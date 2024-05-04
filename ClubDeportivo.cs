@@ -148,11 +148,11 @@ namespace Proyecto_Integrador_Club
 
             if (tipoUsuario == TipoUsuarioClub.Socio)
             {
-                nombreTabla = "Socios"; // Nombre de la tabla donde se insertarán los socios
+                nombreTabla = "socio"; // Nombre de la tabla donde se insertarán los socios
             }
             else if (tipoUsuario == TipoUsuarioClub.NoSocio)
             {
-                nombreTabla = "NoSocios"; // Nombre de la tabla donde se insertarán los no socios
+                nombreTabla = "nosocio"; // Nombre de la tabla donde se insertarán los no socios
             }
 
             MySqlConnection sqlCon = new MySqlConnection();
@@ -167,12 +167,20 @@ namespace Proyecto_Integrador_Club
                 comando.Parameters.AddWithValue("@Nombre", usuarioClub.Nombre);
                 comando.Parameters.AddWithValue("@DNI", usuarioClub.DNI);
                 comando.Parameters.AddWithValue("@Correo", usuarioClub.Correo);
-                comando.Parameters.AddWithValue("@FechaInscripcion", usuarioClub.FechaInscripcion);
+                comando.Parameters.Add("@FechaInscripcion", MySqlDbType.Date).Value = usuarioClub.FechaInscripcion;
+
+                //comando.Parameters.AddWithValue("@FechaInscripcion", usuarioClub.FechaInscripcion);
                 comando.Parameters.AddWithValue("@AptoFisico", usuarioClub.AptoFisico);
 
                 comando.ExecuteNonQuery();
 
-                salida = "1";
+                //get query response
+                int rowsAffected = comando.ExecuteNonQuery();
+
+                salida = rowsAffected.ToString();
+
+
+
             }
             catch (Exception ex)
             {

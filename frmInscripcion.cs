@@ -71,7 +71,14 @@ namespace Proyecto_Integrador_Club
                 socio.AptoFisico = chkAptoFisico.Checked;
 
                 respuesta = ClubDeportivo.RegistrarUsuarioClub(socio, tipoUsuario);
-
+                
+                //respuesta = ClubDeportivo.RegistrarUsuarioClubConInsert(socio, tipoUsuario);
+                // OJO, la inserción funciona PERO la respuesta es 1 si es correcto, porque es el nro de rows afectado
+                // por otra parte si lo vamos a usar hay que hacer acá todas las validaciones de si el socio ya existe
+                // y todo lo que esá en el procedure
+                //MessageBox.Show(respuesta, "AVISO DEL SISTEMA2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                
                 bool esnumero = int.TryParse(respuesta, out int codigo);
                 if (esnumero)
                 {

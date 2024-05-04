@@ -28,7 +28,7 @@ insert into usuario(CodUsu,NombreUsu,PassUsu,RolUsu) values
 (1,'Admin','1234',120);
 
 create table socio(
-	NSocio int,
+	NSocio int auto_increment,
 	Nombre varchar(40),
 	DNI int,
 	Correo varchar(40),
