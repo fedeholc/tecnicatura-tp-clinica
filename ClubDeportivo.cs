@@ -140,5 +140,52 @@ namespace Proyecto_Integrador_Club
             }
             return salida ?? "error";
         }
+
+        public static string RegistrarUsuarioClubConInsert(E_UsuarioClub usuarioClub, TipoUsuarioClub tipoUsuario)
+        {
+            string? salida;
+            string? nombreTabla = "";
+
+            if (tipoUsuario == TipoUsuarioClub.Socio)
+            {
+                nombreTabla = "Socios"; // Nombre de la tabla donde se insertarán los socios
+            }
+            else if (tipoUsuario == TipoUsuarioClub.NoSocio)
+            {
+                nombreTabla = "NoSocios"; // Nombre de la tabla donde se insertarán los no socios
+            }
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = $"INSERT INTO {nombreTabla} (Nombre, DNI, Correo, FechaInscripcion, AptoFisico) VALUES (@Nombre, @DNI, @Correo, @FechaInscripcion, @AptoFisico)";
+
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@Nombre", usuarioClub.Nombre);
+                comando.Parameters.AddWithValue("@DNI", usuarioClub.DNI);
+                comando.Parameters.AddWithValue("@Correo", usuarioClub.Correo);
+                comando.Parameters.AddWithValue("@FechaInscripcion", usuarioClub.FechaInscripcion);
+                comando.Parameters.AddWithValue("@AptoFisico", usuarioClub.AptoFisico);
+
+                comando.ExecuteNonQuery();
+
+                salida = "1";
+            }
+            catch (Exception ex)
+            {
+                salida = ex.Message;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida ?? "error";
+        }
     }
 }
