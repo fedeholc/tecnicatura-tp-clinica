@@ -41,6 +41,8 @@ lugarDeAtencion_id.map((lugar) => {
 //! hay que hacer dos generaciones, una con las horas disponibles y otra con las no disponibles
 //! pasar los maps a una función para reutilizar
 
+//? convertir a c sharp?
+
 /*INSERT INTO CircuitoB.Turno (Fecha, Hora, LugarDeAtencion_id,  Paciente_id, TurnoStatus_id) VALUES
 ('2024-05-07', '10:30:00', 1,  1,  1),
 ('2024-05-08', '11:30:00', 2,  2,  2),
