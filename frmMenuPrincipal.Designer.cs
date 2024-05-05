@@ -1,6 +1,6 @@
 ﻿namespace Clinica
 {
-    partial class frmPrincipal
+    partial class frmMenuPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -34,6 +34,7 @@
             btnCuotas = new Button();
             btnListados = new Button();
             panel1 = new Panel();
+            btnTurnos = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -98,13 +99,27 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(btnTurnos);
             panel1.Controls.Add(btnInscripciones);
             panel1.Location = new Point(12, 42);
             panel1.Name = "panel1";
             panel1.Size = new Size(445, 173);
             panel1.TabIndex = 6;
             // 
-            // frmPrincipal
+            // btnTurnos
+            // 
+            btnTurnos.FlatAppearance.BorderColor = Color.Black;
+            btnTurnos.FlatAppearance.BorderSize = 2;
+            btnTurnos.Font = new Font("Segoe UI", 12F);
+            btnTurnos.Location = new Point(90, 70);
+            btnTurnos.Name = "btnTurnos";
+            btnTurnos.Size = new Size(187, 30);
+            btnTurnos.TabIndex = 7;
+            btnTurnos.Text = "Turnos";
+            btnTurnos.UseVisualStyleBackColor = true;
+            btnTurnos.Click += this.btnTurnos_Click;
+            // 
+            // frmMenuPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -114,7 +129,7 @@
             Controls.Add(btnCuotas);
             Controls.Add(btnSalir);
             Controls.Add(lblIngreso);
-            Name = "frmPrincipal";
+            Name = "frmMenuPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Club Deportivo - Menú Principal";
             Load += frmPrincipal_Load;
@@ -131,5 +146,6 @@
         private Button btnCuotas;
         private Button btnListados;
         private Panel panel1;
+        private Button btnTurnos;
     }
 }

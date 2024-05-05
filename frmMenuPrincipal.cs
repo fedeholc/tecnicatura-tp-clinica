@@ -1,4 +1,5 @@
-﻿using System;
+﻿using clinica;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Clinica
 {
-    public partial class frmPrincipal : Form
+    public partial class frmMenuPrincipal : Form
     {
-        public frmPrincipal()
+        public frmMenuPrincipal()
         {
             InitializeComponent();
         }
@@ -42,6 +43,14 @@ namespace Clinica
             frmRegistroPaciente Inscripcion = new frmRegistroPaciente();
 
             Inscripcion.Show();
+            this.Hide();
+        }
+
+        private void btnTurnos_Click(object sender, EventArgs e)
+        {
+            frmTurnos Turnos= new();
+
+            Turnos.Show();
             this.Hide();
         }
 

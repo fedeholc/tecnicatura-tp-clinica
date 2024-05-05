@@ -401,7 +401,7 @@ namespace Clinica
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            frmPrincipal principal = new frmPrincipal();
+            frmMenuPrincipal principal = new frmMenuPrincipal();
             principal.Show();
             this.Close();
         }

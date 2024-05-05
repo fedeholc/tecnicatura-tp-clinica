@@ -39,7 +39,7 @@ namespace Clinica
                         if (reader.GetString(0) == txtPass.Text)
                         {
                             MessageBox.Show("Ingreso exitoso", "MENSAJES DEL SISTEMA",MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            frmPrincipal Principal = new frmPrincipal();
+                            frmMenuPrincipal Principal = new frmMenuPrincipal();
                             Principal.rol = Convert.ToString(reader.GetString(1));
                             Principal.usuario = cbxUsuarios.Text;
                             Principal.Show();
