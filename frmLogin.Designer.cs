@@ -34,6 +34,7 @@
             txtPass = new TextBox();
             label1 = new Label();
             panel1 = new Panel();
+            cbxUsuarios = new ComboBox();
             btnSalir = new Button();
             panel2 = new Panel();
             txtPuerto = new TextBox();
@@ -48,7 +49,6 @@
             label3 = new Label();
             txtUsuarioBD = new TextBox();
             label4 = new Label();
-            cbxUsuarios = new ComboBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -113,6 +113,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(554, 118);
             panel1.TabIndex = 6;
+            // 
+            // cbxUsuarios
+            // 
+            cbxUsuarios.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbxUsuarios.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxUsuarios.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxUsuarios.FormattingEnabled = true;
+            cbxUsuarios.Location = new Point(29, 71);
+            cbxUsuarios.Name = "cbxUsuarios";
+            cbxUsuarios.Size = new Size(156, 23);
+            cbxUsuarios.TabIndex = 29;
             // 
             // btnSalir
             // 
@@ -248,16 +259,6 @@
             label4.Size = new Size(57, 15);
             label4.TabIndex = 2;
             label4.Text = "Password";
-            // 
-            // cbxUsuarios
-            // 
-            cbxUsuarios.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cbxUsuarios.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cbxUsuarios.FormattingEnabled = true;
-            cbxUsuarios.Location = new Point(29, 71);
-            cbxUsuarios.Name = "cbxUsuarios";
-            cbxUsuarios.Size = new Size(156, 23);
-            cbxUsuarios.TabIndex = 29;
             // 
             // frmLogin
             // 

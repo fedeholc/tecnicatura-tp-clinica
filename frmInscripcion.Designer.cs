@@ -149,6 +149,7 @@
             // 
             // cbxCobertura
             // 
+            cbxCobertura.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxCobertura.FormattingEnabled = true;
             cbxCobertura.Location = new Point(251, 168);
             cbxCobertura.Name = "cbxCobertura";
