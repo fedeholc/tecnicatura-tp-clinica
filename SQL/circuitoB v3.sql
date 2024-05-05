@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `CircuitoB`.`Paciente` (
   `Direccion` VARCHAR(45) NULL,
   `Email` VARCHAR(45) NULL,
   `Cobertura_id` INT NOT NULL,
-  `Historia_clinica` LONGTEXT NULL,
+  `Historia_clinica` TEXT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Paciente_Cobertura1`
     FOREIGN KEY (`Cobertura_id`)
