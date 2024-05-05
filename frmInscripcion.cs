@@ -1,4 +1,6 @@
-﻿using Proyecto_Integrador_Club.Entidades;
+﻿using MySql.Data.MySqlClient;
+using Clinica.Datos;
+using Clinica.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,12 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Proyecto_Integrador_Club
+namespace Clinica
 {
     public partial class frmInscripcion : Form
     {
-        string nroNuevoUsuarioClub = "";
-
+         
         public frmInscripcion()
         {
             InitializeComponent();
@@ -26,123 +27,146 @@ namespace Proyecto_Integrador_Club
             principal.Show();
             this.Hide();
         }
+         
 
-        private void imprimirCarnet(string nroSocio)
+        private void RegistrarPaciente()
         {
-            frmCarnet carnet = new frmCarnet();
+            int? idCobertura = null;
 
-            if (rbtSocio.Checked)
+            if (cbxCobertura.SelectedIndex != -1)
             {
-                carnet.tipoUsuario = "Socio";
-
-            }
-            else
+                idCobertura = ((KeyValuePair<int, string>)cbxCobertura.SelectedItem!).Key;
+            } else
             {
-                carnet.tipoUsuario = "No Socio";
+                MessageBox.Show("Debe elegir la cobertura entre las opciones disponibles.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            carnet.nombre = "Nombre: " + txtNombre.Text;
-            carnet.nSocio = "Nro: " + nroSocio;
-            carnet.dni = "DNI: " + txtDNI.Text;
-            carnet.fechaInicio = "Fecha de inscripción: " + dtpFechaInscripcion.Text;
-            carnet.Show();
-        }
 
-        private void InscribirUsuarioClub(TipoUsuarioClub tipoUsuario)
-        {
-            if (txtNombre.Text == "" || txtEmail.Text == "" || txtDNI.Text == "" || chkAptoFisico.Checked == false)
+            if (ExistePaciente(txtDNI.Text))
+            {
+                MessageBox.Show("Ya existe un paciente registrado con DNI "+ txtDNI.Text, "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (txtNombre.Text == "" || txtDNI.Text == "" || cbxCobertura.Text == "")
             {
                 MessageBox.Show("Debe completar todos los campos", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+
+            int respuesta;
+            Paciente paciente = new();
+            paciente.Nombre = txtNombre.Text;
+            paciente.Apellido = txtApellido.Text;
+            paciente.DNI = txtDNI.Text;
+            paciente.Email = txtEmail.Text;
+            paciente.Direccion = txtDireccion.Text;
+            paciente.Cobertura_id = idCobertura;
+            paciente.HistoriaClinica = "Inscripto el día: " + DateTime.Now;
+   
+            respuesta = Clinica.RegistrarNuevoPaciente(paciente);
+                          
+            if (respuesta == 0)
             {
-                string respuesta;
-                E_UsuarioClub socio = new E_UsuarioClub();
-                socio.Nombre = txtNombre.Text;
-                if (txtDNI.Text.Length > 9)
-                {
-                    socio.DNI = Convert.ToInt32(txtDNI.Text.Substring(0, 9));
-                }
-                else
-                {
-                    socio.DNI = Convert.ToInt32(txtDNI.Text);
-                }
-                socio.Correo = txtEmail.Text;
-                socio.FechaInscripcion = DateOnly.FromDateTime(dtpFechaInscripcion.Value);
-                socio.AptoFisico = chkAptoFisico.Checked;
-
-                respuesta = ClubDeportivo.RegistrarUsuarioClub(socio, tipoUsuario);
-                
-                //respuesta = ClubDeportivo.RegistrarUsuarioClubConInsert(socio, tipoUsuario);
-                // OJO, la inserción funciona PERO la respuesta es 1 si es correcto, porque es el nro de rows afectado
-                // por otra parte si lo vamos a usar hay que hacer acá todas las validaciones de si el socio ya existe
-                // y todo lo que esá en el procedure
-                //MessageBox.Show(respuesta, "AVISO DEL SISTEMA2", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-                
-                bool esnumero = int.TryParse(respuesta, out int codigo);
-                if (esnumero)
-                {
-                    if (codigo == 1)
-                    {
-                        MessageBox.Show("USUARIO YA EXISTE", "AVISO DEL SISTEMA",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        nroNuevoUsuarioClub = respuesta;
-                        btnCarnet.Enabled = true;
-                        MessageBox.Show("Inscripción exitosa del " + tipoUsuario.ToString() + " Nro " + respuesta, "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        desactivarCampos();
-
-                    }
-                }
+                MessageBox.Show("USUARIO YA EXISTE", "AVISO DEL SISTEMA",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else 
+            {           
+                MessageBox.Show("Inscripción exitosa ","AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                desactivarCampos();
             }
         }
+
+        private bool ExistePaciente(string dni)
+        {
+            bool existe = false;
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select DNI from Paciente where DNI = @DNI;";
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@DNI", dni);
+                comando.CommandType = CommandType.Text;
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    existe = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+            return existe;
+        }   
 
         private void desactivarCampos()
         {
-            txtDNI.Enabled= false;
-            txtEmail.Enabled= false;
+            txtDNI.Enabled = false;
+            txtEmail.Enabled = false;
             txtNombre.Enabled = false;
-            dtpFechaInscripcion.Enabled = false;
-            btnInscribir.Enabled = false;
-            rbtNoSocio.Enabled = false;
-            rbtSocio.Enabled = false;
-            chkAptoFisico.Enabled = false;
+             btnInscribir.Enabled = false;
+            txtApellido.Enabled = false;
+            txtDireccion.Enabled = false;
+            cbxCobertura.Enabled = false;
+
+          
         }
         private void activarCampos()
         {
             txtDNI.Enabled = true;
             txtEmail.Enabled = true;
             txtNombre.Enabled = true;
-            dtpFechaInscripcion.Enabled = true;
-            btnInscribir.Enabled = true;
-            rbtNoSocio.Enabled = true;
-            rbtSocio.Enabled = true;
-            chkAptoFisico.Enabled = true;
+             btnInscribir.Enabled = true;
+            txtApellido.Enabled = true;
+            txtDireccion.Enabled = true;
+            cbxCobertura.Enabled = true;
+
+       
         }
 
         private void btnInscribir_Click(object sender, EventArgs e)
         {
-            if (rbtSocio.Checked)
-            {
-                InscribirUsuarioClub(TipoUsuarioClub.Socio);
-            }
-            else
-            {
-                InscribirUsuarioClub(TipoUsuarioClub.NoSocio);
-            }
+            /*  if (rbtSocio.Checked)
+              {
+                  InscribirUsuarioClub(TipoUsuarioClub.Socio);
+              }
+              else
+              {
+                  InscribirUsuarioClub(TipoUsuarioClub.NoSocio);
+              }*/
+
+
+            RegistrarPaciente();
+            //int? idCobertura = ((KeyValuePair<int, string>)cbxCobertura.SelectedItem!).Key;
+
+            //MessageBox.Show(idCobertura.ToString(), "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnNuevaInscripcion_Click(object sender, EventArgs e)
         {
-            nroNuevoUsuarioClub = "";
-            txtNombre.Text = "";
+             txtNombre.Text = "";
             txtDNI.Text = "";
             txtEmail.Text = "";
-            chkAptoFisico.Checked = false;
-            dtpFechaInscripcion.Value = DateTime.Today;
-            btnCarnet.Enabled = false;
+            txtApellido.Text = "";
+            txtDireccion.Text = "";
+            cbxCobertura.SelectedIndex = -1;
+
+    
             btnInscribir.Enabled = true;
             txtNombre.Focus();
 
@@ -150,10 +174,7 @@ namespace Proyecto_Integrador_Club
         }
 
 
-        private void btnCarnet_Click(object sender, EventArgs e)
-        {
-            imprimirCarnet(nroNuevoUsuarioClub);
-        }
+     
         private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verifica si la tecla presionada es un número o una tecla especial
@@ -169,19 +190,83 @@ namespace Proyecto_Integrador_Club
             }
         }
 
-        private void rbtNoSocio_CheckedChanged(object sender, EventArgs e)
-        {
-            btnCarnet.Enabled = false;
-        }
 
-        private void rbtSocio_CheckedChanged(object sender, EventArgs e)
-        {
-            btnCarnet.Enabled = false;
-        }
 
         private void frmInscripcion_Load(object sender, EventArgs e)
         {
+            cargarDatosCobertura();
+        }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cargarDatosCobertura()
+        {
+            cbxCobertura.Items.Clear();
+            cbxCobertura.Text = "";
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select id, Nombre from Cobertura;";
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    List<KeyValuePair<int, string>> coberturas = new();
+
+                    while (reader.Read())
+                    {
+                        // Obtener el ID y el nombre de la cobertura
+                        int id = reader.GetInt32(0);
+                        string nombre = reader.GetString(1);
+
+                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
+                        KeyValuePair<int, string> cobertura = new(id, nombre);
+                       
+                        coberturas.Add(cobertura);
+
+                     
+                    }
+                    // Asignar la lista de coberturas al ComboBox
+                    cbxCobertura.DataSource = coberturas;
+                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
+                    cbxCobertura.DisplayMember = "Value";
+                    cbxCobertura.SelectedIndex = -1;
+                }
+                else
+                {
+                    MessageBox.Show("No hay datos de cobertura");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
         }
     }
 }

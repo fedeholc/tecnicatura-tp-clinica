@@ -1,4 +1,4 @@
-﻿namespace Proyecto_Integrador_Club
+﻿namespace Clinica
 {
     partial class frmInscripcion
     {
@@ -34,49 +34,47 @@
             lblDNI = new Label();
             txtEmail = new TextBox();
             lblEmail = new Label();
-            dtpFechaInscripcion = new DateTimePicker();
-            lblFechaInscripcion = new Label();
-            chkAptoFisico = new CheckBox();
-            rbtSocio = new RadioButton();
-            rbtNoSocio = new RadioButton();
-            grbTipoUsuario = new GroupBox();
+            lblCobertura = new Label();
             btnInscribir = new Button();
             btnVolver = new Button();
             panel1 = new Panel();
-            btnCarnet = new Button();
+            cbxCobertura = new ComboBox();
+            lblDireccion = new Label();
+            txtDireccion = new TextBox();
+            labelApellido = new Label();
+            txtApellido = new TextBox();
             btnNuevaInscripcion = new Button();
-            grbTipoUsuario.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(17, 89);
+            lblNombre.Location = new Point(17, 20);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(107, 15);
+            lblNombre.Size = new Size(51, 15);
             lblNombre.TabIndex = 0;
-            lblNombre.Text = "Nombre y Apellido";
+            lblNombre.Text = "Nombre";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(17, 107);
+            txtNombre.Location = new Point(17, 38);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(209, 23);
             txtNombre.TabIndex = 1;
             // 
             // txtDNI
             // 
-            txtDNI.Location = new Point(265, 107);
+            txtDNI.Location = new Point(17, 101);
             txtDNI.Name = "txtDNI";
             txtDNI.Size = new Size(100, 23);
             txtDNI.TabIndex = 3;
-             txtDNI.KeyPress += txtDNI_KeyPress;
+            txtDNI.KeyPress += txtDNI_KeyPress;
             // 
             // lblDNI
             // 
             lblDNI.AutoSize = true;
-            lblDNI.Location = new Point(265, 89);
+            lblDNI.Location = new Point(17, 83);
             lblDNI.Name = "lblDNI";
             lblDNI.Size = new Size(27, 15);
             lblDNI.TabIndex = 2;
@@ -98,71 +96,19 @@
             lblEmail.TabIndex = 4;
             lblEmail.Text = "E-mail";
             // 
-            // dtpFechaInscripcion
+            // lblCobertura
             // 
-            dtpFechaInscripcion.Location = new Point(265, 168);
-            dtpFechaInscripcion.Name = "dtpFechaInscripcion";
-            dtpFechaInscripcion.Size = new Size(200, 23);
-            dtpFechaInscripcion.TabIndex = 6;
-            // 
-            // lblFechaInscripcion
-            // 
-            lblFechaInscripcion.AutoSize = true;
-            lblFechaInscripcion.Location = new Point(265, 150);
-            lblFechaInscripcion.Name = "lblFechaInscripcion";
-            lblFechaInscripcion.Size = new Size(115, 15);
-            lblFechaInscripcion.TabIndex = 7;
-            lblFechaInscripcion.Text = "Fecha de Inscripción";
-            // 
-            // chkAptoFisico
-            // 
-            chkAptoFisico.AutoSize = true;
-            chkAptoFisico.Location = new Point(17, 218);
-            chkAptoFisico.Name = "chkAptoFisico";
-            chkAptoFisico.Size = new Size(85, 19);
-            chkAptoFisico.TabIndex = 9;
-            chkAptoFisico.Text = "Apto Físico";
-            chkAptoFisico.UseVisualStyleBackColor = true;
-            // 
-            // rbtSocio
-            // 
-            rbtSocio.AutoSize = true;
-            rbtSocio.Checked = true;
-            rbtSocio.Location = new Point(31, 22);
-            rbtSocio.Name = "rbtSocio";
-            rbtSocio.Size = new Size(54, 19);
-            rbtSocio.TabIndex = 10;
-            rbtSocio.TabStop = true;
-            rbtSocio.Text = "Socio";
-            rbtSocio.UseVisualStyleBackColor = true;
-            rbtSocio.CheckedChanged += rbtSocio_CheckedChanged;
-            // 
-            // rbtNoSocio
-            // 
-            rbtNoSocio.AutoSize = true;
-            rbtNoSocio.Location = new Point(117, 22);
-            rbtNoSocio.Name = "rbtNoSocio";
-            rbtNoSocio.Size = new Size(73, 19);
-            rbtNoSocio.TabIndex = 11;
-            rbtNoSocio.Text = "No Socio";
-            rbtNoSocio.UseVisualStyleBackColor = true;
-            rbtNoSocio.CheckedChanged += rbtNoSocio_CheckedChanged;
-            // 
-            // grbTipoUsuario
-            // 
-            grbTipoUsuario.Controls.Add(rbtNoSocio);
-            grbTipoUsuario.Controls.Add(rbtSocio);
-            grbTipoUsuario.Location = new Point(17, 17);
-            grbTipoUsuario.Name = "grbTipoUsuario";
-            grbTipoUsuario.Size = new Size(209, 55);
-            grbTipoUsuario.TabIndex = 12;
-            grbTipoUsuario.TabStop = false;
-            grbTipoUsuario.Text = "Tipo de Usuario:";
+            lblCobertura.AutoSize = true;
+            lblCobertura.Location = new Point(251, 150);
+            lblCobertura.Name = "lblCobertura";
+            lblCobertura.Size = new Size(60, 15);
+            lblCobertura.TabIndex = 7;
+            lblCobertura.Text = "Cobertura";
             // 
             // btnInscribir
             // 
-            btnInscribir.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnInscribir.Location = new Point(251, 262);
+            btnInscribir.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            btnInscribir.Location = new Point(363, 263);
             btnInscribir.Name = "btnInscribir";
             btnInscribir.Size = new Size(97, 32);
             btnInscribir.TabIndex = 13;
@@ -183,15 +129,16 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(btnCarnet);
+            panel1.Controls.Add(cbxCobertura);
+            panel1.Controls.Add(lblDireccion);
+            panel1.Controls.Add(txtDireccion);
+            panel1.Controls.Add(labelApellido);
+            panel1.Controls.Add(txtApellido);
             panel1.Controls.Add(btnInscribir);
-            panel1.Controls.Add(grbTipoUsuario);
             panel1.Controls.Add(lblNombre);
             panel1.Controls.Add(txtNombre);
-            panel1.Controls.Add(lblFechaInscripcion);
+            panel1.Controls.Add(lblCobertura);
             panel1.Controls.Add(lblEmail);
-            panel1.Controls.Add(dtpFechaInscripcion);
-            panel1.Controls.Add(chkAptoFisico);
             panel1.Controls.Add(txtDNI);
             panel1.Controls.Add(lblDNI);
             panel1.Controls.Add(txtEmail);
@@ -200,17 +147,47 @@
             panel1.Size = new Size(488, 315);
             panel1.TabIndex = 16;
             // 
-            // btnCarnet
+            // cbxCobertura
             // 
-            btnCarnet.Enabled = false;
-            btnCarnet.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCarnet.Location = new Point(138, 262);
-            btnCarnet.Name = "btnCarnet";
-            btnCarnet.Size = new Size(97, 32);
-            btnCarnet.TabIndex = 14;
-            btnCarnet.Text = "Carnet";
-            btnCarnet.UseVisualStyleBackColor = true;
-            btnCarnet.Click += btnCarnet_Click;
+            cbxCobertura.FormattingEnabled = true;
+            cbxCobertura.Location = new Point(251, 168);
+            cbxCobertura.Name = "cbxCobertura";
+            cbxCobertura.Size = new Size(209, 23);
+            cbxCobertura.TabIndex = 19;
+            // 
+            // lblDireccion
+            // 
+            lblDireccion.AutoSize = true;
+            lblDireccion.Location = new Point(251, 83);
+            lblDireccion.Name = "lblDireccion";
+            lblDireccion.Size = new Size(57, 15);
+            lblDireccion.TabIndex = 17;
+            lblDireccion.Text = "Dirección";
+            // 
+            // txtDireccion
+            // 
+            txtDireccion.Location = new Point(251, 101);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(209, 23);
+            txtDireccion.TabIndex = 18;
+            txtDireccion.TextChanged += textBox1_TextChanged;
+            // 
+            // labelApellido
+            // 
+            labelApellido.AutoSize = true;
+            labelApellido.Location = new Point(251, 20);
+            labelApellido.Name = "labelApellido";
+            labelApellido.Size = new Size(51, 15);
+            labelApellido.TabIndex = 15;
+            labelApellido.Text = "Apellido";
+            labelApellido.Click += label1_Click;
+            // 
+            // txtApellido
+            // 
+            txtApellido.Location = new Point(251, 38);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(209, 23);
+            txtApellido.TabIndex = 16;
             // 
             // btnNuevaInscripcion
             // 
@@ -226,7 +203,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(551, 389);
+            ClientSize = new Size(535, 392);
             Controls.Add(btnNuevaInscripcion);
             Controls.Add(btnVolver);
             Controls.Add(panel1);
@@ -234,8 +211,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Club Deportivo - Inscripción";
             Load += frmInscripcion_Load;
-            grbTipoUsuario.ResumeLayout(false);
-            grbTipoUsuario.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -249,16 +224,15 @@
         private Label lblDNI;
         private TextBox txtEmail;
         private Label lblEmail;
-        private DateTimePicker dtpFechaInscripcion;
-        private Label lblFechaInscripcion;
-        private CheckBox chkAptoFisico;
-        private RadioButton rbtSocio;
-        private RadioButton rbtNoSocio;
-        private GroupBox grbTipoUsuario;
+        private Label lblCobertura;
         private Button btnInscribir;
         private Button btnVolver;
         private Panel panel1;
         private Button btnNuevaInscripcion;
-        private Button btnCarnet;
+        private Label labelApellido;
+        private TextBox txtApellido;
+        private Label lblDireccion;
+        private TextBox txtDireccion;
+        private ComboBox cbxCobertura;
     }
 }

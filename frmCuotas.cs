@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
-using Proyecto_Integrador_Club.Datos;
-using Proyecto_Integrador_Club.Entidades;
+using Clinica.Datos;
+using Clinica.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace Proyecto_Integrador_Club
+namespace Clinica
 {
 
 
@@ -274,7 +274,7 @@ namespace Proyecto_Integrador_Club
                 cuota.Vencimiento = DateOnly.FromDateTime(dtpFechaInicio.Value);
             }
 
-            respuesta = ClubDeportivo.CobrarCuota(cuota, tipoUsuario);
+            respuesta = Clinica.CobrarCuota(cuota, tipoUsuario);
 
 
             bool esnumero = int.TryParse(respuesta, out int codigo);

@@ -1,9 +1,9 @@
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Data;
-using Proyecto_Integrador_Club.Datos;
+using Clinica.Datos;
 using MySql.Data.MySqlClient;
 
-namespace Proyecto_Integrador_Club
+namespace Clinica
 {
     public partial class frmLogin : Form
     {
@@ -14,23 +14,8 @@ namespace Proyecto_Integrador_Club
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            /* DataTable tablaLogin = new DataTable();
-             Datos.Usuarios dato = new Datos.Usuarios();
-             tablaLogin = dato.Log_Usu(txtUsuario.Text, txtPass.Text);
-             if (tablaLogin.Rows.Count > 0)
-             {
-                 MessageBox.Show("Ingreso exitoso", "MENSAJES DEL SISTEMA",
-                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-                 frmPrincipal Principal = new frmPrincipal();
-                 Principal.rol = Convert.ToString(tablaLogin.Rows[0][0]);
-                 Principal.usuario = Convert.ToString(txtUsuario.Text);
-                 Principal.Show();
-                 this.Hide();
-             }
-             else
-             {
-                 MessageBox.Show("Usuario y/o password incorrecto", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }*/
+          
+
         
 
             MySqlConnection sqlCon = new MySqlConnection();

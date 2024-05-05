@@ -4,8 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto_Integrador_Club.Entidades
+namespace Clinica.Entidades
 {
+    public class Paciente
+    {
+        public int? Id { get; set; }
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
+        public string? DNI { get; set; }
+        public string? Direccion { get; set; }
+        public string? Email { get; set; }
+        public int? Cobertura_id { get; set; }
+        public string? HistoriaClinica { get; set; }
+    }
     public class E_UsuarioClub
     {
         public int NSocio

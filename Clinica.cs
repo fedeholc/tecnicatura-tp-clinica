@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
-using Proyecto_Integrador_Club.Datos;
-using Proyecto_Integrador_Club.Entidades;
+using Clinica.Datos;
+using Clinica.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,9 +8,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Proyecto_Integrador_Club.ClubDeportivo;
+using static Clinica.Clinica;
 
-namespace Proyecto_Integrador_Club
+namespace Clinica
 {
     //enumeración para cuando necesitamos distinguir entre socio y nosocio
     public enum TipoUsuarioClub
@@ -26,7 +26,7 @@ namespace Proyecto_Integrador_Club
         Tarjeta = 1
     }
 
-    internal class ClubDeportivo
+    internal class Clinica
     {
         // query para traer la lista de socios con cuotas vencidas
         public static readonly string queryListadoVencidos = "select Nsocio, Nombre, DNI, IFNULL(MCuota, '') from (select socio.Nsocio, socio.Nombre, socio.DNI, max(cuotaSocio.Vencimiento) as MCuota from socio join cuotaSocio on socio.NSocio = cuotaSocio.NSocio  group by socio.Nsocio) t1 WHERE MCuota <= NOW();";
@@ -141,19 +141,13 @@ namespace Proyecto_Integrador_Club
             return salida ?? "error";
         }
 
-        public static string RegistrarUsuarioClubConInsert(E_UsuarioClub usuarioClub, TipoUsuarioClub tipoUsuario)
+        public static int RegistrarNuevoPaciente(Paciente paciente)
         {
-            string? salida;
-            string? nombreTabla = "";
+            ArgumentNullException.ThrowIfNull(paciente);
 
-            if (tipoUsuario == TipoUsuarioClub.Socio)
-            {
-                nombreTabla = "socio"; // Nombre de la tabla donde se insertarán los socios
-            }
-            else if (tipoUsuario == TipoUsuarioClub.NoSocio)
-            {
-                nombreTabla = "nosocio"; // Nombre de la tabla donde se insertarán los no socios
-            }
+            int salida = 0;
+            string? nombreTabla = "Paciente";
+                    
 
             MySqlConnection sqlCon = new MySqlConnection();
             try
@@ -161,30 +155,26 @@ namespace Proyecto_Integrador_Club
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 sqlCon.Open();
 
-                string query = $"INSERT INTO {nombreTabla} (Nombre, DNI, Correo, FechaInscripcion, AptoFisico) VALUES (@Nombre, @DNI, @Correo, @FechaInscripcion, @AptoFisico)";
+                string query = $"INSERT INTO {nombreTabla} (Nombre, Apellido, DNI, Direccion, Email, Cobertura_id, " +
+                    $"Historia_clinica) VALUES (@Nombre, @Apellido, @DNI, @Direccion, @Email, @Cobertura_id, @Historia_clinica)";
 
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
-                comando.Parameters.AddWithValue("@Nombre", usuarioClub.Nombre);
-                comando.Parameters.AddWithValue("@DNI", usuarioClub.DNI);
-                comando.Parameters.AddWithValue("@Correo", usuarioClub.Correo);
-                comando.Parameters.Add("@FechaInscripcion", MySqlDbType.Date).Value = usuarioClub.FechaInscripcion;
-
-                //comando.Parameters.AddWithValue("@FechaInscripcion", usuarioClub.FechaInscripcion);
-                comando.Parameters.AddWithValue("@AptoFisico", usuarioClub.AptoFisico);
-
-                comando.ExecuteNonQuery();
-
+                comando.Parameters.AddWithValue("@Nombre", paciente.Nombre);
+                comando.Parameters.AddWithValue("@Apellido", paciente.Apellido);
+                comando.Parameters.AddWithValue("@DNI", paciente.DNI);
+                comando.Parameters.AddWithValue("@Direccion", paciente.Direccion);
+                comando.Parameters.AddWithValue("@Email", paciente.Email);
+                comando.Parameters.AddWithValue("@Cobertura_id", paciente.Cobertura_id);
+                comando.Parameters.AddWithValue("@Historia_clinica", paciente.HistoriaClinica);
+                
                 //get query response
                 int rowsAffected = comando.ExecuteNonQuery();
-
-                salida = rowsAffected.ToString();
-
-
-
+                salida = rowsAffected;
             }
             catch (Exception ex)
             {
-                salida = ex.Message;
+                 MessageBox.Show(ex.Message);
+                throw;
             }
             finally
             {
@@ -193,7 +183,7 @@ namespace Proyecto_Integrador_Club
                     sqlCon.Close();
                 };
             }
-            return salida ?? "error";
+            return salida;
         }
     }
 }

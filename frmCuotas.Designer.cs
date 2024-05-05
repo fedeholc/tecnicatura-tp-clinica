@@ -1,4 +1,4 @@
-﻿namespace Proyecto_Integrador_Club
+﻿namespace Clinica
 {
     partial class frmCuotas
     {

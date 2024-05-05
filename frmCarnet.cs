@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Proyecto_Integrador_Club
+namespace Clinica
 {
     public partial class frmCarnet : Form
     {

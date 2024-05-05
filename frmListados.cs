@@ -1,5 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
-using Proyecto_Integrador_Club.Datos;
+using Clinica.Datos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Proyecto_Integrador_Club
+namespace Clinica
 {
     public partial class frmListados : Form
     {
@@ -23,7 +23,7 @@ namespace Proyecto_Integrador_Club
 
         private void frmListados_Load(object sender, EventArgs e)
         {
-            CargaGrilla(ClubDeportivo.queryListadoVencidos);
+            CargaGrilla(Clinica.queryListadoVencidos);
         }
 
         public void CargaGrilla(string query)
@@ -88,7 +88,7 @@ namespace Proyecto_Integrador_Club
             if (rbtTodos.Checked)
             {
                 listadoVencidos = false;
-                CargaGrilla(ClubDeportivo.queryListadoTodos);
+                CargaGrilla(Clinica.queryListadoTodos);
             }
         }
 
@@ -98,7 +98,7 @@ namespace Proyecto_Integrador_Club
             if (rbtVencidos.Checked)
             {
                 listadoVencidos = true;
-                CargaGrilla(ClubDeportivo.queryListadoVencidos);
+                CargaGrilla(Clinica.queryListadoVencidos);
             }
 
         }

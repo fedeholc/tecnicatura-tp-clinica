@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Proyecto_Integrador_Club.Datos
+namespace Clinica.Datos
 {
     internal class Usuarios
     {

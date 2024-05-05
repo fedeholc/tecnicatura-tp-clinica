@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto_Integrador_Club.Entidades
+namespace Clinica.Entidades
 {
     public class E_Cuota
     {

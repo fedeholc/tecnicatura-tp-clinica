@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace Proyecto_Integrador_Club.Datos
+namespace Clinica.Datos
 {
     public class Conexion
     {
@@ -47,6 +47,8 @@ namespace Proyecto_Integrador_Club.Datos
             catch (Exception ex)
             {
                 cadena = null;
+                MessageBox.Show(ex.Message);
+
                 throw;
             }
             return cadena;
