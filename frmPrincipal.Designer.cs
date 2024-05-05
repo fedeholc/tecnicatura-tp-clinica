@@ -60,12 +60,12 @@
             // 
             btnInscripciones.FlatAppearance.BorderColor = Color.Black;
             btnInscripciones.FlatAppearance.BorderSize = 2;
-            btnInscripciones.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnInscripciones.Font = new Font("Segoe UI", 12F);
             btnInscripciones.Location = new Point(90, 25);
             btnInscripciones.Name = "btnInscripciones";
             btnInscripciones.Size = new Size(263, 30);
             btnInscripciones.TabIndex = 2;
-            btnInscripciones.Text = "Inscripción de Socios / No Socios";
+            btnInscripciones.Text = "Registro de Pacientes";
             btnInscripciones.UseVisualStyleBackColor = true;
             btnInscripciones.Click += btnInscripciones_Click;
             // 
@@ -73,8 +73,8 @@
             // 
             btnCuotas.FlatAppearance.BorderColor = Color.Black;
             btnCuotas.FlatAppearance.BorderSize = 2;
-            btnCuotas.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCuotas.Location = new Point(128, 70);
+            btnCuotas.Font = new Font("Segoe UI", 12F);
+            btnCuotas.Location = new Point(12, 359);
             btnCuotas.Name = "btnCuotas";
             btnCuotas.Size = new Size(187, 30);
             btnCuotas.TabIndex = 3;
@@ -86,8 +86,8 @@
             // 
             btnListados.FlatAppearance.BorderColor = Color.Black;
             btnListados.FlatAppearance.BorderSize = 2;
-            btnListados.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnListados.Location = new Point(128, 115);
+            btnListados.Font = new Font("Segoe UI", 12F);
+            btnListados.Location = new Point(12, 323);
             btnListados.Name = "btnListados";
             btnListados.Size = new Size(187, 30);
             btnListados.TabIndex = 4;
@@ -99,19 +99,19 @@
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(btnInscripciones);
-            panel1.Controls.Add(btnCuotas);
-            panel1.Controls.Add(btnListados);
             panel1.Location = new Point(12, 42);
             panel1.Name = "panel1";
             panel1.Size = new Size(445, 173);
             panel1.TabIndex = 6;
-             // 
+            // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(477, 278);
+            ClientSize = new Size(484, 459);
             Controls.Add(panel1);
+            Controls.Add(btnListados);
+            Controls.Add(btnCuotas);
             Controls.Add(btnSalir);
             Controls.Add(lblIngreso);
             Name = "frmPrincipal";

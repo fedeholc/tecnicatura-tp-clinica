@@ -1,6 +1,6 @@
 ﻿namespace Clinica
 {
-    partial class frmInscripcion
+    partial class frmRegistroPaciente
     {
         /// <summary>
         /// Required designer variable.
@@ -108,11 +108,11 @@
             // btnInscribir
             // 
             btnInscribir.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            btnInscribir.Location = new Point(363, 263);
+            btnInscribir.Location = new Point(278, 263);
             btnInscribir.Name = "btnInscribir";
-            btnInscribir.Size = new Size(97, 32);
+            btnInscribir.Size = new Size(182, 32);
             btnInscribir.TabIndex = 13;
-            btnInscribir.Text = "Inscribir";
+            btnInscribir.Text = "Registrar Paciente";
             btnInscribir.UseVisualStyleBackColor = true;
             btnInscribir.Click += btnInscribir_Click;
             // 
@@ -210,7 +210,7 @@
             Controls.Add(panel1);
             Name = "frmInscripcion";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Club Deportivo - Inscripción";
+            Text = "Clínica - Registro de Pacientes";
             Load += frmInscripcion_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

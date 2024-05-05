@@ -13,10 +13,10 @@ using System.Windows.Forms;
 
 namespace Clinica
 {
-    public partial class frmInscripcion : Form
+    public partial class frmRegistroPaciente : Form
     {
          
-        public frmInscripcion()
+        public frmRegistroPaciente()
         {
             InitializeComponent();
         }
