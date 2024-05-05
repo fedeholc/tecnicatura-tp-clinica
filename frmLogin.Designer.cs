@@ -31,7 +31,6 @@
             btnIngresar = new Button();
             lblUsuario = new Label();
             lblPassword = new Label();
-            txtUsuario = new TextBox();
             txtPass = new TextBox();
             label1 = new Label();
             panel1 = new Panel();
@@ -49,6 +48,7 @@
             label3 = new Label();
             txtUsuarioBD = new TextBox();
             label4 = new Label();
+            cbxUsuarios = new ComboBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -56,7 +56,7 @@
             // btnIngresar
             // 
             btnIngresar.Enabled = false;
-            btnIngresar.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnIngresar.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
             btnIngresar.Location = new Point(378, 53);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(150, 41);
@@ -83,14 +83,6 @@
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
-            // txtUsuario
-            // 
-            txtUsuario.Location = new Point(29, 71);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(144, 23);
-            txtUsuario.TabIndex = 3;
-            txtUsuario.Text = "Admin";
-            // 
             // txtPass
             // 
             txtPass.Location = new Point(208, 71);
@@ -101,7 +93,7 @@
             // 
             // label1
             // 
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
             label1.Location = new Point(23, 11);
             label1.Name = "label1";
             label1.Size = new Size(192, 30);
@@ -111,11 +103,11 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(cbxUsuarios);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnIngresar);
             panel1.Controls.Add(txtPass);
             panel1.Controls.Add(lblUsuario);
-            panel1.Controls.Add(txtUsuario);
             panel1.Controls.Add(lblPassword);
             panel1.Location = new Point(15, 231);
             panel1.Name = "panel1";
@@ -192,7 +184,7 @@
             txtBD.Name = "txtBD";
             txtBD.Size = new Size(144, 23);
             txtBD.TabIndex = 8;
-            txtBD.Text = "Proyecto";
+            txtBD.Text = "CircuitoB";
             // 
             // label6
             // 
@@ -205,7 +197,7 @@
             // 
             // label2
             // 
-            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
             label2.Location = new Point(23, 14);
             label2.Name = "label2";
             label2.Size = new Size(297, 30);
@@ -214,7 +206,7 @@
             // 
             // btnConectar
             // 
-            btnConectar.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            btnConectar.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             btnConectar.Location = new Point(384, 123);
             btnConectar.Name = "btnConectar";
             btnConectar.Size = new Size(144, 41);
@@ -257,6 +249,16 @@
             label4.TabIndex = 2;
             label4.Text = "Password";
             // 
+            // cbxUsuarios
+            // 
+            cbxUsuarios.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbxUsuarios.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxUsuarios.FormattingEnabled = true;
+            cbxUsuarios.Location = new Point(29, 71);
+            cbxUsuarios.Name = "cbxUsuarios";
+            cbxUsuarios.Size = new Size(156, 23);
+            cbxUsuarios.TabIndex = 29;
+            // 
             // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -267,7 +269,7 @@
             Controls.Add(panel1);
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Club Deportivo - Ingreso al sistema";
+            Text = "Clínica";
             Load += frmLogin_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -281,7 +283,6 @@
         private Button btnIngresar;
         private Label lblUsuario;
         private Label lblPassword;
-        private TextBox txtUsuario;
         private TextBox txtPass;
         private Label label1;
         private Panel panel1;
@@ -299,5 +300,6 @@
         private Label label5;
         private TextBox txtBD;
         private Label label6;
+        private ComboBox cbxUsuarios;
     }
 }

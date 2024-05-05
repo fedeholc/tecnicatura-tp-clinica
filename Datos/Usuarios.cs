@@ -23,7 +23,7 @@ namespace Proyecto_Integrador_Club.Datos
             MySqlCommand comando = new MySqlCommand
             ("IngresoLogin", sqlCon);
                 comando.CommandType = CommandType.StoredProcedure;
-                 comando.Parameters.Add("Usu",
+                 comando.Parameters.Add("Nombre",
                 MySqlDbType.VarChar).Value = L_Usu;
                 comando.Parameters.Add("Pass", MySqlDbType.VarChar).Value =
                 P_Usu;
