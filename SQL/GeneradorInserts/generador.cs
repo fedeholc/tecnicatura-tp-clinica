@@ -21,12 +21,12 @@ enum TurnoStatus {
             { 
               if (isFirst)
               {
-                Console.WriteLine("('" + date + "', '" + hora + "', " + lugar + ",  NULL,  " + turnoStatus + "),");
+                Console.WriteLine("('" + date + "', '" + hora + "', " + lugar + ",  NULL,  " + ((int)turnoStatus) + ")");
                 isFirst = false;
               }
               else {
 
-              Console.WriteLine(",('" + date + "', '" + hora + "', " + lugar + ",  NULL,  " + turnoStatus + ")");
+              Console.WriteLine(",('" + date + "', '" + hora + "', " + lugar + ",  NULL,  " +((int)turnoStatus) + ")");
               }
             }
           }

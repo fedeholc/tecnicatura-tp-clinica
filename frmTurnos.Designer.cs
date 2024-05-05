@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             cbxEstudios = new ComboBox();
+            cbxTurnos = new ComboBox();
             SuspendLayout();
             // 
             // cbxEstudios
@@ -40,11 +41,20 @@
             cbxEstudios.Size = new Size(324, 23);
             cbxEstudios.TabIndex = 0;
             // 
+            // cbxTurnos
+            // 
+            cbxTurnos.FormattingEnabled = true;
+            cbxTurnos.Location = new Point(273, 185);
+            cbxTurnos.Name = "cbxTurnos";
+            cbxTurnos.Size = new Size(313, 23);
+            cbxTurnos.TabIndex = 1;
+            // 
             // frmTurnos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(cbxTurnos);
             Controls.Add(cbxEstudios);
             Name = "frmTurnos";
             Text = "frmTurnos";
@@ -55,5 +65,6 @@
         #endregion
 
         private ComboBox cbxEstudios;
+        private ComboBox cbxTurnos;
     }
 }
