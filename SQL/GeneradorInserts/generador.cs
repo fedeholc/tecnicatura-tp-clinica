@@ -1,8 +1,4 @@
-﻿//* A la última linea que se genera hay que cambiarle la coma por un punto y coma
- 
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class GeneradorInserts
@@ -57,9 +53,8 @@ enum TurnoStatus {
     }
     public static void Main(string[] args)
     {
-
-         
-        int[] lugarDeAtencion_id = {1, 2};
+        
+        int[] lugarDeAtencion_id = {1, 2, 3, 4, 5};
 
         ImprimirInserts(
           GenerarFechas("2024-05-14", "2024-05-15"), 
@@ -76,8 +71,6 @@ enum TurnoStatus {
           GenerarHoras("12:30:00", "23:30:00"), 
           lugarDeAtencion_id, 
           TurnoStatus.NoDisponible);
-
-      
        
     }
 }
