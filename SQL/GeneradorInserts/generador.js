@@ -1,5 +1,5 @@
 console.log(
-  `INSERT INTO CircuitoB.Turno (Fecha, Hora, LugarDeAtencion_id,  Paciente_id, TurnoStatus_id) VALUES `
+  `INSERT INTO CircuitoB.Turno (Fecha, Hora, LugarDeAtencion_id,  Paciente_id, TurnoStatus) VALUES `
 );
 
 const fechaInicio = "2024-05-09";
@@ -24,14 +24,12 @@ for (let i = 0; i < 24; i++) {
 }
 
 const lugarDeAtencion_id = [1, 2, 3, 4, 5];
-const turnoStatus_id = 1;
+const turnoStatus = 1;
 
 lugarDeAtencion_id.map((lugar) => {
   dates.map((date) => {
     horas.map((hora) => {
-      console.log(
-        `('${date}', '${hora}', ${lugar},  NULL,  ${turnoStatus_id}),`
-      );
+      console.log(`('${date}', '${hora}', ${lugar},  NULL,  ${turnoStatus}),`);
     });
   });
 });

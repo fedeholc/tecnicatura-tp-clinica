@@ -1,3 +1,20 @@
+-- v5 remuevo las tablas que eran solo para status: TurnoStatus, FacturaStatus, MetodoPago
+/* Turno status
+0 = "No disponible"
+1 = "Disponible"
+2 = "Ocupado"
+
+Factura status
+0 = "Pendiente"
+1 = "Pagada"
+2 = "Anulada"
+
+Metodo de pago
+0 = "Pago por Cobertura"
+1 = "Efectivo"
+2 = "Tarjeta de Débito"
+
+*/
 -- v4 cambio estructura de turno
 -- v3 remuevo indexes y campos denormalizados, agrego campo de Historia Clínica
 -- y renombro campos de nombre a descripcion
@@ -74,17 +91,7 @@ CREATE TABLE IF NOT EXISTS `CircuitoB`.`LugarDeAtencion` (
     REFERENCES `CircuitoB`.`Estudio` (`id`));
 
 
--- -----------------------------------------------------
--- Table `CircuitoB`.`TurnoStatus`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CircuitoB`.`TurnoStatus` ;
-
-CREATE TABLE IF NOT EXISTS `CircuitoB`.`TurnoStatus` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `Descripcion` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`));
-
-
+ 
 -- -----------------------------------------------------
 -- Table `CircuitoB`.`Turno`
 -- -----------------------------------------------------
@@ -96,17 +103,14 @@ CREATE TABLE IF NOT EXISTS `CircuitoB`.`Turno` (
   `Hora` TIME NOT NULL,
   `LugarDeAtencion_id` INT NOT NULL,
   `Paciente_id` INT NULL,
-  `TurnoStatus_id` INT NOT NULL,
+  `TurnoStatus` INT NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Turno_Paciente1`
     FOREIGN KEY (`Paciente_id`)
     REFERENCES `CircuitoB`.`Paciente` (`id`),
     CONSTRAINT `fk_Turno_LugarDeAtencion1`
     FOREIGN KEY (`LugarDeAtencion_id`)
-    REFERENCES `CircuitoB`.`LugarDeAtencion` (`id`),
-  CONSTRAINT `fk_Turno_TurnoStatus1`
-    FOREIGN KEY (`TurnoStatus_id`)
-    REFERENCES `CircuitoB`.`TurnoStatus` (`id`));
+    REFERENCES `CircuitoB`.`LugarDeAtencion` (`id`));
 
 
 -- -----------------------------------------------------
@@ -125,27 +129,9 @@ CREATE TABLE IF NOT EXISTS `CircuitoB`.`SalaDeEspera` (
     REFERENCES `CircuitoB`.`Turno` (`id`));
 
 
--- -----------------------------------------------------
--- Table `CircuitoB`.`MetodoPago`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CircuitoB`.`MetodoPago` ;
+ 
 
-CREATE TABLE IF NOT EXISTS `CircuitoB`.`MetodoPago` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `Descripcion` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`));
-
-
--- -----------------------------------------------------
--- Table `CircuitoB`.`FacturaStatus`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CircuitoB`.`FacturaStatus` ;
-
-CREATE TABLE IF NOT EXISTS `CircuitoB`.`FacturaStatus` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `Descripcion` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`));
-
+ 
 
 -- -----------------------------------------------------
 -- Table `CircuitoB`.`Factura`
@@ -157,21 +143,15 @@ CREATE TABLE IF NOT EXISTS `CircuitoB`.`Factura` (
   `Turno_id` INT NOT NULL,
   `Paciente_id` INT NOT NULL,
   `Monto` FLOAT NULL,
-  `MetodoPago_id` INT NULL,
-  `FacturaStatus_id` INT NOT NULL,
+  `MetodoPago` INT NULL,
+  `FacturaStatus` INT NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Factura_Turno1`
     FOREIGN KEY (`Turno_id`)
     REFERENCES `CircuitoB`.`Turno` (`id`),
   CONSTRAINT `fk_Factura_Paciente1`
     FOREIGN KEY (`Paciente_id`)
-    REFERENCES `CircuitoB`.`Paciente` (`id`),
-  CONSTRAINT `fk_Factura_MetodoPago1`
-    FOREIGN KEY (`MetodoPago_id`)
-    REFERENCES `CircuitoB`.`MetodoPago` (`id`),
-  CONSTRAINT `fk_Factura_FacturaStatus1`
-    FOREIGN KEY (`FacturaStatus_id`)
-    REFERENCES `CircuitoB`.`FacturaStatus` (`id`));
+    REFERENCES `CircuitoB`.`Paciente` (`id`));
 
 
 -- -----------------------------------------------------
@@ -230,24 +210,17 @@ INSERT INTO CircuitoB.LugarDeAtencion (Descripcion, Estudio_id) VALUES
 ('Sala de Rayos X', 3),
 ('Consultorio 3', 4),
 ('Tomógrafo', 5);
-
-
-INSERT INTO CircuitoB.TurnoStatus (Descripcion) VALUES
-('Pendiente'),
-('Confirmado'),
-('Atendido'),
-('Cancelado'),
-('En Espera');
+ 
 
 -- Table `Turno`
 
-INSERT INTO CircuitoB.Turno (Fecha, Hora, LugarDeAtencion_id,  Paciente_id, TurnoStatus_id) VALUES
-('2024-05-07', '10:30:00', 1,  1,  1),
+INSERT INTO CircuitoB.Turno (Fecha, Hora, LugarDeAtencion_id,  Paciente_id, TurnoStatus) VALUES
+('2024-05-07', '10:30:00', 1,  1,  2),
 ('2024-05-08', '11:30:00', 2,  2,  2),
-('2024-05-09', '12:30:00', 3,  3,  3),
-('2024-05-10', '13:30:00', 4,  4,  4),
-('2024-05-11', '14:30:00', 5,  5,  5),
-('2024-05-11', '14:30:00', 6,  5,  5);
+('2024-05-09', '12:30:00', 3,  3,  2),
+('2024-05-10', '13:30:00', 4,  4,  2),
+('2024-05-11', '14:30:00', 5,  5,  2),
+('2024-05-11', '14:30:00', 6,  5,  2);
 
 -- Table `SalaDeEspera`
 
@@ -258,25 +231,15 @@ INSERT INTO CircuitoB.SalaDeEspera (FechaHoraAcreditacion, Turno_id, Prioridad) 
 ('2024-05-10 12:45:00', 4, 1),
 ('2024-05-11 13:45:00', 5, 1);
 
+ 
+ 
 
-INSERT INTO CircuitoB.MetodoPago (Descripcion) VALUES
-('Efectivo'),
-('Tarjeta de Débito'),
-('Tarjeta de Crédito'),
-('Pago por Cobertura');
-
-INSERT INTO CircuitoB.FacturaStatus (Descripcion) VALUES
-('Pendiente'),
-('En Proceso'),
-('Pagada'),
-('Anulada');
-
-INSERT INTO CircuitoB.Factura (Turno_id, Paciente_id, Monto, MetodoPago_id, FacturaStatus_id) VALUES
+INSERT INTO CircuitoB.Factura (Turno_id, Paciente_id, Monto, MetodoPago, FacturaStatus) VALUES
 (1, 1, 1000.00, 1, 1),
 (2, 2, 800.00, 2, 2),
-(3, 3, 600.00, 3, 3),
-(4, 4, 400.00, 4, 3),
-(5, 5, 200.00, 1, 2);
+(3, 3, 600.00, 1, 0),
+(4, 4, 400.00, 2, 0),
+(5, 5, 200.00, 0, 1);
 
 INSERT INTO CircuitoB.CoberturaEstudio (Cobertura_id, Estudio_id, Monto) VALUES
 (1, 1, 500),
