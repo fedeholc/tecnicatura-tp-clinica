@@ -33,13 +33,14 @@ namespace clinica
 
 
             cargarDatosEstudios();
+            cargarTurnos();
+            cargarPacientes();
             //cargarTurnos();
         }
         private void cargarTurnos()
         {
-            cbxTurnos.DataSource = null;
-            cbxTurnos.Items.Clear();
-            cbxTurnos.Text = "";
+
+
 
             lbxTurnos.DataSource = null;
             lbxTurnos.Items.Clear();
@@ -71,7 +72,7 @@ namespace clinica
                     "LugarDeAtencion.Descripcion,  TurnoStatus " +
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                     "inner join estudio on Lugardeatencion.Estudio_id = estudio.id";
-               
+
                 query2 += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
                 query2 += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
 
@@ -89,13 +90,13 @@ namespace clinica
                     query2 += $" and estudio.id = {filtroEstudioId}";
                 }
 
-                if (chbNoDisponibles.Checked)
+                if (rbtDisponibles.Checked)
                 {
-                    query2 += $" and (TurnoStatus = 0 or TurnoStatus = 2)";
+                    query2 += $" and TurnoStatus = 1";
                 }
                 else
                 {
-                    query2 += $" and TurnoStatus = 1";
+                    query2 += $" and TurnoStatus = 2";
                 }
 
 
@@ -133,13 +134,10 @@ namespace clinica
                         turnos.Add(turno);
 
                     }
-                    // Asignar la lista de coberturas al ComboBox
-                    cbxTurnos.DataSource = turnos;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
-                    cbxTurnos.DisplayMember = "Value";
-                    cbxTurnos.SelectedIndex = -1;
 
+                    // Asignar la lista de coberturas al ComboBox
                     lbxTurnos.DataSource = turnos;
+                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     lbxTurnos.DisplayMember = "Value";
                     lbxTurnos.SelectedIndex = -1;
                 }
@@ -226,38 +224,78 @@ namespace clinica
             }
         }
 
+        private void cargarPacientes()
+        {
+            cbxPaciente.Items.Clear();
+            cbxPaciente.Text = "";
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select id, Nombre, Apellido, DNI from Paciente;";
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    List<KeyValuePair<int, string>> pacientes = new();
+
+                    while (reader.Read())
+                    {
+                        // Obtener el ID y el nombre de la cobertura
+                        int id = reader.GetInt32(0);
+                        string nombre = reader.GetString(1);
+                        string apellido = reader.GetString(2);
+                        string dni = reader.GetString(3);
+
+                        string descripcion = $"{nombre} {apellido} - {dni}";
+
+                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
+                        KeyValuePair<int, string> paciente = new(id, descripcion);
+                        pacientes.Add(paciente);
+
+                    }
+                    // Asignar la lista de coberturas al ComboBox
+                    cbxPaciente.DataSource = pacientes;
+                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
+                    cbxPaciente.DisplayMember = "Value";
+                    cbxPaciente.SelectedIndex = -1;
+                }
+                else
+                {
+                    MessageBox.Show("No hay datos de Pacientes");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
-
         }
 
         private void cbxEstudios_SelectedIndexChanged(object sender, EventArgs e)
         {
             cargarTurnos();
-
-
-
-        }
-
-
-
-        private void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            /* int idEstudio = 0;
-
-             if (cbxEstudios.SelectedIndex != -1)
-             {
-                 idEstudio = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
-             }
-             else
-             {
-                 MessageBox.Show("Debe elegir un estudio entre las opciones disponibles.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 return;
-             }*/
-
-            cargarTurnos();
-
         }
 
         private void dtpFechaDesde_ValueChanged(object sender, EventArgs e)
@@ -282,12 +320,17 @@ namespace clinica
         private void cbxHoraHasta_SelectedIndexChanged(object sender, EventArgs e)
         {
             cargarTurnos();
-
         }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+   
+        private void rbtOcupados_CheckedChanged(object sender, EventArgs e)
         {
             cargarTurnos();
         }
+
+        private void rbtDisponibles_CheckedChanged(object sender, EventArgs e)
+        {
+            cargarTurnos();
+        }
+   
     }
 }

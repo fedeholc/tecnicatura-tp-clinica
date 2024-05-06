@@ -8,16 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="SQL\**" />
-    <EmbeddedResource Remove="SQL\**" />
   
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SQL\GeneradorInserts\generador.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SQL\GeneradorInserts\GeneradorInserts.csproj" />
-    <None Include="SQL\GeneradorInserts\GeneradorInserts.sln" />
+
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.1.0" />
