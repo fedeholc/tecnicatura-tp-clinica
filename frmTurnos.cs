@@ -81,9 +81,18 @@ namespace clinica
                 query2 += $" and Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
                 query2 += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
 
+                if (cbxHoraDesde.SelectedIndex != -1)
+                {
+                    query2 += $" and Turno.Hora >= '{cbxHoraDesde.Text}'";
+                }
+                if (cbxHoraHasta.SelectedIndex != -1)
+                {
+                    query2 += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
+                }
 
-                //query2 += " and Turno.Hora >= '08:00:00' and Turno.Hora <= '9:00:00'";
-                //query2 += " and Turno.Fecha >= '2024-05-14' and Turno.Fecha <= '2024-05-14'";
+
+
+
                 query2 += ";";
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
@@ -253,6 +262,18 @@ namespace clinica
         }
 
         private void dtpFechaHasta_ValueChanged(object sender, EventArgs e)
+        {
+            cargarTurnos();
+
+        }
+
+        private void cbxHoraDesde_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cargarTurnos();
+
+        }
+
+        private void cbxHoraHasta_SelectedIndexChanged(object sender, EventArgs e)
         {
             cargarTurnos();
 

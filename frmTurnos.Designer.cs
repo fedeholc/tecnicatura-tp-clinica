@@ -31,8 +31,8 @@
             cbxEstudios = new ComboBox();
             cbxTurnos = new ComboBox();
             btnSalir = new Button();
-            cbxHoraInicio = new ComboBox();
-            cbxHoraFin = new ComboBox();
+            cbxHoraDesde = new ComboBox();
+            cbxHoraHasta = new ComboBox();
             btnFiltrar = new Button();
             lblEstudio = new Label();
             dtpFechaDesde = new DateTimePicker();
@@ -40,6 +40,8 @@
             lblFechaDesde = new Label();
             lblFechaHasta = new Label();
             lbxTurnos = new ListBox();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // cbxEstudios
@@ -70,21 +72,27 @@
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 
-            // cbxHoraInicio
+            // cbxHoraDesde
             // 
-            cbxHoraInicio.FormattingEnabled = true;
-            cbxHoraInicio.Location = new Point(70, 193);
-            cbxHoraInicio.Name = "cbxHoraInicio";
-            cbxHoraInicio.Size = new Size(121, 23);
-            cbxHoraInicio.TabIndex = 3;
+            cbxHoraDesde.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxHoraDesde.FormattingEnabled = true;
+            cbxHoraDesde.Items.AddRange(new object[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" });
+            cbxHoraDesde.Location = new Point(70, 204);
+            cbxHoraDesde.Name = "cbxHoraDesde";
+            cbxHoraDesde.Size = new Size(84, 23);
+            cbxHoraDesde.TabIndex = 3;
+            cbxHoraDesde.SelectedIndexChanged += cbxHoraDesde_SelectedIndexChanged;
             // 
-            // cbxHoraFin
+            // cbxHoraHasta
             // 
-            cbxHoraFin.FormattingEnabled = true;
-            cbxHoraFin.Location = new Point(359, 193);
-            cbxHoraFin.Name = "cbxHoraFin";
-            cbxHoraFin.Size = new Size(121, 23);
-            cbxHoraFin.TabIndex = 4;
+            cbxHoraHasta.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxHoraHasta.FormattingEnabled = true;
+            cbxHoraHasta.Items.AddRange(new object[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" });
+            cbxHoraHasta.Location = new Point(160, 204);
+            cbxHoraHasta.Name = "cbxHoraHasta";
+            cbxHoraHasta.Size = new Size(84, 23);
+            cbxHoraHasta.TabIndex = 4;
+            cbxHoraHasta.SelectedIndexChanged += cbxHoraHasta_SelectedIndexChanged;
             // 
             // btnFiltrar
             // 
@@ -148,11 +156,31 @@
             lbxTurnos.Size = new Size(527, 199);
             lbxTurnos.TabIndex = 11;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(70, 186);
+            label1.Name = "label1";
+            label1.Size = new Size(67, 15);
+            label1.TabIndex = 12;
+            label1.Text = "Hora desde";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(160, 186);
+            label2.Name = "label2";
+            label2.Size = new Size(64, 15);
+            label2.TabIndex = 13;
+            label2.Text = "Hora hasta";
+            // 
             // frmTurnos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(815, 533);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(lbxTurnos);
             Controls.Add(lblFechaHasta);
             Controls.Add(lblFechaDesde);
@@ -160,8 +188,8 @@
             Controls.Add(dtpFechaDesde);
             Controls.Add(lblEstudio);
             Controls.Add(btnFiltrar);
-            Controls.Add(cbxHoraFin);
-            Controls.Add(cbxHoraInicio);
+            Controls.Add(cbxHoraHasta);
+            Controls.Add(cbxHoraDesde);
             Controls.Add(btnSalir);
             Controls.Add(cbxTurnos);
             Controls.Add(cbxEstudios);
@@ -177,8 +205,8 @@
         private ComboBox cbxEstudios;
         private ComboBox cbxTurnos;
         private Button btnSalir;
-        private ComboBox cbxHoraInicio;
-        private ComboBox cbxHoraFin;
+        private ComboBox cbxHoraDesde;
+        private ComboBox cbxHoraHasta;
         private Button btnFiltrar;
         private Label lblEstudio;
         private DateTimePicker dtpFechaDesde;
@@ -186,5 +214,7 @@
         private Label lblFechaDesde;
         private Label lblFechaHasta;
         private ListBox lbxTurnos;
+        private Label label1;
+        private Label label2;
     }
 }
