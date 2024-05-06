@@ -113,11 +113,11 @@
             btnTurnos.Font = new Font("Segoe UI", 12F);
             btnTurnos.Location = new Point(90, 70);
             btnTurnos.Name = "btnTurnos";
-            btnTurnos.Size = new Size(187, 30);
+            btnTurnos.Size = new Size(263, 30);
             btnTurnos.TabIndex = 7;
             btnTurnos.Text = "Turnos";
             btnTurnos.UseVisualStyleBackColor = true;
-            btnTurnos.Click += this.btnTurnos_Click;
+            btnTurnos.Click += btnTurnos_Click;
             // 
             // frmMenuPrincipal
             // 

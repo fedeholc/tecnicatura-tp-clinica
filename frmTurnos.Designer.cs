@@ -228,7 +228,7 @@
             btnRegistrarPaciente.TabIndex = 30;
             btnRegistrarPaciente.Text = "Registrar nuevo Paciente";
             btnRegistrarPaciente.UseVisualStyleBackColor = true;
-             // 
+            // 
             // btnCancelar
             // 
             btnCancelar.Location = new Point(707, 439);
@@ -237,6 +237,7 @@
             btnCancelar.TabIndex = 31;
             btnCancelar.Text = "Cancelar turno";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // panel2
             // 
@@ -255,6 +256,7 @@
             btnAsignar.TabIndex = 32;
             btnAsignar.Text = "Asignar turno";
             btnAsignar.UseVisualStyleBackColor = true;
+            btnAsignar.Click += btnAsignar_Click;
             // 
             // panel1
             // 

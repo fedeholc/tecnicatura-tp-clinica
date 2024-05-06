@@ -1,4 +1,5 @@
 ﻿using Clinica.Datos;
+using Clinica.Entidades;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -288,6 +289,76 @@ namespace clinica
             }
         }
 
+        private int CancelarTurno(int idTurno)
+        {
+
+            int salida = 0;
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = "update Turno set TurnoStatus = 1 where id = @idTurno;";
+
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@idTurno", idTurno);
+
+                //get query response
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
+
+        private int AsignarTurno(int idPaciente, int idTurno)
+        {
+            int salida = 0;
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = "update Turno set TurnoStatus = 2, Paciente_id = @idPaciente where id = @idTurno;";
+
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@idTurno", idTurno);
+                comando.Parameters.AddWithValue("@idPaciente", idPaciente);
+
+                //get query response
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -321,7 +392,7 @@ namespace clinica
         {
             cargarTurnos();
         }
-   
+
         private void rbtOcupados_CheckedChanged(object sender, EventArgs e)
         {
             cargarTurnos();
@@ -331,6 +402,58 @@ namespace clinica
         {
             cargarTurnos();
         }
-   
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (rbtDisponibles.Checked)
+            {
+                MessageBox.Show("No se puede cancelar un turno disponible.");
+                return;
+            }
+            if (lbxTurnos.SelectedIndex != -1)
+            {
+                int rta = CancelarTurno(((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key);
+                if (rta > 0)
+                {
+                    MessageBox.Show("Turno cancelado correctamente.");
+                    cargarTurnos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al cancelar el turno.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un turno para cancelar.");
+            }
+        }
+
+        private void btnAsignar_Click(object sender, EventArgs e)
+        {
+            if (rbtOcupados.Checked)
+            {
+                MessageBox.Show("No se puede asignar un turno ya ocupado.");
+                return;
+            }
+            if (lbxTurnos.SelectedIndex != -1 && cbxPaciente.SelectedIndex != -1)
+            {
+                int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key, 
+                    ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key);
+                if (rta > 0)
+                {
+                    MessageBox.Show("Turno Asignado correctamente.");
+                    cargarTurnos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al asignar el turno.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un turno y un paciente para poder asignarle el turno.");
+            }
+        }
     }
 }
