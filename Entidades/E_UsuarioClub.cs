@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Clinica.Entidades
 {
+    enum TurnoStatus
+    {
+        NoDisponible = 0,
+        Disponible = 1,
+        Ocupado = 2
+    }
     public class Paciente
     {
         public int? Id { get; set; }

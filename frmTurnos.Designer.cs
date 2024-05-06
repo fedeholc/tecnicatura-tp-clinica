@@ -42,6 +42,7 @@
             lbxTurnos = new ListBox();
             label1 = new Label();
             label2 = new Label();
+            chbNoDisponibles = new CheckBox();
             SuspendLayout();
             // 
             // cbxEstudios
@@ -174,11 +175,23 @@
             label2.TabIndex = 13;
             label2.Text = "Hora hasta";
             // 
+            // chbNoDisponibles
+            // 
+            chbNoDisponibles.AutoSize = true;
+            chbNoDisponibles.Location = new Point(359, 88);
+            chbNoDisponibles.Name = "chbNoDisponibles";
+            chbNoDisponibles.Size = new Size(253, 19);
+            chbNoDisponibles.TabIndex = 14;
+            chbNoDisponibles.Text = "Mostrar turnos Ocupados y No Disponibles";
+            chbNoDisponibles.UseVisualStyleBackColor = true;
+            chbNoDisponibles.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // frmTurnos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(815, 533);
+            Controls.Add(chbNoDisponibles);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(lbxTurnos);
@@ -216,5 +229,6 @@
         private ListBox lbxTurnos;
         private Label label1;
         private Label label2;
+        private CheckBox chbNoDisponibles;
     }
 }

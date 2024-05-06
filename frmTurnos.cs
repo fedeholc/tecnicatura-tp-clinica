@@ -71,14 +71,8 @@ namespace clinica
                     "LugarDeAtencion.Descripcion,  TurnoStatus " +
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                     "inner join estudio on Lugardeatencion.Estudio_id = estudio.id";
-
-                if (filtroEstudioId > 0)
-                {
-                    query2 += $" where estudio.id = {filtroEstudioId}";
-                }
-
-
-                query2 += $" and Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
+               
+                query2 += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
                 query2 += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
 
                 if (cbxHoraDesde.SelectedIndex != -1)
@@ -90,10 +84,22 @@ namespace clinica
                     query2 += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
                 }
 
+                if (filtroEstudioId > 0)
+                {
+                    query2 += $" and estudio.id = {filtroEstudioId}";
+                }
+
+                if (chbNoDisponibles.Checked)
+                {
+                    query2 += $" and (TurnoStatus = 0 or TurnoStatus = 2)";
+                }
+                else
+                {
+                    query2 += $" and TurnoStatus = 1";
+                }
 
 
-
-                query2 += ";";
+                query2 += " ORDER BY Turno.Fecha, Turno.Hora;";
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
 
@@ -277,6 +283,11 @@ namespace clinica
         {
             cargarTurnos();
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            cargarTurnos();
         }
     }
 }
