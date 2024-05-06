@@ -141,20 +141,11 @@ namespace Clinica
 
         private void btnInscribir_Click(object sender, EventArgs e)
         {
-            /*  if (rbtSocio.Checked)
-              {
-                  InscribirUsuarioClub(TipoUsuarioClub.Socio);
-              }
-              else
-              {
-                  InscribirUsuarioClub(TipoUsuarioClub.NoSocio);
-              }*/
+         
 
 
             RegistrarPaciente();
-            //int? idCobertura = ((KeyValuePair<int, string>)cbxCobertura.SelectedItem!).Key;
-
-            //MessageBox.Show(idCobertura.ToString(), "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
         }
 
         private void btnNuevaInscripcion_Click(object sender, EventArgs e)
