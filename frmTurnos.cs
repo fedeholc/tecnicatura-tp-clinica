@@ -100,10 +100,7 @@ namespace clinica
                 {
                     query += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
                 }
-                if (cbxEstudios.Text.Contains("con ayuno")) {
-                    query += $" and Turno.Hora < '11:00'";
-                }
-
+ 
                 if (filtroEstudioId > 0)
                 {
                     query += $" and estudio.id = {filtroEstudioId}";
@@ -195,7 +192,7 @@ namespace clinica
             {
                 string query;
                 sqlCon = Conexion.getInstancia().CrearConexion();
-                query = "select id, Descripcion from Estudio;";
+                query = "select id, Descripcion from Estudio where RequiereTurno = 1;";
                 MySqlCommand comando = new(query, sqlCon)
                 {
                     CommandType = CommandType.Text
