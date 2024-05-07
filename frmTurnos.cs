@@ -1,4 +1,5 @@
 ﻿using Clinica;
+using clinica;
 using Clinica.Datos;
 using Clinica.Entidades;
 using MySql.Data.MySqlClient;
@@ -39,12 +40,11 @@ namespace clinica
             cbxHoraHasta.SelectedIndex = 23;
 
 
-            cargarDatosEstudios();
-            cargarTurnos();
-            cargarPacientes();
-            //cargarTurnos();
-        }
-        private void cargarTurnos()
+            CargarDatosEstudios();
+            CargarTurnos();
+            CargarPacientes();
+         }
+        private void CargarTurnos()
         {
             lbxTurnos.DataSource = null;
             lbxTurnos.Items.Clear();
@@ -182,7 +182,7 @@ namespace clinica
                 }
             }
         }
-        private void cargarDatosEstudios()
+        private void CargarDatosEstudios()
         {
             cbxEstudios.Items.Clear();
             cbxEstudios.Text = "";
@@ -242,71 +242,18 @@ namespace clinica
             }
         }
 
-        public void cargarPacientes()
+        public void CargarPacientes()
         {
             cbxPaciente.DataSource = null;
             cbxPaciente.Items.Clear();
             cbxPaciente.Text = "";
-
-            MySqlConnection sqlCon = new MySqlConnection();
-            try
-            {
-                string query;
-                sqlCon = Conexion.getInstancia().CrearConexion();
-                query = "select id, Nombre, Apellido, DNI from Paciente;";
-                MySqlCommand comando = new(query, sqlCon)
-                {
-                    CommandType = CommandType.Text
-                };
-                sqlCon.Open();
-
-                MySqlDataReader reader;
-                reader = comando.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    List<KeyValuePair<int, string>> pacientes = new();
-
-                    while (reader.Read())
-                    {
-                        // Obtener el ID y el nombre de la cobertura
-                        int id = reader.GetInt32(0);
-                        string nombre = reader.GetString(1);
-                        string apellido = reader.GetString(2);
-                        string dni = reader.GetString(3);
-
-                        string descripcion = $"{nombre} {apellido} - {dni}";
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
-                        KeyValuePair<int, string> paciente = new(id, descripcion);
-                        pacientes.Add(paciente);
-
-                    }
-                    // Asignar la lista de coberturas al ComboBox
-                    cbxPaciente.DataSource = pacientes;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
-                    cbxPaciente.DisplayMember = "Value";
-                    cbxPaciente.SelectedIndex = -1;
-                }
-                else
-                {
-                    MessageBox.Show("No hay datos de Pacientes");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
-            }
+            // Asignar la lista de coberturas al ComboBox
+            cbxPaciente.DataSource = Clinica.Clinica.ObtenerPacientes();
+            // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
+            cbxPaciente.DisplayMember = "Value";
+            cbxPaciente.SelectedIndex = -1;
         }
-
+      
         private int CancelarTurno(int idTurno)
         {
 
@@ -386,41 +333,41 @@ namespace clinica
 
         private void cbxEstudios_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cargarTurnos();
+            CargarTurnos();
         }
 
         private void dtpFechaDesde_ValueChanged(object sender, EventArgs e)
         {
             dtpFechaHasta.MinDate = dtpFechaDesde.Value;
 
-            cargarTurnos();
+            CargarTurnos();
         }
 
         private void dtpFechaHasta_ValueChanged(object sender, EventArgs e)
         {
-            cargarTurnos();
+            CargarTurnos();
 
         }
 
         private void cbxHoraDesde_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cargarTurnos();
+            CargarTurnos();
 
         }
 
         private void cbxHoraHasta_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cargarTurnos();
+            CargarTurnos();
         }
 
         private void rbtOcupados_CheckedChanged(object sender, EventArgs e)
         {
-            cargarTurnos();
+            CargarTurnos();
         }
 
         private void rbtDisponibles_CheckedChanged(object sender, EventArgs e)
         {
-            cargarTurnos();
+            CargarTurnos();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -436,7 +383,7 @@ namespace clinica
                 if (rta > 0)
                 {
                     MessageBox.Show("Turno cancelado correctamente.");
-                    cargarTurnos();
+                    CargarTurnos();
                 }
                 else
                 {
@@ -464,7 +411,7 @@ namespace clinica
                 if (rta > 0)
                 {
                     MessageBox.Show("Turno Asignado correctamente.");
-                    cargarTurnos();
+                    CargarTurnos();
                 }
                 else
                 {

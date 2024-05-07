@@ -33,7 +33,7 @@ namespace Clinica
         {
                  if (formOrigen is frmTurnos formTunos)
                 {
-                     formTunos.cargarPacientes();
+                     formTunos.CargarPacientes();
                 }   
         }
          

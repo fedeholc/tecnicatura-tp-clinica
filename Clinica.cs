@@ -1,34 +1,74 @@
 ﻿using MySql.Data.MySqlClient;
 using Clinica.Datos;
 using Clinica.Entidades;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+ 
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Clinica.Clinica;
+ 
 
 namespace Clinica
 {
-    //enumeración para cuando necesitamos distinguir entre socio y nosocio
-    public enum TipoUsuarioClub
-    {
-       Socio = 0,
-       NoSocio = 1
-    }
-
-    //enumeración para el método de pago
-    public enum MetodoPago
-    {
-        Efectivo = 0,
-        Tarjeta = 1
-    }
+    
 
     internal class Clinica
     {
-       
+        public static List<KeyValuePair<int, string>>? ObtenerPacientes()
+        {
+      
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select id, Nombre, Apellido, DNI from Paciente;";
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    List<KeyValuePair<int, string>> pacientes = new();
+
+                    while (reader.Read())
+                    {
+                        // Obtener el ID y el nombre de la cobertura
+                        int id = reader.GetInt32(0);
+                        string nombre = reader.GetString(1);
+                        string apellido = reader.GetString(2);
+                        string dni = reader.GetString(3);
+
+                        string descripcion = $"{nombre} {apellido} - {dni}";
+
+                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
+                        KeyValuePair<int, string> paciente = new(id, descripcion);
+                        pacientes.Add(paciente);
+
+                    }
+                    return pacientes;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
 
         public static int RegistrarNuevoPaciente(Paciente paciente)
         {
