@@ -131,7 +131,7 @@
             Controls.Add(lblIngreso);
             Name = "frmMenuPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Club Deportivo - Menú Principal";
+            Text = "Clínica - Menú Principal";
             Load += frmPrincipal_Load;
             panel1.ResumeLayout(false);
             ResumeLayout(false);

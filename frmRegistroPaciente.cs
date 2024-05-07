@@ -10,25 +10,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using clinica;
 
 namespace Clinica
 {
     public partial class frmRegistroPaciente : Form
     {
-         
-        public frmRegistroPaciente()
+        private Form formOrigen;
+        public frmRegistroPaciente(Form formOrigen)
         {
             InitializeComponent();
+            this.formOrigen = formOrigen;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            frmMenuPrincipal principal = new frmMenuPrincipal();
-            principal.Show();
-            this.Hide();
+            formOrigen.Show();
+            this.Close();
+        }
+
+        private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e)
+        {
+                 if (formOrigen is frmTurnos formTunos)
+                {
+                     formTunos.cargarPacientes();
+                }   
         }
          
-
         private void RegistrarPaciente()
         {
             int? idCobertura = null;
@@ -123,8 +131,6 @@ namespace Clinica
             txtApellido.Enabled = false;
             txtDireccion.Enabled = false;
             cbxCobertura.Enabled = false;
-
-          
         }
         private void activarCampos()
         {
@@ -135,17 +141,12 @@ namespace Clinica
             txtApellido.Enabled = true;
             txtDireccion.Enabled = true;
             cbxCobertura.Enabled = true;
-
-       
+   
         }
 
         private void btnInscribir_Click(object sender, EventArgs e)
         {
-         
-
-
             RegistrarPaciente();
-            
         }
 
         private void btnNuevaInscripcion_Click(object sender, EventArgs e)

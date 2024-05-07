@@ -1,4 +1,5 @@
-﻿using Clinica.Datos;
+﻿using Clinica;
+using Clinica.Datos;
 using Clinica.Entidades;
 using MySql.Data.MySqlClient;
 using System;
@@ -40,13 +41,8 @@ namespace clinica
         }
         private void cargarTurnos()
         {
-
-
-
             lbxTurnos.DataSource = null;
             lbxTurnos.Items.Clear();
-
-
 
             int filtroEstudioId = 0;
 
@@ -225,8 +221,9 @@ namespace clinica
             }
         }
 
-        private void cargarPacientes()
+        public void cargarPacientes()
         {
+            cbxPaciente.DataSource = null;
             cbxPaciente.Items.Clear();
             cbxPaciente.Text = "";
 
@@ -438,7 +435,7 @@ namespace clinica
             }
             if (lbxTurnos.SelectedIndex != -1 && cbxPaciente.SelectedIndex != -1)
             {
-                int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key, 
+                int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key,
                     ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key);
                 if (rta > 0)
                 {
@@ -454,6 +451,14 @@ namespace clinica
             {
                 MessageBox.Show("Debe seleccionar un turno y un paciente para poder asignarle el turno.");
             }
+        }
+
+        private void btnRegistrarPaciente_Click(object sender, EventArgs e)
+        {
+            frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
+
+            Inscripcion.Show();
+         
         }
     }
 }

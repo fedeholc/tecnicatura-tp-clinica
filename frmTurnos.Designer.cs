@@ -228,6 +228,7 @@
             btnRegistrarPaciente.TabIndex = 30;
             btnRegistrarPaciente.Text = "Registrar nuevo Paciente";
             btnRegistrarPaciente.UseVisualStyleBackColor = true;
+            btnRegistrarPaciente.Click += btnRegistrarPaciente_Click;
             // 
             // btnCancelar
             // 

@@ -40,7 +40,7 @@ namespace Clinica
 
         private void btnInscripciones_Click(object sender, EventArgs e)
         {
-            frmRegistroPaciente Inscripcion = new frmRegistroPaciente();
+            frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
 
             Inscripcion.Show();
             this.Hide();

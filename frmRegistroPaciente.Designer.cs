@@ -200,7 +200,7 @@
             btnNuevaInscripcion.UseVisualStyleBackColor = true;
             btnNuevaInscripcion.Click += btnNuevaInscripcion_Click;
             // 
-            // frmInscripcion
+            // frmRegistroPaciente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -208,9 +208,10 @@
             Controls.Add(btnNuevaInscripcion);
             Controls.Add(btnVolver);
             Controls.Add(panel1);
-            Name = "frmInscripcion";
+            Name = "frmRegistroPaciente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Clínica - Registro de Pacientes";
+            FormClosed += frmRegistroPaciente_FormClosed;
             Load += frmInscripcion_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

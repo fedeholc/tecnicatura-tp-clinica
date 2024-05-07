@@ -195,7 +195,7 @@
             txtBD.Name = "txtBD";
             txtBD.Size = new Size(144, 23);
             txtBD.TabIndex = 8;
-            txtBD.Text = "CircuitoB";
+            txtBD.Text = "Clinica";
             // 
             // label6
             // 
