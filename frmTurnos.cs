@@ -57,13 +57,36 @@ namespace clinica
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
+                string query;
 
-                string query = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
+                string queryOcupados = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
                     "LugarDeAtencion.Descripcion,  TurnoStatus " +
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
-                    "inner join estudio on Lugardeatencion.Estudio_id = estudio.id";
+                    "inner join estudio on Turno.Estudio_id = estudio.id";
 
-                query += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
+                 /* select Turno.id, Turno.Fecha, Turno.Hora, Turno.Estudio_id,  
+                   LugarDeAtencion.Descripcion,  TurnoStatus, Estudio.Descripcion
+                    from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id
+                    inner join estudiolugardeatencion on estudiolugardeatencion.lugardeatencion_id = turno.LugarDeAtencion_id
+                    inner join estudio on estudio.id = estudiolugardeatencion.Estudio_id
+                    where  TurnoStatus = 1 ; */
+
+                string queryDisponibles = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
+                       "LugarDeAtencion.Descripcion,  TurnoStatus " +
+                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
+                     "inner join estudiolugardeatencion on estudiolugardeatencion.lugardeatencion_id = turno.LugarDeAtencion_id " +
+                     "inner join estudio on estudio.id = estudiolugardeatencion.Estudio_id ";
+
+                if (rbtDisponibles.Checked)
+                {
+                    query = queryDisponibles;
+                }
+                else
+                {
+                    query = queryOcupados;
+                }
+
+                 query += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
                 query += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
 
                 if (cbxHoraDesde.SelectedIndex != -1)
@@ -119,7 +142,7 @@ namespace clinica
 
                         string turnoStatusDescripcion = turnoStatus == (int)TurnoStatus.Disponible ? "Disponible" : "Ocupado";
 
-                        string descripcionTurno = $"{fecha} - {hora} - {estudioDescripcion} - {lugarDescripcion} - {turnoStatusDescripcion}";
+                        string descripcionTurno = $"{fecha} - {hora} - {lugarDescripcion} -  {estudioDescripcion} - {turnoStatusDescripcion}";
 
                         // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> turno = new(id, descripcionTurno);
@@ -292,7 +315,7 @@ namespace clinica
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 sqlCon.Open();
 
-                string query = "update Turno set TurnoStatus = 1 where id = @idTurno;";
+                string query = "update Turno set TurnoStatus = 1, Estudio_id = null where id = @idTurno;";
 
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
                 comando.Parameters.AddWithValue("@idTurno", idTurno);
@@ -316,7 +339,7 @@ namespace clinica
             return salida;
         }
 
-        private int AsignarTurno(int idPaciente, int idTurno)
+        private int AsignarTurno(int idPaciente, int idTurno, int idEstudio)
         {
             int salida = 0;
 
@@ -326,11 +349,13 @@ namespace clinica
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 sqlCon.Open();
 
-                string query = "update Turno set TurnoStatus = 2, Paciente_id = @idPaciente where id = @idTurno;";
+                string query = "update Turno set TurnoStatus = 2, Paciente_id = @idPaciente, " +
+                    "Estudio_id = @idEstudio where id = @idTurno;";
 
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
                 comando.Parameters.AddWithValue("@idTurno", idTurno);
                 comando.Parameters.AddWithValue("@idPaciente", idPaciente);
+                comando.Parameters.AddWithValue("@idEstudio", idEstudio);
 
                 //get query response
                 int rowsAffected = comando.ExecuteNonQuery();
@@ -428,10 +453,11 @@ namespace clinica
                 MessageBox.Show("No se puede asignar un turno ya ocupado.");
                 return;
             }
-            if (lbxTurnos.SelectedIndex != -1 && cbxPaciente.SelectedIndex != -1)
+            if (lbxTurnos.SelectedIndex != -1 && cbxPaciente.SelectedIndex != -1 && cbxEstudios.SelectedIndex != -1)
             {
                 int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key,
-                    ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key);
+                    ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key,
+                    ((KeyValuePair<int,string>)cbxEstudios.SelectedItem!).Key);
                 if (rta > 0)
                 {
                     MessageBox.Show("Turno Asignado correctamente.");
@@ -444,7 +470,7 @@ namespace clinica
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un turno y un paciente para poder asignarle el turno.");
+                MessageBox.Show("Debe seleccionar un turno, estudio y paciente para poder asignarle el turno.");
             }
         }
 
