@@ -32,6 +32,7 @@
             btnSalir = new Button();
             btnInscripciones = new Button();
             panel1 = new Panel();
+            btnAcreditacion = new Button();
             btnTurnos = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -71,12 +72,26 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(btnAcreditacion);
             panel1.Controls.Add(btnTurnos);
             panel1.Controls.Add(btnInscripciones);
             panel1.Location = new Point(12, 42);
             panel1.Name = "panel1";
             panel1.Size = new Size(445, 173);
             panel1.TabIndex = 6;
+            // 
+            // btnAcreditacion
+            // 
+            btnAcreditacion.FlatAppearance.BorderColor = Color.Black;
+            btnAcreditacion.FlatAppearance.BorderSize = 2;
+            btnAcreditacion.Font = new Font("Segoe UI", 12F);
+            btnAcreditacion.Location = new Point(90, 115);
+            btnAcreditacion.Name = "btnAcreditacion";
+            btnAcreditacion.Size = new Size(263, 30);
+            btnAcreditacion.TabIndex = 8;
+            btnAcreditacion.Text = "Acreditación de Pacientes";
+            btnAcreditacion.UseVisualStyleBackColor = true;
+            btnAcreditacion.Click += btnAcreditacion_Click;
             // 
             // btnTurnos
             // 
@@ -87,7 +102,7 @@
             btnTurnos.Name = "btnTurnos";
             btnTurnos.Size = new Size(263, 30);
             btnTurnos.TabIndex = 7;
-            btnTurnos.Text = "Turnos";
+            btnTurnos.Text = "Gestión de Turnos";
             btnTurnos.UseVisualStyleBackColor = true;
             btnTurnos.Click += btnTurnos_Click;
             // 
@@ -115,5 +130,6 @@
         private Button btnInscripciones;
         private Panel panel1;
         private Button btnTurnos;
+        private Button btnAcreditacion;
     }
 }
