@@ -16,9 +16,11 @@ namespace clinica
 {
     public partial class frmTurnos : Form
     {
-        public frmTurnos()
+        private readonly Form formOrigen;
+        public frmTurnos(Form formOrigen)
         {
             InitializeComponent();
+            this.formOrigen = formOrigen;
         }
 
         private void frmTurnos_Load(object sender, EventArgs e)
@@ -56,52 +58,43 @@ namespace clinica
             try
             {
 
-                /*
-                select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, Turno.LugarDeAtencion_id, lugardeatencion.Descripcion,  TurnoStatus 
-                from 
-                Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = lugardeatencion.id
-                inner join estudio on lugardeatencion.Estudio_id = estudio.id
-                ;
-                */
-                string query = "select id, Fecha, Hora, LugarDeAtencion_id, TurnoStatus from Turno;";
-
-                string query2 = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
+                string query = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
                     "LugarDeAtencion.Descripcion,  TurnoStatus " +
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                     "inner join estudio on Lugardeatencion.Estudio_id = estudio.id";
 
-                query2 += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
-                query2 += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
+                query += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
+                query += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
 
                 if (cbxHoraDesde.SelectedIndex != -1)
                 {
-                    query2 += $" and Turno.Hora >= '{cbxHoraDesde.Text}'";
+                    query += $" and Turno.Hora >= '{cbxHoraDesde.Text}'";
                 }
                 if (cbxHoraHasta.SelectedIndex != -1)
                 {
-                    query2 += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
+                    query += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
                 }
 
                 if (filtroEstudioId > 0)
                 {
-                    query2 += $" and estudio.id = {filtroEstudioId}";
+                    query += $" and estudio.id = {filtroEstudioId}";
                 }
 
                 if (rbtDisponibles.Checked)
                 {
-                    query2 += $" and TurnoStatus = 1";
+                    query += $" and TurnoStatus = 1";
                 }
                 else
                 {
-                    query2 += $" and TurnoStatus = 2";
+                    query += $" and TurnoStatus = 2";
                 }
 
 
-                query2 += " ORDER BY Turno.Fecha, Turno.Hora;";
+                query += " ORDER BY Turno.Fecha, Turno.Hora;";
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
 
-                MySqlCommand comando = new(query2, sqlCon)
+                MySqlCommand comando = new(query, sqlCon)
                 {
                     CommandType = CommandType.Text
                 };
@@ -122,9 +115,11 @@ namespace clinica
                         string hora = reader.GetTimeSpan(2).ToString();
                         string estudioDescripcion = reader.GetString(3);
                         string lugarDescripcion = reader.GetString(4);
-                        string turnoStatus = reader.GetInt32(5).ToString();
+                        int turnoStatus = reader.GetInt32(5);
 
-                        string descripcionTurno = $"{fecha} - {hora} - {estudioDescripcion} - {lugarDescripcion} - {turnoStatus}";
+                        string turnoStatusDescripcion = turnoStatus == (int)TurnoStatus.Disponible ? "Disponible" : "Ocupado";
+
+                        string descripcionTurno = $"{fecha} - {hora} - {estudioDescripcion} - {lugarDescripcion} - {turnoStatusDescripcion}";
 
                         // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> turno = new(id, descripcionTurno);
@@ -458,7 +453,14 @@ namespace clinica
             frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
 
             Inscripcion.Show();
-         
+
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            formOrigen.Show();
+
         }
     }
 }

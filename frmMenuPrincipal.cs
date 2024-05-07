@@ -30,13 +30,7 @@ namespace Clinica
             Application.Exit();
         }
 
-        private void btnListados_Click(object sender, EventArgs e)
-        {
-            frmListados Listados = new frmListados();
-
-            Listados.Show();
-            this.Hide();
-        }
+   
 
         private void btnInscripciones_Click(object sender, EventArgs e)
         {
@@ -48,19 +42,12 @@ namespace Clinica
 
         private void btnTurnos_Click(object sender, EventArgs e)
         {
-            frmTurnos Turnos= new();
+            frmTurnos Turnos= new(this);
 
             Turnos.Show();
             this.Hide();
         }
-
-        private void btnCuotas_Click(object sender, EventArgs e)
-        {
-            frmCuotas Cuotas = new frmCuotas();
-
-            Cuotas.Show();
-            this.Hide();
-        }
+ 
 
          
     }

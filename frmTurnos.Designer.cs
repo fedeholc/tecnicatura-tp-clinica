@@ -1,4 +1,5 @@
-﻿namespace clinica
+﻿
+namespace clinica
 {
     partial class frmTurnos
     {
@@ -53,6 +54,7 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            btnVolver = new Button();
             grbMostrarTurnos.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,7 +70,7 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(814, 500);
+            btnSalir.Location = new Point(734, 489);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(75, 23);
             btnSalir.TabIndex = 2;
@@ -244,7 +246,7 @@
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.ForeColor = SystemColors.ActiveBorder;
-            panel2.Location = new Point(48, 479);
+            panel2.Location = new Point(48, 475);
             panel2.Name = "panel2";
             panel2.Size = new Size(842, 1);
             panel2.TabIndex = 28;
@@ -297,11 +299,22 @@
             label6.TabIndex = 35;
             label6.Text = "Filtrar turnos";
             // 
+            // btnVolver
+            // 
+            btnVolver.Location = new Point(815, 489);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(75, 23);
+            btnVolver.TabIndex = 36;
+            btnVolver.Text = "Volver";
+            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
+            // 
             // frmTurnos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(944, 537);
+            Controls.Add(btnVolver);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -334,6 +347,8 @@
             PerformLayout();
         }
 
+     
+
         #endregion
 
         private ComboBox cbxEstudios;
@@ -361,5 +376,6 @@
         private Label label4;
         private Label label5;
         private Label label6;
+        private Button btnVolver;
     }
 }

@@ -31,8 +31,6 @@
             lblIngreso = new Label();
             btnSalir = new Button();
             btnInscripciones = new Button();
-            btnCuotas = new Button();
-            btnListados = new Button();
             panel1 = new Panel();
             btnTurnos = new Button();
             panel1.SuspendLayout();
@@ -70,32 +68,6 @@
             btnInscripciones.UseVisualStyleBackColor = true;
             btnInscripciones.Click += btnInscripciones_Click;
             // 
-            // btnCuotas
-            // 
-            btnCuotas.FlatAppearance.BorderColor = Color.Black;
-            btnCuotas.FlatAppearance.BorderSize = 2;
-            btnCuotas.Font = new Font("Segoe UI", 12F);
-            btnCuotas.Location = new Point(12, 359);
-            btnCuotas.Name = "btnCuotas";
-            btnCuotas.Size = new Size(187, 30);
-            btnCuotas.TabIndex = 3;
-            btnCuotas.Text = "Cobro de Cuotas";
-            btnCuotas.UseVisualStyleBackColor = true;
-            btnCuotas.Click += btnCuotas_Click;
-            // 
-            // btnListados
-            // 
-            btnListados.FlatAppearance.BorderColor = Color.Black;
-            btnListados.FlatAppearance.BorderSize = 2;
-            btnListados.Font = new Font("Segoe UI", 12F);
-            btnListados.Location = new Point(12, 323);
-            btnListados.Name = "btnListados";
-            btnListados.Size = new Size(187, 30);
-            btnListados.TabIndex = 4;
-            btnListados.Text = "Listado de Vencimientos";
-            btnListados.UseVisualStyleBackColor = true;
-            btnListados.Click += btnListados_Click;
-            // 
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
@@ -125,8 +97,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(484, 459);
             Controls.Add(panel1);
-            Controls.Add(btnListados);
-            Controls.Add(btnCuotas);
             Controls.Add(btnSalir);
             Controls.Add(lblIngreso);
             Name = "frmMenuPrincipal";
@@ -143,8 +113,6 @@
         private Label lblIngreso;
         private Button btnSalir;
         private Button btnInscripciones;
-        private Button btnCuotas;
-        private Button btnListados;
         private Panel panel1;
         private Button btnTurnos;
     }
