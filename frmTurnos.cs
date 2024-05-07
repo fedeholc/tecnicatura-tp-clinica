@@ -35,6 +35,9 @@ namespace clinica
             dtpFechaDesde.MinDate = DateTime.Today;
             dtpFechaHasta.MinDate = DateTime.Today;
 
+            cbxHoraDesde.SelectedIndex = 0;
+            cbxHoraHasta.SelectedIndex = 23;
+
 
             cargarDatosEstudios();
             cargarTurnos();
@@ -96,6 +99,9 @@ namespace clinica
                 if (cbxHoraHasta.SelectedIndex != -1)
                 {
                     query += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
+                }
+                if (cbxEstudios.Text.Contains("con ayuno")) {
+                    query += $" and Turno.Hora < '11:00'";
                 }
 
                 if (filtroEstudioId > 0)
@@ -218,7 +224,7 @@ namespace clinica
                     cbxEstudios.DataSource = estudios;
                     // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     cbxEstudios.DisplayMember = "Value";
-                    cbxEstudios.SelectedIndex = -1;
+                    cbxEstudios.SelectedIndex = 0;
                 }
                 else
                 {
