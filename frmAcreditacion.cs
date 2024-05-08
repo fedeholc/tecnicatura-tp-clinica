@@ -424,6 +424,33 @@ namespace clinica
         private void btnAcreditar_Click(object sender, EventArgs e)
         {
             //TODO: validaciones
+            if (cbxPaciente.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (cbxEstudios.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un estudio", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (cbxLugar.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un lugar de atención", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!rbtAdeudado.Checked && !rbtPagado.Checked)
+            {
+                MessageBox.Show("Debe seleccionar si se realizó el pago o si se registrará como adeudado", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (rbtPagado.Checked && !rbtEfectivo.Checked && !rbtTarjeta.Checked)
+            {
+                MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+                    
             //TODO: guardar datos de pago en facutra
             //TODO: acreditar para sala de espera
         }
