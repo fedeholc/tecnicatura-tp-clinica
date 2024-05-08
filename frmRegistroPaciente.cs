@@ -31,10 +31,14 @@ namespace Clinica
 
         private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e)
         {
-                 if (formOrigen is frmTurnos formTunos)
-                {
-                     formTunos.CargarPacientes();
-                }   
+            if (formOrigen is frmTurnos formTunos)
+            {
+                formTunos.CargarPacientes();
+            }
+            if (formOrigen is frmAcreditacion frmAcreditacion)
+            {
+                frmAcreditacion.CargarPacientes();
+            }
         }
          
         private void RegistrarPaciente()

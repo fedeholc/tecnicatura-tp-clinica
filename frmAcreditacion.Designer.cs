@@ -43,15 +43,15 @@
             label6 = new Label();
             lblMonto = new Label();
             label7 = new Label();
-            label5 = new Label();
+            lblMedioPago = new Label();
             rbtEfectivo = new RadioButton();
             rbtTarjeta = new RadioButton();
             panel1 = new Panel();
             panel3 = new Panel();
-            label8 = new Label();
+            lblRegistroPago = new Label();
             rbtPagado = new RadioButton();
             rbtAdeudado = new RadioButton();
-            button1 = new Button();
+            btnAcreditar = new Button();
             groupBox1 = new GroupBox();
             label2 = new Label();
             cbxLugar = new ComboBox();
@@ -101,6 +101,7 @@
             btnRegistrarPaciente.TabIndex = 42;
             btnRegistrarPaciente.Text = "Registrar nuevo Paciente";
             btnRegistrarPaciente.UseVisualStyleBackColor = true;
+            btnRegistrarPaciente.Click += btnRegistrarPaciente_Click;
             // 
             // label3
             // 
@@ -149,6 +150,7 @@
             lbxTurnos.Name = "lbxTurnos";
             lbxTurnos.Size = new Size(527, 72);
             lbxTurnos.TabIndex = 45;
+            lbxTurnos.SelectedIndexChanged += lbxTurnos_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -213,14 +215,14 @@
             label7.TabIndex = 51;
             label7.Text = "Monto a pagar:";
             // 
-            // label5
+            // lblMedioPago
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(3, 5);
-            label5.Name = "label5";
-            label5.Size = new Size(90, 15);
-            label5.TabIndex = 53;
-            label5.Text = "Medio de pago:";
+            lblMedioPago.AutoSize = true;
+            lblMedioPago.Location = new Point(3, 5);
+            lblMedioPago.Name = "lblMedioPago";
+            lblMedioPago.Size = new Size(90, 15);
+            lblMedioPago.TabIndex = 53;
+            lblMedioPago.Text = "Medio de pago:";
             // 
             // rbtEfectivo
             // 
@@ -246,7 +248,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(label5);
+            panel1.Controls.Add(lblMedioPago);
             panel1.Controls.Add(rbtTarjeta);
             panel1.Controls.Add(rbtEfectivo);
             panel1.Location = new Point(5, 61);
@@ -256,7 +258,7 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(label8);
+            panel3.Controls.Add(lblRegistroPago);
             panel3.Controls.Add(rbtPagado);
             panel3.Controls.Add(rbtAdeudado);
             panel3.Location = new Point(276, 59);
@@ -264,15 +266,14 @@
             panel3.Size = new Size(248, 29);
             panel3.TabIndex = 57;
             // 
-            // label8
+            // lblRegistroPago
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(3, 7);
-            label8.Name = "label8";
-            label8.Size = new Size(90, 15);
-            label8.TabIndex = 53;
-            label8.Text = "Registrar cómo:";
-            label8.Click += label8_Click;
+            lblRegistroPago.AutoSize = true;
+            lblRegistroPago.Location = new Point(3, 7);
+            lblRegistroPago.Name = "lblRegistroPago";
+            lblRegistroPago.Size = new Size(90, 15);
+            lblRegistroPago.TabIndex = 53;
+            lblRegistroPago.Text = "Registrar cómo:";
             // 
             // rbtPagado
             // 
@@ -296,15 +297,16 @@
             rbtAdeudado.Text = "Adeudado";
             rbtAdeudado.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnAcreditar
             // 
-            button1.Font = new Font("Segoe UI", 9.75F);
-            button1.Location = new Point(404, 398);
-            button1.Name = "button1";
-            button1.Size = new Size(140, 32);
-            button1.TabIndex = 59;
-            button1.Text = "Acreditar Paciente";
-            button1.UseVisualStyleBackColor = true;
+            btnAcreditar.Font = new Font("Segoe UI", 9.75F);
+            btnAcreditar.Location = new Point(404, 398);
+            btnAcreditar.Name = "btnAcreditar";
+            btnAcreditar.Size = new Size(140, 32);
+            btnAcreditar.TabIndex = 59;
+            btnAcreditar.Text = "Acreditar Paciente";
+            btnAcreditar.UseVisualStyleBackColor = true;
+            btnAcreditar.Click += btnAcreditar_Click;
             // 
             // groupBox1
             // 
@@ -342,6 +344,7 @@
             // rbtNormal
             // 
             rbtNormal.AutoSize = true;
+            rbtNormal.Checked = true;
             rbtNormal.Location = new Point(39, 22);
             rbtNormal.Name = "rbtNormal";
             rbtNormal.Size = new Size(65, 19);
@@ -357,7 +360,6 @@
             rbtUrgencia.Name = "rbtUrgencia";
             rbtUrgencia.Size = new Size(72, 19);
             rbtUrgencia.TabIndex = 54;
-            rbtUrgencia.TabStop = true;
             rbtUrgencia.Text = "Urgencia";
             rbtUrgencia.UseVisualStyleBackColor = true;
             // 
@@ -381,7 +383,7 @@
             Controls.Add(label2);
             Controls.Add(cbxLugar);
             Controls.Add(groupBox1);
-            Controls.Add(button1);
+            Controls.Add(btnAcreditar);
             Controls.Add(label6);
             Controls.Add(label1);
             Controls.Add(lbxTurnos);
@@ -426,15 +428,15 @@
         private Label label6;
         private Label lblMonto;
         private Label label7;
-        private Label label5;
+        private Label lblMedioPago;
         private RadioButton rbtEfectivo;
         private RadioButton rbtTarjeta;
         private Panel panel1;
         private Panel panel3;
-        private Label label8;
+        private Label lblRegistroPago;
         private RadioButton rbtPagado;
         private RadioButton rbtAdeudado;
-        private Button button1;
+        private Button btnAcreditar;
         private GroupBox groupBox1;
         private Label label2;
         private ComboBox cbxLugar;

@@ -1,4 +1,5 @@
-﻿using Clinica.Datos;
+﻿using Clinica;
+using Clinica.Datos;
 using Clinica.Entidades;
 using MySql.Data.MySqlClient;
 using System;
@@ -15,6 +16,8 @@ namespace clinica
 {
     public partial class frmAcreditacion : Form
     {
+        //private static Turno turnoSeleccionado = new();
+
         private Form formOrigen;
         public frmAcreditacion(Form formOrigen)
         {
@@ -43,6 +46,8 @@ namespace clinica
             rbtPagado.Enabled = false;
             lblCoberturaPaciente.Enabled = false;
             lblMonto.Enabled = false;
+            lblMedioPago.Enabled = false;
+            lblRegistroPago.Enabled = false;
 
             CargarPacientes();
             CargarListaEstudios();
@@ -54,9 +59,9 @@ namespace clinica
             cbxPaciente.DataSource = null;
             cbxPaciente.Items.Clear();
             cbxPaciente.Text = "";
-            // Asignar la lista de coberturas al ComboBox
+
             cbxPaciente.DataSource = Clinica.Clinica.ObtenerPacientes();
-            // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
+            // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox  
             cbxPaciente.DisplayMember = "Value";
             cbxPaciente.SelectedIndex = -1;
         }
@@ -121,48 +126,84 @@ namespace clinica
             }
         }
 
+        private void CargarLugares(int idEstudio)
+        {
+            cbxLugar.DataSource = null;
+            cbxLugar.Items.Clear();
+            cbxLugar.Text = "";
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select LugarDeAtencion.id, LugarDeAtencion.Descripcion " +
+                    $"from LugarDeAtencion inner join EstudioLugarDeAtencion " +
+                    $"on EstudioLugarDeAtencion.LugarDeAtencion_id = LugarDeAtencion.id " +
+                    $"inner join Estudio on EstudioLugarDeAtencion.Estudio_id = Estudio.id " +
+                    $"where Estudio.id = {idEstudio};";
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    List<KeyValuePair<int, string>> lugares = new();
+
+                    while (reader.Read())
+                    {
+                        // Obtener el ID y el nombre de la cobertura
+                        int id = reader.GetInt32(0);
+                        string descripcion = reader.GetString(1);
+
+                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
+                        KeyValuePair<int, string> lugar = new(id, descripcion);
+                        lugares.Add(lugar);
+
+                    }
+
+                    cbxLugar.DataSource = lugares;
+                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox 
+                    cbxLugar.DisplayMember = "Value";
+                    cbxLugar.SelectedIndex = -1;
+                }
+                else
+                {
+                    MessageBox.Show("No hay datos de Lugares");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
+
         private void CargarTurnos(int idPaciente)
         {
             lbxTurnos.DataSource = null;
             lbxTurnos.Items.Clear();
 
-            //int filtroEstudioId = 0;
-
-            /*if (cbxEstudios.SelectedIndex != -1)
-            {
-                filtroEstudioId = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
-            }*/
-
-
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-
 
                 string query = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
                     "LugarDeAtencion.Descripcion,  TurnoStatus " +
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                     $"inner join estudio on Turno.Estudio_id = estudio.id where Turno.Paciente_id = {idPaciente}";
-
-
-                //query += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
-                //query += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
-
-                /*if (cbxHoraDesde.SelectedIndex != -1)
-                {
-                    query += $" and Turno.Hora >= '{cbxHoraDesde.Text}'";
-                }
-                if (cbxHoraHasta.SelectedIndex != -1)
-                {
-                    query += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
-                }
-
-                if (filtroEstudioId > 0)
-                {
-                    query += $" and estudio.id = {filtroEstudioId}";
-                }*/
-
-
 
 
                 query += " ORDER BY Turno.Fecha, Turno.Hora;";
@@ -207,6 +248,8 @@ namespace clinica
                     // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     lbxTurnos.DisplayMember = "Value";
                     lbxTurnos.SelectedIndex = 0;
+                    lbxTurnos.Enabled = true;
+
                 }
                 else
                 {
@@ -214,6 +257,7 @@ namespace clinica
                     lbxTurnos.DataSource = null;
                     lbxTurnos.Items.Clear();
                     lbxTurnos.Items.Add("No hay turnos disponibles con los criterios seleccionados.");
+                    lbxTurnos.Enabled = false;
                     // TODO: ojo, si se deja eso hay que evitar que se pueda elegir el turno
                     // Otra opción es dejar el ListBox vacío y oculto, y mostrar un mensaje en un Label
                 }
@@ -232,11 +276,71 @@ namespace clinica
             }
         }
 
+        private static Turno? ObtenerTurno(int idTurno)
+        {
+
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+
+
+                string query = "select Turno.id, Turno.Fecha, Turno.Hora, Turno.LugarDeAtencion_id, " +
+                    "Turno.Paciente_id, Turno.TurnoStatus, Turno.Estudio_id from Turno " +
+                    $"where Turno. id = {idTurno}";
+
+
+                sqlCon = Conexion.getInstancia().CrearConexion();
+
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows && reader.Read())
+                {
+                    Turno turno = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Fecha = reader.GetDateTime(1),
+                        Hora = reader.GetTimeSpan(2),
+                        LugarDeAtencion_id = reader.GetInt32(3),
+                        Paciente_id = reader.GetInt32(4),
+                        TurnoStatus = reader.GetInt32(5),
+                        Estudio_id = reader.GetInt32(6)
+                    };
+
+                    return turno;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
+
+
         private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxPaciente.SelectedIndex != -1)
             {
-
                 CargarTurnos(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
                 lblCoberturaPaciente.Text = Clinica.Clinica.ObtenerCobertura(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
                 lblCoberturaPaciente.Enabled = true;
@@ -249,6 +353,10 @@ namespace clinica
 
         private void cbxEstudios_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbxEstudios.SelectedIndex != -1)
+            {
+                CargarLugares(((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key);
+            }
             if (cbxPaciente.SelectedIndex != -1 && cbxEstudios.SelectedIndex != -1)
             {
                 int idPaciente = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
@@ -265,6 +373,8 @@ namespace clinica
                         rbtTarjeta.Enabled = true;
                         rbtAdeudado.Enabled = true;
                         rbtPagado.Enabled = true;
+                        lblMedioPago.Enabled = true;
+                        lblRegistroPago.Enabled = true;
                     }
                 }
                 else
@@ -276,14 +386,46 @@ namespace clinica
 
         }
 
-        private void label8_Click(object sender, EventArgs e)
+        private int encontrarCbxIndex(int id, ComboBox cbx)
         {
-
+            for (int i = 0; i < cbx.Items.Count; i++)
+            {
+                KeyValuePair<int, string> elemento = (KeyValuePair<int, string>)cbx.Items[i]!;
+                if (elemento.Key == id)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
-        private void lblAlerta_Click(object sender, EventArgs e)
+        private void lbxTurnos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lbxTurnos.SelectedIndex != -1)
+            {
+                int idTurno = ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key;
 
+                if (ObtenerTurno(idTurno) != null)
+                {
+                    Turno turnoSeleccionado = ObtenerTurno(idTurno)!;
+                    cbxEstudios.SelectedIndex = encontrarCbxIndex((int)turnoSeleccionado.Estudio_id!, cbxEstudios);
+                    cbxLugar.SelectedIndex = encontrarCbxIndex(turnoSeleccionado.LugarDeAtencion_id, cbxLugar);
+                }
+            }
+        }
+
+        private void btnRegistrarPaciente_Click(object sender, EventArgs e)
+        {
+            frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
+
+            Inscripcion.Show();
+        }
+
+        private void btnAcreditar_Click(object sender, EventArgs e)
+        {
+            //TODO: validaciones
+            //TODO: guardar datos de pago en facutra
+            //TODO: acreditar para sala de espera
         }
     }
 }

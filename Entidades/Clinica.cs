@@ -12,6 +12,19 @@ namespace Clinica.Entidades
         Disponible = 1,
         Ocupado = 2
     }
+
+    
+        public class Turno
+        {
+            public int Id { get; set; }
+            public DateTime? Fecha { get; set; }
+            public TimeSpan? Hora { get; set; }
+            public int LugarDeAtencion_id { get; set; }
+            public int? Paciente_id { get; set; }
+            public int TurnoStatus { get; set; }
+            public int? Estudio_id { get; set; }
+        }
+    
     public class Paciente
     {
         public int? Id { get; set; }
