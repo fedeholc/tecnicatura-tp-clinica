@@ -53,6 +53,7 @@
             rbtPagado = new RadioButton();
             rbtAdeudado = new RadioButton();
             panel4 = new Panel();
+            button1 = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
@@ -60,7 +61,7 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(703, 437);
+            btnVolver.Location = new Point(469, 406);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(75, 23);
             btnVolver.TabIndex = 39;
@@ -72,14 +73,14 @@
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.ForeColor = SystemColors.ActiveBorder;
-            panel2.Location = new Point(16, 425);
+            panel2.Location = new Point(16, 389);
             panel2.Name = "panel2";
-            panel2.Size = new Size(762, 1);
+            panel2.Size = new Size(528, 1);
             panel2.TabIndex = 38;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(622, 437);
+            btnSalir.Location = new Point(388, 406);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(75, 23);
             btnSalir.TabIndex = 37;
@@ -89,7 +90,7 @@
             // 
             // btnRegistrarPaciente
             // 
-            btnRegistrarPaciente.Location = new Point(282, 61);
+            btnRegistrarPaciente.Location = new Point(391, 40);
             btnRegistrarPaciente.Name = "btnRegistrarPaciente";
             btnRegistrarPaciente.Size = new Size(153, 23);
             btnRegistrarPaciente.TabIndex = 42;
@@ -99,26 +100,26 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(16, 42);
+            label3.Location = new Point(16, 44);
             label3.Name = "label3";
-            label3.Size = new Size(190, 15);
+            label3.Size = new Size(115, 15);
             label3.TabIndex = 41;
-            label3.Text = "Seleccionar Paciente para acreditar";
+            label3.Text = "Seleccionar Paciente";
             // 
             // cbxPaciente
             // 
             cbxPaciente.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPaciente.FormattingEnabled = true;
-            cbxPaciente.Location = new Point(16, 61);
+            cbxPaciente.Location = new Point(137, 40);
             cbxPaciente.Name = "cbxPaciente";
-            cbxPaciente.Size = new Size(251, 23);
+            cbxPaciente.Size = new Size(234, 23);
             cbxPaciente.TabIndex = 40;
             cbxPaciente.SelectedIndexChanged += cbxPaciente_SelectedIndexChanged;
             // 
             // lblEstudio
             // 
             lblEstudio.AutoSize = true;
-            lblEstudio.Location = new Point(16, 97);
+            lblEstudio.Location = new Point(16, 79);
             lblEstudio.Name = "lblEstudio";
             lblEstudio.Size = new Size(95, 15);
             lblEstudio.TabIndex = 44;
@@ -128,25 +129,26 @@
             // 
             cbxEstudios.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxEstudios.FormattingEnabled = true;
-            cbxEstudios.Location = new Point(16, 115);
+            cbxEstudios.Location = new Point(137, 76);
             cbxEstudios.Name = "cbxEstudios";
-            cbxEstudios.Size = new Size(250, 23);
+            cbxEstudios.Size = new Size(233, 23);
             cbxEstudios.TabIndex = 43;
             cbxEstudios.SelectedIndexChanged += cbxEstudios_SelectedIndexChanged;
             // 
             // lbxTurnos
             // 
+            lbxTurnos.Font = new Font("Segoe UI", 9.75F);
             lbxTurnos.FormattingEnabled = true;
-            lbxTurnos.ItemHeight = 15;
-            lbxTurnos.Location = new Point(16, 174);
+            lbxTurnos.ItemHeight = 17;
+            lbxTurnos.Location = new Point(16, 132);
             lbxTurnos.Name = "lbxTurnos";
-            lbxTurnos.Size = new Size(419, 79);
+            lbxTurnos.Size = new Size(527, 72);
             lbxTurnos.TabIndex = 45;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(16, 156);
+            label1.Location = new Point(16, 114);
             label1.Name = "label1";
             label1.Size = new Size(182, 15);
             label1.TabIndex = 46;
@@ -156,7 +158,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.Location = new Point(478, 69);
+            label2.Location = new Point(16, 221);
             label2.Name = "label2";
             label2.Size = new Size(104, 15);
             label2.TabIndex = 47;
@@ -165,7 +167,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(15, 15);
+            label4.Location = new Point(6, 15);
             label4.Name = "label4";
             label4.Size = new Size(105, 15);
             label4.TabIndex = 48;
@@ -176,7 +178,7 @@
             lblCoberturaPaciente.AutoSize = true;
             lblCoberturaPaciente.BackColor = SystemColors.ControlLightLight;
             lblCoberturaPaciente.BorderStyle = BorderStyle.FixedSingle;
-            lblCoberturaPaciente.Location = new Point(133, 12);
+            lblCoberturaPaciente.Location = new Point(114, 12);
             lblCoberturaPaciente.MaximumSize = new Size(150, 0);
             lblCoberturaPaciente.MinimumSize = new Size(150, 0);
             lblCoberturaPaciente.Name = "lblCoberturaPaciente";
@@ -199,7 +201,7 @@
             lblMonto.AutoSize = true;
             lblMonto.BackColor = SystemColors.ControlLightLight;
             lblMonto.BorderStyle = BorderStyle.FixedSingle;
-            lblMonto.Location = new Point(133, 51);
+            lblMonto.Location = new Point(367, 12);
             lblMonto.MaximumSize = new Size(150, 0);
             lblMonto.MinimumSize = new Size(50, 0);
             lblMonto.Name = "lblMonto";
@@ -210,7 +212,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(15, 54);
+            label7.Location = new Point(278, 15);
             label7.Name = "label7";
             label7.Size = new Size(88, 15);
             label7.TabIndex = 51;
@@ -219,7 +221,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(10, 5);
+            label5.Location = new Point(3, 5);
             label5.Name = "label5";
             label5.Size = new Size(90, 15);
             label5.TabIndex = 53;
@@ -228,7 +230,7 @@
             // rbtEfectivo
             // 
             rbtEfectivo.AutoSize = true;
-            rbtEfectivo.Location = new Point(128, 3);
+            rbtEfectivo.Location = new Point(100, 3);
             rbtEfectivo.Name = "rbtEfectivo";
             rbtEfectivo.Size = new Size(67, 19);
             rbtEfectivo.TabIndex = 54;
@@ -239,7 +241,7 @@
             // rbtTarjeta
             // 
             rbtTarjeta.AutoSize = true;
-            rbtTarjeta.Location = new Point(201, 3);
+            rbtTarjeta.Location = new Point(173, 3);
             rbtTarjeta.Name = "rbtTarjeta";
             rbtTarjeta.Size = new Size(59, 19);
             rbtTarjeta.TabIndex = 55;
@@ -252,9 +254,9 @@
             panel1.Controls.Add(label5);
             panel1.Controls.Add(rbtTarjeta);
             panel1.Controls.Add(rbtEfectivo);
-            panel1.Location = new Point(5, 84);
+            panel1.Location = new Point(5, 45);
             panel1.Name = "panel1";
-            panel1.Size = new Size(278, 25);
+            panel1.Size = new Size(259, 25);
             panel1.TabIndex = 56;
             // 
             // panel3
@@ -262,15 +264,15 @@
             panel3.Controls.Add(label8);
             panel3.Controls.Add(rbtPagado);
             panel3.Controls.Add(rbtAdeudado);
-            panel3.Location = new Point(5, 119);
+            panel3.Location = new Point(276, 43);
             panel3.Name = "panel3";
-            panel3.Size = new Size(278, 29);
+            panel3.Size = new Size(248, 29);
             panel3.TabIndex = 57;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(10, 5);
+            label8.Location = new Point(3, 7);
             label8.Name = "label8";
             label8.Size = new Size(90, 15);
             label8.TabIndex = 53;
@@ -280,7 +282,7 @@
             // rbtPagado
             // 
             rbtPagado.AutoSize = true;
-            rbtPagado.Location = new Point(128, 3);
+            rbtPagado.Location = new Point(98, 5);
             rbtPagado.Name = "rbtPagado";
             rbtPagado.Size = new Size(65, 19);
             rbtPagado.TabIndex = 55;
@@ -291,7 +293,7 @@
             // rbtAdeudado
             // 
             rbtAdeudado.AutoSize = true;
-            rbtAdeudado.Location = new Point(201, 3);
+            rbtAdeudado.Location = new Point(164, 5);
             rbtAdeudado.Name = "rbtAdeudado";
             rbtAdeudado.Size = new Size(80, 19);
             rbtAdeudado.TabIndex = 54;
@@ -308,16 +310,27 @@
             panel4.Controls.Add(panel3);
             panel4.Controls.Add(label7);
             panel4.Controls.Add(panel1);
-            panel4.Location = new Point(478, 95);
+            panel4.Location = new Point(16, 240);
             panel4.Name = "panel4";
-            panel4.Size = new Size(301, 158);
+            panel4.Size = new Size(527, 83);
             panel4.TabIndex = 58;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 9.75F);
+            button1.Location = new Point(404, 342);
+            button1.Name = "button1";
+            button1.Size = new Size(140, 32);
+            button1.TabIndex = 59;
+            button1.Text = "Acreditar Paciente";
+            button1.UseVisualStyleBackColor = true;
             // 
             // frmAcreditacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 475);
+            ClientSize = new Size(565, 450);
+            Controls.Add(button1);
             Controls.Add(panel4);
             Controls.Add(label6);
             Controls.Add(label2);
@@ -372,5 +385,6 @@
         private RadioButton rbtPagado;
         private RadioButton rbtAdeudado;
         private Panel panel4;
+        private Button button1;
     }
 }
