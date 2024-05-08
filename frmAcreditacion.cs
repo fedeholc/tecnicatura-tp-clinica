@@ -37,7 +37,7 @@ namespace clinica
         {
             cbxPaciente.SelectedIndex = -1;
 
-             rbtEfectivo.Enabled = false;
+            rbtEfectivo.Enabled = false;
             rbtTarjeta.Enabled = false;
             rbtAdeudado.Enabled = false;
             rbtPagado.Enabled = false;
@@ -277,6 +277,11 @@ namespace clinica
         }
 
         private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAlerta_Click(object sender, EventArgs e)
         {
 
         }
