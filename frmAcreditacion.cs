@@ -450,8 +450,30 @@ namespace clinica
                 MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-                    
+
             //TODO: guardar datos de pago en facutra
+            int respuesta;
+            Factura factura = new();
+            factura.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
+            factura.Estudio_id = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
+            factura.Cobertura_id = (int) Clinica.Clinica.ObtenerCoberturaId(factura.Paciente_id)!;
+            factura.Monto = float.Parse(lblMonto.Text);
+            factura.MetodoPago = rbtEfectivo.Checked ? 1 : 2;
+            factura.FacturaStatus = rbtPagado.Checked ? 1 : 0;
+
+
+            respuesta = Clinica.Clinica.RegistrarFactura(factura);
+
+            if (respuesta == 0)
+            {
+                MessageBox.Show("Error al registrar la factura", "AVISO DEL SISTEMA",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Registro de factura exitoso", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                 
+            }
             //TODO: acreditar para sala de espera
         }
     }

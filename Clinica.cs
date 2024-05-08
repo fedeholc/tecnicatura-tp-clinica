@@ -115,6 +115,50 @@ namespace Clinica
             }
         }
 
+        public static int? ObtenerCoberturaId(int idPaciente)
+        {
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select Cobertura.Id from Cobertura " +
+                    "inner join Paciente on Paciente.Cobertura_id = Cobertura.id " +
+                    $"where Paciente.id = {idPaciente};";
+
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows && reader.Read())
+                {
+                    return reader.GetInt32(0);
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
         public static int? ObtenerMonto(int idEstudio, int idPaciente)
         {
 
@@ -192,6 +236,49 @@ namespace Clinica
             catch (Exception ex)
             {
                  MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
+        public static int RegistrarFactura(Factura factura)
+        {
+            ArgumentNullException.ThrowIfNull(factura);
+
+            int salida = 0;
+     
+
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = "INSERT INTO Factura (Estudio_id, Cobertura_id, Paciente_id, Monto, MetodoPago, FacturaStatus) " +
+                    "VALUES (@Estudio_id, @Cobertura_id, @Paciente_id, @Monto, @MetodoPago, @FacturaStatus)";
+                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@Estudio_id", factura.Estudio_id);
+                comando.Parameters.AddWithValue("@Cobertura_id", factura.Cobertura_id);
+                comando.Parameters.AddWithValue("@Paciente_id", factura.Paciente_id);
+                comando.Parameters.AddWithValue("@Monto", factura.Monto);
+                comando.Parameters.AddWithValue("@MetodoPago", factura.MetodoPago);
+                comando.Parameters.AddWithValue("@FacturaStatus", factura.FacturaStatus);
+
+
+                //get query response
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
                 throw;
             }
             finally

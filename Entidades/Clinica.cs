@@ -13,8 +13,32 @@ namespace Clinica.Entidades
         Ocupado = 2
     }
 
-    
-        public class Turno
+    enum FacturaStatus
+    {
+        Pendiente = 0,
+        Pagada = 1,
+        Anulada = 2
+    }
+
+    enum MetodoPago
+    {
+        PorCobertura = 0,
+        Efectivo = 1,
+        Tarjeta = 2
+    }
+
+    public class Factura
+    {
+        public int Id { get; set; }
+        public int Estudio_id { get; set; }
+        public int Cobertura_id { get; set; }
+        public int Paciente_id { get; set; }
+        public float? Monto { get; set; }
+        public int? MetodoPago { get; set; }
+        public int FacturaStatus { get; set; }
+    }
+
+    public class Turno
         {
             public int Id { get; set; }
             public DateTime? Fecha { get; set; }
