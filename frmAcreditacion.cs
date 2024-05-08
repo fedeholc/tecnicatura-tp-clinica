@@ -35,6 +35,8 @@ namespace clinica
 
         private void frmAcreditacion_Load(object sender, EventArgs e)
         {
+            cbxPaciente.SelectedIndex = -1;
+
             CargarPacientes();
             CargarListaEstudios();
             CargarTurnos(0);
@@ -227,8 +229,13 @@ namespace clinica
         {
             if (cbxPaciente.SelectedIndex != -1)
             {
+                
                 CargarTurnos(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
-            } 
+                lblCoberturaPaciente.Text = Clinica.Clinica.ObtenerCobertura(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);   
+            } else
+            {
+                lblCoberturaPaciente.Text = "";
+            }
         }
     }
 }
