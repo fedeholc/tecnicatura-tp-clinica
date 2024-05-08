@@ -37,6 +37,13 @@ namespace clinica
         {
             cbxPaciente.SelectedIndex = -1;
 
+             rbtEfectivo.Enabled = false;
+            rbtTarjeta.Enabled = false;
+            rbtAdeudado.Enabled = false;
+            rbtPagado.Enabled = false;
+            lblCoberturaPaciente.Enabled = false;
+            lblMonto.Enabled = false;
+
             CargarPacientes();
             CargarListaEstudios();
             CargarTurnos(0);
@@ -229,13 +236,49 @@ namespace clinica
         {
             if (cbxPaciente.SelectedIndex != -1)
             {
-                
+
                 CargarTurnos(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
-                lblCoberturaPaciente.Text = Clinica.Clinica.ObtenerCobertura(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);   
-            } else
+                lblCoberturaPaciente.Text = Clinica.Clinica.ObtenerCobertura(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
+                lblCoberturaPaciente.Enabled = true;
+            }
+            else
             {
                 lblCoberturaPaciente.Text = "";
             }
+        }
+
+        private void cbxEstudios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxPaciente.SelectedIndex != -1 && cbxEstudios.SelectedIndex != -1)
+            {
+                int idPaciente = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
+                int idEstudio = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
+                int? monto = Clinica.Clinica.ObtenerMonto(idEstudio, idPaciente);
+
+                if (monto != null)
+                {
+                    lblMonto.Text = monto.ToString();
+                    lblMonto.Enabled = true;
+                    if (monto > 0)
+                    {
+                        rbtEfectivo.Enabled = true;
+                        rbtTarjeta.Enabled = true;
+                        rbtAdeudado.Enabled = true;
+                        rbtPagado.Enabled = true;
+                    }
+                }
+                else
+                {
+                    lblMonto.Text = "Sin datos";
+                }
+
+            }
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

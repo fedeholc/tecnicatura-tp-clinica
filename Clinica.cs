@@ -91,20 +91,9 @@ namespace Clinica
                 MySqlDataReader reader;
                 reader = comando.ExecuteReader();
 
-                if (reader.HasRows)
+                if (reader.HasRows && reader.Read())
                 {
- 
-                    if (reader.Read())
-                    {
-                        // Obtener el ID y el nombre de la cobertura
-                         return reader.GetString(0);
-
-
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    return reader.GetString(0);
                 }
                 else
                 {
@@ -126,6 +115,50 @@ namespace Clinica
             }
         }
 
+        public static int? ObtenerMonto(int idEstudio, int idPaciente)
+        {
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select CoberturaEstudio.Monto from CoberturaEstudio " +
+                    "inner join Paciente on Paciente.Cobertura_id = CoberturaEstudio.Cobertura_id " +
+                    $"where Paciente.id = {idPaciente} and CoberturaEstudio.Estudio_id = {idEstudio};";
+
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows && reader.Read())
+                {
+                    return reader.GetInt32(0);
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
         public static int RegistrarNuevoPaciente(Paciente paciente)
         {
             ArgumentNullException.ThrowIfNull(paciente);
