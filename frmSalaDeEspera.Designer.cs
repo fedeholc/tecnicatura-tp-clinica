@@ -39,7 +39,7 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(565, 368);
+            btnVolver.Location = new Point(594, 368);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(75, 23);
             btnVolver.TabIndex = 42;
@@ -51,14 +51,14 @@
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.ForeColor = SystemColors.ActiveBorder;
-            panel2.Location = new Point(112, 355);
+            panel2.Location = new Point(141, 355);
             panel2.Name = "panel2";
             panel2.Size = new Size(528, 1);
             panel2.TabIndex = 41;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(484, 368);
+            btnSalir.Location = new Point(513, 368);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(75, 23);
             btnSalir.TabIndex = 40;
@@ -70,7 +70,7 @@
             // 
             lvwConTurno.Location = new Point(22, 40);
             lvwConTurno.Name = "lvwConTurno";
-            lvwConTurno.Size = new Size(628, 120);
+            lvwConTurno.Size = new Size(647, 120);
             lvwConTurno.TabIndex = 67;
             lvwConTurno.UseCompatibleStateImageBehavior = false;
             lvwConTurno.SelectedIndexChanged += lvwConTurno_SelectedIndexChanged;
@@ -79,7 +79,7 @@
             // 
             lvwSinTurno.Location = new Point(22, 201);
             lvwSinTurno.Name = "lvwSinTurno";
-            lvwSinTurno.Size = new Size(628, 120);
+            lvwSinTurno.Size = new Size(647, 120);
             lvwSinTurno.TabIndex = 68;
             lvwSinTurno.UseCompatibleStateImageBehavior = false;
             // 
@@ -107,7 +107,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(672, 414);
+            ClientSize = new Size(693, 414);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(lvwSinTurno);

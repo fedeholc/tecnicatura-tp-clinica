@@ -124,6 +124,12 @@ namespace clinica
             }
         }*/
 
+        public void CargarSalas()
+        {
+            CargarEsperaListView(lvwConTurno, 1);
+            CargarEsperaListView(lvwSinTurno, 0);
+        }
+
         private void CargarEsperaListView(ListView lvw, int requiereTurno)
         {
             lvw.Items.Clear();

@@ -252,8 +252,6 @@ namespace Clinica
             ArgumentNullException.ThrowIfNull(factura);
 
             int salida = 0;
-     
-
 
             MySqlConnection sqlCon = new MySqlConnection();
             try
@@ -271,8 +269,45 @@ namespace Clinica
                 comando.Parameters.AddWithValue("@MetodoPago", factura.MetodoPago);
                 comando.Parameters.AddWithValue("@FacturaStatus", factura.FacturaStatus);
 
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
+        public static int RegistrarSalaDeEspera(SalaDeEspera sala)
+        {
+            ArgumentNullException.ThrowIfNull(sala);
 
-                //get query response
+            int salida = 0;
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = "INSERT INTO SalaDeEspera (FechaHoraAcreditacion, Paciente_id, Estudio_id, LugarDeAtencion_id, Prioridad)  " +
+                    "VALUES (@FechaHoraAcreditacion, @Paciente_id, @Estudio_id, @LugarDeAtencion_id, @Prioridad)";
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@FechaHoraAcreditacion", sala.FechaHoraAcreditacion);
+                comando.Parameters.AddWithValue("@Paciente_id", sala.Paciente_id);
+                comando.Parameters.AddWithValue("@Estudio_id", sala.Estudio_id);
+                comando.Parameters.AddWithValue("@LugarDeAtencion_id", sala.LugarDeAtencion_id);
+                comando.Parameters.AddWithValue("@Prioridad", sala.Prioridad);
+
+
                 int rowsAffected = comando.ExecuteNonQuery();
                 salida = rowsAffected;
             }

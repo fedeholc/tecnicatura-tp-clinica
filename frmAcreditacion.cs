@@ -434,8 +434,7 @@ namespace clinica
 
         private void btnAcreditar_Click(object sender, EventArgs e)
         {
-            //TODO: validaciones
-            if (cbxPaciente.SelectedIndex == -1)
+             if (cbxPaciente.SelectedIndex == -1)
             {
                 MessageBox.Show("Debe seleccionar un paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -453,8 +452,8 @@ namespace clinica
 
 
 
-            //TODO: guardar datos de pago en facutra
-            int respuesta;
+            // guardar datos de pago en facutra
+            int rtaFactura;
             Factura factura = new();
             factura.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
             factura.Estudio_id = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
@@ -517,9 +516,9 @@ namespace clinica
 
 
 
-            respuesta = Clinica.Clinica.RegistrarFactura(factura);
+            rtaFactura = Clinica.Clinica.RegistrarFactura(factura);
 
-            if (respuesta == 0)
+            if (rtaFactura == 0)
             {
                 MessageBox.Show("Error al registrar la factura", "AVISO DEL SISTEMA",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -533,7 +532,39 @@ namespace clinica
 
             DeshabilitarCampos();
 
-            //TODO: acreditar para sala de espera
+            // acreditar para sala de espera
+            int rtaSaladeEspera;
+            SalaDeEspera salaDeEspera = new();
+            salaDeEspera.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
+            salaDeEspera.Estudio_id = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
+            salaDeEspera.LugarDeAtencion_id = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
+            salaDeEspera.FechaHoraAcreditacion = DateTime.Now;
+            salaDeEspera.Prioridad = rbtUrgencia.Checked ? (int)Prioridad.Urgencia : (int)Prioridad.Normal;
+
+            rtaSaladeEspera = Clinica.Clinica.RegistrarSalaDeEspera(salaDeEspera);
+            if (rtaSaladeEspera == 0)
+            {
+                MessageBox.Show("Error al acreditar al paciente.", "AVISO DEL SISTEMA",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Acreditación del paciente exitosa.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+
+            if (Application.OpenForms.OfType<frmSalaDeEspera>().Any())
+            {
+                // Si el formulario está abierto, llamar al método estático
+                //frmSalaDeEspera.CargarSalas();
+            }
+            var formsSalas = Application.OpenForms.OfType<frmSalaDeEspera>().ToList();
+
+            // Recorrer todas las instancias de FormularioSecundario y llamar al método no estático
+            foreach (var form in formsSalas)
+            {
+                form.CargarSalas();
+            }
         }
 
         private void DeshabilitarCampos()

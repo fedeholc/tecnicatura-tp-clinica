@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Clinica.Entidades
 {
+    enum Prioridad
+    {
+        Urgencia = 0,
+        Normal = 1,
+     }
     enum TurnoStatus
     {
         NoDisponible = 0,
@@ -25,6 +30,15 @@ namespace Clinica.Entidades
         SinPago = 0,
         Efectivo = 1,
         Tarjeta = 2
+    }
+    public class SalaDeEspera
+    {
+        public int Id { get; set; }
+        public DateTime? FechaHoraAcreditacion { get; set; }
+        public int Paciente_id { get; set; }
+        public int Estudio_id { get; set; }
+        public int LugarDeAtencion_id { get; set; }
+        public int Prioridad { get; set; }
     }
 
     public class Factura
