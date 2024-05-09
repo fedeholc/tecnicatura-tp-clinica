@@ -37,8 +37,8 @@
             rtxtHistoriaClinica = new RichTextBox();
             label1 = new Label();
             label3 = new Label();
-            btnAcreditar = new Button();
-            button1 = new Button();
+            btnRegistrarAtencion = new Button();
+            btnPacienteAusente = new Button();
             SuspendLayout();
             // 
             // btnVolver
@@ -125,34 +125,36 @@
             label3.TabIndex = 69;
             label3.Text = "Historia Clínica del paciente";
             // 
-            // btnAcreditar
+            // btnRegistrarAtencion
             // 
-            btnAcreditar.Font = new Font("Segoe UI", 9.75F);
-            btnAcreditar.Location = new Point(477, 267);
-            btnAcreditar.Name = "btnAcreditar";
-            btnAcreditar.Size = new Size(186, 32);
-            btnAcreditar.TabIndex = 70;
-            btnAcreditar.Text = "Registrar Paciente Atendido";
-            btnAcreditar.UseVisualStyleBackColor = true;
+            btnRegistrarAtencion.Font = new Font("Segoe UI", 9.75F);
+            btnRegistrarAtencion.Location = new Point(477, 267);
+            btnRegistrarAtencion.Name = "btnRegistrarAtencion";
+            btnRegistrarAtencion.Size = new Size(186, 32);
+            btnRegistrarAtencion.TabIndex = 70;
+            btnRegistrarAtencion.Text = "Registrar Paciente Atendido";
+            btnRegistrarAtencion.UseVisualStyleBackColor = true;
+            btnRegistrarAtencion.Click += btnRegistrarAtencion_Click;
             // 
-            // button1
+            // btnPacienteAusente
             // 
-            button1.Font = new Font("Segoe UI", 9.75F);
-            button1.ForeColor = SystemColors.InfoText;
-            button1.Location = new Point(65, 267);
-            button1.Name = "button1";
-            button1.Size = new Size(186, 32);
-            button1.TabIndex = 71;
-            button1.Text = "Registrar Paciente Ausente";
-            button1.UseVisualStyleBackColor = true;
+            btnPacienteAusente.Font = new Font("Segoe UI", 9.75F);
+            btnPacienteAusente.ForeColor = SystemColors.InfoText;
+            btnPacienteAusente.Location = new Point(65, 267);
+            btnPacienteAusente.Name = "btnPacienteAusente";
+            btnPacienteAusente.Size = new Size(186, 32);
+            btnPacienteAusente.TabIndex = 71;
+            btnPacienteAusente.Text = "Registrar Paciente Ausente";
+            btnPacienteAusente.UseVisualStyleBackColor = true;
+            btnPacienteAusente.Click += btnPacienteAusente_Click;
             // 
             // frmAtencion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(680, 367);
-            Controls.Add(button1);
-            Controls.Add(btnAcreditar);
+            Controls.Add(btnPacienteAusente);
+            Controls.Add(btnRegistrarAtencion);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(rtxtHistoriaClinica);
@@ -162,6 +164,7 @@
             Controls.Add(btnVolver);
             Controls.Add(panel2);
             Controls.Add(btnSalir);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmAtencion";
             Text = "frmAtencion";
             Load += frmAtencion_Load;
@@ -180,7 +183,7 @@
         private RichTextBox rtxtHistoriaClinica;
         private Label label1;
         private Label label3;
-        private Button btnAcreditar;
-        private Button button1;
+        private Button btnRegistrarAtencion;
+        private Button btnPacienteAusente;
     }
 }

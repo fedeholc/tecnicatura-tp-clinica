@@ -208,6 +208,7 @@
             Controls.Add(btnNuevaInscripcion);
             Controls.Add(btnVolver);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmRegistroPaciente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Clínica - Registro de Pacientes";

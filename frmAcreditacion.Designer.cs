@@ -407,6 +407,7 @@
             Controls.Add(btnVolver);
             Controls.Add(panel2);
             Controls.Add(btnSalir);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MinimumSize = new Size(60, 0);
             Name = "frmAcreditacion";
             Text = "Acreditación";

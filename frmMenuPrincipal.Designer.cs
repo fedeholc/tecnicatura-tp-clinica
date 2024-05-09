@@ -32,10 +32,10 @@
             btnSalir = new Button();
             btnInscripciones = new Button();
             panel1 = new Panel();
+            btnAtencion = new Button();
             btnSalaDeEspera = new Button();
             btnAcreditacion = new Button();
             btnTurnos = new Button();
-            btnAtencion = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -84,6 +84,19 @@
             panel1.Size = new Size(445, 247);
             panel1.TabIndex = 6;
             // 
+            // btnAtencion
+            // 
+            btnAtencion.FlatAppearance.BorderColor = Color.Black;
+            btnAtencion.FlatAppearance.BorderSize = 2;
+            btnAtencion.Font = new Font("Segoe UI", 12F);
+            btnAtencion.Location = new Point(90, 197);
+            btnAtencion.Name = "btnAtencion";
+            btnAtencion.Size = new Size(263, 30);
+            btnAtencion.TabIndex = 10;
+            btnAtencion.Text = "Atención de Pacientes";
+            btnAtencion.UseVisualStyleBackColor = true;
+            btnAtencion.Click += btnAtencion_Click;
+            // 
             // btnSalaDeEspera
             // 
             btnSalaDeEspera.FlatAppearance.BorderColor = Color.Black;
@@ -123,19 +136,6 @@
             btnTurnos.UseVisualStyleBackColor = true;
             btnTurnos.Click += btnTurnos_Click;
             // 
-            // btnAtencion
-            // 
-            btnAtencion.FlatAppearance.BorderColor = Color.Black;
-            btnAtencion.FlatAppearance.BorderSize = 2;
-            btnAtencion.Font = new Font("Segoe UI", 12F);
-            btnAtencion.Location = new Point(90, 197);
-            btnAtencion.Name = "btnAtencion";
-            btnAtencion.Size = new Size(263, 30);
-            btnAtencion.TabIndex = 10;
-            btnAtencion.Text = "Atención de Pacientes";
-            btnAtencion.UseVisualStyleBackColor = true;
-            btnAtencion.Click += btnAtencion_Click;
-            // 
             // frmMenuPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -144,6 +144,7 @@
             Controls.Add(panel1);
             Controls.Add(btnSalir);
             Controls.Add(lblIngreso);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmMenuPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Clínica - Menú Principal";

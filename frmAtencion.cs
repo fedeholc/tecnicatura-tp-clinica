@@ -27,6 +27,8 @@ namespace clinica
         {
             CargarLugares();
             CargarEspera(-1);
+            rtxtHistoriaClinica.Text = "";
+            rtxtHistoriaClinica.Enabled = false;
         }
         private void btnVolver_Click(object sender, EventArgs e)
         {
@@ -99,6 +101,8 @@ namespace clinica
                     sqlCon.Close();
                 }
             }
+
+
         }
 
         private void cbxLugar_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,6 +110,7 @@ namespace clinica
             if (cbxLugar.SelectedIndex != -1)
             {
                 CargarEspera(((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key);
+
             }
         }
 
@@ -196,6 +201,8 @@ namespace clinica
 
         private void lbxEnEspera_SelectedIndexChanged(object sender, EventArgs e)
         {
+            rtxtHistoriaClinica.Text = "";
+
             if (lbxEnEspera.SelectedIndex != -1)
             {
                 KeyValuePair<int, string> espera = (KeyValuePair<int, string>)lbxEnEspera.SelectedItem!;
@@ -204,12 +211,104 @@ namespace clinica
                 if (historiaClinica != null)
                 {
                     rtxtHistoriaClinica.Text = historiaClinica;
+                    rtxtHistoriaClinica.Enabled = true;
                 }
                 else
                 {
                     rtxtHistoriaClinica.Text = "No hay historia clínica para este paciente.";
                 }
-            }   
+            }
+        }
+
+        private void btnRegistrarAtencion_Click(object sender, EventArgs e)
+        {
+            int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
+            int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
+
+
+            //guardar historia clínica
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - "
+                            + DateTime.Now.ToString() + " - " + cbxLugar.Text + "."; int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
+            if (rtaHistoriaClinica < 1)
+            {
+                MessageBox.Show("Error al guardar la historia clínica del paciente. ");
+            }
+
+            //quitar paciente de la sala
+            int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+            if (rtaQuitarSala > 0)
+            {
+                MessageBox.Show("Se registró la atención del Paciente y se lo quitó de la lista de espera.");
+                CargarEspera(idLugar);
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar la atención del paciente paciente");
+            }
+
+        }
+        private int QuitarDeSala(int idPaciente, int idLugar)
+        {
+
+            int salida = 0;
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = $"delete from SalaDeEspera where Paciente_id = {idPaciente} and LugarDeAtencion_id = {idLugar};";
+
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@idPaciente", idPaciente);
+                comando.Parameters.AddWithValue("@idLugar", idLugar);
+
+                //get query response
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
+
+        private void btnPacienteAusente_Click(object sender, EventArgs e)
+        {
+            int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
+            int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
+
+
+            //guardar historia clínica
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " 
+                + DateTime.Now.ToString()+ " - " + cbxLugar.Text+".";
+            int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
+            if (rtaHistoriaClinica < 1)
+            {
+                MessageBox.Show("Error al guardar la historia clínica del paciente. ");
+            }
+
+            //quitar paciente de la sala
+            int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+            if (rtaQuitarSala > 0)
+            {
+                MessageBox.Show("Se registró la atención del Paciente y se lo quitó de la lista de espera.");
+                CargarEspera(idLugar);
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar la atención del paciente paciente");
+            }
         }
     }
 

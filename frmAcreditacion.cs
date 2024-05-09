@@ -523,11 +523,7 @@ namespace clinica
                 MessageBox.Show("Error al registrar la factura", "AVISO DEL SISTEMA",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-            {
-                MessageBox.Show("Registro de factura exitoso", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
+            
 
 
             DeshabilitarCampos();

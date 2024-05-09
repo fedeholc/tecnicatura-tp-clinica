@@ -369,5 +369,42 @@ namespace Clinica
             }
             return salida;
         }
+        public static int GuardarHistoriaClinica(int idPaciente, string historiaClinica)
+        {
+            ArgumentNullException.ThrowIfNull(idPaciente);
+            ArgumentNullException.ThrowIfNull(historiaClinica);
+
+
+            int salida = 0;
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = "UPDATE Paciente set Paciente.Historia_clinica = @historiaClinica where Paciente.id = @idPaciente;";
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@historiaClinica", historiaClinica);
+                comando.Parameters.AddWithValue("@idPaciente", idPaciente); 
+
+
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
     }
 }
