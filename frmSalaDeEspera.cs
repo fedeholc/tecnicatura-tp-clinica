@@ -133,8 +133,8 @@ namespace clinica
 
             // Agregar columnas al ListView
             lvw.Columns.Add("Paciente");
-            lvw.Columns.Add("Estudio");
             lvw.Columns.Add("Lugar");
+            lvw.Columns.Add("Estudio");
             lvw.Columns.Add("Acreditación");
             lvw.Columns.Add("Prioridad");
 
@@ -183,7 +183,7 @@ namespace clinica
 
                         string nombreyApellido = $"{pacienteApellido}, {pacienteNombre}";
 
-                        string[] row = { nombreyApellido, estudioDescripcion, lugarDescripcion, fecha, prioridad.ToString() };
+                        string[] row = { nombreyApellido, lugarDescripcion, estudioDescripcion,  fecha, prioridad.ToString() };
 
                         // Crear un ListViewItem con los valores de la fila actual
                         ListViewItem item = new ListViewItem(row);
@@ -196,8 +196,12 @@ namespace clinica
 
                     }
 
-                    lvw.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                    lvw.Columns[4].Width = 100;
+                    lvw.Columns[0].Width = 120;
+                    lvw.Columns[1].Width = 120;
+                    lvw.Columns[2].Width = 180;
+                    lvw.Columns[3].Width = 120;
+                    lvw.Columns[4].Width = 70;
+
 
 
 
