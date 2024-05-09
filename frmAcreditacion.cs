@@ -16,8 +16,6 @@ namespace clinica
 {
     public partial class frmAcreditacion : Form
     {
-        //private static Turno turnoSeleccionado = new();
-
         private Form formOrigen;
         public frmAcreditacion(Form formOrigen)
         {
@@ -61,7 +59,6 @@ namespace clinica
             cbxPaciente.Text = "";
 
             cbxPaciente.DataSource = Clinica.Clinica.ObtenerPacientes();
-            // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox  
             cbxPaciente.DisplayMember = "Value";
             cbxPaciente.SelectedIndex = -1;
         }
@@ -142,6 +139,7 @@ namespace clinica
                     $"on EstudioLugarDeAtencion.LugarDeAtencion_id = LugarDeAtencion.id " +
                     $"inner join Estudio on EstudioLugarDeAtencion.Estudio_id = Estudio.id " +
                     $"where Estudio.id = {idEstudio};";
+
                 MySqlCommand comando = new(query, sqlCon)
                 {
                     CommandType = CommandType.Text
@@ -157,18 +155,13 @@ namespace clinica
 
                     while (reader.Read())
                     {
-                        // Obtener el ID y el nombre de la cobertura
                         int id = reader.GetInt32(0);
                         string descripcion = reader.GetString(1);
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> lugar = new(id, descripcion);
                         lugares.Add(lugar);
-
                     }
 
                     cbxLugar.DataSource = lugares;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox 
                     cbxLugar.DisplayMember = "Value";
                     cbxLugar.SelectedIndex = -1;
                 }
@@ -199,18 +192,15 @@ namespace clinica
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-
                 string query = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
                     "LugarDeAtencion.Descripcion,  TurnoStatus " +
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                     $"inner join estudio on Turno.Estudio_id = estudio.id " +
                     $"where Turno.Paciente_id = {idPaciente} and Turno.Estudio_id = {idEstudio}";
 
-
                 query += " ORDER BY Turno.Fecha, Turno.Hora;";
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
-
                 MySqlCommand comando = new(query, sqlCon)
                 {
                     CommandType = CommandType.Text
@@ -226,7 +216,6 @@ namespace clinica
 
                     while (reader.Read())
                     {
-                        // Obtener el ID y el nombre de la cobertura
                         int id = reader.GetInt32(0);
                         string fecha = reader.GetDateTime(1).ToString("dd/MM/yyyy");
                         string hora = reader.GetTimeSpan(2).ToString();
@@ -236,17 +225,14 @@ namespace clinica
 
                         string turnoStatusDescripcion = turnoStatus == (int)TurnoStatus.Disponible ? "Disponible" : "Ocupado";
 
-                        string descripcionTurno = $"{fecha} - {hora} - {lugarDescripcion} -  {estudioDescripcion} - {turnoStatusDescripcion}";
+                        string descripcionTurno = $"{fecha} - {hora} - {lugarDescripcion} " +
+                            $"-  {estudioDescripcion} - {turnoStatusDescripcion}";
 
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> turno = new(id, descripcionTurno);
                         turnos.Add(turno);
 
                     }
-
-                    // Asignar la lista de coberturas al ComboBox
                     lbxTurnos.DataSource = turnos;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     lbxTurnos.DisplayMember = "Value";
                     lbxTurnos.SelectedIndex = 0;
                     lbxTurnos.Enabled = true;
@@ -254,13 +240,10 @@ namespace clinica
                 }
                 else
                 {
-                    //MessageBox.Show("No hay datos de Turnos");
                     lbxTurnos.DataSource = null;
                     lbxTurnos.Items.Clear();
                     lbxTurnos.Items.Add("No hay turnos disponibles con los criterios seleccionados.");
                     lbxTurnos.Enabled = false;
-                    // TODO: ojo, si se deja eso hay que evitar que se pueda elegir el turno
-                    // Otra opción es dejar el ListBox vacío y oculto, y mostrar un mensaje en un Label
                 }
 
             }
@@ -337,12 +320,10 @@ namespace clinica
             }
         }
 
-
         private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxPaciente.SelectedIndex != -1)
             {
-
                 lblCoberturaPaciente.Text = Clinica.Clinica.ObtenerCobertura(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
                 lblCoberturaPaciente.Enabled = true;
             }
@@ -434,7 +415,7 @@ namespace clinica
 
         private void btnAcreditar_Click(object sender, EventArgs e)
         {
-             if (cbxPaciente.SelectedIndex == -1)
+            if (cbxPaciente.SelectedIndex == -1)
             {
                 MessageBox.Show("Debe seleccionar un paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -449,8 +430,6 @@ namespace clinica
                 MessageBox.Show("Debe seleccionar un lugar de atención", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
 
             // guardar datos de pago en facutra
             int rtaFactura;
@@ -467,12 +446,14 @@ namespace clinica
                 {
                     if (!rbtAdeudado.Checked && !rbtPagado.Checked)
                     {
-                        MessageBox.Show("Debe seleccionar si se realizó el pago o si se registrará como adeudado", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Debe seleccionar si se realizó el pago o " +
+                            "si se registrará como adeudado", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (rbtPagado.Checked && !rbtEfectivo.Checked && !rbtTarjeta.Checked)
                     {
-                        MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (rbtEfectivo.Checked)
@@ -508,13 +489,10 @@ namespace clinica
             }
             else
             {
-
                 MessageBox.Show("Falta el dato del monto del estudio. Avise al administrador del sistema",
                     "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
 
             rtaFactura = Clinica.Clinica.RegistrarFactura(factura);
 
@@ -523,8 +501,6 @@ namespace clinica
                 MessageBox.Show("Error al registrar la factura", "AVISO DEL SISTEMA",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-
 
             DeshabilitarCampos();
 
@@ -546,17 +522,11 @@ namespace clinica
             else
             {
                 MessageBox.Show("Acreditación del paciente exitosa.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
 
-            if (Application.OpenForms.OfType<frmSalaDeEspera>().Any())
-            {
-                // Si el formulario está abierto, llamar al método estático
-                //frmSalaDeEspera.CargarSalas();
-            }
             var formsSalas = Application.OpenForms.OfType<frmSalaDeEspera>().ToList();
 
-            // Recorrer todas las instancias de FormularioSecundario y llamar al método no estático
+            // Recorrer las instancias abiertas del form y actualizar datos
             foreach (var form in formsSalas)
             {
                 form.CargarSalas();

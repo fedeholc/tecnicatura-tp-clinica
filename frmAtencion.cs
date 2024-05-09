@@ -66,21 +66,16 @@ namespace clinica
                 if (reader.HasRows)
                 {
                     List<KeyValuePair<int, string>> lugares = new();
-
                     while (reader.Read())
                     {
-                        // Obtener el ID y el nombre de la cobertura
                         int id = reader.GetInt32(0);
                         string descripcion = reader.GetString(1);
 
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> lugar = new(id, descripcion);
                         lugares.Add(lugar);
 
                     }
-
                     cbxLugar.DataSource = lugares;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox 
                     cbxLugar.DisplayMember = "Value";
                     cbxLugar.SelectedIndex = -1;
                 }
@@ -97,7 +92,7 @@ namespace clinica
             finally
             {
                 if (sqlCon.State == ConnectionState.Open)
-                {
+                { 
                     sqlCon.Close();
                 }
             }
@@ -110,7 +105,6 @@ namespace clinica
             if (cbxLugar.SelectedIndex != -1)
             {
                 CargarEspera(((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key);
-
             }
         }
 
@@ -132,7 +126,6 @@ namespace clinica
                     "inner join Estudio on Estudio.id = saladeespera.Estudio_id " +
                     $"where saladeespera.LugarDeAtencion_id = {idLugar} ";
 
-
                 query += " ORDER BY SalaDeEspera.Prioridad, SalaDeEspera.FechaHoraAcreditacion;";
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
@@ -152,7 +145,6 @@ namespace clinica
 
                     while (reader.Read())
                     {
-
                         string fecha = reader.GetDateTime(0).ToString();
                         int pacienteId = reader.GetInt32(1);
                         string pacienteApellido = reader.GetString(2);
@@ -162,7 +154,6 @@ namespace clinica
                         int prioridad = reader.GetInt32(8);
                         int id = reader.GetInt32(9);
 
-
                         string esperaDescripcion = $"{pacienteApellido}, {pacienteNombre} - " +
                             $"{estudioDescripcion} - {fecha} - {prioridad}";
 
@@ -170,12 +161,10 @@ namespace clinica
                         esperas.Add(espera);
 
                     }
-
                     lbxEnEspera.DataSource = esperas;
                     lbxEnEspera.DisplayMember = "Value";
                     lbxEnEspera.SelectedIndex = 0;
                     lbxEnEspera.Enabled = true;
-
                 }
                 else
                 {
@@ -225,7 +214,6 @@ namespace clinica
             int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
             int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
 
-
             //guardar historia clínica
             string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - "
                             + DateTime.Now.ToString() + " - " + cbxLugar.Text + "."; int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
@@ -245,11 +233,9 @@ namespace clinica
             {
                 MessageBox.Show("Error al registrar la atención del paciente paciente");
             }
-
         }
         private int QuitarDeSala(int idPaciente, int idLugar)
         {
-
             int salida = 0;
 
             MySqlConnection sqlCon = new MySqlConnection();
@@ -264,7 +250,6 @@ namespace clinica
                 comando.Parameters.AddWithValue("@idPaciente", idPaciente);
                 comando.Parameters.AddWithValue("@idLugar", idLugar);
 
-                //get query response
                 int rowsAffected = comando.ExecuteNonQuery();
                 salida = rowsAffected;
             }
@@ -278,7 +263,7 @@ namespace clinica
                 if (sqlCon.State == ConnectionState.Open)
                 {
                     sqlCon.Close();
-                };
+                }
             }
             return salida;
         }
@@ -288,17 +273,16 @@ namespace clinica
             int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
             int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
 
-
-            //guardar historia clínica
             string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " 
                 + DateTime.Now.ToString()+ " - " + cbxLugar.Text+".";
+            
             int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
+            
             if (rtaHistoriaClinica < 1)
             {
                 MessageBox.Show("Error al guardar la historia clínica del paciente. ");
             }
 
-            //quitar paciente de la sala
             int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
             if (rtaQuitarSala > 0)
             {
