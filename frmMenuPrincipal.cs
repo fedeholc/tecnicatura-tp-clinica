@@ -50,7 +50,7 @@ namespace Clinica
 
 
 
-       
+
 
         private void btnAcreditacion_Click(object sender, EventArgs e)
         {
@@ -59,6 +59,13 @@ namespace Clinica
             Acreditacion.Show();
             this.Hide();
         }
+
+        private void btnSalaDeEspera_Click(object sender, EventArgs e)
+        {
+            frmSalaDeEspera SalaDeEspera = new(this);
+            SalaDeEspera.Show();
+
+        }
     }
-    
+
 }

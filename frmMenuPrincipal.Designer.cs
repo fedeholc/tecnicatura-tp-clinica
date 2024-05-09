@@ -32,6 +32,7 @@
             btnSalir = new Button();
             btnInscripciones = new Button();
             panel1 = new Panel();
+            btnSalaDeEspera = new Button();
             btnAcreditacion = new Button();
             btnTurnos = new Button();
             panel1.SuspendLayout();
@@ -48,7 +49,7 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(382, 232);
+            btnSalir.Location = new Point(382, 305);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(75, 23);
             btnSalir.TabIndex = 1;
@@ -72,13 +73,27 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(btnSalaDeEspera);
             panel1.Controls.Add(btnAcreditacion);
             panel1.Controls.Add(btnTurnos);
             panel1.Controls.Add(btnInscripciones);
             panel1.Location = new Point(12, 42);
             panel1.Name = "panel1";
-            panel1.Size = new Size(445, 173);
+            panel1.Size = new Size(445, 247);
             panel1.TabIndex = 6;
+            // 
+            // btnSalaDeEspera
+            // 
+            btnSalaDeEspera.FlatAppearance.BorderColor = Color.Black;
+            btnSalaDeEspera.FlatAppearance.BorderSize = 2;
+            btnSalaDeEspera.Font = new Font("Segoe UI", 12F);
+            btnSalaDeEspera.Location = new Point(90, 162);
+            btnSalaDeEspera.Name = "btnSalaDeEspera";
+            btnSalaDeEspera.Size = new Size(263, 30);
+            btnSalaDeEspera.TabIndex = 9;
+            btnSalaDeEspera.Text = "Sala de Espera";
+            btnSalaDeEspera.UseVisualStyleBackColor = true;
+            btnSalaDeEspera.Click += btnSalaDeEspera_Click;
             // 
             // btnAcreditacion
             // 
@@ -110,7 +125,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(484, 459);
+            ClientSize = new Size(472, 341);
             Controls.Add(panel1);
             Controls.Add(btnSalir);
             Controls.Add(lblIngreso);
@@ -131,5 +146,6 @@
         private Panel panel1;
         private Button btnTurnos;
         private Button btnAcreditacion;
+        private Button btnSalaDeEspera;
     }
 }
