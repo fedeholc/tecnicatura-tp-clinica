@@ -51,7 +51,7 @@ namespace clinica
 
             CargarPacientes();
             CargarListaEstudios();
-            CargarTurnos(0);
+            CargarTurnos(0, 0);
         }
 
         public void CargarPacientes()
@@ -191,7 +191,7 @@ namespace clinica
             }
         }
 
-        private void CargarTurnos(int idPaciente)
+        private void CargarTurnos(int idPaciente, int idEstudio)
         {
             lbxTurnos.DataSource = null;
             lbxTurnos.Items.Clear();
@@ -203,7 +203,8 @@ namespace clinica
                 string query = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
                     "LugarDeAtencion.Descripcion,  TurnoStatus " +
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
-                    $"inner join estudio on Turno.Estudio_id = estudio.id where Turno.Paciente_id = {idPaciente}";
+                    $"inner join estudio on Turno.Estudio_id = estudio.id " +
+                    $"where Turno.Paciente_id = {idPaciente} and Turno.Estudio_id = {idEstudio}";
 
 
                 query += " ORDER BY Turno.Fecha, Turno.Hora;";
@@ -341,7 +342,7 @@ namespace clinica
         {
             if (cbxPaciente.SelectedIndex != -1)
             {
-                CargarTurnos(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
+
                 lblCoberturaPaciente.Text = Clinica.Clinica.ObtenerCobertura(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
                 lblCoberturaPaciente.Enabled = true;
             }
@@ -353,6 +354,13 @@ namespace clinica
 
         private void cbxEstudios_SelectedIndexChanged(object sender, EventArgs e)
         {
+            rbtEfectivo.Enabled = false;
+            rbtTarjeta.Enabled = false;
+            rbtAdeudado.Enabled = false;
+            rbtPagado.Enabled = false;
+            lblMedioPago.Enabled = false;
+            lblRegistroPago.Enabled = false;
+
             if (cbxEstudios.SelectedIndex != -1)
             {
                 CargarLugares(((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key);
@@ -361,6 +369,9 @@ namespace clinica
             {
                 int idPaciente = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
                 int idEstudio = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
+
+                CargarTurnos(idPaciente, idEstudio);
+
                 int? monto = Clinica.Clinica.ObtenerMonto(idEstudio, idPaciente);
 
                 if (monto != null)
@@ -440,26 +451,70 @@ namespace clinica
                 return;
             }
 
-            if (!rbtAdeudado.Checked && !rbtPagado.Checked)
-            {
-                MessageBox.Show("Debe seleccionar si se realizó el pago o si se registrará como adeudado", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (rbtPagado.Checked && !rbtEfectivo.Checked && !rbtTarjeta.Checked)
-            {
-                MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+
 
             //TODO: guardar datos de pago en facutra
             int respuesta;
             Factura factura = new();
             factura.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
             factura.Estudio_id = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
-            factura.Cobertura_id = (int) Clinica.Clinica.ObtenerCoberturaId(factura.Paciente_id)!;
-            factura.Monto = float.Parse(lblMonto.Text);
-            factura.MetodoPago = rbtEfectivo.Checked ? 1 : 2;
-            factura.FacturaStatus = rbtPagado.Checked ? 1 : 0;
+            factura.Cobertura_id = (int)Clinica.Clinica.ObtenerCoberturaId(factura.Paciente_id)!;
+            float monto;
+            if (float.TryParse(lblMonto.Text, out monto))
+            {
+                factura.Monto = monto;
+
+                if (factura.Monto > 0)
+                {
+                    if (!rbtAdeudado.Checked && !rbtPagado.Checked)
+                    {
+                        MessageBox.Show("Debe seleccionar si se realizó el pago o si se registrará como adeudado", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (rbtPagado.Checked && !rbtEfectivo.Checked && !rbtTarjeta.Checked)
+                    {
+                        MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (rbtEfectivo.Checked)
+                    {
+                        factura.MetodoPago = (int)MetodoPago.Efectivo;
+                    }
+                    else if (rbtTarjeta.Checked)
+                    {
+                        factura.MetodoPago = (int)MetodoPago.Tarjeta;
+                    }
+                    else
+                    {
+                        factura.MetodoPago = (int)MetodoPago.SinPago;
+                    }
+                    if (rbtPagado.Checked)
+                    {
+                        factura.FacturaStatus = (int)FacturaStatus.Pagada;
+                    }
+                    else if (rbtAdeudado.Checked)
+                    {
+                        factura.FacturaStatus = (int)FacturaStatus.Adeudada;
+                    }
+                    else
+                    {
+                        factura.FacturaStatus = (int)FacturaStatus.SinPago;
+                    }
+                }
+                else if (factura.Monto <= 0)
+                {
+                    factura.MetodoPago = (int)MetodoPago.SinPago;
+                    factura.FacturaStatus = (int)FacturaStatus.SinPago;
+                }
+            }
+            else
+            {
+
+                MessageBox.Show("Falta el dato del monto del estudio. Avise al administrador del sistema",
+                    "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
 
             respuesta = Clinica.Clinica.RegistrarFactura(factura);
@@ -472,9 +527,81 @@ namespace clinica
             else
             {
                 MessageBox.Show("Registro de factura exitoso", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                 
+
             }
+
+
+            DeshabilitarCampos();
+
             //TODO: acreditar para sala de espera
         }
+
+        private void DeshabilitarCampos()
+        {
+            cbxPaciente.Enabled = false;
+            cbxEstudios.Enabled = false;
+            cbxLugar.Enabled = false;
+            lbxTurnos.Enabled = false;
+            rbtEfectivo.Enabled = false;
+            rbtTarjeta.Enabled = false;
+            rbtAdeudado.Enabled = false;
+            rbtPagado.Enabled = false;
+            lblCoberturaPaciente.Enabled = false;
+            lblMonto.Enabled = false;
+            lblMedioPago.Enabled = false;
+            lblRegistroPago.Enabled = false;
+            rbtNormal.Enabled = false;
+            rbtUrgencia.Enabled = false;
+            lbxTurnos.Enabled = false;
+            btnAcreditar.Enabled = false;
+        }
+        private void HabilitarCampos()
+        {
+            cbxPaciente.Enabled = true;
+            cbxEstudios.Enabled = true;
+            cbxLugar.Enabled = true;
+            lbxTurnos.Enabled = true;
+            rbtEfectivo.Enabled = true;
+            rbtTarjeta.Enabled = true;
+            rbtAdeudado.Enabled = true;
+            rbtPagado.Enabled = true;
+            lblCoberturaPaciente.Enabled = true;
+            lblMonto.Enabled = true;
+            lblMedioPago.Enabled = true;
+            lblRegistroPago.Enabled = true;
+            rbtNormal.Enabled = true;
+            rbtUrgencia.Enabled = true;
+            lbxTurnos.Enabled = true;
+            btnAcreditar.Enabled = true;
+            
+        }
+
+        private void NuevaAcreditacion_Click(object sender, EventArgs e)
+        {
+            HabilitarCampos();
+            cbxPaciente.SelectedIndex = -1;
+            cbxEstudios.SelectedIndex = -1;
+            cbxLugar.SelectedIndex = -1;
+            lbxTurnos.SelectedIndex = -1;
+            rbtEfectivo.Checked = false;
+            rbtTarjeta.Checked = false;
+            rbtAdeudado.Checked = false;
+            rbtPagado.Checked = false;
+            lblCoberturaPaciente.Text = "";
+            lblMonto.Text = "";
+            lbxTurnos.DataSource = null;
+            
+            rbtAdeudado.Enabled = false;
+            rbtPagado.Enabled = false;
+            rbtTarjeta.Enabled = false;
+            rbtEfectivo.Enabled = false;
+
+            rbtNormal.Checked = true;
+
+        }
     }
+
+
+
+
 }

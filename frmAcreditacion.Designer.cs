@@ -58,6 +58,7 @@
             rbtNormal = new RadioButton();
             rbtUrgencia = new RadioButton();
             groupBox2 = new GroupBox();
+            btnNuevaAcreditacion = new Button();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -66,7 +67,7 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(469, 460);
+            btnVolver.Location = new Point(469, 459);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(75, 23);
             btnVolver.TabIndex = 39;
@@ -78,14 +79,14 @@
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.ForeColor = SystemColors.ActiveBorder;
-            panel2.Location = new Point(16, 443);
+            panel2.Location = new Point(16, 446);
             panel2.Name = "panel2";
             panel2.Size = new Size(528, 1);
             panel2.TabIndex = 38;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(388, 460);
+            btnSalir.Location = new Point(388, 459);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(75, 23);
             btnSalir.TabIndex = 37;
@@ -374,11 +375,22 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Prioridad";
             // 
+            // btnNuevaAcreditacion
+            // 
+            btnNuevaAcreditacion.Location = new Point(16, 459);
+            btnNuevaAcreditacion.Name = "btnNuevaAcreditacion";
+            btnNuevaAcreditacion.Size = new Size(132, 23);
+            btnNuevaAcreditacion.TabIndex = 64;
+            btnNuevaAcreditacion.Text = "Nueva Acreditacion";
+            btnNuevaAcreditacion.UseVisualStyleBackColor = true;
+            btnNuevaAcreditacion.Click += NuevaAcreditacion_Click;
+            // 
             // frmAcreditacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(565, 503);
+            Controls.Add(btnNuevaAcreditacion);
             Controls.Add(groupBox2);
             Controls.Add(label2);
             Controls.Add(cbxLugar);
@@ -443,5 +455,6 @@
         private RadioButton rbtNormal;
         private RadioButton rbtUrgencia;
         private GroupBox groupBox2;
+        private Button btnNuevaAcreditacion;
     }
 }

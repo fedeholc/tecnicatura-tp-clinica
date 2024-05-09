@@ -15,14 +15,14 @@ namespace Clinica.Entidades
 
     enum FacturaStatus
     {
-        Pendiente = 0,
+        SinPago = 0,
         Pagada = 1,
-        Anulada = 2
+        Adeudada = 2
     }
 
     enum MetodoPago
     {
-        PorCobertura = 0,
+        SinPago = 0,
         Efectivo = 1,
         Tarjeta = 2
     }
