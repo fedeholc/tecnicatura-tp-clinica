@@ -203,6 +203,50 @@ namespace Clinica
                 }
             }
         }
+
+        public static string? ObtenerHistoriaClinica(int idPaciente)
+        {
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select Paciente.Historia_clinica from Paciente " +
+                    $"where Paciente.id = {idPaciente};";
+
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows && reader.Read())
+                {
+                    return reader.GetString(0);
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
         public static int RegistrarNuevoPaciente(Paciente paciente)
         {
             ArgumentNullException.ThrowIfNull(paciente);

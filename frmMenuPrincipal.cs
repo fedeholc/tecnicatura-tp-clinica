@@ -1,4 +1,5 @@
 ﻿using clinica;
+using Clinica.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,6 +65,14 @@ namespace Clinica
         {
             frmSalaDeEspera SalaDeEspera = new(this);
             SalaDeEspera.Show();
+
+        }
+
+        private void btnAtencion_Click(object sender, EventArgs e)
+        {
+            frmAtencion Atencion = new(this);
+            Atencion.Show();
+            this.Hide();
 
         }
     }

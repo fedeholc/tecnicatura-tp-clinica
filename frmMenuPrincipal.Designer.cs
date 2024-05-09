@@ -35,6 +35,7 @@
             btnSalaDeEspera = new Button();
             btnAcreditacion = new Button();
             btnTurnos = new Button();
+            btnAtencion = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,6 +74,7 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(btnAtencion);
             panel1.Controls.Add(btnSalaDeEspera);
             panel1.Controls.Add(btnAcreditacion);
             panel1.Controls.Add(btnTurnos);
@@ -87,7 +89,7 @@
             btnSalaDeEspera.FlatAppearance.BorderColor = Color.Black;
             btnSalaDeEspera.FlatAppearance.BorderSize = 2;
             btnSalaDeEspera.Font = new Font("Segoe UI", 12F);
-            btnSalaDeEspera.Location = new Point(90, 162);
+            btnSalaDeEspera.Location = new Point(90, 154);
             btnSalaDeEspera.Name = "btnSalaDeEspera";
             btnSalaDeEspera.Size = new Size(263, 30);
             btnSalaDeEspera.TabIndex = 9;
@@ -100,7 +102,7 @@
             btnAcreditacion.FlatAppearance.BorderColor = Color.Black;
             btnAcreditacion.FlatAppearance.BorderSize = 2;
             btnAcreditacion.Font = new Font("Segoe UI", 12F);
-            btnAcreditacion.Location = new Point(90, 115);
+            btnAcreditacion.Location = new Point(90, 111);
             btnAcreditacion.Name = "btnAcreditacion";
             btnAcreditacion.Size = new Size(263, 30);
             btnAcreditacion.TabIndex = 8;
@@ -113,13 +115,26 @@
             btnTurnos.FlatAppearance.BorderColor = Color.Black;
             btnTurnos.FlatAppearance.BorderSize = 2;
             btnTurnos.Font = new Font("Segoe UI", 12F);
-            btnTurnos.Location = new Point(90, 70);
+            btnTurnos.Location = new Point(90, 68);
             btnTurnos.Name = "btnTurnos";
             btnTurnos.Size = new Size(263, 30);
             btnTurnos.TabIndex = 7;
             btnTurnos.Text = "Gestión de Turnos";
             btnTurnos.UseVisualStyleBackColor = true;
             btnTurnos.Click += btnTurnos_Click;
+            // 
+            // btnAtencion
+            // 
+            btnAtencion.FlatAppearance.BorderColor = Color.Black;
+            btnAtencion.FlatAppearance.BorderSize = 2;
+            btnAtencion.Font = new Font("Segoe UI", 12F);
+            btnAtencion.Location = new Point(90, 197);
+            btnAtencion.Name = "btnAtencion";
+            btnAtencion.Size = new Size(263, 30);
+            btnAtencion.TabIndex = 10;
+            btnAtencion.Text = "Atención de Pacientes";
+            btnAtencion.UseVisualStyleBackColor = true;
+            btnAtencion.Click += btnAtencion_Click;
             // 
             // frmMenuPrincipal
             // 
@@ -147,5 +162,6 @@
         private Button btnTurnos;
         private Button btnAcreditacion;
         private Button btnSalaDeEspera;
+        private Button btnAtencion;
     }
 }
