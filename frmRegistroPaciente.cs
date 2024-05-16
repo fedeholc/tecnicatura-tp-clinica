@@ -40,7 +40,7 @@ namespace Clinica
                 frmAcreditacion.CargarPacientes();
             }
         }
-         
+
         private void RegistrarPaciente()
         {
             int? idCobertura = null;
@@ -48,7 +48,8 @@ namespace Clinica
             if (cbxCobertura.SelectedIndex != -1)
             {
                 idCobertura = ((KeyValuePair<int, string>)cbxCobertura.SelectedItem!).Key;
-            } else
+            }
+            else
             {
                 MessageBox.Show("Debe elegir la cobertura entre las opciones disponibles.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -56,7 +57,7 @@ namespace Clinica
 
             if (ExistePaciente(txtDNI.Text))
             {
-                MessageBox.Show("Ya existe un paciente registrado con DNI "+ txtDNI.Text, "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ya existe un paciente registrado con DNI " + txtDNI.Text, "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -75,17 +76,17 @@ namespace Clinica
             paciente.Direccion = txtDireccion.Text;
             paciente.Cobertura_id = idCobertura;
             paciente.HistoriaClinica = "Inscripto el día: " + DateTime.Now;
-   
+
             respuesta = Clinica.RegistrarNuevoPaciente(paciente);
-                          
+
             if (respuesta == 0)
             {
                 MessageBox.Show("USUARIO YA EXISTE", "AVISO DEL SISTEMA",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else 
-            {           
-                MessageBox.Show("Inscripción exitosa ","AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                MessageBox.Show("Inscripción exitosa ", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 desactivarCampos();
             }
         }
@@ -124,14 +125,14 @@ namespace Clinica
                 }
             }
             return existe;
-        }   
+        }
 
         private void desactivarCampos()
         {
             txtDNI.Enabled = false;
             txtEmail.Enabled = false;
             txtNombre.Enabled = false;
-             btnInscribir.Enabled = false;
+            btnInscribir.Enabled = false;
             txtApellido.Enabled = false;
             txtDireccion.Enabled = false;
             cbxCobertura.Enabled = false;
@@ -141,11 +142,11 @@ namespace Clinica
             txtDNI.Enabled = true;
             txtEmail.Enabled = true;
             txtNombre.Enabled = true;
-             btnInscribir.Enabled = true;
+            btnInscribir.Enabled = true;
             txtApellido.Enabled = true;
             txtDireccion.Enabled = true;
             cbxCobertura.Enabled = true;
-   
+
         }
 
         private void btnInscribir_Click(object sender, EventArgs e)
@@ -155,14 +156,14 @@ namespace Clinica
 
         private void btnNuevaInscripcion_Click(object sender, EventArgs e)
         {
-             txtNombre.Text = "";
+            txtNombre.Text = "";
             txtDNI.Text = "";
             txtEmail.Text = "";
             txtApellido.Text = "";
             txtDireccion.Text = "";
             cbxCobertura.SelectedIndex = -1;
 
-    
+
             btnInscribir.Enabled = true;
             txtNombre.Focus();
 
@@ -170,7 +171,7 @@ namespace Clinica
         }
 
 
-     
+
         private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verifica si la tecla presionada es un número o una tecla especial
@@ -191,6 +192,11 @@ namespace Clinica
         private void frmInscripcion_Load(object sender, EventArgs e)
         {
             cargarDatosCobertura();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -235,10 +241,10 @@ namespace Clinica
 
                         // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> cobertura = new(id, nombre);
-                       
+
                         coberturas.Add(cobertura);
 
-                     
+
                     }
                     // Asignar la lista de coberturas al ComboBox
                     cbxCobertura.DataSource = coberturas;

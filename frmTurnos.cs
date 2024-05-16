@@ -43,7 +43,7 @@ namespace clinica
             CargarDatosEstudios();
             CargarTurnos();
             CargarPacientes();
-         }
+        }
         private void CargarTurnos()
         {
             lbxTurnos.DataSource = null;
@@ -67,12 +67,12 @@ namespace clinica
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                     "inner join estudio on Turno.Estudio_id = estudio.id";
 
-                 /* select Turno.id, Turno.Fecha, Turno.Hora, Turno.Estudio_id,  
-                   LugarDeAtencion.Descripcion,  TurnoStatus, Estudio.Descripcion
-                    from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id
-                    inner join estudiolugardeatencion on estudiolugardeatencion.lugardeatencion_id = turno.LugarDeAtencion_id
-                    inner join estudio on estudio.id = estudiolugardeatencion.Estudio_id
-                    where  TurnoStatus = 1 ; */
+                /* select Turno.id, Turno.Fecha, Turno.Hora, Turno.Estudio_id,  
+                  LugarDeAtencion.Descripcion,  TurnoStatus, Estudio.Descripcion
+                   from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id
+                   inner join estudiolugardeatencion on estudiolugardeatencion.lugardeatencion_id = turno.LugarDeAtencion_id
+                   inner join estudio on estudio.id = estudiolugardeatencion.Estudio_id
+                   where  TurnoStatus = 1 ; */
 
                 string queryDisponibles = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
                        "LugarDeAtencion.Descripcion,  TurnoStatus " +
@@ -89,7 +89,7 @@ namespace clinica
                     query = queryOcupados;
                 }
 
-                 query += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
+                query += $" where Turno.Fecha >= '{dtpFechaDesde.Value:yyyy-MM-dd}'";
                 query += $" and Turno.Fecha <= '{dtpFechaHasta.Value:yyyy-MM-dd}'";
 
                 if (cbxHoraDesde.SelectedIndex != -1)
@@ -100,7 +100,7 @@ namespace clinica
                 {
                     query += $" and Turno.Hora <= '{cbxHoraHasta.Text}'";
                 }
- 
+
                 if (filtroEstudioId > 0)
                 {
                     query += $" and estudio.id = {filtroEstudioId}";
@@ -253,7 +253,7 @@ namespace clinica
             cbxPaciente.DisplayMember = "Value";
             cbxPaciente.SelectedIndex = -1;
         }
-      
+
         private int CancelarTurno(int idTurno)
         {
 
@@ -407,7 +407,7 @@ namespace clinica
             {
                 int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key,
                     ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key,
-                    ((KeyValuePair<int,string>)cbxEstudios.SelectedItem!).Key);
+                    ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key);
                 if (rta > 0)
                 {
                     MessageBox.Show("Turno Asignado correctamente.");
