@@ -180,6 +180,19 @@
             label4.Size = new Size(57, 15);
             label4.TabIndex = 2;
             label4.Text = "Password";
+            // 
+            // frmConexion
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(583, 225);
+            Controls.Add(panel2);
+            Name = "frmConexion";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Clínica";
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
