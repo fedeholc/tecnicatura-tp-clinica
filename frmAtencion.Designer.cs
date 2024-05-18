@@ -50,7 +50,7 @@
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnVolver.Location = new Point(775, 467);
+            btnVolver.Location = new Point(775, 550);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(65, 30);
             btnVolver.TabIndex = 45;
@@ -115,7 +115,7 @@
             // 
             rtxtHistoriaClinica.Location = new Point(194, 294);
             rtxtHistoriaClinica.Name = "rtxtHistoriaClinica";
-            rtxtHistoriaClinica.Size = new Size(646, 154);
+            rtxtHistoriaClinica.Size = new Size(646, 238);
             rtxtHistoriaClinica.TabIndex = 67;
             rtxtHistoriaClinica.Text = "";
             // 
@@ -146,7 +146,7 @@
             btnRegistrarAtencion.FlatAppearance.BorderColor = Color.LightGray;
             btnRegistrarAtencion.FlatStyle = FlatStyle.Flat;
             btnRegistrarAtencion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnRegistrarAtencion.Location = new Point(598, 467);
+            btnRegistrarAtencion.Location = new Point(598, 550);
             btnRegistrarAtencion.Name = "btnRegistrarAtencion";
             btnRegistrarAtencion.Size = new Size(150, 30);
             btnRegistrarAtencion.TabIndex = 70;
@@ -160,7 +160,7 @@
             btnPacienteAusente.FlatStyle = FlatStyle.Flat;
             btnPacienteAusente.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnPacienteAusente.ForeColor = SystemColors.InfoText;
-            btnPacienteAusente.Location = new Point(421, 467);
+            btnPacienteAusente.Location = new Point(421, 550);
             btnPacienteAusente.Name = "btnPacienteAusente";
             btnPacienteAusente.Size = new Size(150, 30);
             btnPacienteAusente.TabIndex = 71;

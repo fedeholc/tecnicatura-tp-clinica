@@ -52,7 +52,7 @@
             panel1.Controls.Add(lblPassword);
             panel1.Location = new Point(87, 89);
             panel1.Name = "panel1";
-            panel1.Size = new Size(517, 304);
+            panel1.Size = new Size(518, 325);
             panel1.TabIndex = 7;
             // 
             // btnSalir
@@ -74,16 +74,16 @@
             cbxUsuarios.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxUsuarios.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxUsuarios.FormattingEnabled = true;
-            cbxUsuarios.Location = new Point(96, 239);
+            cbxUsuarios.Location = new Point(107, 249);
             cbxUsuarios.Name = "cbxUsuarios";
-            cbxUsuarios.Size = new Size(156, 23);
+            cbxUsuarios.Size = new Size(140, 23);
             cbxUsuarios.TabIndex = 29;
             // 
             // btnIngresar
             // 
             btnIngresar.Enabled = false;
             btnIngresar.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnIngresar.Location = new Point(432, 260);
+            btnIngresar.Location = new Point(340, 278);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(80, 30);
             btnIngresar.TabIndex = 0;
@@ -93,9 +93,9 @@
             // 
             // txtPass
             // 
-            txtPass.Location = new Point(275, 239);
+            txtPass.Location = new Point(280, 249);
             txtPass.Name = "txtPass";
-            txtPass.Size = new Size(144, 23);
+            txtPass.Size = new Size(140, 23);
             txtPass.TabIndex = 4;
             txtPass.Text = "1234";
             // 
@@ -104,7 +104,7 @@
             lblUsuario.AutoSize = true;
             lblUsuario.BackColor = Color.Transparent;
             lblUsuario.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            lblUsuario.Location = new Point(96, 221);
+            lblUsuario.Location = new Point(107, 231);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(48, 15);
             lblUsuario.TabIndex = 1;
@@ -115,7 +115,7 @@
             lblPassword.AutoSize = true;
             lblPassword.BackColor = Color.Transparent;
             lblPassword.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            lblPassword.Location = new Point(275, 221);
+            lblPassword.Location = new Point(280, 231);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(58, 15);
             lblPassword.TabIndex = 2;
