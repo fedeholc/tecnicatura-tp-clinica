@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             panel1 = new Panel();
             btnSalir = new Button();
             cbxUsuarios = new ComboBox();
-            label1 = new Label();
             btnIngresar = new Button();
             txtPass = new TextBox();
             lblUsuario = new Label();
@@ -41,24 +41,28 @@
             // 
             // panel1
             // 
+            panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
+            panel1.BackgroundImageLayout = ImageLayout.Stretch;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(btnSalir);
             panel1.Controls.Add(cbxUsuarios);
-            panel1.Controls.Add(label1);
             panel1.Controls.Add(btnIngresar);
             panel1.Controls.Add(txtPass);
             panel1.Controls.Add(lblUsuario);
             panel1.Controls.Add(lblPassword);
             panel1.Location = new Point(87, 89);
             panel1.Name = "panel1";
-            panel1.Size = new Size(488, 241);
+            panel1.Size = new Size(517, 304);
             panel1.TabIndex = 7;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(408, 3);
+            btnSalir.FlatAppearance.BorderColor = Color.LightGray;
+            btnSalir.FlatStyle = FlatStyle.Flat;
+            btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnSalir.Location = new Point(452, 3);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 23);
+            btnSalir.Size = new Size(60, 28);
             btnSalir.TabIndex = 30;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
@@ -70,27 +74,18 @@
             cbxUsuarios.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxUsuarios.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxUsuarios.FormattingEnabled = true;
-            cbxUsuarios.Location = new Point(109, 109);
+            cbxUsuarios.Location = new Point(96, 239);
             cbxUsuarios.Name = "cbxUsuarios";
             cbxUsuarios.Size = new Size(156, 23);
             cbxUsuarios.TabIndex = 29;
             // 
-            // label1
-            // 
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
-            label1.Location = new Point(103, 49);
-            label1.Name = "label1";
-            label1.Size = new Size(192, 30);
-            label1.TabIndex = 5;
-            label1.Text = "Ingreso al sistema";
-            // 
             // btnIngresar
             // 
             btnIngresar.Enabled = false;
-            btnIngresar.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
-            btnIngresar.Location = new Point(288, 154);
+            btnIngresar.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnIngresar.Location = new Point(432, 260);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(150, 41);
+            btnIngresar.Size = new Size(80, 30);
             btnIngresar.TabIndex = 0;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = true;
@@ -98,7 +93,7 @@
             // 
             // txtPass
             // 
-            txtPass.Location = new Point(288, 109);
+            txtPass.Location = new Point(275, 239);
             txtPass.Name = "txtPass";
             txtPass.Size = new Size(144, 23);
             txtPass.TabIndex = 4;
@@ -107,18 +102,22 @@
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.Location = new Point(109, 91);
+            lblUsuario.BackColor = Color.Transparent;
+            lblUsuario.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
+            lblUsuario.Location = new Point(96, 221);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(47, 15);
+            lblUsuario.Size = new Size(48, 15);
             lblUsuario.TabIndex = 1;
             lblUsuario.Text = "Usuario";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(288, 91);
+            lblPassword.BackColor = Color.Transparent;
+            lblPassword.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
+            lblPassword.Location = new Point(275, 221);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(57, 15);
+            lblPassword.Size = new Size(58, 15);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
@@ -126,7 +125,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(629, 450);
+            ClientSize = new Size(722, 492);
             Controls.Add(panel1);
             Name = "frmLogin";
             Text = "Login";
@@ -140,7 +139,6 @@
 
         private Panel panel1;
         private ComboBox cbxUsuarios;
-        private Label label1;
         private Button btnIngresar;
         private TextBox txtPass;
         private Label lblUsuario;
