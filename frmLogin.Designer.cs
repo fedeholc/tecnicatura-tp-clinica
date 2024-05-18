@@ -303,4 +303,4 @@
         private Label label6;
         private ComboBox cbxUsuarios;
     }
-}
+} //dividir esto en dos
