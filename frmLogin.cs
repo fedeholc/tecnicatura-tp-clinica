@@ -19,7 +19,15 @@ namespace clinica
         {
             InitializeComponent();
         }
-
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            btnIngresar.Enabled = true;
+            cargarDatosUsuarios();
+        }
         private void cargarDatosUsuarios()
         {
             cbxUsuarios.Items.Clear();

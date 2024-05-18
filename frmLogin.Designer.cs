@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnSalir = new Button();
             cbxUsuarios = new ComboBox();
             label1 = new Label();
             btnIngresar = new Button();
             txtPass = new TextBox();
             lblUsuario = new Label();
             lblPassword = new Label();
-            btnSalir = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -53,6 +53,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(488, 241);
             panel1.TabIndex = 7;
+            // 
+            // btnSalir
+            // 
+            btnSalir.Location = new Point(408, 3);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(75, 23);
+            btnSalir.TabIndex = 30;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // cbxUsuarios
             // 
@@ -84,6 +94,7 @@
             btnIngresar.TabIndex = 0;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = true;
+            btnIngresar.Click += btnIngresar_Click;
             // 
             // txtPass
             // 
@@ -111,23 +122,15 @@
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
-            // btnSalir
-            // 
-            btnSalir.Location = new Point(408, 3);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 23);
-            btnSalir.TabIndex = 30;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            // 
-            // frmLoginRefact
+            // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(629, 450);
             Controls.Add(panel1);
-            Name = "frmLoginRefact";
+            Name = "frmLogin";
             Text = "Login";
+            Load += frmLogin_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
