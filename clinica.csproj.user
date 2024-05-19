@@ -17,6 +17,9 @@
     <Compile Update="frmMenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmModulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmRegistroPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
