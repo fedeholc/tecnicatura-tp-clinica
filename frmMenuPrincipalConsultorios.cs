@@ -20,11 +20,7 @@ namespace clinica
 
 
 
-        private void button1_Click(object sender, EventArgs e, frmModulos frmModulos)
-        {
-            this.Close();
-
-        }
+        
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
@@ -51,6 +47,13 @@ namespace clinica
         {
             frmModulos Modulos = new frmModulos();
             Modulos.Show();
+            this.Hide();
+        }
+
+        private void btnTurnos_Click(object sender, EventArgs e)
+        {
+            frmTurnosConsultorios turnosConsultorios = new frmTurnosConsultorios();
+            turnosConsultorios.Show();
             this.Hide();
         }
     }

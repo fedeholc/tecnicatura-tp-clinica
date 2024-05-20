@@ -241,6 +241,7 @@ namespace clinica
             cbxPaciente.Name = "cbxPaciente";
             cbxPaciente.Size = new Size(286, 47);
             cbxPaciente.TabIndex = 28;
+            cbxPaciente.SelectedIndexChanged += cbxPaciente_SelectedIndexChanged;
             // 
             // label3
             // 

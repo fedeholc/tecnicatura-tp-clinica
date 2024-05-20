@@ -143,6 +143,7 @@
             btnTurnos.TabIndex = 7;
             btnTurnos.Text = "Turnos";
             btnTurnos.UseVisualStyleBackColor = true;
+            btnTurnos.Click += btnTurnos_Click;
             // 
             // btnInscripciones
             // 

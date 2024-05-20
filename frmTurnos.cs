@@ -443,5 +443,10 @@ namespace clinica
         {
 
         }
+
+        private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
