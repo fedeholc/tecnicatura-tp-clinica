@@ -438,5 +438,15 @@ namespace clinica
             formOrigen.Show();
 
         }
+
+        private void pnlTurnos_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

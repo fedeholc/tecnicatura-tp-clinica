@@ -75,6 +75,18 @@ namespace Clinica
             this.Hide();
 
         }
+
+        private void lblIngreso_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            frmModulos Modulos = new frmModulos();
+            Modulos.Show();
+            this.Hide();
+        }
     }
 
 }
