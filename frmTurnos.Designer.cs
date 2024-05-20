@@ -66,7 +66,7 @@ namespace clinica
             cbxEstudios.Location = new Point(212, 122);
             cbxEstudios.Margin = new Padding(3, 4, 3, 4);
             cbxEstudios.Name = "cbxEstudios";
-            cbxEstudios.Size = new Size(285, 27);
+            cbxEstudios.Size = new Size(285, 47);
             cbxEstudios.TabIndex = 0;
             cbxEstudios.SelectedIndexChanged += cbxEstudios_SelectedIndexChanged;
             // 
@@ -92,7 +92,7 @@ namespace clinica
             cbxHoraDesde.Location = new Point(212, 329);
             cbxHoraDesde.Margin = new Padding(3, 4, 3, 4);
             cbxHoraDesde.Name = "cbxHoraDesde";
-            cbxHoraDesde.Size = new Size(95, 27);
+            cbxHoraDesde.Size = new Size(95, 47);
             cbxHoraDesde.TabIndex = 3;
             cbxHoraDesde.SelectedIndexChanged += cbxHoraDesde_SelectedIndexChanged;
             // 
@@ -104,7 +104,7 @@ namespace clinica
             cbxHoraHasta.Location = new Point(315, 329);
             cbxHoraHasta.Margin = new Padding(3, 4, 3, 4);
             cbxHoraHasta.Name = "cbxHoraHasta";
-            cbxHoraHasta.Size = new Size(95, 27);
+            cbxHoraHasta.Size = new Size(95, 47);
             cbxHoraHasta.TabIndex = 4;
             cbxHoraHasta.SelectedIndexChanged += cbxHoraHasta_SelectedIndexChanged;
             // 
@@ -115,7 +115,7 @@ namespace clinica
             lblEstudio.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             lblEstudio.Location = new Point(211, 103);
             lblEstudio.Name = "lblEstudio";
-            lblEstudio.Size = new Size(46, 15);
+            lblEstudio.Size = new Size(91, 32);
             lblEstudio.TabIndex = 6;
             lblEstudio.Text = "Estudio";
             // 
@@ -124,7 +124,7 @@ namespace clinica
             dtpFechaDesde.Location = new Point(212, 184);
             dtpFechaDesde.Margin = new Padding(3, 4, 3, 4);
             dtpFechaDesde.Name = "dtpFechaDesde";
-            dtpFechaDesde.Size = new Size(285, 27);
+            dtpFechaDesde.Size = new Size(285, 47);
             dtpFechaDesde.TabIndex = 7;
             dtpFechaDesde.ValueChanged += dtpFechaDesde_ValueChanged;
             // 
@@ -133,7 +133,7 @@ namespace clinica
             dtpFechaHasta.Location = new Point(212, 255);
             dtpFechaHasta.Margin = new Padding(3, 4, 3, 4);
             dtpFechaHasta.Name = "dtpFechaHasta";
-            dtpFechaHasta.Size = new Size(285, 27);
+            dtpFechaHasta.Size = new Size(285, 47);
             dtpFechaHasta.TabIndex = 8;
             dtpFechaHasta.ValueChanged += dtpFechaHasta_ValueChanged;
             // 
@@ -144,7 +144,7 @@ namespace clinica
             lblFechaDesde.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             lblFechaDesde.Location = new Point(212, 162);
             lblFechaDesde.Name = "lblFechaDesde";
-            lblFechaDesde.Size = new Size(73, 15);
+            lblFechaDesde.Size = new Size(144, 32);
             lblFechaDesde.TabIndex = 9;
             lblFechaDesde.Text = "Fecha Desde";
             // 
@@ -155,18 +155,18 @@ namespace clinica
             lblFechaHasta.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             lblFechaHasta.Location = new Point(212, 232);
             lblFechaHasta.Name = "lblFechaHasta";
-            lblFechaHasta.Size = new Size(72, 15);
+            lblFechaHasta.Size = new Size(142, 32);
             lblFechaHasta.TabIndex = 10;
             lblFechaHasta.Text = "Fecha Hasta";
             // 
             // lbxTurnos
             // 
             lbxTurnos.FormattingEnabled = true;
-            lbxTurnos.ItemHeight = 19;
+            lbxTurnos.ItemHeight = 39;
             lbxTurnos.Location = new Point(557, 122);
             lbxTurnos.Margin = new Padding(3, 4, 3, 4);
             lbxTurnos.Name = "lbxTurnos";
-            lbxTurnos.Size = new Size(615, 422);
+            lbxTurnos.Size = new Size(615, 394);
             lbxTurnos.TabIndex = 11;
             // 
             // label1
@@ -176,7 +176,7 @@ namespace clinica
             label1.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             label1.Location = new Point(212, 306);
             label1.Name = "label1";
-            label1.Size = new Size(67, 15);
+            label1.Size = new Size(131, 32);
             label1.TabIndex = 12;
             label1.Text = "Hora desde";
             // 
@@ -187,7 +187,7 @@ namespace clinica
             label2.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             label2.Location = new Point(315, 306);
             label2.Name = "label2";
-            label2.Size = new Size(66, 15);
+            label2.Size = new Size(129, 32);
             label2.TabIndex = 13;
             label2.Text = "Hora hasta";
             // 
@@ -212,7 +212,7 @@ namespace clinica
             rbtOcupados.Location = new Point(157, 27);
             rbtOcupados.Margin = new Padding(3, 4, 3, 4);
             rbtOcupados.Name = "rbtOcupados";
-            rbtOcupados.Size = new Size(78, 19);
+            rbtOcupados.Size = new Size(148, 36);
             rbtOcupados.TabIndex = 1;
             rbtOcupados.Text = "Ocupados";
             rbtOcupados.UseVisualStyleBackColor = true;
@@ -225,7 +225,7 @@ namespace clinica
             rbtDisponibles.Location = new Point(24, 27);
             rbtDisponibles.Margin = new Padding(3, 4, 3, 4);
             rbtDisponibles.Name = "rbtDisponibles";
-            rbtDisponibles.Size = new Size(86, 19);
+            rbtDisponibles.Size = new Size(163, 36);
             rbtDisponibles.TabIndex = 0;
             rbtDisponibles.TabStop = true;
             rbtDisponibles.Text = "Disponibles";
@@ -239,7 +239,7 @@ namespace clinica
             cbxPaciente.Location = new Point(212, 481);
             cbxPaciente.Margin = new Padding(3, 4, 3, 4);
             cbxPaciente.Name = "cbxPaciente";
-            cbxPaciente.Size = new Size(286, 27);
+            cbxPaciente.Size = new Size(286, 47);
             cbxPaciente.TabIndex = 28;
             // 
             // label3
@@ -249,7 +249,7 @@ namespace clinica
             label3.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             label3.Location = new Point(212, 457);
             label3.Name = "label3";
-            label3.Size = new Size(217, 15);
+            label3.Size = new Size(427, 32);
             label3.TabIndex = 29;
             label3.Text = "Seleccionar paciente para asignar turno";
             // 
@@ -312,7 +312,7 @@ namespace clinica
             lblTituloT.Font = new Font("Calibri", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblTituloT.Location = new Point(211, 35);
             lblTituloT.Name = "lblTituloT";
-            lblTituloT.Size = new Size(147, 23);
+            lblTituloT.Size = new Size(298, 46);
             lblTituloT.TabIndex = 33;
             lblTituloT.Text = "Gestión de turnos";
             // 
@@ -323,7 +323,7 @@ namespace clinica
             label5.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             label5.Location = new Point(557, 103);
             label5.Name = "label5";
-            label5.Size = new Size(98, 15);
+            label5.Size = new Size(193, 32);
             label5.TabIndex = 34;
             label5.Text = "Listado de turnos";
             // 
@@ -371,10 +371,11 @@ namespace clinica
             pnlTurnos.Name = "pnlTurnos";
             pnlTurnos.Size = new Size(1281, 642);
             pnlTurnos.TabIndex = 37;
+            pnlTurnos.Paint += pnlTurnos_Paint;
             // 
             // frmTurnos
             // 
-            AutoScaleDimensions = new SizeF(8F, 19F);
+            AutoScaleDimensions = new SizeF(17F, 39F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1308, 667);

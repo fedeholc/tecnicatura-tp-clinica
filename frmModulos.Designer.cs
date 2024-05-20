@@ -29,46 +29,71 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmModulos));
-            pnlTurnos = new Panel();
-            btnVolver = new Button();
+            pnlModulos = new Panel();
+            grbSeleccionarModulos = new GroupBox();
+            rbtEstudiosClinic = new RadioButton();
+            rbtConsultoriosMed = new RadioButton();
             lblTituloT = new Label();
             pnlTituloT = new Panel();
             btnSeleccionarModulo = new Button();
-            this.grbMostrarModulos = new GroupBox();
-            this.rbtEstudiosClinicos = new RadioButton();
-            rbtConsultoriosMedicos = new RadioButton();
             btnSalir = new Button();
-            pnlTurnos.SuspendLayout();
-            this.grbMostrarModulos.SuspendLayout();
+            rbtConsultoriosMedicos = new RadioButton();
+            pnlModulos.SuspendLayout();
+            grbSeleccionarModulos.SuspendLayout();
             SuspendLayout();
             // 
-            // pnlTurnos
+            // pnlModulos
             // 
-            pnlTurnos.BackgroundImage = (Image)resources.GetObject("pnlTurnos.BackgroundImage");
-            pnlTurnos.BorderStyle = BorderStyle.FixedSingle;
-            pnlTurnos.Controls.Add(btnVolver);
-            pnlTurnos.Controls.Add(lblTituloT);
-            pnlTurnos.Controls.Add(pnlTituloT);
-            pnlTurnos.Controls.Add(btnSeleccionarModulo);
-            pnlTurnos.Controls.Add(this.grbMostrarModulos);
-            pnlTurnos.Controls.Add(btnSalir);
-            pnlTurnos.Location = new Point(152, 53);
-            pnlTurnos.Name = "pnlTurnos";
-            pnlTurnos.Size = new Size(1281, 811);
-            pnlTurnos.TabIndex = 38;
+            pnlModulos.BackgroundImage = (Image)resources.GetObject("pnlModulos.BackgroundImage");
+            pnlModulos.BorderStyle = BorderStyle.FixedSingle;
+            pnlModulos.Controls.Add(grbSeleccionarModulos);
+            pnlModulos.Controls.Add(lblTituloT);
+            pnlModulos.Controls.Add(pnlTituloT);
+            pnlModulos.Controls.Add(btnSeleccionarModulo);
+            pnlModulos.Controls.Add(btnSalir);
+            pnlModulos.Location = new Point(152, 53);
+            pnlModulos.Name = "pnlModulos";
+            pnlModulos.Size = new Size(1281, 811);
+            pnlModulos.TabIndex = 38;
             // 
-            // btnVolver
+            // grbSeleccionarModulos
             // 
-            btnVolver.FlatAppearance.BorderColor = Color.LightGray;
-            btnVolver.FlatStyle = FlatStyle.Flat;
-            btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnVolver.Location = new Point(1032, 554);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
-            btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(141, 46);
-            btnVolver.TabIndex = 36;
-            btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            grbSeleccionarModulos.BackColor = Color.Transparent;
+            grbSeleccionarModulos.Controls.Add(rbtEstudiosClinic);
+            grbSeleccionarModulos.Controls.Add(rbtConsultoriosMed);
+            grbSeleccionarModulos.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            grbSeleccionarModulos.Location = new Point(211, 178);
+            grbSeleccionarModulos.Margin = new Padding(3, 4, 3, 4);
+            grbSeleccionarModulos.Name = "grbSeleccionarModulos";
+            grbSeleccionarModulos.Padding = new Padding(3, 4, 3, 4);
+            grbSeleccionarModulos.Size = new Size(318, 268);
+            grbSeleccionarModulos.TabIndex = 38;
+            grbSeleccionarModulos.TabStop = false;
+            grbSeleccionarModulos.Text = "Seleccionar Modulo";
+            // 
+            // rbtEstudiosClinic
+            // 
+            rbtEstudiosClinic.AutoSize = true;
+            rbtEstudiosClinic.Location = new Point(24, 142);
+            rbtEstudiosClinic.Margin = new Padding(3, 4, 3, 4);
+            rbtEstudiosClinic.Name = "rbtEstudiosClinic";
+            rbtEstudiosClinic.Size = new Size(217, 36);
+            rbtEstudiosClinic.TabIndex = 1;
+            rbtEstudiosClinic.Text = "Estudios Clínicos";
+            rbtEstudiosClinic.UseVisualStyleBackColor = true;
+            // 
+            // rbtConsultoriosMed
+            // 
+            rbtConsultoriosMed.AutoSize = true;
+            rbtConsultoriosMed.Checked = true;
+            rbtConsultoriosMed.Location = new Point(24, 50);
+            rbtConsultoriosMed.Margin = new Padding(3, 4, 3, 4);
+            rbtConsultoriosMed.Name = "rbtConsultoriosMed";
+            rbtConsultoriosMed.Size = new Size(267, 36);
+            rbtConsultoriosMed.TabIndex = 0;
+            rbtConsultoriosMed.TabStop = true;
+            rbtConsultoriosMed.Text = "Consultorios Médicos";
+            rbtConsultoriosMed.UseVisualStyleBackColor = true;
             // 
             // lblTituloT
             // 
@@ -103,32 +128,21 @@
             btnSeleccionarModulo.TabIndex = 30;
             btnSeleccionarModulo.Text = "Seleccionar";
             btnSeleccionarModulo.UseVisualStyleBackColor = true;
+            btnSeleccionarModulo.Click += btnSeleccionarModulo_Click;
             // 
-            // grbMostrarModulos
+            // btnSalir
             // 
-            this.grbMostrarModulos.BackColor = Color.Transparent;
-            this.grbMostrarModulos.Controls.Add(this.rbtEstudiosClinicos);
-            this.grbMostrarModulos.Controls.Add(rbtConsultoriosMedicos);
-            this.grbMostrarModulos.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            this.grbMostrarModulos.Location = new Point(212, 163);
-            this.grbMostrarModulos.Margin = new Padding(3, 4, 3, 4);
-            this.grbMostrarModulos.Name = "grbMostrarModulos";
-            this.grbMostrarModulos.Padding = new Padding(3, 4, 3, 4);
-            this.grbMostrarModulos.Size = new Size(397, 284);
-            this.grbMostrarModulos.TabIndex = 26;
-            this.grbMostrarModulos.TabStop = false;
-            this.grbMostrarModulos.Text = "Mostrar Módulos";
-            // 
-            // rbtEstudiosClinicos
-            // 
-            this.rbtEstudiosClinicos.AutoSize = true;
-            this.rbtEstudiosClinicos.Location = new Point(24, 181);
-            this.rbtEstudiosClinicos.Margin = new Padding(3, 4, 3, 4);
-            this.rbtEstudiosClinicos.Name = "rbtEstudiosClinicos";
-            this.rbtEstudiosClinicos.Size = new Size(217, 36);
-            this.rbtEstudiosClinicos.TabIndex = 1;
-            this.rbtEstudiosClinicos.Text = "Estudios Clínicos";
-            this.rbtEstudiosClinicos.UseVisualStyleBackColor = true;
+            btnSalir.FlatAppearance.BorderColor = Color.LightGray;
+            btnSalir.FlatStyle = FlatStyle.Flat;
+            btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
+            btnSalir.Location = new Point(1084, 19);
+            btnSalir.Margin = new Padding(3, 4, 3, 4);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(108, 47);
+            btnSalir.TabIndex = 2;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.Click += btnSalir_Click;
             // 
             // rbtConsultoriosMedicos
             // 
@@ -143,46 +157,37 @@
             rbtConsultoriosMedicos.Text = "Consultorios Médicos";
             rbtConsultoriosMedicos.UseVisualStyleBackColor = true;
             // 
-            // btnSalir
-            // 
-            btnSalir.FlatAppearance.BorderColor = Color.LightGray;
-            btnSalir.FlatStyle = FlatStyle.Flat;
-            btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSalir.Location = new Point(1084, 19);
-            btnSalir.Margin = new Padding(3, 4, 3, 4);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(108, 47);
-            btnSalir.TabIndex = 2;
-            btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
-            // 
             // frmModulos
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1587, 889);
-            Controls.Add(pnlTurnos);
+            Controls.Add(pnlModulos);
             Name = "frmModulos";
             Text = "frmModulos";
-            pnlTurnos.ResumeLayout(false);
-            pnlTurnos.PerformLayout();
-            this.grbMostrarModulos.ResumeLayout(false);
-            this.grbMostrarModulos.PerformLayout();
+            pnlModulos.ResumeLayout(false);
+            pnlModulos.PerformLayout();
+            grbSeleccionarModulos.ResumeLayout(false);
+            grbSeleccionarModulos.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel pnlTurnos;
-        private Button btnVolver;
+        private Panel pnlModulos;
         private Label lblTituloT;
         private Panel pnlTituloT;
         private Button btnAsignar;
         private Button btnCancelar;
         private Button btnSeleccionarModulo;
-        private GroupBox grbMostrarTurnos;
-        private RadioButton rbtOcupados;
+
+        public GroupBox grbMostrarModulos { get; private set; }
+        public RadioButton rbtEstudiosClinicos { get; private set; }
+
+        private GroupBox grbSeleccionarModulos;
+        private RadioButton rbtEstudiosClinic;
         private RadioButton rbtConsultoriosMedicos;
         private Button btnSalir;
+        private RadioButton rbtConsultoriosMed;
     }
 }

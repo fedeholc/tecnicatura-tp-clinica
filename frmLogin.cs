@@ -96,10 +96,12 @@ namespace clinica
                         if (reader.GetString(0) == txtPass.Text)
                         {
                             MessageBox.Show("Ingreso exitoso", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            frmMenuPrincipal Principal = new frmMenuPrincipal();
+                            /*frmMenuPrincipal Principal = new frmMenuPrincipal();
+                            
                             Principal.rol = Convert.ToString(reader.GetString(1));
-                            Principal.usuario = cbxUsuarios.Text;
-                            Principal.Show();
+                            Principal.usuario = cbxUsuarios.Text;*/
+                            frmModulos Modulos = new frmModulos();
+                            Modulos.Show();
                             this.Hide();
                         }
                         else
@@ -108,8 +110,8 @@ namespace clinica
                         }
                     }
                 }
-
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
