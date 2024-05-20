@@ -34,8 +34,8 @@ namespace clinica
             else
             {
                 MessageBox.Show("Ha seleccionado Consultorios Medicos");
-                frmMenuPrincipal Principal = new frmMenuPrincipal();
-                Principal.Show();
+                frmMenuPrincipalConsultorios PrincipalConsultorios = new frmMenuPrincipalConsultorios();
+                PrincipalConsultorios.Show();
                 this.Hide();
             }
 
