@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTurnosConsultorios));
             pnlTurnos = new Panel();
+            cbxEspecialidad = new ComboBox();
             btnVolver = new Button();
             label5 = new Label();
             lblTituloT = new Label();
@@ -53,7 +54,6 @@
             cbxHoraHasta = new ComboBox();
             cbxHoraDesde = new ComboBox();
             btnSalir = new Button();
-            cbxEspecialistas = new ComboBox();
             pnlTurnos.SuspendLayout();
             grbMostrarTurnos.SuspendLayout();
             SuspendLayout();
@@ -62,6 +62,7 @@
             // 
             pnlTurnos.BackgroundImage = (Image)resources.GetObject("pnlTurnos.BackgroundImage");
             pnlTurnos.BorderStyle = BorderStyle.FixedSingle;
+            pnlTurnos.Controls.Add(cbxEspecialidad);
             pnlTurnos.Controls.Add(btnVolver);
             pnlTurnos.Controls.Add(label5);
             pnlTurnos.Controls.Add(lblTituloT);
@@ -83,12 +84,20 @@
             pnlTurnos.Controls.Add(cbxHoraHasta);
             pnlTurnos.Controls.Add(cbxHoraDesde);
             pnlTurnos.Controls.Add(btnSalir);
-            pnlTurnos.Controls.Add(cbxEspecialistas);
             pnlTurnos.Location = new Point(36, 39);
             pnlTurnos.Name = "pnlTurnos";
             pnlTurnos.Size = new Size(1385, 818);
             pnlTurnos.TabIndex = 38;
             pnlTurnos.Paint += pnlTurnos_Paint;
+            // 
+            // cbxEspecialidad
+            // 
+            cbxEspecialidad.FormattingEnabled = true;
+            cbxEspecialidad.Location = new Point(216, 121);
+            cbxEspecialidad.Name = "cbxEspecialidad";
+            cbxEspecialidad.Size = new Size(281, 40);
+            cbxEspecialidad.TabIndex = 37;
+            cbxEspecialidad.SelectedIndexChanged += cbxEspecialidad_SelectedIndexChanged;
             // 
             // btnVolver
             // 
@@ -310,7 +319,7 @@
             lblEspecialista.AutoSize = true;
             lblEspecialista.BackColor = Color.Transparent;
             lblEspecialista.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            lblEspecialista.Location = new Point(211, 103);
+            lblEspecialista.Location = new Point(212, 87);
             lblEspecialista.Name = "lblEspecialista";
             lblEspecialista.Size = new Size(136, 32);
             lblEspecialista.TabIndex = 6;
@@ -351,17 +360,6 @@
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
-            // 
-            // cbxEspecialistas
-            // 
-            cbxEspecialistas.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxEspecialistas.FormattingEnabled = true;
-            cbxEspecialistas.Location = new Point(212, 122);
-            cbxEspecialistas.Margin = new Padding(3, 4, 3, 4);
-            cbxEspecialistas.Name = "cbxEspecialistas";
-            cbxEspecialistas.Size = new Size(285, 40);
-            cbxEspecialistas.TabIndex = 0;
-            cbxEspecialistas.SelectedIndexChanged += cbxEspecialistas_SelectedIndexChanged;
             // 
             // frmTurnosConsultorios
             // 
@@ -405,6 +403,6 @@
         private ComboBox cbxHoraHasta;
         private ComboBox cbxHoraDesde;
         private Button btnSalir;
-        private ComboBox cbxEspecialistas;
+        private ComboBox cbxEspecialidad;
     }
 }

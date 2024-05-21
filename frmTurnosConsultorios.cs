@@ -50,18 +50,18 @@ namespace clinica
             cbxHoraHasta.SelectedIndex = 23;*/
 
             CargarDatosEspecialista();
-        
+
         }
 
         private void CargarDatosEspecialista()
         {
-            cbxEspecialistas.Items.Clear();
-            cbxEspecialistas.Text = "";
+            cbxEspecialidad.Items.Clear();
+            cbxEspecialidad.Text = "";
 
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-                
+
                 string query;
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 query = "select distinct especialidad from profesional;";
@@ -75,14 +75,10 @@ namespace clinica
 
                 while (reader.Read())
                 {
-                    cbxEspecialistas.Items.Add(reader["especialidad"]);
+                    cbxEspecialidad.Items.Add(reader["especialidad"]);
                 }
 
-                /*// Asignar la lista de coberturas al ComboBox
-                cbxEspecialistas.DataSource = especialidad;
-                // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
-                cbxEspecialitas.DisplayMember = "Value";*/
-                
+
                 reader.Close();
 
             }
@@ -97,10 +93,7 @@ namespace clinica
             }
         }
 
-        private void cbxEspecialistas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CargarDatosEspecialista();
-        }
+
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
@@ -113,7 +106,18 @@ namespace clinica
             frmMenuPrincipalConsultorios MenuPrincipal = new frmMenuPrincipalConsultorios();
             MenuPrincipal.Show();
 
-                
+
+        }
+
+        private void cbxEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxEspecialidad != null) 
+            {
+                string esp = cbxEspecialidad.Text;
+                this.Hide();
+                frmListadoProfesionales profesionales = new frmListadoProfesionales(esp);
+                profesionales.Show();
+            }
         }
     }
 }

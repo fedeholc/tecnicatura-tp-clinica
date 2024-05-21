@@ -452,7 +452,7 @@ namespace clinica
                     }
                     if (rbtPagado.Checked && !rbtEfectivo.Checked && !rbtTarjeta.Checked)
                     {
-                        MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", 
+                        MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -570,7 +570,7 @@ namespace clinica
             rbtUrgencia.Enabled = true;
             lbxTurnos.Enabled = true;
             btnAcreditar.Enabled = true;
-            
+
         }
 
         private void NuevaAcreditacion_Click(object sender, EventArgs e)
@@ -587,13 +587,18 @@ namespace clinica
             lblCoberturaPaciente.Text = "";
             lblMonto.Text = "";
             lbxTurnos.DataSource = null;
-            
+
             rbtAdeudado.Enabled = false;
             rbtPagado.Enabled = false;
             rbtTarjeta.Enabled = false;
             rbtEfectivo.Enabled = false;
 
             rbtNormal.Checked = true;
+
+        }
+
+        private void pnlAcreditacion_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
