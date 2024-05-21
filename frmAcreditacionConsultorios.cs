@@ -48,7 +48,7 @@ namespace clinica
             lblRegistroPago.Enabled = false;
 
             CargarPacientes();
-            CargarListaEstudios();
+            CargarListaProfesionales();
             CargarTurnos(0, 0);
         }
 
@@ -63,17 +63,17 @@ namespace clinica
             cbxPaciente.SelectedIndex = -1;
         }
 
-        private void CargarListaEstudios()
+        private void CargarListaProfesionales()
         {
-            cbxEstudios.Items.Clear();
-            cbxEstudios.Text = "";
+            cbxProfesionales.Items.Clear();
+            cbxProfesionales.Text = "";
 
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
                 string query;
                 sqlCon = Conexion.getInstancia().CrearConexion();
-                query = "select id, Descripcion from Estudio;";
+                query = "SELECT id, Nombre FROM Profesional;";
                 MySqlCommand comando = new(query, sqlCon)
                 {
                     CommandType = CommandType.Text
@@ -85,30 +85,23 @@ namespace clinica
 
                 if (reader.HasRows)
                 {
-                    List<KeyValuePair<int, string>> estudios = new();
+                    List<KeyValuePair<int, string>> profesionales = new();
 
                     while (reader.Read())
                     {
-                        // Obtener el ID y el nombre de la cobertura
                         int id = reader.GetInt32(0);
-                        string descripcion = reader.GetString(1);
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
-                        KeyValuePair<int, string> estudio = new(id, descripcion);
-                        estudios.Add(estudio);
-
+                        string nombre = reader.GetString(1);
+                        KeyValuePair<int, string> profesional = new(id, nombre);
+                        profesionales.Add(profesional);
                     }
-                    // Asignar la lista de coberturas al ComboBox
-                    cbxEstudios.DataSource = estudios;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
-                    cbxEstudios.DisplayMember = "Value";
-                    cbxEstudios.SelectedIndex = -1;
+                    cbxProfesionales.DataSource = profesionales;
+                    cbxProfesionales.DisplayMember = "Value";
+                    cbxProfesionales.SelectedIndex = -1;
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos de Estudios");
+                    MessageBox.Show("No hay datos de profesionales.");
                 }
-
             }
             catch (Exception ex)
             {
@@ -333,7 +326,7 @@ namespace clinica
             }
         }
 
-        private void cbxEstudios_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxProfesionales_SelectedIndexChanged(object sender, EventArgs e)
         {
             rbtEfectivo.Enabled = false;
             rbtTarjeta.Enabled = false;
@@ -342,14 +335,14 @@ namespace clinica
             lblMedioPago.Enabled = false;
             lblRegistroPago.Enabled = false;
 
-            if (cbxEstudios.SelectedIndex != -1)
+            if (cbxProfesionales.SelectedIndex != -1)
             {
-                CargarLugares(((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key);
+                CargarLugares(((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key);
             }
-            if (cbxPaciente.SelectedIndex != -1 && cbxEstudios.SelectedIndex != -1)
+            if (cbxPaciente.SelectedIndex != -1 && cbxProfesionales.SelectedIndex != -1)
             {
                 int idPaciente = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
-                int idEstudio = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
+                int idEstudio = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
 
                 CargarTurnos(idPaciente, idEstudio);
 
@@ -400,7 +393,7 @@ namespace clinica
                 if (ObtenerTurno(idTurno) != null)
                 {
                     Turno turnoSeleccionado = ObtenerTurno(idTurno)!;
-                    cbxEstudios.SelectedIndex = encontrarCbxIndex((int)turnoSeleccionado.Estudio_id!, cbxEstudios);
+                    cbxProfesionales.SelectedIndex = encontrarCbxIndex((int)turnoSeleccionado.Estudio_id!, cbxProfesionales);
                     cbxLugar.SelectedIndex = encontrarCbxIndex(turnoSeleccionado.LugarDeAtencion_id, cbxLugar);
                 }
             }
@@ -420,9 +413,9 @@ namespace clinica
                 MessageBox.Show("Debe seleccionar un paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (cbxEstudios.SelectedIndex == -1)
+            if (cbxProfesionales.SelectedIndex == -1)
             {
-                MessageBox.Show("Debe seleccionar un estudio", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe seleccionar un profesional", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (cbxLugar.SelectedIndex == -1)
@@ -431,11 +424,11 @@ namespace clinica
                 return;
             }
 
-            // guardar datos de pago en facutra
+            // guardar datos de pago en factura
             int rtaFactura;
             Factura factura = new();
             factura.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
-            factura.Estudio_id = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
+            factura.Estudio_id = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
             factura.Cobertura_id = (int)Clinica.Clinica.ObtenerCoberturaId(factura.Paciente_id)!;
             float monto;
             if (float.TryParse(lblMonto.Text, out monto))
@@ -489,7 +482,7 @@ namespace clinica
             }
             else
             {
-                MessageBox.Show("Falta el dato del monto del estudio. Avise al administrador del sistema",
+                MessageBox.Show("Falta el dato del monto de la atención. Avise al administrador del sistema",
                     "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -508,7 +501,7 @@ namespace clinica
             int rtaSaladeEspera;
             SalaDeEspera salaDeEspera = new();
             salaDeEspera.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
-            salaDeEspera.Estudio_id = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
+            salaDeEspera.Estudio_id = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
             salaDeEspera.LugarDeAtencion_id = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
             salaDeEspera.FechaHoraAcreditacion = DateTime.Now;
             salaDeEspera.Prioridad = rbtUrgencia.Checked ? (int)Prioridad.Urgencia : (int)Prioridad.Normal;
@@ -536,7 +529,7 @@ namespace clinica
         private void DeshabilitarCampos()
         {
             cbxPaciente.Enabled = false;
-            cbxEstudios.Enabled = false;
+            cbxProfesionales.Enabled = false;
             cbxLugar.Enabled = false;
             lbxTurnos.Enabled = false;
             rbtEfectivo.Enabled = false;
@@ -555,7 +548,7 @@ namespace clinica
         private void HabilitarCampos()
         {
             cbxPaciente.Enabled = true;
-            cbxEstudios.Enabled = true;
+            cbxProfesionales.Enabled = true;
             cbxLugar.Enabled = true;
             lbxTurnos.Enabled = true;
             rbtEfectivo.Enabled = true;
@@ -577,7 +570,7 @@ namespace clinica
         {
             HabilitarCampos();
             cbxPaciente.SelectedIndex = -1;
-            cbxEstudios.SelectedIndex = -1;
+            cbxProfesionales.SelectedIndex = -1;
             cbxLugar.SelectedIndex = -1;
             lbxTurnos.SelectedIndex = -1;
             rbtEfectivo.Checked = false;

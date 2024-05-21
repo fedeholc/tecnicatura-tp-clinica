@@ -1,6 +1,6 @@
 ﻿namespace clinica
 {
-    partial class frmAcreditacion
+    partial class frmAcreditacionConsultorios
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,7 @@
             label3 = new Label();
             cbxPaciente = new ComboBox();
             lblEstudio = new Label();
-            cbxEstudios = new ComboBox();
+            cbxProfesionales = new ComboBox();
             lbxTurnos = new ListBox();
             label1 = new Label();
             label4 = new Label();
@@ -148,15 +148,16 @@
             lblEstudio.TabIndex = 44;
             lblEstudio.Text = "Estudio a realizar";
             // 
-            // cbxEstudios
+            // cbxProfesionales
             // 
-            cbxEstudios.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxEstudios.FormattingEnabled = true;
-            cbxEstudios.Location = new Point(327, 147);
-            cbxEstudios.Name = "cbxEstudios";
-            cbxEstudios.Size = new Size(233, 23);
-            cbxEstudios.TabIndex = 43;
-            cbxEstudios.SelectedIndexChanged += cbxEstudios_SelectedIndexChanged;
+            cbxProfesionales.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxProfesionales.FormattingEnabled = true;
+            cbxProfesionales.Location = new Point(327, 147);
+            cbxProfesionales.Name = "cbxProfesionales";
+            cbxProfesionales.Size = new Size(233, 23);
+            cbxProfesionales.TabIndex = 43;
+            //Llamar via cbxProfesionales 
+            cbxProfesionales.SelectedIndexChanged += cbxProfesionales_SelectedIndexChanged;
             // 
             // lbxTurnos
             // 
@@ -432,7 +433,7 @@
             pnlAcreditacion.Controls.Add(label1);
             pnlAcreditacion.Controls.Add(lbxTurnos);
             pnlAcreditacion.Controls.Add(lblEstudio);
-            pnlAcreditacion.Controls.Add(cbxEstudios);
+            pnlAcreditacion.Controls.Add(cbxProfesionales);
             pnlAcreditacion.Controls.Add(btnRegistrarPaciente);
             pnlAcreditacion.Controls.Add(label3);
             pnlAcreditacion.Controls.Add(cbxPaciente);
@@ -477,7 +478,7 @@
         private Label label3;
         private ComboBox cbxPaciente;
         private Label lblEstudio;
-        private ComboBox cbxEstudios;
+        private ComboBox cbxProfesionales;
         private ListBox lbxTurnos;
         private Label label1;
         private Label label4;
