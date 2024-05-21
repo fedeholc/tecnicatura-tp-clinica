@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             lblTituloA = new Label();
             label1 = new Label();
             label2 = new Label();
@@ -94,13 +94,14 @@
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnVolver.Location = new Point(1159, 166);
+            btnVolver.Location = new Point(1126, 167);
             btnVolver.Margin = new Padding(6);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(111, 60);
+            btnVolver.Size = new Size(152, 60);
             btnVolver.TabIndex = 73;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // dtgvProfesionales
             // 
@@ -115,6 +116,7 @@
             dtgvProfesionales.Size = new Size(778, 194);
             dtgvProfesionales.TabIndex = 81;
             dtgvProfesionales.CellContentClick += dtgvProfesionales_CellContentClick;
+            dtgvProfesionales.SelectionChanged += dtgvProfesionales_SelectionChanged;
             // 
             // nroMatricula
             // 
@@ -139,9 +141,9 @@
             // 
             // especialidad
             // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            especialidad.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            especialidad.DefaultCellStyle = dataGridViewCellStyle1;
             especialidad.HeaderText = "Especialidad";
             especialidad.MinimumWidth = 10;
             especialidad.Name = "especialidad";
@@ -153,7 +155,6 @@
             txtEspecialidad.Name = "txtEspecialidad";
             txtEspecialidad.Size = new Size(276, 39);
             txtEspecialidad.TabIndex = 82;
-            txtEspecialidad.TextChanged += txtEspecialidad_TextChanged;
             // 
             // frmListadoProfesionales
             // 

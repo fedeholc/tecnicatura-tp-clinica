@@ -15,12 +15,18 @@ namespace clinica
     public partial class frmListadoProfesionales : Form
     {
         private string esp;
+        private frmTurnosConsultorios turnos;
 
 
         public frmListadoProfesionales(string esp)
         {
             InitializeComponent();
             this.esp = esp;
+            txtEspecialidad.Text = esp;
+            turnos = new frmTurnosConsultorios();
+            turnos.Show();
+
+            dtgvProfesionales.SelectionChanged += dtgvProfesionales_SelectionChanged;
         }
 
         private void pnlAcreditacion_Paint(object sender, PaintEventArgs e)
@@ -34,7 +40,7 @@ namespace clinica
 
         private void dtgvProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
 
         private void frmListadoProfesionales_Load(object sender, EventArgs e)
@@ -88,9 +94,37 @@ namespace clinica
             }
         }
 
-        private void txtEspecialidad_TextChanged(object sender, EventArgs e)
+
+
+        private void btnVolver_Click(object sender, EventArgs e)
         {
-           
+            this.Close();
+            frmTurnosConsultorios turnosConsultorios = new frmTurnosConsultorios();
+            turnosConsultorios.Show();
+        }
+
+        private void dtgvProfesionales_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dtgvProfesionales.SelectedRows.Count > 0) 
+            {
+                DataGridViewRow row = dtgvProfesionales.SelectedRows[0];
+                try
+                {
+                    string valor = (row.Cells[1].Value.ToString()) + " " + (row.Cells[2].Value.ToString());
+                    turnos.SetTextBoxValue(valor);
+                    this.Close();
+                    turnos.Show();
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener el valor de la celda: " + ex.Message);
+                }
+                
+
+            }
+
+
         }
     }
 }
