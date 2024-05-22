@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTurnosConsultorios));
             pnlTurnos = new Panel();
+            txtProfesional = new TextBox();
+            lblProfesional = new Label();
             cbxEspecialidad = new ComboBox();
             btnVolver = new Button();
             label5 = new Label();
@@ -50,7 +52,7 @@
             lblFechaDesde = new Label();
             dtpFechaHasta = new DateTimePicker();
             dtpFechaDesde = new DateTimePicker();
-            lblEspecialista = new Label();
+            lblEspecialidad = new Label();
             cbxHoraHasta = new ComboBox();
             cbxHoraDesde = new ComboBox();
             btnSalir = new Button();
@@ -62,6 +64,8 @@
             // 
             pnlTurnos.BackgroundImage = (Image)resources.GetObject("pnlTurnos.BackgroundImage");
             pnlTurnos.BorderStyle = BorderStyle.FixedSingle;
+            pnlTurnos.Controls.Add(txtProfesional);
+            pnlTurnos.Controls.Add(lblProfesional);
             pnlTurnos.Controls.Add(cbxEspecialidad);
             pnlTurnos.Controls.Add(btnVolver);
             pnlTurnos.Controls.Add(label5);
@@ -80,7 +84,7 @@
             pnlTurnos.Controls.Add(lblFechaDesde);
             pnlTurnos.Controls.Add(dtpFechaHasta);
             pnlTurnos.Controls.Add(dtpFechaDesde);
-            pnlTurnos.Controls.Add(lblEspecialista);
+            pnlTurnos.Controls.Add(lblEspecialidad);
             pnlTurnos.Controls.Add(cbxHoraHasta);
             pnlTurnos.Controls.Add(cbxHoraDesde);
             pnlTurnos.Controls.Add(btnSalir);
@@ -90,10 +94,28 @@
             pnlTurnos.TabIndex = 38;
             pnlTurnos.Paint += pnlTurnos_Paint;
             // 
+            // txtProfesional
+            // 
+            txtProfesional.Location = new Point(528, 122);
+            txtProfesional.Name = "txtProfesional";
+            txtProfesional.Size = new Size(276, 39);
+            txtProfesional.TabIndex = 83;
+            // 
+            // lblProfesional
+            // 
+            lblProfesional.AutoSize = true;
+            lblProfesional.BackColor = Color.Transparent;
+            lblProfesional.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
+            lblProfesional.Location = new Point(528, 87);
+            lblProfesional.Name = "lblProfesional";
+            lblProfesional.Size = new Size(130, 32);
+            lblProfesional.TabIndex = 38;
+            lblProfesional.Text = "Profesional";
+            // 
             // cbxEspecialidad
             // 
             cbxEspecialidad.FormattingEnabled = true;
-            cbxEspecialidad.Location = new Point(216, 121);
+            cbxEspecialidad.Location = new Point(216, 122);
             cbxEspecialidad.Name = "cbxEspecialidad";
             cbxEspecialidad.Size = new Size(281, 40);
             cbxEspecialidad.TabIndex = 37;
@@ -118,7 +140,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label5.Location = new Point(645, 103);
+            label5.Location = new Point(878, 140);
             label5.Name = "label5";
             label5.Size = new Size(193, 32);
             label5.TabIndex = 34;
@@ -177,7 +199,7 @@
             btnRegistrarPaciente.FlatAppearance.BorderColor = Color.LightGray;
             btnRegistrarPaciente.FlatStyle = FlatStyle.Flat;
             btnRegistrarPaciente.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnRegistrarPaciente.Location = new Point(347, 529);
+            btnRegistrarPaciente.Location = new Point(547, 542);
             btnRegistrarPaciente.Margin = new Padding(3, 4, 3, 4);
             btnRegistrarPaciente.Name = "btnRegistrarPaciente";
             btnRegistrarPaciente.Size = new Size(150, 51);
@@ -190,7 +212,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label3.Location = new Point(212, 457);
+            label3.Location = new Point(216, 473);
             label3.Name = "label3";
             label3.Size = new Size(427, 32);
             label3.TabIndex = 29;
@@ -200,11 +222,12 @@
             // 
             cbxPaciente.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPaciente.FormattingEnabled = true;
-            cbxPaciente.Location = new Point(212, 481);
+            cbxPaciente.Location = new Point(216, 522);
             cbxPaciente.Margin = new Padding(3, 4, 3, 4);
             cbxPaciente.Name = "cbxPaciente";
             cbxPaciente.Size = new Size(286, 40);
             cbxPaciente.TabIndex = 28;
+            cbxPaciente.SelectedIndexChanged += cbxPaciente_SelectedIndexChanged;
             // 
             // grbMostrarTurnos
             // 
@@ -212,11 +235,11 @@
             grbMostrarTurnos.Controls.Add(rbtOcupados);
             grbMostrarTurnos.Controls.Add(rbtDisponibles);
             grbMostrarTurnos.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            grbMostrarTurnos.Location = new Point(211, 377);
+            grbMostrarTurnos.Location = new Point(211, 390);
             grbMostrarTurnos.Margin = new Padding(3, 4, 3, 4);
             grbMostrarTurnos.Name = "grbMostrarTurnos";
             grbMostrarTurnos.Padding = new Padding(3, 4, 3, 4);
-            grbMostrarTurnos.Size = new Size(287, 65);
+            grbMostrarTurnos.Size = new Size(334, 79);
             grbMostrarTurnos.TabIndex = 26;
             grbMostrarTurnos.TabStop = false;
             grbMostrarTurnos.Text = "Mostrar turnos:";
@@ -244,13 +267,14 @@
             rbtDisponibles.TabStop = true;
             rbtDisponibles.Text = "Disponibles";
             rbtDisponibles.UseVisualStyleBackColor = true;
+            rbtDisponibles.CheckedChanged += rbtDisponibles_CheckedChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label2.Location = new Point(315, 306);
+            label2.Location = new Point(416, 296);
             label2.Name = "label2";
             label2.Size = new Size(129, 32);
             label2.TabIndex = 13;
@@ -261,7 +285,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label1.Location = new Point(212, 306);
+            label1.Location = new Point(218, 296);
             label1.Name = "label1";
             label1.Size = new Size(131, 32);
             label1.TabIndex = 12;
@@ -270,18 +294,19 @@
             // lbxTurnos
             // 
             lbxTurnos.FormattingEnabled = true;
-            lbxTurnos.Location = new Point(645, 122);
+            lbxTurnos.Location = new Point(878, 166);
             lbxTurnos.Margin = new Padding(3, 4, 3, 4);
             lbxTurnos.Name = "lbxTurnos";
-            lbxTurnos.Size = new Size(527, 388);
+            lbxTurnos.Size = new Size(387, 324);
             lbxTurnos.TabIndex = 11;
+            lbxTurnos.SelectedIndexChanged += lbxTurnos_SelectedIndexChanged;
             // 
             // lblFechaHasta
             // 
             lblFechaHasta.AutoSize = true;
             lblFechaHasta.BackColor = Color.Transparent;
             lblFechaHasta.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            lblFechaHasta.Location = new Point(212, 232);
+            lblFechaHasta.Location = new Point(555, 198);
             lblFechaHasta.Name = "lblFechaHasta";
             lblFechaHasta.Size = new Size(142, 32);
             lblFechaHasta.TabIndex = 10;
@@ -292,7 +317,7 @@
             lblFechaDesde.AutoSize = true;
             lblFechaDesde.BackColor = Color.Transparent;
             lblFechaDesde.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            lblFechaDesde.Location = new Point(212, 162);
+            lblFechaDesde.Location = new Point(218, 198);
             lblFechaDesde.Name = "lblFechaDesde";
             lblFechaDesde.Size = new Size(144, 32);
             lblFechaDesde.TabIndex = 9;
@@ -300,7 +325,7 @@
             // 
             // dtpFechaHasta
             // 
-            dtpFechaHasta.Location = new Point(212, 255);
+            dtpFechaHasta.Location = new Point(528, 234);
             dtpFechaHasta.Margin = new Padding(3, 4, 3, 4);
             dtpFechaHasta.Name = "dtpFechaHasta";
             dtpFechaHasta.Size = new Size(285, 39);
@@ -308,29 +333,29 @@
             // 
             // dtpFechaDesde
             // 
-            dtpFechaDesde.Location = new Point(212, 184);
+            dtpFechaDesde.Location = new Point(218, 234);
             dtpFechaDesde.Margin = new Padding(3, 4, 3, 4);
             dtpFechaDesde.Name = "dtpFechaDesde";
             dtpFechaDesde.Size = new Size(285, 39);
             dtpFechaDesde.TabIndex = 7;
             // 
-            // lblEspecialista
+            // lblEspecialidad
             // 
-            lblEspecialista.AutoSize = true;
-            lblEspecialista.BackColor = Color.Transparent;
-            lblEspecialista.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            lblEspecialista.Location = new Point(212, 87);
-            lblEspecialista.Name = "lblEspecialista";
-            lblEspecialista.Size = new Size(136, 32);
-            lblEspecialista.TabIndex = 6;
-            lblEspecialista.Text = "Especialista";
+            lblEspecialidad.AutoSize = true;
+            lblEspecialidad.BackColor = Color.Transparent;
+            lblEspecialidad.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
+            lblEspecialidad.Location = new Point(215, 87);
+            lblEspecialidad.Name = "lblEspecialidad";
+            lblEspecialidad.Size = new Size(143, 32);
+            lblEspecialidad.TabIndex = 6;
+            lblEspecialidad.Text = "Especialidad";
             // 
             // cbxHoraHasta
             // 
             cbxHoraHasta.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxHoraHasta.FormattingEnabled = true;
             cbxHoraHasta.Items.AddRange(new object[] { "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "23:59" });
-            cbxHoraHasta.Location = new Point(315, 329);
+            cbxHoraHasta.Location = new Point(416, 332);
             cbxHoraHasta.Margin = new Padding(3, 4, 3, 4);
             cbxHoraHasta.Name = "cbxHoraHasta";
             cbxHoraHasta.Size = new Size(95, 40);
@@ -341,7 +366,7 @@
             cbxHoraDesde.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxHoraDesde.FormattingEnabled = true;
             cbxHoraDesde.Items.AddRange(new object[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" });
-            cbxHoraDesde.Location = new Point(212, 329);
+            cbxHoraDesde.Location = new Point(231, 332);
             cbxHoraDesde.Margin = new Padding(3, 4, 3, 4);
             cbxHoraDesde.Name = "cbxHoraDesde";
             cbxHoraDesde.Size = new Size(95, 40);
@@ -399,10 +424,12 @@
         private Label lblFechaDesde;
         private DateTimePicker dtpFechaHasta;
         private DateTimePicker dtpFechaDesde;
-        private Label lblEspecialista;
+        private Label lblEspecialidad;
         private ComboBox cbxHoraHasta;
         private ComboBox cbxHoraDesde;
         private Button btnSalir;
         private ComboBox cbxEspecialidad;
+        private Label lblProfesional;
+        private TextBox txtProfesional;
     }
 }

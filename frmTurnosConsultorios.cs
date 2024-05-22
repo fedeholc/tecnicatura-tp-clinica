@@ -111,7 +111,7 @@ namespace clinica
 
         private void cbxEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbxEspecialidad != null) 
+            if (cbxEspecialidad != null)
             {
                 string esp = cbxEspecialidad.Text;
                 this.Hide();
@@ -119,5 +119,26 @@ namespace clinica
                 profesionales.Show();
             }
         }
+
+        public void SetTextBoxValue(string value)
+        {
+            txtProfesional.Text = value.ToString();
+        }
+        private void lbxTurnos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbtDisponibles_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+      
     }
 }
