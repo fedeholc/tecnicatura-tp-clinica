@@ -176,7 +176,48 @@ namespace clinica
                 }
             }
         }
+        // Función para verificar la disponibilidad del profesional
+        private bool VerificarDisponibilidadProfesional(int idProfesional, int idPaciente, DateTime fecha, TimeSpan hora)
+        {
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Turno " +
+                               "WHERE Profesional_id = @ProfesionalId " +
+                               "AND Paciente_id = @PacienteId " +
+                               "AND Fecha = @Fecha " +
+                               "AND Hora = @Hora " +
+                               "AND TurnoStatus = @TurnoStatus";
 
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                comando.Parameters.AddWithValue("@ProfesionalId", idProfesional);
+                comando.Parameters.AddWithValue("@PacienteId", idPaciente);
+                comando.Parameters.AddWithValue("@Fecha", fecha);
+                comando.Parameters.AddWithValue("@Hora", hora);
+                comando.Parameters.AddWithValue("@TurnoStatus", (int)TurnoStatus.Disponible);
+                sqlCon.Open();
+
+                int count = Convert.ToInt32(comando.ExecuteScalar());
+
+                return count > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
         private void CargarTurnos(int idPaciente, int idEstudio)
         {
             lbxTurnos.DataSource = null;
@@ -186,10 +227,10 @@ namespace clinica
             try
             {
                 string query = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
-                    "LugarDeAtencion.Descripcion,  TurnoStatus " +
-                    "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
-                    $"inner join estudio on Turno.Estudio_id = estudio.id " +
-                    $"where Turno.Paciente_id = {idPaciente} and Turno.Estudio_id = {idEstudio}";
+                               "LugarDeAtencion.Descripcion,  TurnoStatus " +
+                               "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
+                               "inner join estudio on Turno.Estudio_id = estudio.id " +
+                               $"where Turno.Paciente_id = {idPaciente} and Turno.Estudio_id = {idEstudio}";
 
                 query += " ORDER BY Turno.Fecha, Turno.Hora;";
 
@@ -200,8 +241,7 @@ namespace clinica
                 };
                 sqlCon.Open();
 
-                MySqlDataReader reader;
-                reader = comando.ExecuteReader();
+                MySqlDataReader reader = comando.ExecuteReader();
 
                 if (reader.HasRows)
                 {
@@ -210,26 +250,30 @@ namespace clinica
                     while (reader.Read())
                     {
                         int id = reader.GetInt32(0);
-                        string fecha = reader.GetDateTime(1).ToString("dd/MM/yyyy");
-                        string hora = reader.GetTimeSpan(2).ToString();
+                        DateTime fecha = reader.GetDateTime(1);
+                        TimeSpan hora = reader.GetTimeSpan(2);
                         string estudioDescripcion = reader.GetString(3);
                         string lugarDescripcion = reader.GetString(4);
                         int turnoStatus = reader.GetInt32(5);
 
                         string turnoStatusDescripcion = turnoStatus == (int)TurnoStatus.Disponible ? "Disponible" : "Ocupado";
 
-                        string descripcionTurno = $"{fecha} - {hora} - {lugarDescripcion} " +
-                            $"-  {estudioDescripcion} - {turnoStatusDescripcion}";
+                        string descripcionTurno = $"{fecha:dd/MM/yyyy} - {hora} - {lugarDescripcion} " +
+                                                  $"-  {estudioDescripcion} - {turnoStatusDescripcion}";
+
+                        if (!VerificarDisponibilidadProfesional(idEstudio, idPaciente, fecha, hora))
+                        {
+                            descripcionTurno += " (Profesional no disponible)";
+                        }
 
                         KeyValuePair<int, string> turno = new(id, descripcionTurno);
                         turnos.Add(turno);
-
                     }
+
                     lbxTurnos.DataSource = turnos;
                     lbxTurnos.DisplayMember = "Value";
                     lbxTurnos.SelectedIndex = 0;
                     lbxTurnos.Enabled = true;
-
                 }
                 else
                 {
@@ -238,7 +282,6 @@ namespace clinica
                     lbxTurnos.Items.Add("No hay turnos disponibles con los criterios seleccionados.");
                     lbxTurnos.Enabled = false;
                 }
-
             }
             catch (Exception ex)
             {
@@ -390,9 +433,16 @@ namespace clinica
             {
                 int idTurno = ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key;
 
-                if (ObtenerTurno(idTurno) != null)
+                Turno? turnoSeleccionado = ObtenerTurno(idTurno);
+                if (turnoSeleccionado != null)
                 {
-                    Turno turnoSeleccionado = ObtenerTurno(idTurno)!;
+                    if (!VerificarDisponibilidadProfesional((int)turnoSeleccionado.Estudio_id!, (int)turnoSeleccionado.Paciente_id, (DateTime)turnoSeleccionado.Fecha, (TimeSpan)turnoSeleccionado.Hora))
+                    {
+                        MessageBox.Show("El profesional no puede atender al paciente en este horario. Por favor, seleccione otro turno.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        CargarTurnos((int)turnoSeleccionado.Paciente_id, (int)turnoSeleccionado.Estudio_id!);
+                        return;
+                    }
+
                     cbxProfesionales.SelectedIndex = encontrarCbxIndex((int)turnoSeleccionado.Estudio_id!, cbxProfesionales);
                     cbxLugar.SelectedIndex = encontrarCbxIndex(turnoSeleccionado.LugarDeAtencion_id, cbxLugar);
                 }

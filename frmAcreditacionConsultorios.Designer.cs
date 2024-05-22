@@ -147,7 +147,7 @@ namespace clinica
             lblEstudio.Name = "lblEstudio";
             lblEstudio.Size = new Size(98, 15);
             lblEstudio.TabIndex = 44;
-            lblEstudio.Text = "Profesional";
+            lblEstudio.Text = "Seleccione Profesional";
             // 
             // cbxProfesionales
             // 
