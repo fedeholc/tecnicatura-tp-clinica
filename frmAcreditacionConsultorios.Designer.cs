@@ -1,4 +1,5 @@
-﻿namespace clinica
+﻿
+namespace clinica
 {
     partial class frmAcreditacionConsultorios
     {
@@ -146,7 +147,7 @@
             lblEstudio.Name = "lblEstudio";
             lblEstudio.Size = new Size(98, 15);
             lblEstudio.TabIndex = 44;
-            lblEstudio.Text = "Estudio a realizar";
+            lblEstudio.Text = "Profesional";
             // 
             // cbxProfesionales
             // 
@@ -348,7 +349,7 @@
             groupBox1.Size = new Size(528, 100);
             groupBox1.TabIndex = 60;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Cobro del estudio";
+            groupBox1.Text = "Cobro de la atención";
             // 
             // label2
             // 
@@ -467,6 +468,11 @@
             pnlAcreditacion.ResumeLayout(false);
             pnlAcreditacion.PerformLayout();
             ResumeLayout(false);
+        }
+
+        private void frmAcreditacion_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
