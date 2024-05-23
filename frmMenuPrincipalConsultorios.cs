@@ -20,7 +20,7 @@ namespace clinica
 
 
 
-        
+
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
@@ -56,5 +56,13 @@ namespace clinica
             turnosConsultorios.Show();
             this.Hide();
         }
+
+        private void btnAcreditacion_Click(object sender, EventArgs e)
+        {
+            frmAcreditacionConsultorios acreditacionConsultorios = new (this);
+            acreditacionConsultorios.Show();
+            this.Hide();
+        }
+
     }
 }
