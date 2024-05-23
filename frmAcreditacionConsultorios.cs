@@ -41,16 +41,6 @@ namespace clinica
         private void frmAcreditacionConsultorios_Load(object sender, EventArgs e)
         {
             cbxPaciente.SelectedIndex = -1;
-
-            rbtEfectivo.Enabled = false;
-            rbtTarjeta.Enabled = false;
-            rbtAdeudado.Enabled = false;
-            rbtPagado.Enabled = false;
-            lblCoberturaPaciente.Enabled = false;
-            lblMonto.Enabled = false;
-            lblMedioPago.Enabled = false;
-            lblRegistroPago.Enabled = false;
-
             CargarPacientes();
             CargarListaProfesionales();
             CargarTurnos(0, 0);
@@ -117,6 +107,37 @@ namespace clinica
                 {
                     sqlCon.Close();
                 }
+            }
+        }
+        public class ProfesionalesManager
+        {
+            public static DataTable ObtenerProfesionalesPorEspecialidad(string especialidad)
+            {
+                DataTable dataTable = new DataTable();
+                MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+
+                try
+                {
+                    string query = "SELECT * FROM profesional WHERE Especialidad LIKE @esp";
+                    MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                    comando.Parameters.AddWithValue("@esp", "%" + especialidad + "%");
+
+                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(comando);
+                    dataAdapter.Fill(dataTable);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al obtener profesionales: " + ex.Message);
+                }
+                finally
+                {
+                    if (sqlCon.State == ConnectionState.Open)
+                    {
+                        sqlCon.Close();
+                    }
+                }
+
+                return dataTable;
             }
         }
 
@@ -360,63 +381,6 @@ namespace clinica
             }
         }
 
-        private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxPaciente.SelectedIndex != -1)
-            {
-                lblCoberturaPaciente.Text = Clinica.Clinica.ObtenerCobertura(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key);
-                lblCoberturaPaciente.Enabled = true;
-            }
-            else
-            {
-                lblCoberturaPaciente.Text = "";
-            }
-        }
-
-        private void cbxProfesionales_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            rbtEfectivo.Enabled = false;
-            rbtTarjeta.Enabled = false;
-            rbtAdeudado.Enabled = false;
-            rbtPagado.Enabled = false;
-            lblMedioPago.Enabled = false;
-            lblRegistroPago.Enabled = false;
-
-            if (cbxProfesionales.SelectedIndex != -1)
-            {
-                CargarLugares(((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key);
-            }
-            if (cbxPaciente.SelectedIndex != -1 && cbxProfesionales.SelectedIndex != -1)
-            {
-                int idPaciente = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
-                int idEstudio = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
-
-                CargarTurnos(idPaciente, idEstudio);
-
-                int? monto = Clinica.Clinica.ObtenerMonto(idEstudio, idPaciente);
-
-                if (monto != null)
-                {
-                    lblMonto.Text = monto.ToString();
-                    lblMonto.Enabled = true;
-                    if (monto > 0)
-                    {
-                        rbtEfectivo.Enabled = true;
-                        rbtTarjeta.Enabled = true;
-                        rbtAdeudado.Enabled = true;
-                        rbtPagado.Enabled = true;
-                        lblMedioPago.Enabled = true;
-                        lblRegistroPago.Enabled = true;
-                    }
-                }
-                else
-                {
-                    lblMonto.Text = "Sin datos";
-                }
-
-            }
-
-        }
 
         private int encontrarCbxIndex(int id, ComboBox cbx)
         {
@@ -477,147 +441,19 @@ namespace clinica
                 MessageBox.Show("Debe seleccionar un lugar de atención", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            // guardar datos de pago en factura
-            int rtaFactura;
-            Factura factura = new();
-            factura.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
-            factura.Estudio_id = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
-            factura.Cobertura_id = (int)Clinica.Clinica.ObtenerCoberturaId(factura.Paciente_id)!;
-            float monto;
-            if (float.TryParse(lblMonto.Text, out monto))
-            {
-                factura.Monto = monto;
-
-                if (factura.Monto > 0)
-                {
-                    if (!rbtAdeudado.Checked && !rbtPagado.Checked)
-                    {
-                        MessageBox.Show("Debe seleccionar si se realizó el pago o " +
-                            "si se registrará como adeudado", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    if (rbtPagado.Checked && !rbtEfectivo.Checked && !rbtTarjeta.Checked)
-                    {
-                        MessageBox.Show("Debe seleccionar el medio de pago", "AVISO DEL SISTEMA", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    if (rbtEfectivo.Checked)
-                    {
-                        factura.MetodoPago = (int)MetodoPago.Efectivo;
-                    }
-                    else if (rbtTarjeta.Checked)
-                    {
-                        factura.MetodoPago = (int)MetodoPago.Tarjeta;
-                    }
-                    else
-                    {
-                        factura.MetodoPago = (int)MetodoPago.SinPago;
-                    }
-                    if (rbtPagado.Checked)
-                    {
-                        factura.FacturaStatus = (int)FacturaStatus.Pagada;
-                    }
-                    else if (rbtAdeudado.Checked)
-                    {
-                        factura.FacturaStatus = (int)FacturaStatus.Adeudada;
-                    }
-                    else
-                    {
-                        factura.FacturaStatus = (int)FacturaStatus.SinPago;
-                    }
-                }
-                else if (factura.Monto <= 0)
-                {
-                    factura.MetodoPago = (int)MetodoPago.SinPago;
-                    factura.FacturaStatus = (int)FacturaStatus.SinPago;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Falta el dato del monto de la atención. Avise al administrador del sistema",
-                    "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            rtaFactura = Clinica.Clinica.RegistrarFactura(factura);
-
-            if (rtaFactura == 0)
-            {
-                MessageBox.Show("Error al registrar la factura", "AVISO DEL SISTEMA",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            DeshabilitarCampos();
-
-            // acreditar para sala de espera
-            int rtaSaladeEspera;
-            SalaDeEspera salaDeEspera = new();
-            salaDeEspera.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
-            salaDeEspera.Estudio_id = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
-            salaDeEspera.LugarDeAtencion_id = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
-            salaDeEspera.FechaHoraAcreditacion = DateTime.Now;
-            salaDeEspera.Prioridad = rbtUrgencia.Checked ? (int)Prioridad.Urgencia : (int)Prioridad.Normal;
-
-            rtaSaladeEspera = Clinica.Clinica.RegistrarSalaDeEspera(salaDeEspera);
-            if (rtaSaladeEspera == 0)
-            {
-                MessageBox.Show("Error al acreditar al paciente.", "AVISO DEL SISTEMA",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                MessageBox.Show("Acreditación del paciente exitosa.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            var formsSalas = Application.OpenForms.OfType<frmSalaDeEspera>().ToList();
-
-            // Recorrer las instancias abiertas del form y actualizar datos
-            foreach (var form in formsSalas)
-            {
-                form.CargarSalas();
-            }
         }
 
-        private void DeshabilitarCampos()
-        {
-            cbxPaciente.Enabled = false;
-            cbxProfesionales.Enabled = false;
-            cbxLugar.Enabled = false;
-            lbxTurnos.Enabled = false;
-            rbtEfectivo.Enabled = false;
-            rbtTarjeta.Enabled = false;
-            rbtAdeudado.Enabled = false;
-            rbtPagado.Enabled = false;
-            lblCoberturaPaciente.Enabled = false;
-            lblMonto.Enabled = false;
-            lblMedioPago.Enabled = false;
-            lblRegistroPago.Enabled = false;
-            rbtNormal.Enabled = false;
-            rbtUrgencia.Enabled = false;
-            lbxTurnos.Enabled = false;
-            btnAcreditar.Enabled = false;
-        }
-        private void HabilitarCampos()
+        private void HabilitarCampos1()
         {
             cbxPaciente.Enabled = true;
             cbxProfesionales.Enabled = true;
             cbxLugar.Enabled = true;
             lbxTurnos.Enabled = true;
-            rbtEfectivo.Enabled = true;
-            rbtTarjeta.Enabled = true;
-            rbtAdeudado.Enabled = true;
-            rbtPagado.Enabled = true;
-            lblCoberturaPaciente.Enabled = true;
-            lblMonto.Enabled = true;
-            lblMedioPago.Enabled = true;
-            lblRegistroPago.Enabled = true;
             rbtNormal.Enabled = true;
             rbtUrgencia.Enabled = true;
             lbxTurnos.Enabled = true;
             btnAcreditar.Enabled = true;
-            
+
         }
 
         private void NuevaAcreditacion_Click(object sender, EventArgs e)
@@ -627,25 +463,30 @@ namespace clinica
             cbxProfesionales.SelectedIndex = -1;
             cbxLugar.SelectedIndex = -1;
             lbxTurnos.SelectedIndex = -1;
-            rbtEfectivo.Checked = false;
-            rbtTarjeta.Checked = false;
-            rbtAdeudado.Checked = false;
-            rbtPagado.Checked = false;
-            lblCoberturaPaciente.Text = "";
-            lblMonto.Text = "";
             lbxTurnos.DataSource = null;
-            
-            rbtAdeudado.Enabled = false;
-            rbtPagado.Enabled = false;
-            rbtTarjeta.Enabled = false;
-            rbtEfectivo.Enabled = false;
-
             rbtNormal.Checked = true;
 
         }
+
+        private void HabilitarCampos()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeshabilitarCampos()
+        {
+            cbxPaciente.Enabled = false;
+            cbxProfesionales.Enabled = false;
+            cbxLugar.Enabled = false;
+            lbxTurnos.Enabled = false;
+            rbtNormal.Enabled = false;
+            rbtUrgencia.Enabled = false;
+            lbxTurnos.Enabled = false;
+            btnAcreditar.Enabled = false;
+        }
+
+
+
+
     }
-
-
-
-
 }
