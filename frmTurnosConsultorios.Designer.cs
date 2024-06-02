@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTurnosConsultorios));
             pnlTurnos = new Panel();
+            cbxPacientes = new ComboBox();
             txtProfesional = new TextBox();
             lblProfesional = new Label();
             cbxEspecialidad = new ComboBox();
@@ -41,13 +42,12 @@
             btnCancelar = new Button();
             btnRegistrarPaciente = new Button();
             label3 = new Label();
-            cbxPaciente = new ComboBox();
             grbMostrarTurnos = new GroupBox();
             rbtOcupados = new RadioButton();
             rbtDisponibles = new RadioButton();
             label2 = new Label();
             label1 = new Label();
-            lbxTurnos = new ListBox();
+            lbxAgendaTurnos = new ListBox();
             lblFechaHasta = new Label();
             lblFechaDesde = new Label();
             dtpFechaHasta = new DateTimePicker();
@@ -64,6 +64,7 @@
             // 
             pnlTurnos.BackgroundImage = (Image)resources.GetObject("pnlTurnos.BackgroundImage");
             pnlTurnos.BorderStyle = BorderStyle.FixedSingle;
+            pnlTurnos.Controls.Add(cbxPacientes);
             pnlTurnos.Controls.Add(txtProfesional);
             pnlTurnos.Controls.Add(lblProfesional);
             pnlTurnos.Controls.Add(cbxEspecialidad);
@@ -75,11 +76,10 @@
             pnlTurnos.Controls.Add(btnCancelar);
             pnlTurnos.Controls.Add(btnRegistrarPaciente);
             pnlTurnos.Controls.Add(label3);
-            pnlTurnos.Controls.Add(cbxPaciente);
             pnlTurnos.Controls.Add(grbMostrarTurnos);
             pnlTurnos.Controls.Add(label2);
             pnlTurnos.Controls.Add(label1);
-            pnlTurnos.Controls.Add(lbxTurnos);
+            pnlTurnos.Controls.Add(lbxAgendaTurnos);
             pnlTurnos.Controls.Add(lblFechaHasta);
             pnlTurnos.Controls.Add(lblFechaDesde);
             pnlTurnos.Controls.Add(dtpFechaHasta);
@@ -94,12 +94,21 @@
             pnlTurnos.TabIndex = 38;
             pnlTurnos.Paint += pnlTurnos_Paint;
             // 
+            // cbxPacientes
+            // 
+            cbxPacientes.FormattingEnabled = true;
+            cbxPacientes.Location = new Point(215, 508);
+            cbxPacientes.Name = "cbxPacientes";
+            cbxPacientes.Size = new Size(242, 40);
+            cbxPacientes.TabIndex = 84;
+            // 
             // txtProfesional
             // 
             txtProfesional.Location = new Point(528, 122);
             txtProfesional.Name = "txtProfesional";
             txtProfesional.Size = new Size(276, 39);
             txtProfesional.TabIndex = 83;
+            txtProfesional.TextChanged += txtProfesional_TextChanged;
             // 
             // lblProfesional
             // 
@@ -140,7 +149,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label5.Location = new Point(878, 140);
+            label5.Location = new Point(835, 87);
             label5.Name = "label5";
             label5.Size = new Size(193, 32);
             label5.TabIndex = 34;
@@ -218,17 +227,6 @@
             label3.TabIndex = 29;
             label3.Text = "Seleccionar paciente para asignar turno";
             // 
-            // cbxPaciente
-            // 
-            cbxPaciente.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxPaciente.FormattingEnabled = true;
-            cbxPaciente.Location = new Point(216, 522);
-            cbxPaciente.Margin = new Padding(3, 4, 3, 4);
-            cbxPaciente.Name = "cbxPaciente";
-            cbxPaciente.Size = new Size(286, 40);
-            cbxPaciente.TabIndex = 28;
-            cbxPaciente.SelectedIndexChanged += cbxPaciente_SelectedIndexChanged;
-            // 
             // grbMostrarTurnos
             // 
             grbMostrarTurnos.BackColor = Color.Transparent;
@@ -291,15 +289,15 @@
             label1.TabIndex = 12;
             label1.Text = "Hora desde";
             // 
-            // lbxTurnos
+            // lbxAgendaTurnos
             // 
-            lbxTurnos.FormattingEnabled = true;
-            lbxTurnos.Location = new Point(878, 166);
-            lbxTurnos.Margin = new Padding(3, 4, 3, 4);
-            lbxTurnos.Name = "lbxTurnos";
-            lbxTurnos.Size = new Size(387, 324);
-            lbxTurnos.TabIndex = 11;
-            lbxTurnos.SelectedIndexChanged += lbxTurnos_SelectedIndexChanged;
+            lbxAgendaTurnos.FormattingEnabled = true;
+            lbxAgendaTurnos.Location = new Point(819, 122);
+            lbxAgendaTurnos.Margin = new Padding(3, 4, 3, 4);
+            lbxAgendaTurnos.Name = "lbxAgendaTurnos";
+            lbxAgendaTurnos.Size = new Size(544, 388);
+            lbxAgendaTurnos.TabIndex = 11;
+            lbxAgendaTurnos.SelectedIndexChanged += lbxTurnos_SelectedIndexChanged;
             // 
             // lblFechaHasta
             // 
@@ -413,13 +411,12 @@
         private Button btnCancelar;
         private Button btnRegistrarPaciente;
         private Label label3;
-        private ComboBox cbxPaciente;
         private GroupBox grbMostrarTurnos;
         private RadioButton rbtOcupados;
         private RadioButton rbtDisponibles;
         private Label label2;
         private Label label1;
-        private ListBox lbxTurnos;
+        private ListBox lbxAgendaTurnos;
         private Label lblFechaHasta;
         private Label lblFechaDesde;
         private DateTimePicker dtpFechaHasta;
@@ -431,5 +428,6 @@
         private ComboBox cbxEspecialidad;
         private Label lblProfesional;
         private TextBox txtProfesional;
+        private ComboBox cbxPacientes;
     }
 }

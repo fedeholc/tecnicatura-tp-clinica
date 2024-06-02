@@ -168,6 +168,7 @@ namespace clinica
             lbxTurnos.Name = "lbxTurnos";
             lbxTurnos.Size = new Size(615, 394);
             lbxTurnos.TabIndex = 11;
+            lbxTurnos.SelectedIndexChanged += lbxTurnos_SelectedIndexChanged;
             // 
             // label1
             // 
