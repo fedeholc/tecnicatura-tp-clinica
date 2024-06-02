@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lblTituloA = new Label();
             label1 = new Label();
             label2 = new Label();
@@ -105,6 +105,8 @@
             // 
             // dtgvProfesionales
             // 
+            dtgvProfesionales.AllowUserToAddRows = false;
+            dtgvProfesionales.AllowUserToDeleteRows = false;
             dtgvProfesionales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dtgvProfesionales.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dtgvProfesionales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -112,9 +114,11 @@
             dtgvProfesionales.Location = new Point(74, 460);
             dtgvProfesionales.Margin = new Padding(4, 2, 4, 2);
             dtgvProfesionales.Name = "dtgvProfesionales";
+            dtgvProfesionales.ReadOnly = true;
             dtgvProfesionales.RowHeadersWidth = 82;
             dtgvProfesionales.Size = new Size(778, 194);
             dtgvProfesionales.TabIndex = 81;
+          
             dtgvProfesionales.CellContentClick += dtgvProfesionales_CellContentClick;
             dtgvProfesionales.SelectionChanged += dtgvProfesionales_SelectionChanged;
             // 
@@ -123,6 +127,7 @@
             nroMatricula.HeaderText = "Nro. Matricula";
             nroMatricula.MinimumWidth = 10;
             nroMatricula.Name = "nroMatricula";
+            nroMatricula.ReadOnly = true;
             nroMatricula.Width = 210;
             // 
             // nombreProfesional
@@ -130,6 +135,7 @@
             nombreProfesional.HeaderText = "Nombre";
             nombreProfesional.MinimumWidth = 10;
             nombreProfesional.Name = "nombreProfesional";
+            nombreProfesional.ReadOnly = true;
             nombreProfesional.Width = 147;
             // 
             // apellidoProfesional
@@ -137,16 +143,18 @@
             apellidoProfesional.HeaderText = "Apellido";
             apellidoProfesional.MinimumWidth = 10;
             apellidoProfesional.Name = "apellidoProfesional";
+            apellidoProfesional.ReadOnly = true;
             apellidoProfesional.Width = 147;
             // 
             // especialidad
             // 
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            especialidad.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            especialidad.DefaultCellStyle = dataGridViewCellStyle2;
             especialidad.HeaderText = "Especialidad";
             especialidad.MinimumWidth = 10;
             especialidad.Name = "especialidad";
+            especialidad.ReadOnly = true;
             especialidad.Width = 189;
             // 
             // txtEspecialidad
@@ -155,6 +163,7 @@
             txtEspecialidad.Name = "txtEspecialidad";
             txtEspecialidad.Size = new Size(276, 39);
             txtEspecialidad.TabIndex = 82;
+            txtEspecialidad.TextChanged += txtEspecialidad_TextChanged;
             // 
             // frmListadoProfesionales
             // 

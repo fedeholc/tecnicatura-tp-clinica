@@ -1,4 +1,6 @@
-﻿using Clinica;
+﻿using clinica.Entidades;
+using Clinica;
+using Clinica.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using System.IO.Packaging;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace clinica
 {
@@ -59,10 +65,38 @@ namespace clinica
 
         private void btnAcreditacion_Click(object sender, EventArgs e)
         {
-            frmAcreditacionConsultorios acreditacionConsultorios = new (this);
+            frmAcreditacionConsultorios acreditacionConsultorios = new(this);
             acreditacionConsultorios.Show();
             this.Hide();
         }
 
+      
+            public void CrearTurno(int pacienteId, int profesionalId, DateTime fechaHora)
+            {
+                using (var context = new ClinicaContext())
+                {
+                    var turno = new AgendaTurnos
+                    {
+                        PacienteId = pacienteId,
+                        ProfesionalId = profesionalId,
+                        FechaHora = fechaHora
+                    };
+
+                    context.AgendaTurnos.Add(turno);
+                    context.SaveChanges();
+                }
+            }
+
+        /*public List<Turno> ListarTurnos()
+        {
+            using (var context = new ClinicaContext())
+            {
+                return context.AgendaTurnos
+                    .Include(at => at.Paciente)
+                    .Include(at => at.Profesional)
+                    .ToList();
+            }
+        }*/
     }
-}
+    }
+
