@@ -1,4 +1,5 @@
-﻿namespace clinica
+﻿
+namespace clinica
 {
     partial class frmSalaDeEsperaConsultorios
     {
@@ -206,4 +207,3 @@
         private ListView listView1;
     }
 }
-

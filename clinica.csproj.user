@@ -35,6 +35,9 @@
     <Compile Update="frmSalaDeEspera.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmSalaDeEsperaConsultorios.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmTurnos.cs">
       <SubType>Form</SubType>
     </Compile>
