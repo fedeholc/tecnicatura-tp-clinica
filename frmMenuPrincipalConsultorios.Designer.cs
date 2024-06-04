@@ -55,7 +55,7 @@
             pnlPanelPrincipal.Controls.Add(btnTurnos);
             pnlPanelPrincipal.Controls.Add(btnInscripciones);
             pnlPanelPrincipal.Location = new Point(84, 95);
-            pnlPanelPrincipal.Margin = new Padding(4, 4, 4, 4);
+            pnlPanelPrincipal.Margin = new Padding(4);
             pnlPanelPrincipal.Name = "pnlPanelPrincipal";
             pnlPanelPrincipal.Size = new Size(654, 453);
             pnlPanelPrincipal.TabIndex = 8;
@@ -66,7 +66,7 @@
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnVolver.Location = new Point(558, 414);
-            btnVolver.Margin = new Padding(4, 4, 4, 4);
+            btnVolver.Margin = new Padding(4);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(84, 38);
             btnVolver.TabIndex = 11;
@@ -81,12 +81,13 @@
             btnAtencion.FlatStyle = FlatStyle.Flat;
             btnAtencion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnAtencion.Location = new Point(460, 327);
-            btnAtencion.Margin = new Padding(4, 4, 4, 4);
+            btnAtencion.Margin = new Padding(4);
             btnAtencion.Name = "btnAtencion";
             btnAtencion.Size = new Size(126, 40);
             btnAtencion.TabIndex = 10;
             btnAtencion.Text = "Atención";
             btnAtencion.UseVisualStyleBackColor = true;
+            btnAtencion.Click += btnAtencion_Click;
             // 
             // btnSalir
             // 
@@ -94,7 +95,7 @@
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnSalir.Location = new Point(580, 4);
-            btnSalir.Margin = new Padding(4, 4, 4, 4);
+            btnSalir.Margin = new Padding(4);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(68, 38);
             btnSalir.TabIndex = 1;
@@ -109,12 +110,13 @@
             btnSalaDeEspera.FlatStyle = FlatStyle.Flat;
             btnSalaDeEspera.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnSalaDeEspera.Location = new Point(258, 387);
-            btnSalaDeEspera.Margin = new Padding(4, 4, 4, 4);
+            btnSalaDeEspera.Margin = new Padding(4);
             btnSalaDeEspera.Name = "btnSalaDeEspera";
             btnSalaDeEspera.Size = new Size(137, 40);
             btnSalaDeEspera.TabIndex = 9;
             btnSalaDeEspera.Text = "Sala de Espera";
             btnSalaDeEspera.UseVisualStyleBackColor = true;
+            btnSalaDeEspera.Click += btnSalaDeEspera_Click;
             // 
             // btnAcreditacion
             // 
@@ -123,7 +125,7 @@
             btnAcreditacion.FlatStyle = FlatStyle.Flat;
             btnAcreditacion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnAcreditacion.Location = new Point(328, 327);
-            btnAcreditacion.Margin = new Padding(4, 4, 4, 4);
+            btnAcreditacion.Margin = new Padding(4);
             btnAcreditacion.Name = "btnAcreditacion";
             btnAcreditacion.Size = new Size(126, 40);
             btnAcreditacion.TabIndex = 8;
@@ -138,7 +140,7 @@
             btnTurnos.FlatStyle = FlatStyle.Flat;
             btnTurnos.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnTurnos.Location = new Point(63, 327);
-            btnTurnos.Margin = new Padding(4, 4, 4, 4);
+            btnTurnos.Margin = new Padding(4);
             btnTurnos.Name = "btnTurnos";
             btnTurnos.Size = new Size(126, 40);
             btnTurnos.TabIndex = 7;
@@ -153,7 +155,7 @@
             btnInscripciones.FlatStyle = FlatStyle.Flat;
             btnInscripciones.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             btnInscripciones.Location = new Point(196, 327);
-            btnInscripciones.Margin = new Padding(4, 4, 4, 4);
+            btnInscripciones.Margin = new Padding(4);
             btnInscripciones.Name = "btnInscripciones";
             btnInscripciones.Size = new Size(126, 40);
             btnInscripciones.TabIndex = 2;
@@ -189,7 +191,7 @@
             Controls.Add(lblConsultoriosExternos);
             Controls.Add(pnlPanelPrincipal);
             Controls.Add(lblIngreso);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "frmMenuPrincipalConsultorios";
             Text = "frmMenuPrincipalConsultorios";
             pnlPanelPrincipal.ResumeLayout(false);

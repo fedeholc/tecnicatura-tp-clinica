@@ -59,9 +59,25 @@ namespace clinica
 
         private void btnAcreditacion_Click(object sender, EventArgs e)
         {
-            frmAcreditacionConsultorios acreditacionConsultorios = new (this);
+            frmAcreditacionConsultorios acreditacionConsultorios = new(this);
             acreditacionConsultorios.Show();
             this.Hide();
+        }
+
+        private void btnSalaDeEspera_Click(object sender, EventArgs e)
+        {
+            frmSalaDeEsperaConsultorios salaDeEsperaForm = new frmSalaDeEsperaConsultorios(this);
+            salaDeEsperaForm.Show();
+            this.Hide(); // Ocultar el formulario principal si es necesario
+        }
+
+        private void btnAtencion_Click(object sender, EventArgs e)
+        {
+            // Crear una instancia del formulario frmAtencionConsultorios
+            using frmAtencion frm = new(this);
+
+            // Mostrar el formulario
+            frm.ShowDialog(); // Utiliza Show() si no necesitas bloquear el formulario principal
         }
 
     }
