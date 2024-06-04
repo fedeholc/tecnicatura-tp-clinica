@@ -51,9 +51,10 @@
             pnlModulos.Controls.Add(pnlTituloT);
             pnlModulos.Controls.Add(btnSeleccionarModulo);
             pnlModulos.Controls.Add(btnSalir);
-            pnlModulos.Location = new Point(152, 53);
+            pnlModulos.Location = new Point(11, 10);
+            pnlModulos.Margin = new Padding(2, 1, 2, 1);
             pnlModulos.Name = "pnlModulos";
-            pnlModulos.Size = new Size(1281, 811);
+            pnlModulos.Size = new Size(518, 242);
             pnlModulos.TabIndex = 38;
             // 
             // grbSeleccionarModulos
@@ -62,11 +63,11 @@
             grbSeleccionarModulos.Controls.Add(rbtEstudiosClinic);
             grbSeleccionarModulos.Controls.Add(rbtConsultoriosMed);
             grbSeleccionarModulos.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            grbSeleccionarModulos.Location = new Point(211, 178);
-            grbSeleccionarModulos.Margin = new Padding(3, 4, 3, 4);
+            grbSeleccionarModulos.Location = new Point(147, 72);
+            grbSeleccionarModulos.Margin = new Padding(2, 2, 2, 2);
             grbSeleccionarModulos.Name = "grbSeleccionarModulos";
-            grbSeleccionarModulos.Padding = new Padding(3, 4, 3, 4);
-            grbSeleccionarModulos.Size = new Size(318, 268);
+            grbSeleccionarModulos.Padding = new Padding(2, 2, 2, 2);
+            grbSeleccionarModulos.Size = new Size(171, 126);
             grbSeleccionarModulos.TabIndex = 38;
             grbSeleccionarModulos.TabStop = false;
             grbSeleccionarModulos.Text = "Seleccionar Modulo";
@@ -74,10 +75,10 @@
             // rbtEstudiosClinic
             // 
             rbtEstudiosClinic.AutoSize = true;
-            rbtEstudiosClinic.Location = new Point(24, 142);
-            rbtEstudiosClinic.Margin = new Padding(3, 4, 3, 4);
+            rbtEstudiosClinic.Location = new Point(13, 67);
+            rbtEstudiosClinic.Margin = new Padding(2, 2, 2, 2);
             rbtEstudiosClinic.Name = "rbtEstudiosClinic";
-            rbtEstudiosClinic.Size = new Size(217, 36);
+            rbtEstudiosClinic.Size = new Size(112, 19);
             rbtEstudiosClinic.TabIndex = 1;
             rbtEstudiosClinic.Text = "Estudios Clínicos";
             rbtEstudiosClinic.UseVisualStyleBackColor = true;
@@ -86,10 +87,10 @@
             // 
             rbtConsultoriosMed.AutoSize = true;
             rbtConsultoriosMed.Checked = true;
-            rbtConsultoriosMed.Location = new Point(24, 50);
-            rbtConsultoriosMed.Margin = new Padding(3, 4, 3, 4);
+            rbtConsultoriosMed.Location = new Point(13, 23);
+            rbtConsultoriosMed.Margin = new Padding(2, 2, 2, 2);
             rbtConsultoriosMed.Name = "rbtConsultoriosMed";
-            rbtConsultoriosMed.Size = new Size(267, 36);
+            rbtConsultoriosMed.Size = new Size(138, 19);
             rbtConsultoriosMed.TabIndex = 0;
             rbtConsultoriosMed.TabStop = true;
             rbtConsultoriosMed.Text = "Consultorios Médicos";
@@ -100,9 +101,10 @@
             lblTituloT.AutoSize = true;
             lblTituloT.BackColor = Color.Transparent;
             lblTituloT.Font = new Font("Calibri", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTituloT.Location = new Point(211, 35);
+            lblTituloT.Location = new Point(147, 26);
+            lblTituloT.Margin = new Padding(2, 0, 2, 0);
             lblTituloT.Name = "lblTituloT";
-            lblTituloT.Size = new Size(360, 46);
+            lblTituloT.Size = new Size(179, 23);
             lblTituloT.TabIndex = 33;
             lblTituloT.Text = "Selección de Módulos";
             // 
@@ -110,10 +112,10 @@
             // 
             pnlTituloT.BorderStyle = BorderStyle.FixedSingle;
             pnlTituloT.ForeColor = SystemColors.ActiveBorder;
-            pnlTituloT.Location = new Point(211, 65);
-            pnlTituloT.Margin = new Padding(3, 4, 3, 4);
+            pnlTituloT.Location = new Point(147, 51);
+            pnlTituloT.Margin = new Padding(2, 2, 2, 2);
             pnlTituloT.Name = "pnlTituloT";
-            pnlTituloT.Size = new Size(962, 1);
+            pnlTituloT.Size = new Size(331, 2);
             pnlTituloT.TabIndex = 29;
             // 
             // btnSeleccionarModulo
@@ -121,10 +123,10 @@
             btnSeleccionarModulo.FlatAppearance.BorderColor = Color.LightGray;
             btnSeleccionarModulo.FlatStyle = FlatStyle.Flat;
             btnSeleccionarModulo.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSeleccionarModulo.Location = new Point(349, 492);
-            btnSeleccionarModulo.Margin = new Padding(3, 4, 3, 4);
+            btnSeleccionarModulo.Location = new Point(375, 166);
+            btnSeleccionarModulo.Margin = new Padding(2, 2, 2, 2);
             btnSeleccionarModulo.Name = "btnSeleccionarModulo";
-            btnSeleccionarModulo.Size = new Size(180, 55);
+            btnSeleccionarModulo.Size = new Size(103, 32);
             btnSeleccionarModulo.TabIndex = 30;
             btnSeleccionarModulo.Text = "Seleccionar";
             btnSeleccionarModulo.UseVisualStyleBackColor = true;
@@ -135,10 +137,10 @@
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSalir.Location = new Point(1084, 19);
-            btnSalir.Margin = new Padding(3, 4, 3, 4);
+            btnSalir.Location = new Point(418, 19);
+            btnSalir.Margin = new Padding(2, 2, 2, 2);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(108, 47);
+            btnSalir.Size = new Size(60, 28);
             btnSalir.TabIndex = 2;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
@@ -159,10 +161,11 @@
             // 
             // frmModulos
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1587, 889);
+            ClientSize = new Size(555, 273);
             Controls.Add(pnlModulos);
+            Margin = new Padding(2, 1, 2, 1);
             Name = "frmModulos";
             Text = "frmModulos";
             pnlModulos.ResumeLayout(false);

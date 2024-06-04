@@ -52,6 +52,7 @@
             txtDireccion = new TextBox();
             labelApellido = new Label();
             txtApellido = new TextBox();
+            btnImprimirComprobante = new Button();
             pnlRegistro.SuspendLayout();
             SuspendLayout();
             // 
@@ -141,7 +142,7 @@
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnVolver.Location = new Point(469, 462);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(65, 28);
+            btnVolver.Size = new Size(65, 30);
             btnVolver.TabIndex = 14;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
@@ -152,6 +153,7 @@
             pnlRegistro.BackgroundImage = (Image)resources.GetObject("pnlRegistro.BackgroundImage");
             pnlRegistro.BackgroundImageLayout = ImageLayout.Stretch;
             pnlRegistro.BorderStyle = BorderStyle.FixedSingle;
+            pnlRegistro.Controls.Add(btnImprimirComprobante);
             pnlRegistro.Controls.Add(btnSalir);
             pnlRegistro.Controls.Add(dtpFechaNac);
             pnlRegistro.Controls.Add(pnlTituloR);
@@ -309,6 +311,18 @@
             txtApellido.Size = new Size(209, 23);
             txtApellido.TabIndex = 16;
             // 
+            // btnImprimirComprobante
+            // 
+            btnImprimirComprobante.FlatAppearance.BorderColor = Color.LightGray;
+            btnImprimirComprobante.FlatStyle = FlatStyle.Flat;
+            btnImprimirComprobante.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnImprimirComprobante.Location = new Point(279, 462);
+            btnImprimirComprobante.Name = "btnImprimirComprobante";
+            btnImprimirComprobante.Size = new Size(184, 30);
+            btnImprimirComprobante.TabIndex = 28;
+            btnImprimirComprobante.Text = "Imprimir Comprobante";
+            btnImprimirComprobante.UseVisualStyleBackColor = true;
+            // 
             // frmRegistroPaciente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -351,5 +365,6 @@
         private Panel pnlTituloR;
         private DateTimePicker dtpFechaNac;
         private Button btnSalir;
+        private Button btnImprimirComprobante;
     }
 }

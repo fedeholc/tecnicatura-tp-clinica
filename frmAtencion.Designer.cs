@@ -42,6 +42,7 @@
             btnPacienteAusente = new Button();
             lblTituloA = new Label();
             pnlAtencion = new Panel();
+            btnImprimirComprobante = new Button();
             pnlAtencion.SuspendLayout();
             SuspendLayout();
             // 
@@ -184,6 +185,7 @@
             pnlAtencion.BackgroundImage = (Image)resources.GetObject("pnlAtencion.BackgroundImage");
             pnlAtencion.BackgroundImageLayout = ImageLayout.Center;
             pnlAtencion.BorderStyle = BorderStyle.FixedSingle;
+            pnlAtencion.Controls.Add(btnImprimirComprobante);
             pnlAtencion.Controls.Add(lblTituloA);
             pnlAtencion.Controls.Add(btnPacienteAusente);
             pnlAtencion.Controls.Add(btnRegistrarAtencion);
@@ -200,6 +202,18 @@
             pnlAtencion.Name = "pnlAtencion";
             pnlAtencion.Size = new Size(966, 631);
             pnlAtencion.TabIndex = 73;
+            // 
+            // btnImprimirComprobante
+            // 
+            btnImprimirComprobante.FlatAppearance.BorderColor = Color.LightGray;
+            btnImprimirComprobante.FlatStyle = FlatStyle.Flat;
+            btnImprimirComprobante.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnImprimirComprobante.Location = new Point(196, 550);
+            btnImprimirComprobante.Name = "btnImprimirComprobante";
+            btnImprimirComprobante.Size = new Size(184, 30);
+            btnImprimirComprobante.TabIndex = 73;
+            btnImprimirComprobante.Text = "Imprimir Comprobante";
+            btnImprimirComprobante.UseVisualStyleBackColor = true;
             // 
             // frmAtencion
             // 
@@ -231,5 +245,6 @@
         private Button btnPacienteAusente;
         private Label lblTituloA;
         private Panel pnlAtencion;
+        private Button btnImprimirComprobante;
     }
 }

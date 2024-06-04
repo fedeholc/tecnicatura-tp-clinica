@@ -601,6 +601,11 @@ namespace clinica
         {
 
         }
+
+        private void lblMonto_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
