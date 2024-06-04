@@ -1,4 +1,5 @@
-﻿namespace clinica
+﻿
+namespace clinica
 {
     partial class frmMenuPrincipalConsultorios
     {
@@ -87,6 +88,7 @@
             btnAtencion.TabIndex = 10;
             btnAtencion.Text = "Atención";
             btnAtencion.UseVisualStyleBackColor = true;
+            btnAtencion.Click += btnAtencion_Click;
             // 
             // btnSalir
             // 
@@ -115,6 +117,7 @@
             btnSalaDeEspera.TabIndex = 9;
             btnSalaDeEspera.Text = "Sala de Espera";
             btnSalaDeEspera.UseVisualStyleBackColor = true;
+            btnSalaDeEspera.Click += btnSalaDeEspera_Click;
             // 
             // btnAcreditacion
             // 
@@ -195,6 +198,16 @@
             pnlPanelPrincipal.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void btnSalaDeEspera_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnAtencion_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
