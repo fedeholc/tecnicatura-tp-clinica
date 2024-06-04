@@ -1,4 +1,6 @@
-﻿using Clinica;
+﻿using clinica.Entidades;
+using Clinica;
+using Clinica.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using System.IO.Packaging;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace clinica
 {
@@ -64,21 +70,33 @@ namespace clinica
             this.Hide();
         }
 
-        private void btnSalaDeEspera_Click(object sender, EventArgs e)
+      
+            public void CrearTurno(int pacienteId, int profesionalId, DateTime fechaHora)
+            {
+                using (var context = new ClinicaContext())
+                {
+                    var turno = new AgendaTurnos
+                    {
+                        PacienteId = pacienteId,
+                        ProfesionalId = profesionalId,
+                        FechaHora = fechaHora
+                    };
+
+                    context.AgendaTurnos.Add(turno);
+                    context.SaveChanges();
+                }
+            }
+
+        /*public List<Turno> ListarTurnos()
         {
-            frmSalaDeEsperaConsultorios salaDeEsperaForm = new frmSalaDeEsperaConsultorios(this);
-            salaDeEsperaForm.Show();
-            this.Hide(); // Ocultar el formulario principal si es necesario
-        }
-
-        private void btnAtencion_Click(object sender, EventArgs e)
-        {
-            // Crear una instancia del formulario frmAtencionConsultorios
-            using frmAtencion frm = new(this);
-
-            // Mostrar el formulario
-            frm.ShowDialog(); // Utiliza Show() si no necesitas bloquear el formulario principal
-        }
-
+            using (var context = new ClinicaContext())
+            {
+                return context.AgendaTurnos
+                    .Include(at => at.Paciente)
+                    .Include(at => at.Profesional)
+                    .ToList();
+            }
+        }*/
     }
-}
+    }
+

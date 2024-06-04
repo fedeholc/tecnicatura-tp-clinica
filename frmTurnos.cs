@@ -448,5 +448,10 @@ namespace clinica
         {
 
         }
+
+        private void lbxTurnos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

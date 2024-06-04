@@ -13,7 +13,9 @@ using System.Windows.Forms;
 namespace clinica
 {
     public partial class frmListadoProfesionales : Form
+        
     {
+        frmTurnosConsultorios Frm01;
         private string esp;
         private frmTurnosConsultorios turnos;
 
@@ -40,7 +42,7 @@ namespace clinica
 
         private void dtgvProfesionales_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void frmListadoProfesionales_Load(object sender, EventArgs e)
@@ -105,13 +107,15 @@ namespace clinica
 
         private void dtgvProfesionales_SelectionChanged(object sender, EventArgs e)
         {
-            if(dtgvProfesionales.SelectedRows.Count > 0) 
+            if (dtgvProfesionales.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = dtgvProfesionales.SelectedRows[0];
                 try
                 {
-                    string valor = (row.Cells[1].Value.ToString()) + " " + (row.Cells[2].Value.ToString());
-                    turnos.SetTextBoxValue(valor);
+                    string valor = (row.Cells[1].Value.ToString()) + " " + (row.Cells[2].Value.ToString()); 
+                    string especialidad = (row.Cells[3].Value.ToString()); 
+                    turnos.SetTextBoxValue(valor);// Defino el valor a mostrar en el TextBox Profesional
+                    turnos.SetComboBoxValue(especialidad);// Defino el valor a mostrar en el ComboBox Especialidad
                     this.Close();
                     turnos.Show();
                 }
@@ -120,11 +124,18 @@ namespace clinica
                 {
                     MessageBox.Show("Error al obtener el valor de la celda: " + ex.Message);
                 }
-                
+
 
             }
 
 
         }
+
+        private void txtEspecialidad_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
