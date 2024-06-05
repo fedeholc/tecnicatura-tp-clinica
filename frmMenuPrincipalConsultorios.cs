@@ -56,7 +56,7 @@ namespace clinica
 
         private void btnAtencion_Click(object sender, EventArgs e)
         {
-            frmAtencion acreditacionConsultorios = new frmAtencion(this);
+            frmAtencionConsultorios acreditacionConsultorios = new frmAtencionConsultorios(this);
             acreditacionConsultorios.Show();
             this.Hide();
         }

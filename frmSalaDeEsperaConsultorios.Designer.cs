@@ -38,9 +38,9 @@ namespace clinica
             label1 = new Label();
             label2 = new Label();
             panel1 = new Panel();
-            lblTituloSDE = new Label();
-            listView1 = new ListView();
             label3 = new Label();
+            listView1 = new ListView();
+            lblTituloSDE = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -108,9 +108,9 @@ namespace clinica
             label1.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.Location = new Point(198, 92);
             label1.Name = "label1";
-            label1.Size = new Size(168, 24);
+            label1.Size = new Size(114, 24);
             label1.TabIndex = 69;
-            label1.Text = "Estudios con turno";
+            label1.Text = "Kinesiológia\r\n";
             label1.Click += label1_Click;
             // 
             // label2
@@ -120,9 +120,9 @@ namespace clinica
             label2.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label2.Location = new Point(198, 255);
             label2.Name = "label2";
-            label2.Size = new Size(162, 24);
+            label2.Size = new Size(123, 24);
             label2.TabIndex = 70;
-            label2.Text = "Estudios sin turno";
+            label2.Text = "Salud Mental";
             // 
             // panel1
             // 
@@ -145,16 +145,16 @@ namespace clinica
             panel1.Size = new Size(1471, 863);
             panel1.TabIndex = 71;
             // 
-            // lblTituloSDE
+            // label3
             // 
-            lblTituloSDE.AutoSize = true;
-            lblTituloSDE.BackColor = Color.Transparent;
-            lblTituloSDE.Font = new Font("Calibri", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTituloSDE.Location = new Point(198, 47);
-            lblTituloSDE.Name = "lblTituloSDE";
-            lblTituloSDE.Size = new Size(284, 29);
-            lblTituloSDE.TabIndex = 71;
-            lblTituloSDE.Text = "Sala de espera consultorios";
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label3.Location = new Point(195, 440);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 24);
+            label3.TabIndex = 73;
+            label3.Text = "Otros";
             // 
             // listView1
             // 
@@ -165,16 +165,16 @@ namespace clinica
             listView1.TabIndex = 72;
             listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // label3
+            // lblTituloSDE
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.Location = new Point(195, 440);
-            label3.Name = "label3";
-            label3.Size = new Size(162, 24);
-            label3.TabIndex = 73;
-            label3.Text = "Estudios sin turno";
+            lblTituloSDE.AutoSize = true;
+            lblTituloSDE.BackColor = Color.Transparent;
+            lblTituloSDE.Font = new Font("Calibri", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblTituloSDE.Location = new Point(198, 47);
+            lblTituloSDE.Name = "lblTituloSDE";
+            lblTituloSDE.Size = new Size(284, 29);
+            lblTituloSDE.TabIndex = 71;
+            lblTituloSDE.Text = "Sala de espera consultorios";
             // 
             // frmSalaDeEsperaConsultorios
             // 
