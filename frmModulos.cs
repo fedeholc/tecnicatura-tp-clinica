@@ -18,31 +18,28 @@ namespace clinica
         public frmModulos()
         {
             InitializeComponent();
-
         }
         internal string? rol;
         internal string? usuario;
 
-        private void btnSeleccionarModulo_Click(object sender, EventArgs e)
+        private void btnIngresarModulo_Click(object sender, EventArgs e)
         {
             if (rbtEstudiosClinic.Checked)
             {
-                MessageBox.Show("Ha seleccionado Estudios Clìnicos");
+                MessageBox.Show("Ha seleccionado Estudios Clínicos", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmMenuPrincipal Principal = new frmMenuPrincipal();
                 Principal.rol = rol;
                 Principal.usuario = usuario;
                 Principal.Show();
                 this.Hide();
-
             }
             else
             {
-                MessageBox.Show("Ha seleccionado Consultorios Medicos");
+                MessageBox.Show("Ha seleccionado Consultorios Médicos", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmMenuPrincipalConsultorios PrincipalConsultorios = new frmMenuPrincipalConsultorios();
                 PrincipalConsultorios.Show();
                 this.Hide();
             }
-
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
