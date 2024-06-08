@@ -101,6 +101,8 @@ namespace clinica
                             Principal.rol = Convert.ToString(reader.GetString(1));
                             Principal.usuario = cbxUsuarios.Text;*/
                             frmModulos Modulos = new frmModulos();
+                            Modulos.rol = Convert.ToString(reader.GetString(1));
+                            Modulos.usuario = cbxUsuarios.Text;
                             Modulos.Show();
                             this.Hide();
                         }

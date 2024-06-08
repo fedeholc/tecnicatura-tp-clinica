@@ -20,6 +20,8 @@ namespace clinica
             InitializeComponent();
 
         }
+        internal string? rol;
+        internal string? usuario;
 
         private void btnSeleccionarModulo_Click(object sender, EventArgs e)
         {
@@ -27,6 +29,8 @@ namespace clinica
             {
                 MessageBox.Show("Ha seleccionado Estudios Clìnicos");
                 frmMenuPrincipal Principal = new frmMenuPrincipal();
+                Principal.rol = rol;
+                Principal.usuario = usuario;
                 Principal.Show();
                 this.Hide();
 
