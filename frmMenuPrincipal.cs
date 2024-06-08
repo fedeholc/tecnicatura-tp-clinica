@@ -18,12 +18,13 @@ namespace Clinica
         {
             InitializeComponent();
         }
+
         internal string? rol;
         internal string? usuario;
+
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            lblIngreso.Text = "USUARIO: " + usuario + " " + "(" + rol +
-            ")";
+            lblIngreso.Text = "Usuario: " + usuario + " " + "(" + rol + ")";
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -31,12 +32,9 @@ namespace Clinica
             Application.Exit();
         }
 
-
-
         private void btnInscripciones_Click(object sender, EventArgs e)
         {
             frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
-
             Inscripcion.Show();
             this.Hide();
         }
@@ -44,19 +42,13 @@ namespace Clinica
         private void btnTurnos_Click(object sender, EventArgs e)
         {
             frmTurnos Turnos = new(this);
-
             Turnos.Show();
             this.Hide();
         }
 
-
-
-
-
         private void btnAcreditacion_Click(object sender, EventArgs e)
         {
             frmAcreditacion Acreditacion = new(this);
-
             Acreditacion.Show();
             this.Hide();
         }
@@ -65,7 +57,7 @@ namespace Clinica
         {
             frmSalaDeEspera SalaDeEspera = new(this);
             SalaDeEspera.Show();
-
+            this.Hide();
         }
 
         private void btnAtencion_Click(object sender, EventArgs e)
@@ -73,12 +65,6 @@ namespace Clinica
             frmAtencion Atencion = new(this);
             Atencion.Show();
             this.Hide();
-
-        }
-
-        private void lblIngreso_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -88,5 +74,4 @@ namespace Clinica
             this.Hide();
         }
     }
-
 }

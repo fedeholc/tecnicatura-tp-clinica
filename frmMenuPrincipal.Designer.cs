@@ -33,32 +33,31 @@
             btnSalir = new Button();
             btnInscripciones = new Button();
             pnlPanelPrincipal = new Panel();
+            label1 = new Label();
             btnVolver = new Button();
             btnAtencion = new Button();
             btnSalaDeEspera = new Button();
             btnAcreditacion = new Button();
             btnTurnos = new Button();
-            label1 = new Label();
             pnlPanelPrincipal.SuspendLayout();
             SuspendLayout();
             // 
             // lblIngreso
             // 
             lblIngreso.AutoSize = true;
-            lblIngreso.Location = new Point(12, 9);
+            lblIngreso.Location = new Point(4, 18);
             lblIngreso.Margin = new Padding(4, 0, 4, 0);
             lblIngreso.Name = "lblIngreso";
             lblIngreso.Size = new Size(50, 15);
             lblIngreso.TabIndex = 0;
             lblIngreso.Text = "Usuario:";
-            lblIngreso.Click += lblIngreso_Click;
             // 
             // btnSalir
             // 
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSalir.Location = new Point(508, 3);
+            btnSalir.Location = new Point(506, 3);
             btnSalir.Margin = new Padding(4, 3, 4, 3);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(60, 28);
@@ -87,6 +86,8 @@
             pnlPanelPrincipal.BackgroundImage = (Image)resources.GetObject("pnlPanelPrincipal.BackgroundImage");
             pnlPanelPrincipal.BackgroundImageLayout = ImageLayout.Stretch;
             pnlPanelPrincipal.BorderStyle = BorderStyle.FixedSingle;
+            pnlPanelPrincipal.Controls.Add(label1);
+            pnlPanelPrincipal.Controls.Add(lblIngreso);
             pnlPanelPrincipal.Controls.Add(btnVolver);
             pnlPanelPrincipal.Controls.Add(btnAtencion);
             pnlPanelPrincipal.Controls.Add(btnSalir);
@@ -94,18 +95,28 @@
             pnlPanelPrincipal.Controls.Add(btnAcreditacion);
             pnlPanelPrincipal.Controls.Add(btnTurnos);
             pnlPanelPrincipal.Controls.Add(btnInscripciones);
-            pnlPanelPrincipal.Location = new Point(12, 57);
+            pnlPanelPrincipal.Location = new Point(11, 12);
             pnlPanelPrincipal.Margin = new Padding(4, 3, 4, 3);
             pnlPanelPrincipal.Name = "pnlPanelPrincipal";
             pnlPanelPrincipal.Size = new Size(572, 342);
             pnlPanelPrincipal.TabIndex = 6;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(4, 3);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(144, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Módulo: Estudios Clínicos";
             // 
             // btnVolver
             // 
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnVolver.Location = new Point(482, 310);
+            btnVolver.Location = new Point(497, 309);
             btnVolver.Margin = new Padding(4, 3, 4, 3);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(69, 28);
@@ -174,24 +185,12 @@
             btnTurnos.UseVisualStyleBackColor = true;
             btnTurnos.Click += btnTurnos_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 34);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(144, 15);
-            label1.TabIndex = 7;
-            label1.Text = "Modulo: Estudios Clínicos";
-            // 
             // frmMenuPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(596, 413);
-            Controls.Add(label1);
+            ClientSize = new Size(591, 363);
             Controls.Add(pnlPanelPrincipal);
-            Controls.Add(lblIngreso);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
             Name = "frmMenuPrincipal";
@@ -199,8 +198,8 @@
             Text = "Clínica - Menú Principal";
             Load += frmPrincipal_Load;
             pnlPanelPrincipal.ResumeLayout(false);
+            pnlPanelPrincipal.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
