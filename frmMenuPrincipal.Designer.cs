@@ -33,7 +33,6 @@
             btnSalir = new Button();
             btnInscripciones = new Button();
             pnlPanelPrincipal = new Panel();
-            label1 = new Label();
             btnVolver = new Button();
             btnAtencion = new Button();
             btnSalaDeEspera = new Button();
@@ -45,7 +44,7 @@
             // lblIngreso
             // 
             lblIngreso.AutoSize = true;
-            lblIngreso.Location = new Point(4, 18);
+            lblIngreso.Location = new Point(4, 3);
             lblIngreso.Margin = new Padding(4, 0, 4, 0);
             lblIngreso.Name = "lblIngreso";
             lblIngreso.Size = new Size(50, 15);
@@ -86,7 +85,6 @@
             pnlPanelPrincipal.BackgroundImage = (Image)resources.GetObject("pnlPanelPrincipal.BackgroundImage");
             pnlPanelPrincipal.BackgroundImageLayout = ImageLayout.Stretch;
             pnlPanelPrincipal.BorderStyle = BorderStyle.FixedSingle;
-            pnlPanelPrincipal.Controls.Add(label1);
             pnlPanelPrincipal.Controls.Add(lblIngreso);
             pnlPanelPrincipal.Controls.Add(btnVolver);
             pnlPanelPrincipal.Controls.Add(btnAtencion);
@@ -100,16 +98,6 @@
             pnlPanelPrincipal.Name = "pnlPanelPrincipal";
             pnlPanelPrincipal.Size = new Size(572, 342);
             pnlPanelPrincipal.TabIndex = 6;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(4, 3);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(144, 15);
-            label1.TabIndex = 7;
-            label1.Text = "Módulo: Estudios Clínicos";
             // 
             // btnVolver
             // 
@@ -195,7 +183,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "frmMenuPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Clínica - Menú Principal";
+            Text = "Menú Principal - Estudios Clínicos";
             Load += frmPrincipal_Load;
             pnlPanelPrincipal.ResumeLayout(false);
             pnlPanelPrincipal.PerformLayout();
@@ -213,6 +201,5 @@
         private Button btnSalaDeEspera;
         private Button btnAtencion;
         private Button btnVolver;
-        private Label label1;
     }
 }

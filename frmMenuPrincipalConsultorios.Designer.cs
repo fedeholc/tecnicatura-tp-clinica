@@ -17,6 +17,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenuPrincipalConsultorios));
             pnlPanelPrincipal = new Panel();
+            lblIngreso = new Label();
             btnVolver = new Button();
             btnAtencion = new Button();
             btnSalir = new Button();
@@ -24,8 +25,6 @@
             btnAcreditacion = new Button();
             btnTurnos = new Button();
             btnInscripciones = new Button();
-            lblIngreso = new Label();
-            lblConsultoriosExternos = new Label();
             pnlPanelPrincipal.SuspendLayout();
             SuspendLayout();
             // 
@@ -34,6 +33,7 @@
             pnlPanelPrincipal.BackgroundImage = (Image)resources.GetObject("pnlPanelPrincipal.BackgroundImage");
             pnlPanelPrincipal.BackgroundImageLayout = ImageLayout.Stretch;
             pnlPanelPrincipal.BorderStyle = BorderStyle.FixedSingle;
+            pnlPanelPrincipal.Controls.Add(lblIngreso);
             pnlPanelPrincipal.Controls.Add(btnVolver);
             pnlPanelPrincipal.Controls.Add(btnAtencion);
             pnlPanelPrincipal.Controls.Add(btnSalir);
@@ -41,21 +41,32 @@
             pnlPanelPrincipal.Controls.Add(btnAcreditacion);
             pnlPanelPrincipal.Controls.Add(btnTurnos);
             pnlPanelPrincipal.Controls.Add(btnInscripciones);
-            pnlPanelPrincipal.Location = new Point(136, 152);
+            pnlPanelPrincipal.Location = new Point(9, 8);
             pnlPanelPrincipal.Margin = new Padding(6);
             pnlPanelPrincipal.Name = "pnlPanelPrincipal";
-            pnlPanelPrincipal.Size = new Size(1062, 724);
+            pnlPanelPrincipal.Size = new Size(572, 342);
             pnlPanelPrincipal.TabIndex = 8;
+            // 
+            // lblIngreso
+            // 
+            lblIngreso.AutoSize = true;
+            lblIngreso.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblIngreso.Location = new Point(4, 3);
+            lblIngreso.Margin = new Padding(4, 0, 4, 0);
+            lblIngreso.Name = "lblIngreso";
+            lblIngreso.Size = new Size(50, 15);
+            lblIngreso.TabIndex = 0;
+            lblIngreso.Text = "Usuario:";
             // 
             // btnVolver
             // 
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnVolver.Location = new Point(907, 662);
+            btnVolver.Location = new Point(497, 309);
             btnVolver.Margin = new Padding(6);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(136, 61);
+            btnVolver.Size = new Size(68, 28);
             btnVolver.TabIndex = 11;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
@@ -67,10 +78,10 @@
             btnAtencion.FlatAppearance.BorderSize = 2;
             btnAtencion.FlatStyle = FlatStyle.Flat;
             btnAtencion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnAtencion.Location = new Point(748, 523);
+            btnAtencion.Location = new Point(409, 245);
             btnAtencion.Margin = new Padding(6);
             btnAtencion.Name = "btnAtencion";
-            btnAtencion.Size = new Size(205, 64);
+            btnAtencion.Size = new Size(110, 30);
             btnAtencion.TabIndex = 10;
             btnAtencion.Text = "Atención";
             btnAtencion.UseVisualStyleBackColor = true;
@@ -81,10 +92,10 @@
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSalir.Location = new Point(942, 6);
+            btnSalir.Location = new Point(506, 3);
             btnSalir.Margin = new Padding(6);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(110, 61);
+            btnSalir.Size = new Size(60, 28);
             btnSalir.TabIndex = 1;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = true;
@@ -96,10 +107,10 @@
             btnSalaDeEspera.FlatAppearance.BorderSize = 2;
             btnSalaDeEspera.FlatStyle = FlatStyle.Flat;
             btnSalaDeEspera.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSalaDeEspera.Location = new Point(419, 619);
+            btnSalaDeEspera.Location = new Point(226, 290);
             btnSalaDeEspera.Margin = new Padding(6);
             btnSalaDeEspera.Name = "btnSalaDeEspera";
-            btnSalaDeEspera.Size = new Size(223, 64);
+            btnSalaDeEspera.Size = new Size(120, 30);
             btnSalaDeEspera.TabIndex = 9;
             btnSalaDeEspera.Text = "Sala de Espera";
             btnSalaDeEspera.UseVisualStyleBackColor = true;
@@ -111,10 +122,10 @@
             btnAcreditacion.FlatAppearance.BorderSize = 2;
             btnAcreditacion.FlatStyle = FlatStyle.Flat;
             btnAcreditacion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnAcreditacion.Location = new Point(533, 523);
+            btnAcreditacion.Location = new Point(288, 245);
             btnAcreditacion.Margin = new Padding(6);
             btnAcreditacion.Name = "btnAcreditacion";
-            btnAcreditacion.Size = new Size(205, 64);
+            btnAcreditacion.Size = new Size(110, 30);
             btnAcreditacion.TabIndex = 8;
             btnAcreditacion.Text = "Acreditación";
             btnAcreditacion.UseVisualStyleBackColor = true;
@@ -126,10 +137,10 @@
             btnTurnos.FlatAppearance.BorderSize = 2;
             btnTurnos.FlatStyle = FlatStyle.Flat;
             btnTurnos.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnTurnos.Location = new Point(102, 523);
+            btnTurnos.Location = new Point(55, 245);
             btnTurnos.Margin = new Padding(6);
             btnTurnos.Name = "btnTurnos";
-            btnTurnos.Size = new Size(205, 64);
+            btnTurnos.Size = new Size(110, 30);
             btnTurnos.TabIndex = 7;
             btnTurnos.Text = "Turnos";
             btnTurnos.UseVisualStyleBackColor = true;
@@ -141,52 +152,29 @@
             btnInscripciones.FlatAppearance.BorderSize = 2;
             btnInscripciones.FlatStyle = FlatStyle.Flat;
             btnInscripciones.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnInscripciones.Location = new Point(319, 523);
+            btnInscripciones.Location = new Point(172, 245);
             btnInscripciones.Margin = new Padding(6);
             btnInscripciones.Name = "btnInscripciones";
-            btnInscripciones.Size = new Size(205, 64);
+            btnInscripciones.Size = new Size(110, 30);
             btnInscripciones.TabIndex = 6;
-            btnInscripciones.Text = "Inscripciones";
+            btnInscripciones.Text = "Registro";
             btnInscripciones.UseVisualStyleBackColor = true;
             btnInscripciones.Click += btnInscripciones_Click;
-            // 
-            // lblIngreso
-            // 
-            lblIngreso.AutoSize = true;
-            lblIngreso.Font = new Font("Microsoft Sans Serif", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblIngreso.Location = new Point(510, 50);
-            lblIngreso.Margin = new Padding(6, 0, 6, 0);
-            lblIngreso.Name = "lblIngreso";
-            lblIngreso.Size = new Size(271, 42);
-            lblIngreso.TabIndex = 0;
-            lblIngreso.Text = "Ingreso";
-            // 
-            // lblConsultoriosExternos
-            // 
-            lblConsultoriosExternos.AutoSize = true;
-            lblConsultoriosExternos.Font = new Font("Microsoft Sans Serif", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblConsultoriosExternos.Location = new Point(399, 92);
-            lblConsultoriosExternos.Margin = new Padding(6, 0, 6, 0);
-            lblConsultoriosExternos.Name = "lblConsultoriosExternos";
-            lblConsultoriosExternos.Size = new Size(398, 42);
-            lblConsultoriosExternos.TabIndex = 1;
-            lblConsultoriosExternos.Text = "Consultorios Externos";
             // 
             // frmMenuPrincipalConsultorios
             // 
             AutoScaleDimensions = new SizeF(12F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1284, 911);
-            Controls.Add(lblConsultoriosExternos);
-            Controls.Add(lblIngreso);
+            ClientSize = new Size(589, 359);
             Controls.Add(pnlPanelPrincipal);
             Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(6);
             Name = "frmMenuPrincipalConsultorios";
-            Text = "Menú Principal de Consultorios Externos";
+            Text = "Menú Principal - Consultorios Externos";
+            Load += frmPrincipal_Load;
             pnlPanelPrincipal.ResumeLayout(false);
+            pnlPanelPrincipal.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         private Panel pnlPanelPrincipal;
@@ -198,6 +186,5 @@
         private Button btnTurnos;
         private Button btnInscripciones;
         private Label lblIngreso;
-        private Label lblConsultoriosExternos;
     }
 }

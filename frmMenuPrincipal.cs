@@ -70,6 +70,8 @@ namespace Clinica
         private void btnVolver_Click(object sender, EventArgs e)
         {
             frmModulos Modulos = new frmModulos();
+            Modulos.rol = rol;
+            Modulos.usuario = usuario;
             Modulos.Show();
             this.Hide();
         }

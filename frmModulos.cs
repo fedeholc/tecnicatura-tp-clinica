@@ -37,6 +37,8 @@ namespace clinica
             {
                 MessageBox.Show("Ha seleccionado Consultorios Médicos", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frmMenuPrincipalConsultorios PrincipalConsultorios = new frmMenuPrincipalConsultorios();
+                PrincipalConsultorios.rol = rol;
+                PrincipalConsultorios.usuario = usuario;
                 PrincipalConsultorios.Show();
                 this.Hide();
             }
