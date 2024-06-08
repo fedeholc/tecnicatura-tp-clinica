@@ -164,7 +164,7 @@ namespace clinica
                     //MessageBox.Show("No hay datos de Turnos");
                     lbxTurnos.DataSource = null;
                     lbxTurnos.Items.Clear();
-                    lbxTurnos.Items.Add("No hay turnos disponibles con los criterios seleccionados.");
+                    lbxTurnos.Items.Add("No hay turnos con los criterios seleccionados.");
                     // TODO: ojo, si se deja eso hay que evitar que se pueda elegir el turno
                     // Otra opción es dejar el ListBox vacío y oculto, y mostrar un mensaje en un Label
                 }
