@@ -58,7 +58,6 @@ namespace clinica
                 {
                     MessageBox.Show("No hay datos");
                 }
-
             }
             catch (Exception ex)
             {
@@ -90,16 +89,11 @@ namespace clinica
 
                 if (reader.HasRows)
                 {
-
                     while (reader.Read())
                     {
                         if (reader.GetString(0) == txtPass.Text)
                         {
                             MessageBox.Show("Ingreso exitoso", "MENSAJES DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            /*frmMenuPrincipal Principal = new frmMenuPrincipal();
-                            
-                            Principal.rol = Convert.ToString(reader.GetString(1));
-                            Principal.usuario = cbxUsuarios.Text;*/
                             frmModulos Modulos = new frmModulos();
                             Modulos.rol = Convert.ToString(reader.GetString(1));
                             Modulos.usuario = cbxUsuarios.Text;
@@ -113,7 +107,6 @@ namespace clinica
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
