@@ -242,7 +242,7 @@ namespace clinica
                 {
                     lbxTurnos.DataSource = null;
                     lbxTurnos.Items.Clear();
-                    lbxTurnos.Items.Add("No hay turnos disponibles con los criterios seleccionados.");
+                    lbxTurnos.Items.Add("No hay turnos con los criterios seleccionados.");
                     lbxTurnos.Enabled = false;
                 }
 
