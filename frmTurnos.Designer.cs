@@ -400,7 +400,7 @@ namespace clinica
             Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             Margin = new Padding(3, 4, 3, 4);
             Name = "frmTurnos";
-            Text = "frmTurnos";
+            Text = "Turnos";
             Load += frmTurnos_Load;
             grbMostrarTurnos.ResumeLayout(false);
             grbMostrarTurnos.PerformLayout();
