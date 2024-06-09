@@ -52,7 +52,7 @@ namespace Clinica
                 return;
             }
 
-            if (txtNombre.Text == "" || txtApellido.Text == "" || txtDNI.Text == "" || txtTelefono.Text == "" || txtDireccion.Text == "" 
+            if (txtNombre.Text == "" || txtApellido.Text == "" || txtDNI.Text == "" || txtTelefono.Text == "" || txtDireccion.Text == ""
                || txtEmail.Text == "" || cbxCobertura.Text == "")
             {
                 MessageBox.Show("Debe completar todos los campos", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -61,8 +61,8 @@ namespace Clinica
 
             if (dtpFechaNac.Value > DateTime.Now)
             {
-                MessageBox.Show("La fecha de nacimiento no puede ser posterior a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; 
+                MessageBox.Show("La fecha de nacimiento no puede ser posterior a la fecha actual", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             int respuesta;
@@ -81,7 +81,7 @@ namespace Clinica
 
             if (respuesta == 0)
             {
-                MessageBox.Show("El usuario ya existe", "AVISO DEL SISTEMA",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El usuario ya existe", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -136,7 +136,7 @@ namespace Clinica
             txtDireccion.Enabled = false;
             txtEmail.Enabled = false;
             cbxCobertura.Enabled = false;
-            btnInscribir.Enabled = false;       
+            btnInscribir.Enabled = false;
         }
         private void activarCampos()
         {
@@ -151,7 +151,7 @@ namespace Clinica
             btnInscribir.Enabled = true;
         }
 
-        private void btnNuevaInscripcion_Click(object sender, EventArgs e) 
+        private void btnNuevaInscripcion_Click(object sender, EventArgs e)
         {
             txtNombre.Text = "";
             txtDNI.Text = "";
@@ -167,11 +167,11 @@ namespace Clinica
         private void validacionCampoDNI(object sender, KeyPressEventArgs e)
         {
             // Verifica si la tecla presionada es un número o tecla especial, si no es un número ni una tecla especial se cancela la pulsación
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Delete)                                                                                            
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Delete)
             {
                 e.Handled = true;
             }
-            
+
             if (e.KeyChar == '.' || e.KeyChar == ',') // Verifica si ya hay un punto o coma en la TextBox y, si es así, cancela la pulsación
             {
                 e.Handled = true;
@@ -200,13 +200,6 @@ namespace Clinica
             }
         }
 
-       /* 
-        * public void dtpFechaNac_ValueChanged(object sender, EventArgs e)
-        {
-            DateTime fechaNac = dtpFechaNac.Value;
-            lblFechaNac.Text = fechaNac.ToString("dd-MM-yyyy");
-        }
-       */
         private void frmInscripcion_Load(object sender, EventArgs e)
         {
             cargarDatosCobertura();
@@ -260,7 +253,7 @@ namespace Clinica
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos de cobertura");
+                    MessageBox.Show("No hay datos de cobertura", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -276,6 +269,12 @@ namespace Clinica
                 }
             }
         }
+
+        private void btnImprimirComprobante_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (formOrigen is frmTurnos formTurnos)
@@ -287,5 +286,7 @@ namespace Clinica
                 frmAcreditacion.CargarPacientes();
             }
         }
+
+
     }
 }

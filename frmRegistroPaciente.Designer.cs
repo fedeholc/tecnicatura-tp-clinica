@@ -193,6 +193,7 @@
             btnImprimirComprobante.TabIndex = 28;
             btnImprimirComprobante.Text = "Imprimir Comprobante";
             btnImprimirComprobante.UseVisualStyleBackColor = true;
+            btnImprimirComprobante.Click += btnImprimirComprobante_Click;
             // 
             // btnSalir
             // 
@@ -211,10 +212,11 @@
             // 
             dtpFechaNac.Format = DateTimePickerFormat.Short;
             dtpFechaNac.Location = new Point(91, 242);
+            dtpFechaNac.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dtpFechaNac.Name = "dtpFechaNac";
             dtpFechaNac.Size = new Size(209, 23);
             dtpFechaNac.TabIndex = 26;
-            dtpFechaNac.Value = new DateTime(2024, 5, 1, 0, 0, 0, 0);
+            dtpFechaNac.Value = new DateTime(2024, 6, 8, 22, 40, 43, 0);
             // 
             // pnlTituloR
             // 
@@ -304,7 +306,6 @@
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(209, 23);
             txtDireccion.TabIndex = 18;
-            txtDireccion.KeyPress += validacionCamposString;
             // 
             // labelApellido
             // 
