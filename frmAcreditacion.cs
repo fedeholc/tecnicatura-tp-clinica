@@ -89,18 +89,13 @@ namespace clinica
 
                     while (reader.Read())
                     {
-                        // Obtener el ID y el nombre de la cobertura
                         int id = reader.GetInt32(0);
                         string descripcion = reader.GetString(1);
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> estudio = new(id, descripcion);
                         estudios.Add(estudio);
 
                     }
-                    // Asignar la lista de coberturas al ComboBox
                     cbxEstudios.DataSource = estudios;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     cbxEstudios.DisplayMember = "Value";
                     cbxEstudios.SelectedIndex = -1;
                 }
@@ -267,12 +262,9 @@ namespace clinica
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-
-
                 string query = "select Turno.id, Turno.Fecha, Turno.Hora, Turno.LugarDeAtencion_id, " +
                     "Turno.Paciente_id, Turno.TurnoStatus, Turno.Estudio_id from Turno " +
                     $"where Turno. id = {idTurno}";
-
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
 
@@ -597,15 +589,7 @@ namespace clinica
 
         }
 
-        private void pnlAcreditacion_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lblMonto_Click(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 
 

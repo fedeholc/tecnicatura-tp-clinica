@@ -227,7 +227,7 @@
             lblMonto.Padding = new Padding(2, 2, 2, 2);
             lblMonto.Size = new Size(50, 21);
             lblMonto.TabIndex = 52;
-            lblMonto.Click += lblMonto_Click;
+ 
             // 
             // label7
             // 
@@ -446,8 +446,7 @@
             pnlAcreditacion.Name = "pnlAcreditacion";
             pnlAcreditacion.Size = new Size(836, 644);
             pnlAcreditacion.TabIndex = 65;
-            pnlAcreditacion.Paint += pnlAcreditacion_Paint;
-            // 
+             // 
             // btnImprimirComprobante
             // 
             btnImprimirComprobante.FlatAppearance.BorderColor = Color.LightGray;
