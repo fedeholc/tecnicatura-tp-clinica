@@ -60,7 +60,7 @@ namespace clinica
 
         private void CargarAgendaTurnos()
         {
-       
+
             lbxAgendaTurnos.DataSource = null;
             lbxAgendaTurnos.Items.Clear();
 
@@ -74,7 +74,7 @@ namespace clinica
                     string baseQuery = "SELECT a.Fecha, a.Hora, p.Nombre, p.Apellido, p.Especialidad, a.TurnoStatus " +
                                             "FROM `agendaturnos` as a " +
                                             "JOIN `profesional` AS p ON a.Profesional_id = P.Profesional_id";
-                  
+
 
                     if (rbtDisponibles.Checked)
                     {
@@ -87,7 +87,7 @@ namespace clinica
                         queryBuilder.Append(" WHERE a.TurnoStatus = 2 ");
                     }
                     queryBuilder.Append(" and a.Fecha >= @FechaDesde and a.Fecha <= @FechaHasta ");
-                    
+
 
                     if (cbxHoraDesde.SelectedIndex != -1)
                     {
@@ -173,9 +173,9 @@ namespace clinica
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
-        
+
 
         private void CargarDatosEspecialista()
         {
@@ -303,7 +303,7 @@ namespace clinica
 
         }
 
-        
+
 
         private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -311,6 +311,11 @@ namespace clinica
         }
 
         private void txtProfesional_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblFechaDesde_Click(object sender, EventArgs e)
         {
 
         }

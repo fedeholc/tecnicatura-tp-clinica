@@ -44,40 +44,42 @@
             // lblIngreso
             // 
             lblIngreso.AutoSize = true;
-            lblIngreso.Location = new Point(4, 3);
-            lblIngreso.Margin = new Padding(4, 0, 4, 0);
+            lblIngreso.Location = new Point(5, 4);
+            lblIngreso.Margin = new Padding(5, 0, 5, 0);
             lblIngreso.Name = "lblIngreso";
-            lblIngreso.Size = new Size(50, 15);
+            lblIngreso.Size = new Size(62, 20);
             lblIngreso.TabIndex = 0;
             lblIngreso.Text = "Usuario:";
             // 
             // btnSalir
             // 
+            btnSalir.BackColor = SystemColors.ActiveBorder;
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSalir.Location = new Point(506, 3);
-            btnSalir.Margin = new Padding(4, 3, 4, 3);
+            btnSalir.Location = new Point(544, 4);
+            btnSalir.Margin = new Padding(5, 4, 5, 4);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(60, 28);
+            btnSalir.Size = new Size(152, 37);
             btnSalir.TabIndex = 1;
             btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
             // btnInscripciones
             // 
+            btnInscripciones.BackColor = SystemColors.ActiveCaption;
             btnInscripciones.FlatAppearance.BorderColor = Color.LightGray;
             btnInscripciones.FlatAppearance.BorderSize = 2;
             btnInscripciones.FlatStyle = FlatStyle.Flat;
             btnInscripciones.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnInscripciones.Location = new Point(172, 245);
-            btnInscripciones.Margin = new Padding(4, 3, 4, 3);
+            btnInscripciones.Location = new Point(186, 359);
+            btnInscripciones.Margin = new Padding(5, 4, 5, 4);
             btnInscripciones.Name = "btnInscripciones";
-            btnInscripciones.Size = new Size(110, 30);
+            btnInscripciones.Size = new Size(152, 37);
             btnInscripciones.TabIndex = 2;
             btnInscripciones.Text = "Registro ";
-            btnInscripciones.UseVisualStyleBackColor = true;
+            btnInscripciones.UseVisualStyleBackColor = false;
             btnInscripciones.Click += btnInscripciones_Click;
             // 
             // pnlPanelPrincipal
@@ -93,94 +95,99 @@
             pnlPanelPrincipal.Controls.Add(btnAcreditacion);
             pnlPanelPrincipal.Controls.Add(btnTurnos);
             pnlPanelPrincipal.Controls.Add(btnInscripciones);
-            pnlPanelPrincipal.Location = new Point(11, 12);
-            pnlPanelPrincipal.Margin = new Padding(4, 3, 4, 3);
+            pnlPanelPrincipal.Location = new Point(13, 16);
+            pnlPanelPrincipal.Margin = new Padding(5, 4, 5, 4);
             pnlPanelPrincipal.Name = "pnlPanelPrincipal";
-            pnlPanelPrincipal.Size = new Size(572, 342);
+            pnlPanelPrincipal.Size = new Size(703, 492);
             pnlPanelPrincipal.TabIndex = 6;
             // 
             // btnVolver
             // 
+            btnVolver.BackColor = SystemColors.ActiveCaption;
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnVolver.Location = new Point(497, 309);
-            btnVolver.Margin = new Padding(4, 3, 4, 3);
+            btnVolver.Location = new Point(390, 435);
+            btnVolver.Margin = new Padding(5, 4, 5, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(69, 28);
+            btnVolver.Size = new Size(152, 37);
             btnVolver.TabIndex = 11;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // btnAtencion
             // 
+            btnAtencion.BackColor = SystemColors.ActiveCaption;
             btnAtencion.FlatAppearance.BorderColor = Color.LightGray;
             btnAtencion.FlatAppearance.BorderSize = 2;
             btnAtencion.FlatStyle = FlatStyle.Flat;
             btnAtencion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnAtencion.Location = new Point(409, 245);
-            btnAtencion.Margin = new Padding(4, 3, 4, 3);
+            btnAtencion.Location = new Point(544, 359);
+            btnAtencion.Margin = new Padding(5, 4, 5, 4);
             btnAtencion.Name = "btnAtencion";
-            btnAtencion.Size = new Size(110, 30);
+            btnAtencion.Size = new Size(152, 37);
             btnAtencion.TabIndex = 10;
             btnAtencion.Text = "Atención";
-            btnAtencion.UseVisualStyleBackColor = true;
+            btnAtencion.UseVisualStyleBackColor = false;
             btnAtencion.Click += btnAtencion_Click;
             // 
             // btnSalaDeEspera
             // 
+            btnSalaDeEspera.BackColor = SystemColors.ActiveCaption;
             btnSalaDeEspera.FlatAppearance.BorderColor = Color.LightGray;
             btnSalaDeEspera.FlatAppearance.BorderSize = 2;
             btnSalaDeEspera.FlatStyle = FlatStyle.Flat;
             btnSalaDeEspera.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnSalaDeEspera.Location = new Point(226, 290);
-            btnSalaDeEspera.Margin = new Padding(4, 3, 4, 3);
+            btnSalaDeEspera.Location = new Point(161, 435);
+            btnSalaDeEspera.Margin = new Padding(5, 4, 5, 4);
             btnSalaDeEspera.Name = "btnSalaDeEspera";
-            btnSalaDeEspera.Size = new Size(120, 30);
+            btnSalaDeEspera.Size = new Size(152, 37);
             btnSalaDeEspera.TabIndex = 9;
             btnSalaDeEspera.Text = "Sala de Espera";
-            btnSalaDeEspera.UseVisualStyleBackColor = true;
+            btnSalaDeEspera.UseVisualStyleBackColor = false;
             btnSalaDeEspera.Click += btnSalaDeEspera_Click;
             // 
             // btnAcreditacion
             // 
+            btnAcreditacion.BackColor = SystemColors.ActiveCaption;
             btnAcreditacion.FlatAppearance.BorderColor = Color.LightGray;
             btnAcreditacion.FlatAppearance.BorderSize = 2;
             btnAcreditacion.FlatStyle = FlatStyle.Flat;
             btnAcreditacion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnAcreditacion.Location = new Point(288, 245);
-            btnAcreditacion.Margin = new Padding(4, 3, 4, 3);
+            btnAcreditacion.Location = new Point(366, 359);
+            btnAcreditacion.Margin = new Padding(5, 4, 5, 4);
             btnAcreditacion.Name = "btnAcreditacion";
-            btnAcreditacion.Size = new Size(115, 30);
+            btnAcreditacion.Size = new Size(152, 37);
             btnAcreditacion.TabIndex = 8;
             btnAcreditacion.Text = "Acreditación";
-            btnAcreditacion.UseVisualStyleBackColor = true;
+            btnAcreditacion.UseVisualStyleBackColor = false;
             btnAcreditacion.Click += btnAcreditacion_Click;
             // 
             // btnTurnos
             // 
+            btnTurnos.BackColor = SystemColors.ActiveCaption;
             btnTurnos.FlatAppearance.BorderColor = Color.LightGray;
             btnTurnos.FlatAppearance.BorderSize = 2;
             btnTurnos.FlatStyle = FlatStyle.Flat;
             btnTurnos.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnTurnos.Location = new Point(55, 245);
-            btnTurnos.Margin = new Padding(4, 3, 4, 3);
+            btnTurnos.Location = new Point(5, 359);
+            btnTurnos.Margin = new Padding(5, 4, 5, 4);
             btnTurnos.Name = "btnTurnos";
-            btnTurnos.Size = new Size(110, 30);
+            btnTurnos.Size = new Size(152, 37);
             btnTurnos.TabIndex = 7;
             btnTurnos.Text = "Turnos";
-            btnTurnos.UseVisualStyleBackColor = true;
+            btnTurnos.UseVisualStyleBackColor = false;
             btnTurnos.Click += btnTurnos_Click;
             // 
             // frmMenuPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(591, 363);
+            ClientSize = new Size(730, 521);
             Controls.Add(pnlPanelPrincipal);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "frmMenuPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Menú Principal - Estudios Clínicos";
