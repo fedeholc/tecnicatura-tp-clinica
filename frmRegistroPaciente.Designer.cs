@@ -39,12 +39,13 @@
             btnInscribir = new Button();
             btnVolver = new Button();
             pnlRegistro = new Panel();
+            btnImprimirComprobante = new Button();
             btnSalir = new Button();
             dtpFechaNac = new DateTimePicker();
             pnlTituloR = new Panel();
             lblTituloR = new Label();
             lblTel = new Label();
-            textBox1 = new TextBox();
+            txtTelefono = new TextBox();
             lblFecha = new Label();
             btnNuevaInscripcion = new Button();
             cbxCobertura = new ComboBox();
@@ -52,7 +53,6 @@
             txtDireccion = new TextBox();
             labelApellido = new Label();
             txtApellido = new TextBox();
-            btnImprimirComprobante = new Button();
             pnlRegistro.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,6 +73,7 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(209, 23);
             txtNombre.TabIndex = 1;
+            txtNombre.KeyPress += validacionCamposString;
             // 
             // txtDNI
             // 
@@ -80,7 +81,7 @@
             txtDNI.Name = "txtDNI";
             txtDNI.Size = new Size(209, 23);
             txtDNI.TabIndex = 3;
-            txtDNI.KeyPress += txtDNI_KeyPress;
+            txtDNI.KeyPress += validacionCampoDNI;
             // 
             // lblDNI
             // 
@@ -159,7 +160,7 @@
             pnlRegistro.Controls.Add(pnlTituloR);
             pnlRegistro.Controls.Add(lblTituloR);
             pnlRegistro.Controls.Add(lblTel);
-            pnlRegistro.Controls.Add(textBox1);
+            pnlRegistro.Controls.Add(txtTelefono);
             pnlRegistro.Controls.Add(lblFecha);
             pnlRegistro.Controls.Add(btnVolver);
             pnlRegistro.Controls.Add(btnNuevaInscripcion);
@@ -180,6 +181,18 @@
             pnlRegistro.Name = "pnlRegistro";
             pnlRegistro.Size = new Size(618, 546);
             pnlRegistro.TabIndex = 16;
+            // 
+            // btnImprimirComprobante
+            // 
+            btnImprimirComprobante.FlatAppearance.BorderColor = Color.LightGray;
+            btnImprimirComprobante.FlatStyle = FlatStyle.Flat;
+            btnImprimirComprobante.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btnImprimirComprobante.Location = new Point(279, 462);
+            btnImprimirComprobante.Name = "btnImprimirComprobante";
+            btnImprimirComprobante.Size = new Size(184, 30);
+            btnImprimirComprobante.TabIndex = 28;
+            btnImprimirComprobante.Text = "Imprimir Comprobante";
+            btnImprimirComprobante.UseVisualStyleBackColor = true;
             // 
             // btnSalir
             // 
@@ -233,12 +246,13 @@
             lblTel.TabIndex = 22;
             lblTel.Text = "Teléfono";
             // 
-            // textBox1
+            // txtTelefono
             // 
-            textBox1.Location = new Point(91, 292);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(209, 23);
-            textBox1.TabIndex = 23;
+            txtTelefono.Location = new Point(91, 292);
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(209, 23);
+            txtTelefono.TabIndex = 23;
+            txtTelefono.KeyPress += validacionCamposInt;
             // 
             // lblFecha
             // 
@@ -290,7 +304,7 @@
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(209, 23);
             txtDireccion.TabIndex = 18;
-            txtDireccion.TextChanged += textBox1_TextChanged;
+            txtDireccion.KeyPress += validacionCamposString;
             // 
             // labelApellido
             // 
@@ -302,7 +316,6 @@
             labelApellido.Size = new Size(50, 15);
             labelApellido.TabIndex = 15;
             labelApellido.Text = "Apellido";
-            labelApellido.Click += label1_Click;
             // 
             // txtApellido
             // 
@@ -310,18 +323,7 @@
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(209, 23);
             txtApellido.TabIndex = 16;
-            // 
-            // btnImprimirComprobante
-            // 
-            btnImprimirComprobante.FlatAppearance.BorderColor = Color.LightGray;
-            btnImprimirComprobante.FlatStyle = FlatStyle.Flat;
-            btnImprimirComprobante.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            btnImprimirComprobante.Location = new Point(279, 462);
-            btnImprimirComprobante.Name = "btnImprimirComprobante";
-            btnImprimirComprobante.Size = new Size(184, 30);
-            btnImprimirComprobante.TabIndex = 28;
-            btnImprimirComprobante.Text = "Imprimir Comprobante";
-            btnImprimirComprobante.UseVisualStyleBackColor = true;
+            txtApellido.KeyPress += validacionCamposString;
             // 
             // frmRegistroPaciente
             // 
@@ -359,7 +361,7 @@
         private TextBox txtDireccion;
         private ComboBox cbxCobertura;
         private Label lblTel;
-        private TextBox textBox1;
+        private TextBox txtTelefono;
         private Label lblFecha;
         private Label lblTituloR;
         private Panel pnlTituloR;

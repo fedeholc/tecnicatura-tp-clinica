@@ -252,8 +252,7 @@ namespace Clinica
             ArgumentNullException.ThrowIfNull(paciente);
 
             int salida = 0;
-            string? nombreTabla = "Paciente";
-                    
+            string? nombreTabla = "Paciente";           
 
             MySqlConnection sqlCon = new MySqlConnection();
             try
@@ -261,13 +260,15 @@ namespace Clinica
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 sqlCon.Open();
 
-                string query = $"INSERT INTO {nombreTabla} (Nombre, Apellido, DNI, Direccion, Email, Cobertura_id, " +
-                    $"Historia_clinica) VALUES (@Nombre, @Apellido, @DNI, @Direccion, @Email, @Cobertura_id, @Historia_clinica)";
+                string query = $"INSERT INTO {nombreTabla} (Nombre, Apellido, FechaNac, DNI, Telefono, Direccion, Email, Cobertura_id, " +
+                    $"Historia_clinica) VALUES (@Nombre, @Apellido, @FechaNac, @DNI, @Telefono, @Direccion, @Email, @Cobertura_id, @Historia_clinica)";
 
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
                 comando.Parameters.AddWithValue("@Nombre", paciente.Nombre);
                 comando.Parameters.AddWithValue("@Apellido", paciente.Apellido);
+                comando.Parameters.AddWithValue("@FechaNac", paciente.FechaNac);
                 comando.Parameters.AddWithValue("@DNI", paciente.DNI);
+                comando.Parameters.AddWithValue("@Telefono", paciente.Telefono);
                 comando.Parameters.AddWithValue("@Direccion", paciente.Direccion);
                 comando.Parameters.AddWithValue("@Email", paciente.Email);
                 comando.Parameters.AddWithValue("@Cobertura_id", paciente.Cobertura_id);
