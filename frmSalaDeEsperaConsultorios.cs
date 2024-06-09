@@ -140,6 +140,11 @@ namespace clinica
         {
             // Manejador de clic para la etiqueta (si es necesario)
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

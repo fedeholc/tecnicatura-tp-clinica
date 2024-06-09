@@ -54,16 +54,17 @@ namespace clinica
             // 
             // btnVolver
             // 
+            btnVolver.BackColor = SystemColors.ActiveCaption;
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnVolver.Location = new Point(679, 507);
+            btnVolver.Location = new Point(658, 507);
             btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(158, 40);
+            btnVolver.Size = new Size(181, 37);
             btnVolver.TabIndex = 39;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // panel2
@@ -78,30 +79,32 @@ namespace clinica
             // 
             // btnSalir
             // 
+            btnSalir.BackColor = SystemColors.ActiveBorder;
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSalir.Location = new Point(770, 61);
+            btnSalir.Location = new Point(687, 62);
             btnSalir.Margin = new Padding(3, 4, 3, 4);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(69, 37);
+            btnSalir.Size = new Size(152, 37);
             btnSalir.TabIndex = 37;
             btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
             // btnRegistrarPaciente
             // 
+            btnRegistrarPaciente.BackColor = SystemColors.ActiveCaption;
             btnRegistrarPaciente.FlatAppearance.BorderColor = Color.LightGray;
             btnRegistrarPaciente.FlatStyle = FlatStyle.Flat;
             btnRegistrarPaciente.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnRegistrarPaciente.Location = new Point(667, 148);
+            btnRegistrarPaciente.Location = new Point(687, 148);
             btnRegistrarPaciente.Margin = new Padding(3, 4, 3, 4);
             btnRegistrarPaciente.Name = "btnRegistrarPaciente";
-            btnRegistrarPaciente.Size = new Size(171, 40);
+            btnRegistrarPaciente.Size = new Size(152, 73);
             btnRegistrarPaciente.TabIndex = 42;
             btnRegistrarPaciente.Text = "Registrar nuevo Paciente";
-            btnRegistrarPaciente.UseVisualStyleBackColor = true;
+            btnRegistrarPaciente.UseVisualStyleBackColor = false;
             btnRegistrarPaciente.Click += btnRegistrarPaciente_Click;
             // 
             // label3
@@ -182,16 +185,17 @@ namespace clinica
             // 
             // btnAcreditar
             // 
+            btnAcreditar.BackColor = SystemColors.ActiveCaption;
             btnAcreditar.FlatAppearance.BorderColor = Color.LightGray;
             btnAcreditar.FlatStyle = FlatStyle.Flat;
             btnAcreditar.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnAcreditar.Location = new Point(235, 507);
             btnAcreditar.Margin = new Padding(3, 4, 3, 4);
             btnAcreditar.Name = "btnAcreditar";
-            btnAcreditar.Size = new Size(171, 40);
+            btnAcreditar.Size = new Size(181, 37);
             btnAcreditar.TabIndex = 59;
             btnAcreditar.Text = "Acreditar Paciente";
-            btnAcreditar.UseVisualStyleBackColor = true;
+            btnAcreditar.UseVisualStyleBackColor = false;
             btnAcreditar.Click += btnAcreditar_Click;
             // 
             // label2
@@ -256,16 +260,17 @@ namespace clinica
             // 
             // btnNuevaAcreditacion
             // 
+            btnNuevaAcreditacion.BackColor = SystemColors.ActiveCaption;
             btnNuevaAcreditacion.FlatAppearance.BorderColor = Color.LightGray;
             btnNuevaAcreditacion.FlatStyle = FlatStyle.Flat;
             btnNuevaAcreditacion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnNuevaAcreditacion.Location = new Point(443, 507);
+            btnNuevaAcreditacion.Location = new Point(448, 507);
             btnNuevaAcreditacion.Margin = new Padding(3, 4, 3, 4);
             btnNuevaAcreditacion.Name = "btnNuevaAcreditacion";
-            btnNuevaAcreditacion.Size = new Size(171, 40);
+            btnNuevaAcreditacion.Size = new Size(181, 37);
             btnNuevaAcreditacion.TabIndex = 64;
             btnNuevaAcreditacion.Text = "Nueva Acreditacion";
-            btnNuevaAcreditacion.UseVisualStyleBackColor = true;
+            btnNuevaAcreditacion.UseVisualStyleBackColor = false;
             btnNuevaAcreditacion.Click += NuevaAcreditacion_Click;
             // 
             // pnlAcreditacion
@@ -291,14 +296,14 @@ namespace clinica
             pnlAcreditacion.Location = new Point(14, 16);
             pnlAcreditacion.Margin = new Padding(3, 4, 3, 4);
             pnlAcreditacion.Name = "pnlAcreditacion";
-            pnlAcreditacion.Size = new Size(955, 858);
+            pnlAcreditacion.Size = new Size(1137, 858);
             pnlAcreditacion.TabIndex = 65;
             // 
             // frmAcreditacionConsultorios
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(981, 586);
+            ClientSize = new Size(1163, 586);
             Controls.Add(pnlAcreditacion);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 4, 3, 4);

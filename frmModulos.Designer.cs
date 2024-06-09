@@ -51,10 +51,10 @@
             pnlModulos.Controls.Add(pnlTituloT);
             pnlModulos.Controls.Add(btnIngresarModulo);
             pnlModulos.Controls.Add(btnSalir);
-            pnlModulos.Location = new Point(11, 10);
+            pnlModulos.Location = new Point(13, 13);
             pnlModulos.Margin = new Padding(2, 1, 2, 1);
             pnlModulos.Name = "pnlModulos";
-            pnlModulos.Size = new Size(518, 216);
+            pnlModulos.Size = new Size(592, 287);
             pnlModulos.TabIndex = 38;
             // 
             // grbSeleccionarModulos
@@ -63,11 +63,11 @@
             grbSeleccionarModulos.Controls.Add(rbtEstudiosClinic);
             grbSeleccionarModulos.Controls.Add(rbtConsultoriosMed);
             grbSeleccionarModulos.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            grbSeleccionarModulos.Location = new Point(147, 72);
-            grbSeleccionarModulos.Margin = new Padding(2);
+            grbSeleccionarModulos.Location = new Point(168, 96);
+            grbSeleccionarModulos.Margin = new Padding(2, 3, 2, 3);
             grbSeleccionarModulos.Name = "grbSeleccionarModulos";
-            grbSeleccionarModulos.Padding = new Padding(2);
-            grbSeleccionarModulos.Size = new Size(171, 101);
+            grbSeleccionarModulos.Padding = new Padding(2, 3, 2, 3);
+            grbSeleccionarModulos.Size = new Size(195, 135);
             grbSeleccionarModulos.TabIndex = 38;
             grbSeleccionarModulos.TabStop = false;
             grbSeleccionarModulos.Text = "Seleccionar Módulo";
@@ -75,10 +75,10 @@
             // rbtEstudiosClinic
             // 
             rbtEstudiosClinic.AutoSize = true;
-            rbtEstudiosClinic.Location = new Point(13, 67);
-            rbtEstudiosClinic.Margin = new Padding(2);
+            rbtEstudiosClinic.Location = new Point(15, 89);
+            rbtEstudiosClinic.Margin = new Padding(2, 3, 2, 3);
             rbtEstudiosClinic.Name = "rbtEstudiosClinic";
-            rbtEstudiosClinic.Size = new Size(112, 19);
+            rbtEstudiosClinic.Size = new Size(147, 25);
             rbtEstudiosClinic.TabIndex = 1;
             rbtEstudiosClinic.Text = "Estudios Clínicos";
             rbtEstudiosClinic.UseVisualStyleBackColor = true;
@@ -87,10 +87,10 @@
             // 
             rbtConsultoriosMed.AutoSize = true;
             rbtConsultoriosMed.Checked = true;
-            rbtConsultoriosMed.Location = new Point(13, 23);
-            rbtConsultoriosMed.Margin = new Padding(2);
+            rbtConsultoriosMed.Location = new Point(15, 31);
+            rbtConsultoriosMed.Margin = new Padding(2, 3, 2, 3);
             rbtConsultoriosMed.Name = "rbtConsultoriosMed";
-            rbtConsultoriosMed.Size = new Size(138, 19);
+            rbtConsultoriosMed.Size = new Size(181, 25);
             rbtConsultoriosMed.TabIndex = 0;
             rbtConsultoriosMed.TabStop = true;
             rbtConsultoriosMed.Text = "Consultorios Médicos";
@@ -101,10 +101,10 @@
             lblTituloT.AutoSize = true;
             lblTituloT.BackColor = Color.Transparent;
             lblTituloT.Font = new Font("Calibri", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTituloT.Location = new Point(147, 26);
+            lblTituloT.Location = new Point(168, 35);
             lblTituloT.Margin = new Padding(2, 0, 2, 0);
             lblTituloT.Name = "lblTituloT";
-            lblTituloT.Size = new Size(179, 23);
+            lblTituloT.Size = new Size(229, 29);
             lblTituloT.TabIndex = 33;
             lblTituloT.Text = "Selección de Módulos";
             // 
@@ -112,38 +112,40 @@
             // 
             pnlTituloT.BorderStyle = BorderStyle.FixedSingle;
             pnlTituloT.ForeColor = SystemColors.ActiveBorder;
-            pnlTituloT.Location = new Point(147, 51);
-            pnlTituloT.Margin = new Padding(2);
+            pnlTituloT.Location = new Point(168, 68);
+            pnlTituloT.Margin = new Padding(2, 3, 2, 3);
             pnlTituloT.Name = "pnlTituloT";
-            pnlTituloT.Size = new Size(331, 2);
+            pnlTituloT.Size = new Size(378, 2);
             pnlTituloT.TabIndex = 29;
             // 
             // btnIngresarModulo
             // 
+            btnIngresarModulo.BackColor = SystemColors.ActiveCaption;
             btnIngresarModulo.FlatAppearance.BorderColor = Color.LightGray;
             btnIngresarModulo.FlatStyle = FlatStyle.Flat;
             btnIngresarModulo.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnIngresarModulo.Location = new Point(375, 141);
-            btnIngresarModulo.Margin = new Padding(2);
+            btnIngresarModulo.Location = new Point(401, 152);
+            btnIngresarModulo.Margin = new Padding(2, 3, 2, 3);
             btnIngresarModulo.Name = "btnIngresarModulo";
-            btnIngresarModulo.Size = new Size(103, 32);
+            btnIngresarModulo.Size = new Size(152, 37);
             btnIngresarModulo.TabIndex = 30;
             btnIngresarModulo.Text = "Ingresar";
-            btnIngresarModulo.UseVisualStyleBackColor = true;
+            btnIngresarModulo.UseVisualStyleBackColor = false;
             btnIngresarModulo.Click += btnIngresarModulo_Click;
             // 
             // btnSalir
             // 
+            btnSalir.BackColor = SystemColors.ActiveBorder;
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSalir.Location = new Point(418, 19);
-            btnSalir.Margin = new Padding(2);
+            btnSalir.Location = new Point(401, 25);
+            btnSalir.Margin = new Padding(2, 3, 2, 3);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(60, 28);
+            btnSalir.Size = new Size(152, 37);
             btnSalir.TabIndex = 2;
             btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
             // rbtConsultoriosMedicos
@@ -161,9 +163,9 @@
             // 
             // frmModulos
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(545, 244);
+            ClientSize = new Size(623, 325);
             Controls.Add(pnlModulos);
             Margin = new Padding(2, 1, 2, 1);
             Name = "frmModulos";

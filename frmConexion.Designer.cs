@@ -47,12 +47,14 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(474, 3);
+            btnSalir.BackColor = SystemColors.ActiveBorder;
+            btnSalir.Location = new Point(452, 19);
+            btnSalir.Margin = new Padding(3, 4, 3, 4);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(75, 23);
+            btnSalir.Size = new Size(152, 37);
             btnSalir.TabIndex = 6;
             btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
             // panel2
@@ -71,122 +73,131 @@
             panel2.Controls.Add(label3);
             panel2.Controls.Add(txtUsuarioBD);
             panel2.Controls.Add(label4);
-            panel2.Location = new Point(15, 12);
+            panel2.Location = new Point(17, 16);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(554, 201);
+            panel2.Size = new Size(633, 267);
             panel2.TabIndex = 8;
             // 
             // txtPuerto
             // 
-            txtPuerto.Location = new Point(384, 76);
+            txtPuerto.Location = new Point(439, 101);
+            txtPuerto.Margin = new Padding(3, 4, 3, 4);
             txtPuerto.Name = "txtPuerto";
-            txtPuerto.Size = new Size(144, 23);
+            txtPuerto.Size = new Size(164, 27);
             txtPuerto.TabIndex = 11;
             txtPuerto.Text = "3306";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(384, 58);
+            label7.Location = new Point(439, 77);
             label7.Name = "label7";
-            label7.Size = new Size(42, 15);
+            label7.Size = new Size(52, 20);
             label7.TabIndex = 10;
             label7.Text = "Puerto";
             // 
             // txtServidor
             // 
-            txtServidor.Location = new Point(208, 76);
+            txtServidor.Location = new Point(238, 101);
+            txtServidor.Margin = new Padding(3, 4, 3, 4);
             txtServidor.Name = "txtServidor";
-            txtServidor.Size = new Size(144, 23);
+            txtServidor.Size = new Size(164, 27);
             txtServidor.TabIndex = 9;
             txtServidor.Text = "localhost";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(29, 58);
+            label5.Location = new Point(33, 77);
             label5.Name = "label5";
-            label5.Size = new Size(80, 15);
+            label5.Size = new Size(104, 20);
             label5.TabIndex = 6;
             label5.Text = "Base de Datos";
             // 
             // txtBD
             // 
-            txtBD.Location = new Point(29, 76);
+            txtBD.Location = new Point(33, 101);
+            txtBD.Margin = new Padding(3, 4, 3, 4);
             txtBD.Name = "txtBD";
-            txtBD.Size = new Size(144, 23);
+            txtBD.Size = new Size(164, 27);
             txtBD.TabIndex = 8;
             txtBD.Text = "Clinica";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(208, 58);
+            label6.Location = new Point(238, 77);
             label6.Name = "label6";
-            label6.Size = new Size(50, 15);
+            label6.Size = new Size(64, 20);
             label6.TabIndex = 7;
             label6.Text = "Servidor";
             // 
             // label2
             // 
             label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
-            label2.Location = new Point(23, 14);
+            label2.Location = new Point(26, 19);
             label2.Name = "label2";
-            label2.Size = new Size(297, 30);
+            label2.Size = new Size(385, 40);
             label2.TabIndex = 5;
             label2.Text = "Conexión a la Base de Datos";
             // 
             // btnConectar
             // 
+            btnConectar.BackColor = SystemColors.ActiveCaption;
             btnConectar.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
-            btnConectar.Location = new Point(384, 123);
+            btnConectar.Location = new Point(452, 178);
+            btnConectar.Margin = new Padding(3, 4, 3, 4);
             btnConectar.Name = "btnConectar";
-            btnConectar.Size = new Size(144, 41);
+            btnConectar.Size = new Size(152, 37);
             btnConectar.TabIndex = 0;
             btnConectar.Text = "Conectar";
-            btnConectar.UseVisualStyleBackColor = true;
+            btnConectar.UseVisualStyleBackColor = false;
             btnConectar.Click += btnConectar_Click;
             // 
             // txtPasswordBD
             // 
-            txtPasswordBD.Location = new Point(208, 141);
+            txtPasswordBD.Location = new Point(238, 188);
+            txtPasswordBD.Margin = new Padding(3, 4, 3, 4);
             txtPasswordBD.Name = "txtPasswordBD";
-            txtPasswordBD.Size = new Size(144, 23);
+            txtPasswordBD.Size = new Size(164, 27);
             txtPasswordBD.TabIndex = 4;
             txtPasswordBD.Text = "1234";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(29, 123);
+            label3.Location = new Point(33, 164);
             label3.Name = "label3";
-            label3.Size = new Size(47, 15);
+            label3.Size = new Size(59, 20);
             label3.TabIndex = 1;
             label3.Text = "Usuario";
             // 
             // txtUsuarioBD
             // 
-            txtUsuarioBD.Location = new Point(29, 141);
+            txtUsuarioBD.Location = new Point(33, 188);
+            txtUsuarioBD.Margin = new Padding(3, 4, 3, 4);
             txtUsuarioBD.Name = "txtUsuarioBD";
-            txtUsuarioBD.Size = new Size(144, 23);
+            txtUsuarioBD.Size = new Size(164, 27);
             txtUsuarioBD.TabIndex = 3;
             txtUsuarioBD.Text = "root";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(208, 123);
+            label4.Location = new Point(238, 164);
             label4.Name = "label4";
-            label4.Size = new Size(57, 15);
+            label4.Size = new Size(70, 20);
             label4.TabIndex = 2;
             label4.Text = "Password";
             // 
             // frmConexion
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(583, 225);
+            ClientSize = new Size(666, 300);
             Controls.Add(panel2);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmConexion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Clínica";

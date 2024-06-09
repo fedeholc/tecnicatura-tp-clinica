@@ -46,16 +46,17 @@ namespace clinica
             // 
             // btnVolver
             // 
+            btnVolver.BackColor = SystemColors.ActiveCaption;
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnVolver.Location = new Point(1258, 741);
+            btnVolver.Location = new Point(1183, 741);
             btnVolver.Margin = new Padding(3, 4, 3, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(74, 40);
+            btnVolver.Size = new Size(152, 37);
             btnVolver.TabIndex = 42;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // panel2
@@ -70,34 +71,35 @@ namespace clinica
             // 
             // btnSalir
             // 
+            btnSalir.BackColor = SystemColors.ActiveBorder;
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSalir.Location = new Point(1264, 44);
+            btnSalir.Location = new Point(1183, 42);
             btnSalir.Margin = new Padding(3, 4, 3, 4);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(69, 37);
+            btnSalir.Size = new Size(152, 37);
             btnSalir.TabIndex = 40;
             btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
             // lvwConTurno
             // 
-            lvwConTurno.Location = new Point(198, 120);
+            lvwConTurno.Location = new Point(207, 120);
             lvwConTurno.Margin = new Padding(3, 4, 3, 4);
             lvwConTurno.Name = "lvwConTurno";
-            lvwConTurno.Size = new Size(1137, 131);
+            lvwConTurno.Size = new Size(1128, 131);
             lvwConTurno.TabIndex = 67;
             lvwConTurno.UseCompatibleStateImageBehavior = false;
             lvwConTurno.SelectedIndexChanged += lvwConTurno_SelectedIndexChanged;
             // 
             // lvwSinTurno
             // 
-            lvwSinTurno.Location = new Point(195, 283);
+            lvwSinTurno.Location = new Point(207, 283);
             lvwSinTurno.Margin = new Padding(3, 4, 3, 4);
             lvwSinTurno.Name = "lvwSinTurno";
-            lvwSinTurno.Size = new Size(1137, 145);
+            lvwSinTurno.Size = new Size(1125, 145);
             lvwSinTurno.TabIndex = 68;
             lvwSinTurno.UseCompatibleStateImageBehavior = false;
             // 
@@ -106,7 +108,7 @@ namespace clinica
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(198, 92);
+            label1.Location = new Point(207, 92);
             label1.Name = "label1";
             label1.Size = new Size(114, 24);
             label1.TabIndex = 69;
@@ -118,7 +120,7 @@ namespace clinica
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label2.Location = new Point(198, 255);
+            label2.Location = new Point(207, 255);
             label2.Name = "label2";
             label2.Size = new Size(123, 24);
             label2.TabIndex = 70;
@@ -144,13 +146,14 @@ namespace clinica
             panel1.Name = "panel1";
             panel1.Size = new Size(1471, 863);
             panel1.TabIndex = 71;
+            panel1.Paint += panel1_Paint;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.Location = new Point(195, 440);
+            label3.Location = new Point(207, 440);
             label3.Name = "label3";
             label3.Size = new Size(56, 24);
             label3.TabIndex = 73;
@@ -158,10 +161,10 @@ namespace clinica
             // 
             // listView1
             // 
-            listView1.Location = new Point(195, 468);
+            listView1.Location = new Point(207, 468);
             listView1.Margin = new Padding(3, 4, 3, 4);
             listView1.Name = "listView1";
-            listView1.Size = new Size(1137, 145);
+            listView1.Size = new Size(1125, 145);
             listView1.TabIndex = 72;
             listView1.UseCompatibleStateImageBehavior = false;
             // 

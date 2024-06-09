@@ -48,10 +48,10 @@
             lblTituloA.AutoSize = true;
             lblTituloA.BackColor = Color.Transparent;
             lblTituloA.Font = new Font("Calibri", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTituloA.Location = new Point(74, 173);
-            lblTituloA.Margin = new Padding(6, 0, 6, 0);
+            lblTituloA.Location = new Point(46, 108);
+            lblTituloA.Margin = new Padding(4, 0, 4, 0);
             lblTituloA.Name = "lblTituloA";
-            lblTituloA.Size = new Size(401, 46);
+            lblTituloA.Size = new Size(255, 29);
             lblTituloA.TabIndex = 80;
             lblTituloA.Text = "Listado de Profesionales";
             // 
@@ -60,10 +60,10 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label1.Location = new Point(70, 410);
-            label1.Margin = new Padding(6, 0, 6, 0);
+            label1.Location = new Point(43, 256);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(244, 32);
+            label1.Size = new Size(165, 21);
             label1.TabIndex = 78;
             label1.Text = "Seleccione Profesional";
             // 
@@ -72,10 +72,10 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label2.Location = new Point(70, 269);
-            label2.Margin = new Padding(6, 0, 6, 0);
+            label2.Location = new Point(43, 168);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(284, 32);
+            label2.Size = new Size(192, 21);
             label2.TabIndex = 76;
             label2.Text = "Especialidad Seleccionada";
             // 
@@ -83,24 +83,25 @@
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.ForeColor = SystemColors.ActiveBorder;
-            panel2.Location = new Point(70, 239);
-            panel2.Margin = new Padding(6);
+            panel2.Location = new Point(43, 149);
+            panel2.Margin = new Padding(4, 4, 4, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1198, 0);
+            panel2.Size = new Size(738, 1);
             panel2.TabIndex = 74;
             // 
             // btnVolver
             // 
+            btnVolver.BackColor = SystemColors.ActiveCaption;
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnVolver.Location = new Point(1126, 167);
-            btnVolver.Margin = new Padding(6);
+            btnVolver.Location = new Point(629, 104);
+            btnVolver.Margin = new Padding(4, 4, 4, 4);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(152, 60);
+            btnVolver.Size = new Size(152, 37);
             btnVolver.TabIndex = 73;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
             // dtgvProfesionales
@@ -111,14 +112,13 @@
             dtgvProfesionales.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dtgvProfesionales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgvProfesionales.Columns.AddRange(new DataGridViewColumn[] { nroMatricula, nombreProfesional, apellidoProfesional, especialidad });
-            dtgvProfesionales.Location = new Point(74, 460);
-            dtgvProfesionales.Margin = new Padding(4, 2, 4, 2);
+            dtgvProfesionales.Location = new Point(46, 288);
+            dtgvProfesionales.Margin = new Padding(2, 1, 2, 1);
             dtgvProfesionales.Name = "dtgvProfesionales";
             dtgvProfesionales.ReadOnly = true;
             dtgvProfesionales.RowHeadersWidth = 82;
-            dtgvProfesionales.Size = new Size(778, 194);
+            dtgvProfesionales.Size = new Size(581, 121);
             dtgvProfesionales.TabIndex = 81;
-          
             dtgvProfesionales.CellContentClick += dtgvProfesionales_CellContentClick;
             dtgvProfesionales.SelectionChanged += dtgvProfesionales_SelectionChanged;
             // 
@@ -128,7 +128,7 @@
             nroMatricula.MinimumWidth = 10;
             nroMatricula.Name = "nroMatricula";
             nroMatricula.ReadOnly = true;
-            nroMatricula.Width = 210;
+            nroMatricula.Width = 132;
             // 
             // nombreProfesional
             // 
@@ -136,7 +136,7 @@
             nombreProfesional.MinimumWidth = 10;
             nombreProfesional.Name = "nombreProfesional";
             nombreProfesional.ReadOnly = true;
-            nombreProfesional.Width = 147;
+            nombreProfesional.Width = 93;
             // 
             // apellidoProfesional
             // 
@@ -144,7 +144,7 @@
             apellidoProfesional.MinimumWidth = 10;
             apellidoProfesional.Name = "apellidoProfesional";
             apellidoProfesional.ReadOnly = true;
-            apellidoProfesional.Width = 147;
+            apellidoProfesional.Width = 95;
             // 
             // especialidad
             // 
@@ -155,21 +155,22 @@
             especialidad.MinimumWidth = 10;
             especialidad.Name = "especialidad";
             especialidad.ReadOnly = true;
-            especialidad.Width = 189;
+            especialidad.Width = 122;
             // 
             // txtEspecialidad
             // 
-            txtEspecialidad.Location = new Point(78, 306);
+            txtEspecialidad.Location = new Point(48, 191);
+            txtEspecialidad.Margin = new Padding(2, 2, 2, 2);
             txtEspecialidad.Name = "txtEspecialidad";
-            txtEspecialidad.Size = new Size(276, 39);
+            txtEspecialidad.Size = new Size(171, 27);
             txtEspecialidad.TabIndex = 82;
             txtEspecialidad.TextChanged += txtEspecialidad_TextChanged;
             // 
             // frmListadoProfesionales
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1341, 882);
+            ClientSize = new Size(825, 551);
             Controls.Add(txtEspecialidad);
             Controls.Add(dtgvProfesionales);
             Controls.Add(lblTituloA);
@@ -177,6 +178,7 @@
             Controls.Add(label2);
             Controls.Add(panel2);
             Controls.Add(btnVolver);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "frmListadoProfesionales";
             Text = "frmListadoProfesionales";
             Load += frmListadoProfesionales_Load;
