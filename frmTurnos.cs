@@ -26,7 +26,6 @@ namespace clinica
 
         private void frmTurnos_Load(object sender, EventArgs e)
         {
-
             // Establecer la fecha actual en el primer DateTimePicker
             dtpFechaDesde.Value = DateTime.Today;
 
@@ -39,7 +38,6 @@ namespace clinica
             cbxHoraDesde.SelectedIndex = 0;
             cbxHoraHasta.SelectedIndex = 23;
 
-
             CargarDatosEstudios();
             CargarTurnos();
             CargarPacientes();
@@ -48,7 +46,6 @@ namespace clinica
         {
             lbxTurnos.DataSource = null;
             lbxTurnos.Items.Clear();
-
             int filtroEstudioId = 0;
 
             if (cbxEstudios.SelectedIndex != -1)
@@ -67,14 +64,7 @@ namespace clinica
                     "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                     "inner join estudio on Turno.Estudio_id = estudio.id";
 
-                /* select Turno.id, Turno.Fecha, Turno.Hora, Turno.Estudio_id,  
-                  LugarDeAtencion.Descripcion,  TurnoStatus, Estudio.Descripcion
-                   from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id
-                   inner join estudiolugardeatencion on estudiolugardeatencion.lugardeatencion_id = turno.LugarDeAtencion_id
-                   inner join estudio on estudio.id = estudiolugardeatencion.Estudio_id
-                   where  TurnoStatus = 1 ; */
-
-                string queryDisponibles = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
+                 string queryDisponibles = "select Turno.id, Turno.Fecha, Turno.Hora, Estudio.Descripcion, " +
                        "LugarDeAtencion.Descripcion,  TurnoStatus " +
                      "from Turno inner join lugardeatencion on Turno.LugarDeAtencion_id = Lugardeatencion.id " +
                      "inner join estudiolugardeatencion on estudiolugardeatencion.lugardeatencion_id = turno.LugarDeAtencion_id " +
@@ -158,6 +148,8 @@ namespace clinica
                     // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     lbxTurnos.DisplayMember = "Value";
                     lbxTurnos.SelectedIndex = -1;
+                    btnAsignar.Enabled = true;
+
                 }
                 else
                 {
@@ -165,6 +157,7 @@ namespace clinica
                     lbxTurnos.DataSource = null;
                     lbxTurnos.Items.Clear();
                     lbxTurnos.Items.Add("No hay turnos con los criterios seleccionados.");
+                    btnAsignar.Enabled = false;
                     // TODO: ojo, si se deja eso hay que evitar que se pueda elegir el turno
                     // Otra opción es dejar el ListBox vacío y oculto, y mostrar un mensaje en un Label
                 }
@@ -208,18 +201,13 @@ namespace clinica
 
                     while (reader.Read())
                     {
-                        // Obtener el ID y el nombre de la cobertura
                         int id = reader.GetInt32(0);
                         string descripcion = reader.GetString(1);
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> estudio = new(id, descripcion);
                         estudios.Add(estudio);
 
                     }
-                    // Asignar la lista de coberturas al ComboBox
                     cbxEstudios.DataSource = estudios;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     cbxEstudios.DisplayMember = "Value";
                     cbxEstudios.SelectedIndex = 0;
                 }
@@ -247,9 +235,7 @@ namespace clinica
             cbxPaciente.DataSource = null;
             cbxPaciente.Items.Clear();
             cbxPaciente.Text = "";
-            // Asignar la lista de coberturas al ComboBox
             cbxPaciente.DataSource = Clinica.Clinica.ObtenerPacientes();
-            // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
             cbxPaciente.DisplayMember = "Value";
             cbxPaciente.SelectedIndex = -1;
         }
@@ -270,7 +256,6 @@ namespace clinica
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
                 comando.Parameters.AddWithValue("@idTurno", idTurno);
 
-                //get query response
                 int rowsAffected = comando.ExecuteNonQuery();
                 salida = rowsAffected;
             }
@@ -292,7 +277,6 @@ namespace clinica
         private int AsignarTurno(int idPaciente, int idTurno, int idEstudio)
         {
             int salida = 0;
-
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
@@ -307,7 +291,6 @@ namespace clinica
                 comando.Parameters.AddWithValue("@idPaciente", idPaciente);
                 comando.Parameters.AddWithValue("@idEstudio", idEstudio);
 
-                //get query response
                 int rowsAffected = comando.ExecuteNonQuery();
                 salida = rowsAffected;
             }
