@@ -125,41 +125,28 @@ namespace clinica
 
                     while (reader.Read())
                     {
-                        // Obtener el ID y el nombre de la cobertura
                         int id = reader.GetInt32(0);
                         string fecha = reader.GetDateTime(1).ToString("dd/MM/yyyy");
                         string hora = reader.GetTimeSpan(2).ToString();
                         string estudioDescripcion = reader.GetString(3);
                         string lugarDescripcion = reader.GetString(4);
                         int turnoStatus = reader.GetInt32(5);
-
                         string turnoStatusDescripcion = turnoStatus == (int)TurnoStatus.Disponible ? "Disponible" : "Ocupado";
-
                         string descripcionTurno = $"{fecha} - {hora} - {lugarDescripcion} -  {estudioDescripcion} - {turnoStatusDescripcion}";
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
                         KeyValuePair<int, string> turno = new(id, descripcionTurno);
                         turnos.Add(turno);
-
                     }
-
-                    // Asignar la lista de coberturas al ComboBox
                     lbxTurnos.DataSource = turnos;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                     lbxTurnos.DisplayMember = "Value";
                     lbxTurnos.SelectedIndex = -1;
                     btnAsignar.Enabled = true;
-
                 }
                 else
                 {
-                    //MessageBox.Show("No hay datos de Turnos");
                     lbxTurnos.DataSource = null;
                     lbxTurnos.Items.Clear();
                     lbxTurnos.Items.Add("No hay turnos con los criterios seleccionados.");
                     btnAsignar.Enabled = false;
-                    // TODO: ojo, si se deja eso hay que evitar que se pueda elegir el turno
-                    // Otra opción es dejar el ListBox vacío y oculto, y mostrar un mensaje en un Label
                 }
 
             }
@@ -244,18 +231,14 @@ namespace clinica
         {
 
             int salida = 0;
-
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 sqlCon.Open();
-
                 string query = "update Turno set TurnoStatus = 1, Estudio_id = null where id = @idTurno;";
-
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
                 comando.Parameters.AddWithValue("@idTurno", idTurno);
-
                 int rowsAffected = comando.ExecuteNonQuery();
                 salida = rowsAffected;
             }
@@ -410,16 +393,13 @@ namespace clinica
         private void btnRegistrarPaciente_Click(object sender, EventArgs e)
         {
             frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
-
             Inscripcion.Show();
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
             formOrigen.Show();
-
         }
 
         private void pnlTurnos_Paint(object sender, PaintEventArgs e)
