@@ -28,19 +28,10 @@ namespace Clinica
             formOrigen.Show();
             this.Close();
         }
-
-        private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e)
+        private void btnInscribir_Click(object sender, EventArgs e)
         {
-            if (formOrigen is frmTurnos formTunos)
-            {
-                formTunos.CargarPacientes();
-            }
-            if (formOrigen is frmAcreditacion frmAcreditacion)
-            {
-                frmAcreditacion.CargarPacientes();
-            }
+            RegistrarPaciente();
         }
-
         private void RegistrarPaciente()
         {
             int? idCobertura = null;
@@ -61,9 +52,16 @@ namespace Clinica
                 return;
             }
 
-            if (txtNombre.Text == "" || txtDNI.Text == "" || cbxCobertura.Text == "")
+            if (txtNombre.Text == "" || txtApellido.Text == "" || txtDNI.Text == "" || txtTelefono.Text == "" || txtDireccion.Text == ""
+               || txtEmail.Text == "" || cbxCobertura.Text == "")
             {
                 MessageBox.Show("Debe completar todos los campos", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (dtpFechaNac.Value > DateTime.Now)
+            {
+                MessageBox.Show("La fecha de nacimiento no puede ser posterior a la fecha actual", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -71,9 +69,11 @@ namespace Clinica
             Paciente paciente = new();
             paciente.Nombre = txtNombre.Text;
             paciente.Apellido = txtApellido.Text;
+            paciente.FechaNac = dtpFechaNac.Value;
             paciente.DNI = txtDNI.Text;
-            paciente.Email = txtEmail.Text;
+            paciente.Telefono = txtTelefono.Text;
             paciente.Direccion = txtDireccion.Text;
+            paciente.Email = txtEmail.Text;
             paciente.Cobertura_id = idCobertura;
             paciente.HistoriaClinica = "Inscripto el día: " + DateTime.Now;
 
@@ -81,12 +81,11 @@ namespace Clinica
 
             if (respuesta == 0)
             {
-                MessageBox.Show("USUARIO YA EXISTE", "AVISO DEL SISTEMA",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El usuario ya existe", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("Inscripción exitosa ", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Inscripción exitosa", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 desactivarCampos();
             }
         }
@@ -129,29 +128,27 @@ namespace Clinica
 
         private void desactivarCampos()
         {
-            txtDNI.Enabled = false;
-            txtEmail.Enabled = false;
             txtNombre.Enabled = false;
-            btnInscribir.Enabled = false;
             txtApellido.Enabled = false;
+            dtpFechaNac.Enabled = false;
+            txtDNI.Enabled = false;
+            txtTelefono.Enabled = false;
             txtDireccion.Enabled = false;
+            txtEmail.Enabled = false;
             cbxCobertura.Enabled = false;
+            btnInscribir.Enabled = false;
         }
         private void activarCampos()
         {
-            txtDNI.Enabled = true;
-            txtEmail.Enabled = true;
             txtNombre.Enabled = true;
-            btnInscribir.Enabled = true;
             txtApellido.Enabled = true;
+            dtpFechaNac.Enabled = true;
+            txtDNI.Enabled = true;
+            txtTelefono.Enabled = true;
             txtDireccion.Enabled = true;
+            txtEmail.Enabled = true;
             cbxCobertura.Enabled = true;
-
-        }
-
-        private void btnInscribir_Click(object sender, EventArgs e)
-        {
-            RegistrarPaciente();
+            btnInscribir.Enabled = true;
         }
 
         private void btnNuevaInscripcion_Click(object sender, EventArgs e)
@@ -162,32 +159,46 @@ namespace Clinica
             txtApellido.Text = "";
             txtDireccion.Text = "";
             cbxCobertura.SelectedIndex = -1;
-
-
             btnInscribir.Enabled = true;
             txtNombre.Focus();
-
             activarCampos();
         }
 
-
-
-        private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
+        private void validacionCampoDNI(object sender, KeyPressEventArgs e)
         {
-            // Verifica si la tecla presionada es un número o una tecla especial
-            // Si no es un número ni una tecla especial, se cancela la pulsación
+            // Verifica si la tecla presionada es un número o tecla especial, si no es un número ni una tecla especial se cancela la pulsación
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Delete)
             {
                 e.Handled = true;
             }
-            // Además, verifica si ya hay un punto o coma en la TextBox y, si es así, cancela la pulsación
-            if (e.KeyChar == '.' || e.KeyChar == ',')
+
+            if (e.KeyChar == '.' || e.KeyChar == ',') // Verifica si ya hay un punto o coma en la TextBox y, si es así, cancela la pulsación
+            {
+                e.Handled = true;
+            }
+
+            if (txtDNI.Text.Length > 8) //Se restringe el campo a un máximo de 8 cifras
+            {
+                txtDNI.Text = txtDNI.Text.Substring(0, 8);
+                txtDNI.SelectionStart = 8;
+            }
+        }
+
+        private void validacionCamposInt(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) // Si no es un número o la tecla de retroceso, se ignora la pulsación
             {
                 e.Handled = true;
             }
         }
 
-
+        private void validacionCamposString(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)Keys.Space && e.KeyChar != (char)Keys.Back) // Si no es una letra, espacio ni la tecla de retroceso, se ignora la pulsación
+            {
+                e.Handled = true;
+            }
+        }
 
         private void frmInscripcion_Load(object sender, EventArgs e)
         {
@@ -197,16 +208,6 @@ namespace Clinica
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cargarDatosCobertura()
@@ -243,8 +244,6 @@ namespace Clinica
                         KeyValuePair<int, string> cobertura = new(id, nombre);
 
                         coberturas.Add(cobertura);
-
-
                     }
                     // Asignar la lista de coberturas al ComboBox
                     cbxCobertura.DataSource = coberturas;
@@ -254,7 +253,7 @@ namespace Clinica
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos de cobertura");
+                    MessageBox.Show("No hay datos de cobertura", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -270,5 +269,24 @@ namespace Clinica
                 }
             }
         }
+
+        private void btnImprimirComprobante_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (formOrigen is frmTurnos formTurnos)
+            {
+                formTurnos.CargarPacientes();
+            }
+            if (formOrigen is frmAcreditacion frmAcreditacion)
+            {
+                frmAcreditacion.CargarPacientes();
+            }
+        }
+
+
     }
 }

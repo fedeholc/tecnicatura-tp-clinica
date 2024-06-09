@@ -35,7 +35,7 @@
             rbtConsultoriosMed = new RadioButton();
             lblTituloT = new Label();
             pnlTituloT = new Panel();
-            btnSeleccionarModulo = new Button();
+            btnIngresarModulo = new Button();
             btnSalir = new Button();
             rbtConsultoriosMedicos = new RadioButton();
             pnlModulos.SuspendLayout();
@@ -49,12 +49,12 @@
             pnlModulos.Controls.Add(grbSeleccionarModulos);
             pnlModulos.Controls.Add(lblTituloT);
             pnlModulos.Controls.Add(pnlTituloT);
-            pnlModulos.Controls.Add(btnSeleccionarModulo);
+            pnlModulos.Controls.Add(btnIngresarModulo);
             pnlModulos.Controls.Add(btnSalir);
             pnlModulos.Location = new Point(11, 10);
             pnlModulos.Margin = new Padding(2, 1, 2, 1);
             pnlModulos.Name = "pnlModulos";
-            pnlModulos.Size = new Size(518, 242);
+            pnlModulos.Size = new Size(518, 216);
             pnlModulos.TabIndex = 38;
             // 
             // grbSeleccionarModulos
@@ -64,19 +64,19 @@
             grbSeleccionarModulos.Controls.Add(rbtConsultoriosMed);
             grbSeleccionarModulos.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
             grbSeleccionarModulos.Location = new Point(147, 72);
-            grbSeleccionarModulos.Margin = new Padding(2, 2, 2, 2);
+            grbSeleccionarModulos.Margin = new Padding(2);
             grbSeleccionarModulos.Name = "grbSeleccionarModulos";
-            grbSeleccionarModulos.Padding = new Padding(2, 2, 2, 2);
-            grbSeleccionarModulos.Size = new Size(171, 126);
+            grbSeleccionarModulos.Padding = new Padding(2);
+            grbSeleccionarModulos.Size = new Size(171, 101);
             grbSeleccionarModulos.TabIndex = 38;
             grbSeleccionarModulos.TabStop = false;
-            grbSeleccionarModulos.Text = "Seleccionar Modulo";
+            grbSeleccionarModulos.Text = "Seleccionar Módulo";
             // 
             // rbtEstudiosClinic
             // 
             rbtEstudiosClinic.AutoSize = true;
             rbtEstudiosClinic.Location = new Point(13, 67);
-            rbtEstudiosClinic.Margin = new Padding(2, 2, 2, 2);
+            rbtEstudiosClinic.Margin = new Padding(2);
             rbtEstudiosClinic.Name = "rbtEstudiosClinic";
             rbtEstudiosClinic.Size = new Size(112, 19);
             rbtEstudiosClinic.TabIndex = 1;
@@ -88,7 +88,7 @@
             rbtConsultoriosMed.AutoSize = true;
             rbtConsultoriosMed.Checked = true;
             rbtConsultoriosMed.Location = new Point(13, 23);
-            rbtConsultoriosMed.Margin = new Padding(2, 2, 2, 2);
+            rbtConsultoriosMed.Margin = new Padding(2);
             rbtConsultoriosMed.Name = "rbtConsultoriosMed";
             rbtConsultoriosMed.Size = new Size(138, 19);
             rbtConsultoriosMed.TabIndex = 0;
@@ -113,24 +113,24 @@
             pnlTituloT.BorderStyle = BorderStyle.FixedSingle;
             pnlTituloT.ForeColor = SystemColors.ActiveBorder;
             pnlTituloT.Location = new Point(147, 51);
-            pnlTituloT.Margin = new Padding(2, 2, 2, 2);
+            pnlTituloT.Margin = new Padding(2);
             pnlTituloT.Name = "pnlTituloT";
             pnlTituloT.Size = new Size(331, 2);
             pnlTituloT.TabIndex = 29;
             // 
-            // btnSeleccionarModulo
+            // btnIngresarModulo
             // 
-            btnSeleccionarModulo.FlatAppearance.BorderColor = Color.LightGray;
-            btnSeleccionarModulo.FlatStyle = FlatStyle.Flat;
-            btnSeleccionarModulo.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSeleccionarModulo.Location = new Point(375, 166);
-            btnSeleccionarModulo.Margin = new Padding(2, 2, 2, 2);
-            btnSeleccionarModulo.Name = "btnSeleccionarModulo";
-            btnSeleccionarModulo.Size = new Size(103, 32);
-            btnSeleccionarModulo.TabIndex = 30;
-            btnSeleccionarModulo.Text = "Seleccionar";
-            btnSeleccionarModulo.UseVisualStyleBackColor = true;
-            btnSeleccionarModulo.Click += btnSeleccionarModulo_Click;
+            btnIngresarModulo.FlatAppearance.BorderColor = Color.LightGray;
+            btnIngresarModulo.FlatStyle = FlatStyle.Flat;
+            btnIngresarModulo.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
+            btnIngresarModulo.Location = new Point(375, 141);
+            btnIngresarModulo.Margin = new Padding(2);
+            btnIngresarModulo.Name = "btnIngresarModulo";
+            btnIngresarModulo.Size = new Size(103, 32);
+            btnIngresarModulo.TabIndex = 30;
+            btnIngresarModulo.Text = "Ingresar";
+            btnIngresarModulo.UseVisualStyleBackColor = true;
+            btnIngresarModulo.Click += btnIngresarModulo_Click;
             // 
             // btnSalir
             // 
@@ -138,7 +138,7 @@
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnSalir.Location = new Point(418, 19);
-            btnSalir.Margin = new Padding(2, 2, 2, 2);
+            btnSalir.Margin = new Padding(2);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(60, 28);
             btnSalir.TabIndex = 2;
@@ -163,11 +163,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(555, 273);
+            ClientSize = new Size(545, 244);
             Controls.Add(pnlModulos);
             Margin = new Padding(2, 1, 2, 1);
             Name = "frmModulos";
-            Text = "frmModulos";
+            Text = "Módulos";
             pnlModulos.ResumeLayout(false);
             pnlModulos.PerformLayout();
             grbSeleccionarModulos.ResumeLayout(false);
@@ -182,7 +182,7 @@
         private Panel pnlTituloT;
         private Button btnAsignar;
         private Button btnCancelar;
-        private Button btnSeleccionarModulo;
+        private Button btnIngresarModulo;
 
         public GroupBox grbMostrarModulos { get; private set; }
         public RadioButton rbtEstudiosClinicos { get; private set; }

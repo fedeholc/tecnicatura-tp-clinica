@@ -21,6 +21,14 @@ namespace clinica
             InitializeComponent();
         }
 
+        internal string? rol;
+        internal string? usuario;
+
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+            lblIngreso.Text = "Usuario: " + usuario + " " + "(" + rol + ")";
+        }
+
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -29,6 +37,8 @@ namespace clinica
         private void btnVolver_Click(object sender, EventArgs e)
         {
             frmModulos Modulos = new frmModulos();
+            Modulos.rol = rol;
+            Modulos.usuario = usuario;
             Modulos.Show();
             this.Hide();
         }
@@ -68,7 +78,8 @@ namespace clinica
             this.Hide();
         }
 
-        public void CrearTurno(int pacienteId, int profesionalId, DateTime fechaHora)
+        /*
+         public void CrearTurno(int pacienteId, int profesionalId, DateTime fechaHora)   //este método es huérfano y creo que debería ir en la clase Turno, de implementarse.
         {
             using (var context = new ClinicaContext())
             {
@@ -83,8 +94,10 @@ namespace clinica
                 context.SaveChanges();
             }
         }
+        */
 
-        /*public List<Turno> ListarTurnos()
+        /*
+         public List<Turno> ListarTurnos()         //Mismo comentario que arriba, pero este método ya estaba comentado.
         {
             using (var context = new ClinicaContext())
             {

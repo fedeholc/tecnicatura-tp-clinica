@@ -50,7 +50,7 @@
             panel1.Controls.Add(txtPass);
             panel1.Controls.Add(lblUsuario);
             panel1.Controls.Add(lblPassword);
-            panel1.Location = new Point(87, 89);
+            panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
             panel1.Size = new Size(518, 325);
             panel1.TabIndex = 7;
@@ -98,6 +98,7 @@
             txtPass.Size = new Size(140, 23);
             txtPass.TabIndex = 4;
             txtPass.Text = "1234";
+            txtPass.UseSystemPasswordChar = true;
             // 
             // lblUsuario
             // 
@@ -117,15 +118,15 @@
             lblPassword.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
             lblPassword.Location = new Point(280, 231);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(58, 15);
+            lblPassword.Size = new Size(68, 15);
             lblPassword.TabIndex = 2;
-            lblPassword.Text = "Password";
+            lblPassword.Text = "Contraseña";
             // 
             // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(722, 492);
+            ClientSize = new Size(541, 349);
             Controls.Add(panel1);
             Name = "frmLogin";
             Text = "Login";
