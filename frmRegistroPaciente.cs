@@ -137,6 +137,7 @@ namespace Clinica
             txtEmail.Enabled = false;
             cbxCobertura.Enabled = false;
             btnInscribir.Enabled = false;
+            btnImprimirComprobante.Enabled = true;
         }
         private void activarCampos()
         {
@@ -203,6 +204,7 @@ namespace Clinica
         private void frmInscripcion_Load(object sender, EventArgs e)
         {
             cargarDatosCobertura();
+            btnImprimirComprobante.Enabled = false;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -273,6 +275,7 @@ namespace Clinica
         private void btnImprimirComprobante_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnImprimirComprobante.Enabled = false;
         }
 
         private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e)
