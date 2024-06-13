@@ -31,10 +31,67 @@ namespace clinica
         {
 
         }
+        private int AsignarTurno(int idPaciente, int idAgendaturno, int idProfesional)
+        {
+            int salida = 0;
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = "update agendaturnos set TurnoStatus = 2, Paciente_id = @idPaciente, " +
+                    "Profesional_id = @idProfesional where Id_Agendaturnos = @idAgendaturno;";
+
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@idAgendaturno", idAgendaturno);
+                comando.Parameters.AddWithValue("@idPaciente", idPaciente);
+                comando.Parameters.AddWithValue("@idProfesional", idProfesional);
+
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
 
         private void btnAsignar_Click(object sender, EventArgs e)
         {
-
+            if (rbtOcupados.Checked)
+            {
+                MessageBox.Show("No se puede asignar un turno ya ocupado.");
+                return;
+            }
+            if (lbxAgendaTurnos.SelectedIndex != -1 && cbxPacientes.SelectedIndex != -1 && cbxProfesionales.SelectedIndex != -1)
+            {
+                int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPacientes.SelectedItem!).Key,
+                    ((KeyValuePair<int, string>)lbxAgendaTurnos.SelectedItem!).Key,
+                    ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key);
+                if (rta > 0)
+                {
+                    MessageBox.Show("Turno Asignado correctamente.");
+                    CargarAgendaTurnos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al asignar el turno.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un turno, estudio y paciente para poder asignarle el turno.");
+            }
         }
 
         private void frmTurnosConsultorios_Load(object sender, EventArgs e)
@@ -243,18 +300,47 @@ namespace clinica
 
 
         }
+        public void CargarProfesionalesPorEspecialidad(string especialidad)
+        {
+            cbxProfesionales.Items.Clear();
+            cbxProfesionales.Text = "";
+
+            try
+            {
+                using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+                {
+                    string query = "SELECT Profesional_id, Nombre FROM profesional WHERE Especialidad = @Especialidad";
+                    MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                    comando.Parameters.AddWithValue("@Especialidad", especialidad);
+                    sqlCon.Open();
+
+                    using (MySqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int idProfesional = reader.GetInt32("Profesional_id");
+                            string nombreProfesional = reader.GetString("Nombre");
+                            cbxProfesionales.Items.Add(new KeyValuePair<int, string>(idProfesional, nombreProfesional));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los profesionales: " + ex.Message);
+            }
+        }
 
         private void cbxEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Obtener la especialidad seleccionada
+            string especialidad = cbxEspecialidad.SelectedItem?.ToString();
 
-            if (cbxEspecialidad != null)
+            if (!string.IsNullOrEmpty(especialidad))
             {
-                string esp = cbxEspecialidad.Text;
-                this.Hide();
-                frmListadoProfesionales profesionales = new frmListadoProfesionales(esp);
-                profesionales.Show();
+                // Llamar al método para cargar los profesionales según la especialidad seleccionada
+                CargarProfesionalesPorEspecialidad(especialidad);
             }
-            CargarAgendaTurnos();
         }
         private void dtpFechaDesde_ValueChanged(object sender, EventArgs e)
         {
@@ -269,9 +355,9 @@ namespace clinica
         }
 
 
-        public void SetTextBoxValue(string value)
+        public void SetComboBoxValueProfesionales(string value)
         {
-            txtProfesional.Text = value.ToString();
+            cbxProfesionales.Text = value.ToString();
         }
 
         public void SetComboBoxValue(string value)
@@ -318,6 +404,11 @@ namespace clinica
         private void lblFechaDesde_Click(object sender, EventArgs e)
         {
 
+        }
+
+        internal void SetTextBoxValue(string valor)
+        {
+            throw new NotImplementedException();
         }
     }
 }
