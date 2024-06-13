@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             lblTituloA = new Label();
             label1 = new Label();
             label2 = new Label();
             panel2 = new Panel();
             btnVolver = new Button();
             dtgvProfesionales = new DataGridView();
-            nroMatricula = new DataGridViewTextBoxColumn();
+            txtEspecialidad = new TextBox();
+            Id_Profesional = new DataGridViewTextBoxColumn();
             nombreProfesional = new DataGridViewTextBoxColumn();
             apellidoProfesional = new DataGridViewTextBoxColumn();
             especialidad = new DataGridViewTextBoxColumn();
-            txtEspecialidad = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dtgvProfesionales).BeginInit();
             SuspendLayout();
             // 
@@ -84,7 +84,7 @@
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.ForeColor = SystemColors.ActiveBorder;
             panel2.Location = new Point(43, 149);
-            panel2.Margin = new Padding(4, 4, 4, 4);
+            panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
             panel2.Size = new Size(738, 1);
             panel2.TabIndex = 74;
@@ -96,7 +96,7 @@
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnVolver.Location = new Point(629, 104);
-            btnVolver.Margin = new Padding(4, 4, 4, 4);
+            btnVolver.Margin = new Padding(4);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(152, 37);
             btnVolver.TabIndex = 73;
@@ -111,7 +111,7 @@
             dtgvProfesionales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dtgvProfesionales.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dtgvProfesionales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvProfesionales.Columns.AddRange(new DataGridViewColumn[] { nroMatricula, nombreProfesional, apellidoProfesional, especialidad });
+            dtgvProfesionales.Columns.AddRange(new DataGridViewColumn[] { Id_Profesional, nombreProfesional, apellidoProfesional, especialidad });
             dtgvProfesionales.Location = new Point(46, 288);
             dtgvProfesionales.Margin = new Padding(2, 1, 2, 1);
             dtgvProfesionales.Name = "dtgvProfesionales";
@@ -122,16 +122,27 @@
             dtgvProfesionales.CellContentClick += dtgvProfesionales_CellContentClick;
             dtgvProfesionales.SelectionChanged += dtgvProfesionales_SelectionChanged;
             // 
-            // nroMatricula
+            // txtEspecialidad
             // 
-            nroMatricula.HeaderText = "Nro. Matricula";
-            nroMatricula.MinimumWidth = 10;
-            nroMatricula.Name = "nroMatricula";
-            nroMatricula.ReadOnly = true;
-            nroMatricula.Width = 132;
+            txtEspecialidad.Location = new Point(48, 191);
+            txtEspecialidad.Margin = new Padding(2);
+            txtEspecialidad.Name = "txtEspecialidad";
+            txtEspecialidad.Size = new Size(171, 27);
+            txtEspecialidad.TabIndex = 82;
+            txtEspecialidad.TextChanged += txtEspecialidad_TextChanged;
+            // 
+            // Id_Profesional
+            // 
+            Id_Profesional.DataPropertyName = "Id_Profesional";
+            Id_Profesional.HeaderText = "Id_Profesional";
+            Id_Profesional.MinimumWidth = 10;
+            Id_Profesional.Name = "Id_Profesional";
+            Id_Profesional.ReadOnly = true;
+            Id_Profesional.Width = 131;
             // 
             // nombreProfesional
             // 
+            nombreProfesional.DataPropertyName = "nombreProfesional";
             nombreProfesional.HeaderText = "Nombre";
             nombreProfesional.MinimumWidth = 10;
             nombreProfesional.Name = "nombreProfesional";
@@ -140,6 +151,7 @@
             // 
             // apellidoProfesional
             // 
+            apellidoProfesional.DataPropertyName = "apellidoProfesional";
             apellidoProfesional.HeaderText = "Apellido";
             apellidoProfesional.MinimumWidth = 10;
             apellidoProfesional.Name = "apellidoProfesional";
@@ -148,23 +160,14 @@
             // 
             // especialidad
             // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            especialidad.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            especialidad.DefaultCellStyle = dataGridViewCellStyle1;
             especialidad.HeaderText = "Especialidad";
             especialidad.MinimumWidth = 10;
             especialidad.Name = "especialidad";
             especialidad.ReadOnly = true;
             especialidad.Width = 122;
-            // 
-            // txtEspecialidad
-            // 
-            txtEspecialidad.Location = new Point(48, 191);
-            txtEspecialidad.Margin = new Padding(2, 2, 2, 2);
-            txtEspecialidad.Name = "txtEspecialidad";
-            txtEspecialidad.Size = new Size(171, 27);
-            txtEspecialidad.TabIndex = 82;
-            txtEspecialidad.TextChanged += txtEspecialidad_TextChanged;
             // 
             // frmListadoProfesionales
             // 
@@ -178,7 +181,7 @@
             Controls.Add(label2);
             Controls.Add(panel2);
             Controls.Add(btnVolver);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "frmListadoProfesionales";
             Text = "frmListadoProfesionales";
             Load += frmListadoProfesionales_Load;
@@ -195,10 +198,10 @@
         private Panel panel2;
         private Button btnVolver;
         private DataGridView dtgvProfesionales;
-        private DataGridViewTextBoxColumn nroMatricula;
+        private TextBox txtEspecialidad;
+        private DataGridViewTextBoxColumn Id_Profesional;
         private DataGridViewTextBoxColumn nombreProfesional;
         private DataGridViewTextBoxColumn apellidoProfesional;
         private DataGridViewTextBoxColumn especialidad;
-        private TextBox txtEspecialidad;
     }
 }

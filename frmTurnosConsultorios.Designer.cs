@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTurnosConsultorios));
             pnlTurnos = new Panel();
+            cbxProfesionales = new ComboBox();
             cbxPacientes = new ComboBox();
-            txtProfesional = new TextBox();
             lblProfesional = new Label();
             cbxEspecialidad = new ComboBox();
             btnVolver = new Button();
@@ -64,8 +64,8 @@
             // 
             pnlTurnos.BackgroundImage = (Image)resources.GetObject("pnlTurnos.BackgroundImage");
             pnlTurnos.BorderStyle = BorderStyle.FixedSingle;
+            pnlTurnos.Controls.Add(cbxProfesionales);
             pnlTurnos.Controls.Add(cbxPacientes);
-            pnlTurnos.Controls.Add(txtProfesional);
             pnlTurnos.Controls.Add(lblProfesional);
             pnlTurnos.Controls.Add(cbxEspecialidad);
             pnlTurnos.Controls.Add(btnVolver);
@@ -89,29 +89,29 @@
             pnlTurnos.Controls.Add(cbxHoraDesde);
             pnlTurnos.Controls.Add(btnSalir);
             pnlTurnos.Location = new Point(22, 24);
-            pnlTurnos.Margin = new Padding(2, 2, 2, 2);
+            pnlTurnos.Margin = new Padding(2);
             pnlTurnos.Name = "pnlTurnos";
             pnlTurnos.Size = new Size(871, 525);
             pnlTurnos.TabIndex = 38;
             pnlTurnos.Paint += pnlTurnos_Paint;
             // 
+            // cbxProfesionales
+            // 
+            cbxProfesionales.FormattingEnabled = true;
+            cbxProfesionales.Location = new Point(325, 76);
+            cbxProfesionales.Margin = new Padding(2);
+            cbxProfesionales.Name = "cbxProfesionales";
+            cbxProfesionales.Size = new Size(179, 28);
+            cbxProfesionales.TabIndex = 85;
+            // 
             // cbxPacientes
             // 
             cbxPacientes.FormattingEnabled = true;
             cbxPacientes.Location = new Point(133, 360);
-            cbxPacientes.Margin = new Padding(2, 2, 2, 2);
+            cbxPacientes.Margin = new Padding(2);
             cbxPacientes.Name = "cbxPacientes";
             cbxPacientes.Size = new Size(203, 28);
             cbxPacientes.TabIndex = 84;
-            // 
-            // txtProfesional
-            // 
-            txtProfesional.Location = new Point(325, 76);
-            txtProfesional.Margin = new Padding(2, 2, 2, 2);
-            txtProfesional.Name = "txtProfesional";
-            txtProfesional.Size = new Size(177, 27);
-            txtProfesional.TabIndex = 83;
-            txtProfesional.TextChanged += txtProfesional_TextChanged;
             // 
             // lblProfesional
             // 
@@ -129,7 +129,7 @@
             // 
             cbxEspecialidad.FormattingEnabled = true;
             cbxEspecialidad.Location = new Point(137, 76);
-            cbxEspecialidad.Margin = new Padding(2, 2, 2, 2);
+            cbxEspecialidad.Margin = new Padding(2);
             cbxEspecialidad.Name = "cbxEspecialidad";
             cbxEspecialidad.Size = new Size(179, 28);
             cbxEspecialidad.TabIndex = 37;
@@ -142,7 +142,7 @@
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnVolver.Location = new Point(690, 446);
-            btnVolver.Margin = new Padding(2, 2, 2, 2);
+            btnVolver.Margin = new Padding(2);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(152, 37);
             btnVolver.TabIndex = 36;
@@ -179,7 +179,7 @@
             pnlTituloT.BorderStyle = BorderStyle.FixedSingle;
             pnlTituloT.ForeColor = SystemColors.ActiveBorder;
             pnlTituloT.Location = new Point(137, 32);
-            pnlTituloT.Margin = new Padding(2, 2, 2, 2);
+            pnlTituloT.Margin = new Padding(2);
             pnlTituloT.Name = "pnlTituloT";
             pnlTituloT.Size = new Size(571, 10);
             pnlTituloT.TabIndex = 29;
@@ -191,7 +191,7 @@
             btnAsignar.FlatStyle = FlatStyle.Flat;
             btnAsignar.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnAsignar.Location = new Point(256, 446);
-            btnAsignar.Margin = new Padding(2, 2, 2, 2);
+            btnAsignar.Margin = new Padding(2);
             btnAsignar.Name = "btnAsignar";
             btnAsignar.Size = new Size(152, 37);
             btnAsignar.TabIndex = 32;
@@ -206,7 +206,7 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnCancelar.Location = new Point(474, 446);
-            btnCancelar.Margin = new Padding(2, 2, 2, 2);
+            btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(152, 37);
             btnCancelar.TabIndex = 31;
@@ -220,7 +220,7 @@
             btnRegistrarPaciente.FlatStyle = FlatStyle.Flat;
             btnRegistrarPaciente.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnRegistrarPaciente.Location = new Point(29, 446);
-            btnRegistrarPaciente.Margin = new Padding(2, 2, 2, 2);
+            btnRegistrarPaciente.Margin = new Padding(2);
             btnRegistrarPaciente.Name = "btnRegistrarPaciente";
             btnRegistrarPaciente.Size = new Size(152, 37);
             btnRegistrarPaciente.TabIndex = 30;
@@ -246,9 +246,9 @@
             grbMostrarTurnos.Controls.Add(rbtDisponibles);
             grbMostrarTurnos.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
             grbMostrarTurnos.Location = new Point(130, 244);
-            grbMostrarTurnos.Margin = new Padding(2, 2, 2, 2);
+            grbMostrarTurnos.Margin = new Padding(2);
             grbMostrarTurnos.Name = "grbMostrarTurnos";
-            grbMostrarTurnos.Padding = new Padding(2, 2, 2, 2);
+            grbMostrarTurnos.Padding = new Padding(2);
             grbMostrarTurnos.Size = new Size(246, 49);
             grbMostrarTurnos.TabIndex = 26;
             grbMostrarTurnos.TabStop = false;
@@ -258,7 +258,7 @@
             // 
             rbtOcupados.AutoSize = true;
             rbtOcupados.Location = new Point(141, 18);
-            rbtOcupados.Margin = new Padding(2, 2, 2, 2);
+            rbtOcupados.Margin = new Padding(2);
             rbtOcupados.Name = "rbtOcupados";
             rbtOcupados.Size = new Size(101, 25);
             rbtOcupados.TabIndex = 1;
@@ -270,7 +270,7 @@
             rbtDisponibles.AutoSize = true;
             rbtDisponibles.Checked = true;
             rbtDisponibles.Location = new Point(15, 18);
-            rbtDisponibles.Margin = new Padding(2, 2, 2, 2);
+            rbtDisponibles.Margin = new Padding(2);
             rbtDisponibles.Name = "rbtDisponibles";
             rbtDisponibles.Size = new Size(111, 25);
             rbtDisponibles.TabIndex = 0;
@@ -307,7 +307,7 @@
             // 
             lbxAgendaTurnos.FormattingEnabled = true;
             lbxAgendaTurnos.Location = new Point(514, 76);
-            lbxAgendaTurnos.Margin = new Padding(2, 2, 2, 2);
+            lbxAgendaTurnos.Margin = new Padding(2);
             lbxAgendaTurnos.Name = "lbxAgendaTurnos";
             lbxAgendaTurnos.Size = new Size(350, 304);
             lbxAgendaTurnos.TabIndex = 11;
@@ -341,7 +341,7 @@
             // dtpFechaHasta
             // 
             dtpFechaHasta.Location = new Point(325, 146);
-            dtpFechaHasta.Margin = new Padding(2, 2, 2, 2);
+            dtpFechaHasta.Margin = new Padding(2);
             dtpFechaHasta.Name = "dtpFechaHasta";
             dtpFechaHasta.Size = new Size(177, 27);
             dtpFechaHasta.TabIndex = 8;
@@ -349,7 +349,7 @@
             // dtpFechaDesde
             // 
             dtpFechaDesde.Location = new Point(134, 146);
-            dtpFechaDesde.Margin = new Padding(2, 2, 2, 2);
+            dtpFechaDesde.Margin = new Padding(2);
             dtpFechaDesde.Name = "dtpFechaDesde";
             dtpFechaDesde.Size = new Size(177, 27);
             dtpFechaDesde.TabIndex = 7;
@@ -372,7 +372,7 @@
             cbxHoraHasta.FormattingEnabled = true;
             cbxHoraHasta.Items.AddRange(new object[] { "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "23:59" });
             cbxHoraHasta.Location = new Point(256, 208);
-            cbxHoraHasta.Margin = new Padding(2, 2, 2, 2);
+            cbxHoraHasta.Margin = new Padding(2);
             cbxHoraHasta.Name = "cbxHoraHasta";
             cbxHoraHasta.Size = new Size(80, 28);
             cbxHoraHasta.TabIndex = 4;
@@ -383,7 +383,7 @@
             cbxHoraDesde.FormattingEnabled = true;
             cbxHoraDesde.Items.AddRange(new object[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" });
             cbxHoraDesde.Location = new Point(134, 208);
-            cbxHoraDesde.Margin = new Padding(2, 2, 2, 2);
+            cbxHoraDesde.Margin = new Padding(2);
             cbxHoraDesde.Name = "cbxHoraDesde";
             cbxHoraDesde.Size = new Size(82, 28);
             cbxHoraDesde.TabIndex = 3;
@@ -395,7 +395,7 @@
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
             btnSalir.Location = new Point(712, 5);
-            btnSalir.Margin = new Padding(2, 2, 2, 2);
+            btnSalir.Margin = new Padding(2);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(152, 37);
             btnSalir.TabIndex = 2;
@@ -409,7 +409,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(904, 550);
             Controls.Add(pnlTurnos);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "frmTurnosConsultorios";
             Text = "frmTurnosConsultorios";
             Load += frmTurnosConsultorios_Load;
@@ -447,7 +447,7 @@
         private Button btnSalir;
         private ComboBox cbxEspecialidad;
         private Label lblProfesional;
-        private TextBox txtProfesional;
         private ComboBox cbxPacientes;
+        private ComboBox cbxProfesionales;
     }
 }
