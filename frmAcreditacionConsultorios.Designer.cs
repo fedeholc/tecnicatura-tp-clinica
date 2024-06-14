@@ -41,8 +41,6 @@ namespace clinica
             label1 = new Label();
             lblTituloA = new Label();
             btnAcreditar = new Button();
-            label2 = new Label();
-            cbxLugar = new ComboBox();
             rbtNormal = new RadioButton();
             rbtUrgencia = new RadioButton();
             groupBox2 = new GroupBox();
@@ -58,10 +56,10 @@ namespace clinica
             btnVolver.FlatAppearance.BorderColor = Color.LightGray;
             btnVolver.FlatStyle = FlatStyle.Flat;
             btnVolver.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnVolver.Location = new Point(658, 507);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.Location = new Point(1069, 811);
+            btnVolver.Margin = new Padding(5, 6, 5, 6);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(181, 37);
+            btnVolver.Size = new Size(294, 59);
             btnVolver.TabIndex = 39;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = false;
@@ -71,10 +69,10 @@ namespace clinica
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.ForeColor = SystemColors.ActiveBorder;
-            panel2.Location = new Point(235, 107);
-            panel2.Margin = new Padding(3, 4, 3, 4);
+            panel2.Location = new Point(382, 171);
+            panel2.Margin = new Padding(5, 6, 5, 6);
             panel2.Name = "panel2";
-            panel2.Size = new Size(603, 1);
+            panel2.Size = new Size(979, 0);
             panel2.TabIndex = 38;
             // 
             // btnSalir
@@ -83,10 +81,10 @@ namespace clinica
             btnSalir.FlatAppearance.BorderColor = Color.LightGray;
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnSalir.Location = new Point(687, 62);
-            btnSalir.Margin = new Padding(3, 4, 3, 4);
+            btnSalir.Location = new Point(1116, 99);
+            btnSalir.Margin = new Padding(5, 6, 5, 6);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(152, 37);
+            btnSalir.Size = new Size(247, 59);
             btnSalir.TabIndex = 37;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = false;
@@ -98,10 +96,10 @@ namespace clinica
             btnRegistrarPaciente.FlatAppearance.BorderColor = Color.LightGray;
             btnRegistrarPaciente.FlatStyle = FlatStyle.Flat;
             btnRegistrarPaciente.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnRegistrarPaciente.Location = new Point(687, 148);
-            btnRegistrarPaciente.Margin = new Padding(3, 4, 3, 4);
+            btnRegistrarPaciente.Location = new Point(1116, 237);
+            btnRegistrarPaciente.Margin = new Padding(5, 6, 5, 6);
             btnRegistrarPaciente.Name = "btnRegistrarPaciente";
-            btnRegistrarPaciente.Size = new Size(152, 73);
+            btnRegistrarPaciente.Size = new Size(247, 117);
             btnRegistrarPaciente.TabIndex = 42;
             btnRegistrarPaciente.Text = "Registrar nuevo Paciente";
             btnRegistrarPaciente.UseVisualStyleBackColor = false;
@@ -112,9 +110,10 @@ namespace clinica
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label3.Location = new Point(235, 153);
+            label3.Location = new Point(382, 245);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(146, 21);
+            label3.Size = new Size(216, 32);
             label3.TabIndex = 41;
             label3.Text = "Seleccione Paciente";
             // 
@@ -122,10 +121,10 @@ namespace clinica
             // 
             cbxPaciente.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPaciente.FormattingEnabled = true;
-            cbxPaciente.Location = new Point(374, 148);
-            cbxPaciente.Margin = new Padding(3, 4, 3, 4);
+            cbxPaciente.Location = new Point(608, 237);
+            cbxPaciente.Margin = new Padding(5, 6, 5, 6);
             cbxPaciente.Name = "cbxPaciente";
-            cbxPaciente.Size = new Size(267, 28);
+            cbxPaciente.Size = new Size(431, 40);
             cbxPaciente.TabIndex = 40;
             // 
             // lblEstudio
@@ -133,9 +132,10 @@ namespace clinica
             lblEstudio.AutoSize = true;
             lblEstudio.BackColor = Color.Transparent;
             lblEstudio.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            lblEstudio.Location = new Point(235, 200);
+            lblEstudio.Location = new Point(382, 320);
+            lblEstudio.Margin = new Padding(5, 0, 5, 0);
             lblEstudio.Name = "lblEstudio";
-            lblEstudio.Size = new Size(165, 21);
+            lblEstudio.Size = new Size(244, 32);
             lblEstudio.TabIndex = 44;
             lblEstudio.Text = "Seleccione Profesional";
             // 
@@ -143,32 +143,33 @@ namespace clinica
             // 
             cbxProfesionales.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxProfesionales.FormattingEnabled = true;
-            cbxProfesionales.Location = new Point(374, 196);
-            cbxProfesionales.Margin = new Padding(3, 4, 3, 4);
+            cbxProfesionales.Location = new Point(608, 314);
+            cbxProfesionales.Margin = new Padding(5, 6, 5, 6);
             cbxProfesionales.Name = "cbxProfesionales";
-            cbxProfesionales.Size = new Size(266, 28);
+            cbxProfesionales.Size = new Size(430, 40);
             cbxProfesionales.TabIndex = 43;
+            cbxProfesionales.SelectedIndexChanged += cbxProfesionales_SelectedIndexChanged;
             // 
             // lbxTurnos
             // 
             lbxTurnos.Font = new Font("Segoe UI", 9.75F);
             lbxTurnos.FormattingEnabled = true;
-            lbxTurnos.ItemHeight = 21;
-            lbxTurnos.Location = new Point(235, 271);
-            lbxTurnos.Margin = new Padding(3, 4, 3, 4);
+            lbxTurnos.ItemHeight = 36;
+            lbxTurnos.Location = new Point(382, 434);
+            lbxTurnos.Margin = new Padding(5, 6, 5, 6);
             lbxTurnos.Name = "lbxTurnos";
-            lbxTurnos.Size = new Size(602, 88);
+            lbxTurnos.Size = new Size(976, 112);
             lbxTurnos.TabIndex = 45;
-            lbxTurnos.SelectedIndexChanged += lbxTurnos_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label1.Location = new Point(235, 247);
+            label1.Location = new Point(382, 395);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(240, 21);
+            label1.Size = new Size(355, 32);
             label1.TabIndex = 46;
             label1.Text = "Turnos del paciente seleccionado";
             // 
@@ -177,9 +178,10 @@ namespace clinica
             lblTituloA.AutoSize = true;
             lblTituloA.BackColor = Color.Transparent;
             lblTituloA.Font = new Font("Calibri", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTituloA.Location = new Point(235, 75);
+            lblTituloA.Location = new Point(382, 120);
+            lblTituloA.Margin = new Padding(5, 0, 5, 0);
             lblTituloA.Name = "lblTituloA";
-            lblTituloA.Size = new Size(271, 29);
+            lblTituloA.Size = new Size(425, 46);
             lblTituloA.TabIndex = 50;
             lblTituloA.Text = "Acreditación de Pacientes";
             // 
@@ -189,44 +191,23 @@ namespace clinica
             btnAcreditar.FlatAppearance.BorderColor = Color.LightGray;
             btnAcreditar.FlatStyle = FlatStyle.Flat;
             btnAcreditar.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnAcreditar.Location = new Point(235, 507);
-            btnAcreditar.Margin = new Padding(3, 4, 3, 4);
+            btnAcreditar.Location = new Point(382, 811);
+            btnAcreditar.Margin = new Padding(5, 6, 5, 6);
             btnAcreditar.Name = "btnAcreditar";
-            btnAcreditar.Size = new Size(181, 37);
+            btnAcreditar.Size = new Size(294, 59);
             btnAcreditar.TabIndex = 59;
             btnAcreditar.Text = "Acreditar Paciente";
             btnAcreditar.UseVisualStyleBackColor = false;
             btnAcreditar.Click += btnAcreditar_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic);
-            label2.Location = new Point(235, 389);
-            label2.Name = "label2";
-            label2.Size = new Size(209, 21);
-            label2.TabIndex = 62;
-            label2.Text = "Seleccione lugar de atención";
-            // 
-            // cbxLugar
-            // 
-            cbxLugar.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxLugar.FormattingEnabled = true;
-            cbxLugar.Location = new Point(235, 413);
-            cbxLugar.Margin = new Padding(3, 4, 3, 4);
-            cbxLugar.Name = "cbxLugar";
-            cbxLugar.Size = new Size(267, 28);
-            cbxLugar.TabIndex = 61;
-            // 
             // rbtNormal
             // 
             rbtNormal.AutoSize = true;
             rbtNormal.Checked = true;
-            rbtNormal.Location = new Point(45, 29);
-            rbtNormal.Margin = new Padding(3, 4, 3, 4);
+            rbtNormal.Location = new Point(73, 46);
+            rbtNormal.Margin = new Padding(5, 6, 5, 6);
             rbtNormal.Name = "rbtNormal";
-            rbtNormal.Size = new Size(83, 25);
+            rbtNormal.Size = new Size(123, 36);
             rbtNormal.TabIndex = 55;
             rbtNormal.TabStop = true;
             rbtNormal.Text = "Normal";
@@ -235,10 +216,10 @@ namespace clinica
             // rbtUrgencia
             // 
             rbtUrgencia.AutoSize = true;
-            rbtUrgencia.Location = new Point(162, 31);
-            rbtUrgencia.Margin = new Padding(3, 4, 3, 4);
+            rbtUrgencia.Location = new Point(263, 50);
+            rbtUrgencia.Margin = new Padding(5, 6, 5, 6);
             rbtUrgencia.Name = "rbtUrgencia";
-            rbtUrgencia.Size = new Size(94, 25);
+            rbtUrgencia.Size = new Size(139, 36);
             rbtUrgencia.TabIndex = 54;
             rbtUrgencia.Text = "Urgencia";
             rbtUrgencia.UseVisualStyleBackColor = true;
@@ -249,11 +230,11 @@ namespace clinica
             groupBox2.Controls.Add(rbtNormal);
             groupBox2.Controls.Add(rbtUrgencia);
             groupBox2.Font = new Font("Calibri Light", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(551, 388);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
+            groupBox2.Location = new Point(895, 621);
+            groupBox2.Margin = new Padding(5, 6, 5, 6);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(288, 73);
+            groupBox2.Padding = new Padding(5, 6, 5, 6);
+            groupBox2.Size = new Size(468, 117);
             groupBox2.TabIndex = 63;
             groupBox2.TabStop = false;
             groupBox2.Text = "Prioridad";
@@ -264,10 +245,10 @@ namespace clinica
             btnNuevaAcreditacion.FlatAppearance.BorderColor = Color.LightGray;
             btnNuevaAcreditacion.FlatStyle = FlatStyle.Flat;
             btnNuevaAcreditacion.Font = new Font("Calibri", 12F, FontStyle.Bold | FontStyle.Italic);
-            btnNuevaAcreditacion.Location = new Point(448, 507);
-            btnNuevaAcreditacion.Margin = new Padding(3, 4, 3, 4);
+            btnNuevaAcreditacion.Location = new Point(728, 811);
+            btnNuevaAcreditacion.Margin = new Padding(5, 6, 5, 6);
             btnNuevaAcreditacion.Name = "btnNuevaAcreditacion";
-            btnNuevaAcreditacion.Size = new Size(181, 37);
+            btnNuevaAcreditacion.Size = new Size(294, 59);
             btnNuevaAcreditacion.TabIndex = 64;
             btnNuevaAcreditacion.Text = "Nueva Acreditacion";
             btnNuevaAcreditacion.UseVisualStyleBackColor = false;
@@ -279,8 +260,6 @@ namespace clinica
             pnlAcreditacion.BorderStyle = BorderStyle.FixedSingle;
             pnlAcreditacion.Controls.Add(btnNuevaAcreditacion);
             pnlAcreditacion.Controls.Add(groupBox2);
-            pnlAcreditacion.Controls.Add(label2);
-            pnlAcreditacion.Controls.Add(cbxLugar);
             pnlAcreditacion.Controls.Add(btnAcreditar);
             pnlAcreditacion.Controls.Add(lblTituloA);
             pnlAcreditacion.Controls.Add(label1);
@@ -293,23 +272,24 @@ namespace clinica
             pnlAcreditacion.Controls.Add(btnVolver);
             pnlAcreditacion.Controls.Add(panel2);
             pnlAcreditacion.Controls.Add(btnSalir);
-            pnlAcreditacion.Location = new Point(14, 16);
-            pnlAcreditacion.Margin = new Padding(3, 4, 3, 4);
+            pnlAcreditacion.Location = new Point(23, 26);
+            pnlAcreditacion.Margin = new Padding(5, 6, 5, 6);
             pnlAcreditacion.Name = "pnlAcreditacion";
-            pnlAcreditacion.Size = new Size(1137, 858);
+            pnlAcreditacion.Size = new Size(1846, 1372);
             pnlAcreditacion.TabIndex = 65;
             // 
             // frmAcreditacionConsultorios
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1163, 586);
+            ClientSize = new Size(1890, 938);
             Controls.Add(pnlAcreditacion);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(3, 4, 3, 4);
-            MinimumSize = new Size(66, 47);
+            Margin = new Padding(5, 6, 5, 6);
+            MinimumSize = new Size(91, 71);
             Name = "frmAcreditacionConsultorios";
-            Text = "Acreditación";
+            Text = "Acreditación Consultorios";
+            Load += frmAcreditacionConsultorios_Load_1;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             pnlAcreditacion.ResumeLayout(false);
@@ -317,10 +297,7 @@ namespace clinica
             ResumeLayout(false);
         }
 
-        private void frmAcreditacion_Load(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+
 
         #endregion
 
@@ -336,8 +313,6 @@ namespace clinica
         private Label label1;
         private Label lblTituloA;
         private Button btnAcreditar;
-        private Label label2;
-        private ComboBox cbxLugar;
         private RadioButton rbtNormal;
         private RadioButton rbtUrgencia;
         private GroupBox groupBox2;
