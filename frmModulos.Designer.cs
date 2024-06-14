@@ -182,8 +182,8 @@
         private Panel pnlModulos;
         private Label lblTituloT;
         private Panel pnlTituloT;
-        private Button btnAsignar;
-        private Button btnCancelar;
+        private Button btnAsignar;    //sacar esto si no se va a usar
+        private Button btnCancelar;  //
         private Button btnIngresarModulo;
 
         public GroupBox grbMostrarModulos { get; private set; }

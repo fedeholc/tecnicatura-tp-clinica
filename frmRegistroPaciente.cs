@@ -22,16 +22,70 @@ namespace Clinica
             InitializeComponent();
             this.formOrigen = formOrigen;
         }
-
-        private void btnVolver_Click(object sender, EventArgs e)
+        private void frmInscripcion_Load(object sender, EventArgs e)
         {
-            formOrigen.Show();
-            this.Close();
+            cargarDatosCobertura();
+            btnImprimirComprobante.Enabled = false;
         }
+
+        private void cargarDatosCobertura()
+        {
+            cbxCobertura.Items.Clear();
+            cbxCobertura.Text = "";
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select id, Nombre from Cobertura;";
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    List<KeyValuePair<int, string>> coberturas = new();
+
+                    while (reader.Read())
+                    {            
+                        int id = reader.GetInt32(0);                           // Obtener el ID y el nombre de la cobertura
+                        string nombre = reader.GetString(1);                
+                        KeyValuePair<int, string> cobertura = new(id, nombre); // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
+                        coberturas.Add(cobertura);
+                    }            
+                    cbxCobertura.DataSource = coberturas;  // Asignar la lista de coberturas al ComboBox
+                    cbxCobertura.DisplayMember = "Value";  // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
+                    cbxCobertura.SelectedIndex = -1;
+                }
+                else
+                {
+                    MessageBox.Show("No hay datos de cobertura", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
+
         private void btnInscribir_Click(object sender, EventArgs e)
         {
             RegistrarPaciente();
         }
+
         private void RegistrarPaciente()
         {
             int? idCobertura = null;
@@ -139,18 +193,6 @@ namespace Clinica
             btnInscribir.Enabled = false;
             btnImprimirComprobante.Enabled = true;
         }
-        private void activarCampos()
-        {
-            txtNombre.Enabled = true;
-            txtApellido.Enabled = true;
-            dtpFechaNac.Enabled = true;
-            txtDNI.Enabled = true;
-            txtTelefono.Enabled = true;
-            txtDireccion.Enabled = true;
-            txtEmail.Enabled = true;
-            cbxCobertura.Enabled = true;
-            btnInscribir.Enabled = true;
-        }
 
         private void btnNuevaInscripcion_Click(object sender, EventArgs e)
         {
@@ -163,6 +205,18 @@ namespace Clinica
             btnInscribir.Enabled = true;
             txtNombre.Focus();
             activarCampos();
+        }
+        private void activarCampos()
+        {
+            txtNombre.Enabled = true;
+            txtApellido.Enabled = true;
+            dtpFechaNac.Enabled = true;
+            txtDNI.Enabled = true;
+            txtTelefono.Enabled = true;
+            txtDireccion.Enabled = true;
+            txtEmail.Enabled = true;
+            cbxCobertura.Enabled = true;
+            btnInscribir.Enabled = true;
         }
 
         private void validacionCampoDNI(object sender, KeyPressEventArgs e)
@@ -184,7 +238,6 @@ namespace Clinica
                 txtDNI.SelectionStart = 8;
             }
         }
-
         private void validacionCamposInt(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) // Si no es un número o la tecla de retroceso, se ignora la pulsación
@@ -201,10 +254,16 @@ namespace Clinica
             }
         }
 
-        private void frmInscripcion_Load(object sender, EventArgs e)
+        private void btnImprimirComprobante_Click(object sender, EventArgs e)
         {
-            cargarDatosCobertura();
+            MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnImprimirComprobante.Enabled = false;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            formOrigen.Show();
+            this.Close();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -212,74 +271,8 @@ namespace Clinica
             Application.Exit();
         }
 
-        private void cargarDatosCobertura()
-        {
-            cbxCobertura.Items.Clear();
-            cbxCobertura.Text = "";
-
-            MySqlConnection sqlCon = new MySqlConnection();
-            try
-            {
-                string query;
-                sqlCon = Conexion.getInstancia().CrearConexion();
-                query = "select id, Nombre from Cobertura;";
-                MySqlCommand comando = new(query, sqlCon)
-                {
-                    CommandType = CommandType.Text
-                };
-                sqlCon.Open();
-
-                MySqlDataReader reader;
-                reader = comando.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    List<KeyValuePair<int, string>> coberturas = new();
-
-                    while (reader.Read())
-                    {
-                        // Obtener el ID y el nombre de la cobertura
-                        int id = reader.GetInt32(0);
-                        string nombre = reader.GetString(1);
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
-                        KeyValuePair<int, string> cobertura = new(id, nombre);
-
-                        coberturas.Add(cobertura);
-                    }
-                    // Asignar la lista de coberturas al ComboBox
-                    cbxCobertura.DataSource = coberturas;
-                    // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
-                    cbxCobertura.DisplayMember = "Value";
-                    cbxCobertura.SelectedIndex = -1;
-                }
-                else
-                {
-                    MessageBox.Show("No hay datos de cobertura", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
-            }
-        }
-
-        private void btnImprimirComprobante_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnImprimirComprobante.Enabled = false;
-        }
-
-        private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e)
-        {
+        private void frmRegistroPaciente_FormClosed(object sender, FormClosedEventArgs e) //Al cerrarse el formulario actualiza el listado de pacientes en el formulario
+        {                                                                                 //de origen de la solicitud.
             if (formOrigen is frmTurnos formTurnos)
             {
                 formTurnos.CargarPacientes();
@@ -289,7 +282,5 @@ namespace Clinica
                 frmAcreditacion.CargarPacientes();
             }
         }
-
-
     }
 }

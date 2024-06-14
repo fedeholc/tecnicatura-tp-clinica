@@ -169,7 +169,6 @@ namespace clinica
             lbxTurnos.Name = "lbxTurnos";
             lbxTurnos.Size = new Size(615, 384);
             lbxTurnos.TabIndex = 11;
-            lbxTurnos.SelectedIndexChanged += lbxTurnos_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -243,7 +242,6 @@ namespace clinica
             cbxPaciente.Name = "cbxPaciente";
             cbxPaciente.Size = new Size(286, 27);
             cbxPaciente.TabIndex = 28;
-            cbxPaciente.SelectedIndexChanged += cbxPaciente_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -375,7 +373,6 @@ namespace clinica
             pnlTurnos.Name = "pnlTurnos";
             pnlTurnos.Size = new Size(1281, 642);
             pnlTurnos.TabIndex = 37;
-            pnlTurnos.Paint += pnlTurnos_Paint;
             // 
             // btnImprimirComprobante
             // 
@@ -388,6 +385,7 @@ namespace clinica
             btnImprimirComprobante.TabIndex = 38;
             btnImprimirComprobante.Text = "Imprimir Comprobante";
             btnImprimirComprobante.UseVisualStyleBackColor = true;
+            btnImprimirComprobante.Click += btnImprimirComprobante_Click;
             // 
             // frmTurnos
             // 
