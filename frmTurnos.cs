@@ -38,10 +38,12 @@ namespace clinica
             cbxHoraDesde.SelectedIndex = 0;
             cbxHoraHasta.SelectedIndex = 23;
 
-            CargarDatosEstudios();
             CargarTurnos();
+            CargarDatosEstudios();
             CargarPacientes();
+            btnImprimirComprobante.Enabled = false;
         }
+
         private void CargarTurnos()
         {
             lbxTurnos.DataSource = null;
@@ -52,7 +54,6 @@ namespace clinica
             {
                 filtroEstudioId = ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key;
             }
-
 
             MySqlConnection sqlCon = new MySqlConnection();
             try
@@ -105,7 +106,6 @@ namespace clinica
                     query += $" and TurnoStatus = 2";
                 }
 
-
                 query += " ORDER BY Turno.Fecha, Turno.Hora;";
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
@@ -148,7 +148,6 @@ namespace clinica
                     lbxTurnos.Items.Add("No hay turnos con los criterios seleccionados.");
                     btnAsignar.Enabled = false;
                 }
-
             }
             catch (Exception ex)
             {
@@ -162,6 +161,7 @@ namespace clinica
                 }
             }
         }
+
         private void CargarDatosEstudios()
         {
             cbxEstudios.Items.Clear();
@@ -200,9 +200,8 @@ namespace clinica
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos de Estudios");
+                    MessageBox.Show("No hay datos de estudios", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             catch (Exception ex)
             {
@@ -227,34 +226,33 @@ namespace clinica
             cbxPaciente.SelectedIndex = -1;
         }
 
-        private int CancelarTurno(int idTurno)
+        private void btnAsignar_Click(object sender, EventArgs e)
         {
-
-            int salida = 0;
-            MySqlConnection sqlCon = new MySqlConnection();
-            try
+            if (rbtOcupados.Checked)
             {
-                sqlCon = Conexion.getInstancia().CrearConexion();
-                sqlCon.Open();
-                string query = "update Turno set TurnoStatus = 1, Estudio_id = null where id = @idTurno;";
-                MySqlCommand comando = new MySqlCommand(query, sqlCon);
-                comando.Parameters.AddWithValue("@idTurno", idTurno);
-                int rowsAffected = comando.ExecuteNonQuery();
-                salida = rowsAffected;
+                MessageBox.Show("No se puede asignar un turno ya ocupado", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (Exception ex)
+            if (lbxTurnos.SelectedIndex != -1 && cbxPaciente.SelectedIndex != -1 && cbxEstudios.SelectedIndex != -1)
             {
-                MessageBox.Show(ex.Message);
-                throw;
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
+                int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key,
+                    ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key,
+                    ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key);
+                if (rta > 0)
                 {
-                    sqlCon.Close();
-                };
+                    MessageBox.Show("Turno asignado correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarTurnos();
+                    btnImprimirComprobante.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Error al asignar el turno", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            return salida;
+            else
+            {
+                MessageBox.Show("Debe seleccionar un turno, estudio y paciente para poder asignarle el turno", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private int AsignarTurno(int idPaciente, int idTurno, int idEstudio)
@@ -292,9 +290,60 @@ namespace clinica
             return salida;
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (rbtDisponibles.Checked)
+            {
+                MessageBox.Show("No se puede cancelar un turno disponible", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (lbxTurnos.SelectedIndex != -1)
+            {
+                int rta = CancelarTurno(((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key);
+                if (rta > 0)
+                {
+                    MessageBox.Show("Turno cancelado correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarTurnos();
+                    btnImprimirComprobante.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Error al cancelar el turno", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un turno para cancelar", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int CancelarTurno(int idTurno)
+        {
+            int salida = 0;
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+                string query = "update Turno set TurnoStatus = 1, Estudio_id = null where id = @idTurno;";
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@idTurno", idTurno);
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
         }
 
         private void cbxEstudios_SelectedIndexChanged(object sender, EventArgs e)
@@ -304,21 +353,18 @@ namespace clinica
 
         private void dtpFechaDesde_ValueChanged(object sender, EventArgs e)
         {
-            dtpFechaHasta.MinDate = dtpFechaDesde.Value;
-
+            dtpFechaHasta.MinDate = dtpFechaDesde.Value;  
             CargarTurnos();
         }
 
         private void dtpFechaHasta_ValueChanged(object sender, EventArgs e)
         {
             CargarTurnos();
-
         }
 
         private void cbxHoraDesde_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarTurnos();
-
         }
 
         private void cbxHoraHasta_SelectedIndexChanged(object sender, EventArgs e)
@@ -334,66 +380,18 @@ namespace clinica
         private void rbtDisponibles_CheckedChanged(object sender, EventArgs e)
         {
             CargarTurnos();
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            if (rbtDisponibles.Checked)
-            {
-                MessageBox.Show("No se puede cancelar un turno disponible.");
-                return;
-            }
-            if (lbxTurnos.SelectedIndex != -1)
-            {
-                int rta = CancelarTurno(((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key);
-                if (rta > 0)
-                {
-                    MessageBox.Show("Turno cancelado correctamente.");
-                    CargarTurnos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al cancelar el turno.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un turno para cancelar.");
-            }
-        }
-
-        private void btnAsignar_Click(object sender, EventArgs e)
-        {
-            if (rbtOcupados.Checked)
-            {
-                MessageBox.Show("No se puede asignar un turno ya ocupado.");
-                return;
-            }
-            if (lbxTurnos.SelectedIndex != -1 && cbxPaciente.SelectedIndex != -1 && cbxEstudios.SelectedIndex != -1)
-            {
-                int rta = AsignarTurno(((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key,
-                    ((KeyValuePair<int, string>)lbxTurnos.SelectedItem!).Key,
-                    ((KeyValuePair<int, string>)cbxEstudios.SelectedItem!).Key);
-                if (rta > 0)
-                {
-                    MessageBox.Show("Turno Asignado correctamente.");
-                    CargarTurnos();
-                }
-                else
-                {
-                    MessageBox.Show("Error al asignar el turno.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un turno, estudio y paciente para poder asignarle el turno.");
-            }
-        }
+        } 
 
         private void btnRegistrarPaciente_Click(object sender, EventArgs e)
         {
             frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
             Inscripcion.Show();
+        }
+
+        private void btnImprimirComprobante_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnImprimirComprobante.Enabled = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -402,19 +400,9 @@ namespace clinica
             formOrigen.Show();
         }
 
-        private void pnlTurnos_Paint(object sender, PaintEventArgs e)
+        private void btnSalir_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void cbxPaciente_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbxTurnos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            Application.Exit();
         }
     }
 }
