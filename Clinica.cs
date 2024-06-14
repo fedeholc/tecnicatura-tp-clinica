@@ -370,6 +370,47 @@ namespace Clinica
             }
             return salida;
         }
+
+        public static int RegistrarSalaDeEsperaC (clinica.Entidades.SalaDeEsperaConsultorios salaC)
+        {
+            ArgumentNullException.ThrowIfNull(salaC);
+
+            int salida = 0;
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                string query = "INSERT INTO SalaDeEspera (FechaHoraAcreditacion, Paciente_id, Profesional_id, idAgenda, Prioridad)  " +
+                    "VALUES (@FechaHoraAcreditacion, @Paciente_id, @Profesional_id, @idAgenda, @Prioridad)";
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@FechaHoraAcreditacion", salaC.FechaHoraAcreditacion);
+                comando.Parameters.AddWithValue("@Paciente_id", salaC.Paciente_id);
+                comando.Parameters.AddWithValue("@Profesional_id", salaC.Profesional_id);
+                comando.Parameters.AddWithValue("@idAgenda", salaC.idAgenda);
+                comando.Parameters.AddWithValue("@Prioridad", salaC.Prioridad);
+
+
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
+
         public static int GuardarHistoriaClinica(int idPaciente, string historiaClinica)
         {
             ArgumentNullException.ThrowIfNull(idPaciente);
