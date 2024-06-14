@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using clinica.Entidades;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Net;
 
 namespace clinica
 {
@@ -27,10 +29,7 @@ namespace clinica
 
         }
 
-        private void pnlTurnos_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
         private int AsignarTurno(int idPaciente, int idAgendaturno, int idProfesional)
         {
             int salida = 0;
@@ -44,8 +43,8 @@ namespace clinica
                     "Profesional_id = @idProfesional where Id_Agendaturnos = @idAgendaturno;";
 
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
-                comando.Parameters.AddWithValue("@idAgendaturno", idAgendaturno);
                 comando.Parameters.AddWithValue("@idPaciente", idPaciente);
+                comando.Parameters.AddWithValue("@idAgendaturno", idAgendaturno);
                 comando.Parameters.AddWithValue("@idProfesional", idProfesional);
 
                 int rowsAffected = comando.ExecuteNonQuery();
@@ -128,7 +127,7 @@ namespace clinica
                 {
                     StringBuilder queryBuilder = new StringBuilder();
 
-                    string baseQuery = "SELECT a.Fecha, a.Hora, p.Nombre, p.Apellido, p.Especialidad, a.TurnoStatus " +
+                    string baseQuery = "SELECT a.Id_Agendaturnos, a.Fecha, a.Hora, p.Nombre, p.Apellido, p.Especialidad, a.TurnoStatus " +
                                             "FROM `agendaturnos` as a " +
                                             "JOIN `profesional` AS p ON a.Profesional_id = P.Profesional_id";
 
@@ -189,27 +188,32 @@ namespace clinica
 
                             while (reader.Read())
                             {
-                                DateTime fecha = reader.GetDateTime(0);
-                                TimeSpan hora = reader.GetTimeSpan(1);
-                                string Nombre = reader.GetString(2);
-                                string Apellido = reader.GetString(3);
-                                string Especialidad = reader.GetString(4);
-                                int turnoStatus = reader.GetInt32(5);
+                                int id = reader.GetInt32(0);
+                                string fecha = reader.GetDateTime(1).ToString("dd/MM/yyyy");
+
+                                string hora = reader.GetTimeSpan(2).ToString();
+
+                                string Nombre = reader.GetString(3);
+                                string Apellido = reader.GetString(4);
+                                string Especialidad = reader.GetString(5);
+                                int turnoStatus = reader.GetInt32(6);
 
                                 string turnoStatusDescripcion = turnoStatus == 1 ? "Disponible" : "Ocupado";
 
-                                string descripcionTurno = $"{fecha:dd/MM/yyyy}-{hora}-{Nombre} {Apellido}-{Especialidad}-{turnoStatusDescripcion}";
+                                string descripcionTurno = $"{fecha}-{hora}-{Nombre} {Apellido}-{Especialidad}-{turnoStatusDescripcion}";
 
                                 // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
-                                KeyValuePair<int, string> turno = new KeyValuePair<int, string>(fecha.GetHashCode() ^ hora.GetHashCode(), descripcionTurno);
+                                KeyValuePair<int, string> turno = new KeyValuePair<int, string>(id, descripcionTurno);
+                                //KeyValuePair<int, string> turno = new KeyValuePair<int, string>(fecha.GetHashCode() ^ hora.GetHashCode(), descripcionTurno);
                                 turnos.Add(turno);
                             }
                             // Asignar la lista de coberturas al ComboBox
                             lbxAgendaTurnos.DataSource = turnos;
                             // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre)
                             lbxAgendaTurnos.DisplayMember = "Value";
-                            lbxAgendaTurnos.ValueMember = "Key";
+                            //lbxAgendaTurnos.ValueMember = "Key";
                             lbxAgendaTurnos.SelectedIndex = -1;
+                            btnAsignar.Enabled = true;
                         }
                         else
                         {
@@ -285,6 +289,38 @@ namespace clinica
             cbxPacientes.SelectedIndex = -1;
         }
 
+        private int CancelarTurno(int idAgendaTurno)
+        {
+
+            int salida = 0;
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+                string query = "update Agendaturnos set TurnoStatus = 1, Paciente_id = null where id_Agendaturnos = @idAgendaTurno;";
+                MySqlCommand comando = new MySqlCommand(query, sqlCon);
+                comando.Parameters.AddWithValue("@idAgendaTurno", idAgendaTurno);
+                int rowsAffected = comando.ExecuteNonQuery();
+                salida = rowsAffected;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                };
+            }
+            return salida;
+        }
+
+
+
 
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -309,7 +345,7 @@ namespace clinica
             {
                 using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
                 {
-                    string query = "SELECT Profesional_id, Nombre FROM profesional WHERE Especialidad = @Especialidad";
+                    string query = "SELECT Profesional_id, Nombre, Apellido FROM profesional WHERE Especialidad = @Especialidad";
                     MySqlCommand comando = new MySqlCommand(query, sqlCon);
                     comando.Parameters.AddWithValue("@Especialidad", especialidad);
                     sqlCon.Open();
@@ -320,7 +356,12 @@ namespace clinica
                         {
                             int idProfesional = reader.GetInt32("Profesional_id");
                             string nombreProfesional = reader.GetString("Nombre");
-                            cbxProfesionales.Items.Add(new KeyValuePair<int, string>(idProfesional, nombreProfesional));
+                            string apellidoProfesional = reader.GetString("Apellido");
+                            string nombre = $"{nombreProfesional}";
+                            string apellido = $"{apellidoProfesional}";
+                            cbxProfesionales.Items.Add(new KeyValuePair<string, string>(nombre, apellido));
+
+                            //cbxProfesionales.Items.Add(new KeyValuePair<int, string>(idProfesional,nombreProfesional));
                         }
                     }
                 }
@@ -396,19 +437,45 @@ namespace clinica
 
         }
 
-        private void txtProfesional_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+     
 
         private void lblFechaDesde_Click(object sender, EventArgs e)
         {
 
         }
 
-        internal void SetTextBoxValue(string valor)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (rbtDisponibles.Checked)
+            {
+                MessageBox.Show("No se puede cancelar un turno disponible.");
+                return;
+            }
+            if (lbxAgendaTurnos.SelectedIndex != -1)
+            {
+                int rta = CancelarTurno(((KeyValuePair<int, string>)lbxAgendaTurnos.SelectedItem!).Key);
+                if (rta > 0)
+                {
+                    MessageBox.Show("Turno cancelado correctamente.");
+                    CargarAgendaTurnos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al cancelar el turno.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un turno para cancelar.");
+            }
         }
+
+        private void btnRegistrarPaciente_Click(object sender, EventArgs e)
+        {
+            frmRegistroPaciente Inscripcion = new frmRegistroPaciente(this);
+            Inscripcion.Show();
+        }
+
+        
     }
 }
