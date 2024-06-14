@@ -31,22 +31,19 @@ namespace Clinica
 
                 if (reader.HasRows)
                 {
-                    List<KeyValuePair<int, string>> pacientes = new();
+                    List<KeyValuePair<int, string>> pacientes = new(); //Se instancia una lista vacía de pacientes
 
                     while (reader.Read())
-                    {
-                        // Obtener el ID y el nombre de la cobertura
-                        int id = reader.GetInt32(0);
+                    {                  
+                        int id = reader.GetInt32(0);                    // Obtener los datos de los pacientes
                         string nombre = reader.GetString(1);
                         string apellido = reader.GetString(2);
                         string dni = reader.GetString(3);
 
                         string descripcion = $"{nombre} {apellido} - {dni}";
-
-                        // Crear un objeto de KeyValuePair con el ID y el nombre de la cobertura
-                        KeyValuePair<int, string> paciente = new(id, descripcion);
-                        pacientes.Add(paciente);
-
+                   
+                        KeyValuePair<int, string> paciente = new(id, descripcion); // Crear un objeto de KeyValuePair con el ID y los datos (string descripcion) de cada uno de los pacientes
+                        pacientes.Add(paciente);                                   //Agrega cada uno de los pacientes al listado pacientes
                     }
                     return pacientes;
                 }
