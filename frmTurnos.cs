@@ -38,10 +38,64 @@ namespace clinica
             cbxHoraDesde.SelectedIndex = 0;
             cbxHoraHasta.SelectedIndex = 23;
 
-            CargarTurnos();
             CargarDatosEstudios();
+            CargarTurnos();
             CargarPacientes();
             btnImprimirComprobante.Enabled = false;
+        }
+
+        private void CargarDatosEstudios()
+        {
+            cbxEstudios.Items.Clear();
+            cbxEstudios.Text = "";
+
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                string query;
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                query = "select id, Descripcion from Estudio where RequiereTurno = 1;";
+                MySqlCommand comando = new(query, sqlCon)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlCon.Open();
+
+                MySqlDataReader reader;
+                reader = comando.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    List<KeyValuePair<int, string>> estudios = new();
+
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string descripcion = reader.GetString(1);
+                        KeyValuePair<int, string> estudio = new(id, descripcion);
+                        estudios.Add(estudio);
+
+                    }
+                    cbxEstudios.DataSource = estudios;
+                    cbxEstudios.DisplayMember = "Value";
+                    cbxEstudios.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("No hay datos de estudios", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
         }
 
         private void CargarTurnos()
@@ -147,60 +201,6 @@ namespace clinica
                     lbxTurnos.Items.Clear();
                     lbxTurnos.Items.Add("No hay turnos con los criterios seleccionados.");
                     btnAsignar.Enabled = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
-            }
-        }
-
-        private void CargarDatosEstudios()
-        {
-            cbxEstudios.Items.Clear();
-            cbxEstudios.Text = "";
-
-            MySqlConnection sqlCon = new MySqlConnection();
-            try
-            {
-                string query;
-                sqlCon = Conexion.getInstancia().CrearConexion();
-                query = "select id, Descripcion from Estudio where RequiereTurno = 1;";
-                MySqlCommand comando = new(query, sqlCon)
-                {
-                    CommandType = CommandType.Text
-                };
-                sqlCon.Open();
-
-                MySqlDataReader reader;
-                reader = comando.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    List<KeyValuePair<int, string>> estudios = new();
-
-                    while (reader.Read())
-                    {
-                        int id = reader.GetInt32(0);
-                        string descripcion = reader.GetString(1);
-                        KeyValuePair<int, string> estudio = new(id, descripcion);
-                        estudios.Add(estudio);
-
-                    }
-                    cbxEstudios.DataSource = estudios;
-                    cbxEstudios.DisplayMember = "Value";
-                    cbxEstudios.SelectedIndex = 0;
-                }
-                else
-                {
-                    MessageBox.Show("No hay datos de estudios", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
