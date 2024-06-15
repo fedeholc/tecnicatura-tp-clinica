@@ -200,7 +200,7 @@
             lblCoberturaPaciente.MaximumSize = new Size(150, 0);
             lblCoberturaPaciente.MinimumSize = new Size(150, 0);
             lblCoberturaPaciente.Name = "lblCoberturaPaciente";
-            lblCoberturaPaciente.Padding = new Padding(2, 2, 2, 2);
+            lblCoberturaPaciente.Padding = new Padding(2);
             lblCoberturaPaciente.Size = new Size(150, 21);
             lblCoberturaPaciente.TabIndex = 49;
             // 
@@ -224,10 +224,9 @@
             lblMonto.MaximumSize = new Size(150, 0);
             lblMonto.MinimumSize = new Size(50, 0);
             lblMonto.Name = "lblMonto";
-            lblMonto.Padding = new Padding(2, 2, 2, 2);
+            lblMonto.Padding = new Padding(2);
             lblMonto.Size = new Size(50, 21);
             lblMonto.TabIndex = 52;
- 
             // 
             // label7
             // 
@@ -446,7 +445,7 @@
             pnlAcreditacion.Name = "pnlAcreditacion";
             pnlAcreditacion.Size = new Size(836, 644);
             pnlAcreditacion.TabIndex = 65;
-             // 
+            // 
             // btnImprimirComprobante
             // 
             btnImprimirComprobante.FlatAppearance.BorderColor = Color.LightGray;
@@ -458,6 +457,7 @@
             btnImprimirComprobante.TabIndex = 65;
             btnImprimirComprobante.Text = "Imprimir Comprobante";
             btnImprimirComprobante.UseVisualStyleBackColor = true;
+            btnImprimirComprobante.Click += btnImprimirComprobante_Click;
             // 
             // frmAcreditacion
             // 

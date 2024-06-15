@@ -21,26 +21,12 @@ namespace clinica
             InitializeComponent();
             this.formOrigen = formOrigen;
         }
+
         private void frmSalaDeEspera_Load(object sender, EventArgs e)
         {
-
             CargarEsperaListView(lvwConTurno, 1);
             CargarEsperaListView(lvwSinTurno, 0);
-
         }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            formOrigen.Show();
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-
-        }
-      
 
         public void CargarSalas()
         {
@@ -62,11 +48,9 @@ namespace clinica
             lvw.Columns.Add("Acreditación");
             lvw.Columns.Add("Prioridad");
 
-
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-
                 string query = "Select SalaDeEspera.FechaHoraAcreditacion, SalaDeEspera.Paciente_id, " +
                     "Paciente.Apellido, Paciente.Nombre, SalaDeEspera.Estudio_id, Estudio.Descripcion, " +
                     "SalaDeEspera.LugarDeAtencion_id, LugarDeAtencion.Descripcion, SalaDeEspera.Prioridad," +
@@ -75,7 +59,6 @@ namespace clinica
                     "inner join LugarDeAtencion on lugardeatencion.id = saladeespera.LugarDeAtencion_id " +
                     "inner join Estudio on Estudio.id = saladeespera.Estudio_id " +
                     $"where Estudio.RequiereTurno = {requiereTurno} ";
-
 
                 query += " ORDER BY SalaDeEspera.Prioridad, SalaDeEspera.FechaHoraAcreditacion;";
 
@@ -96,7 +79,6 @@ namespace clinica
 
                     while (reader.Read())
                     {
-
                         string fecha = reader.GetDateTime(0).ToString();
                         string pacienteApellido = reader.GetString(2);
                         string pacienteNombre = reader.GetString(3);
@@ -117,7 +99,6 @@ namespace clinica
 
                         // Agregar el ListViewItem al ListView
                         lvw.Items.Add(item);
-
                     }
 
                     lvw.Columns[0].Width = 120;
@@ -125,10 +106,6 @@ namespace clinica
                     lvw.Columns[2].Width = 180;
                     lvw.Columns[3].Width = 120;
                     lvw.Columns[4].Width = 70;
-
-
-
-
                 }
                 else
                 {
@@ -137,8 +114,6 @@ namespace clinica
                      lbxEnEspera.Items.Add("No hay datos disponibles con los criterios seleccionados.");
                      lbxEnEspera.Enabled = false;*/
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -152,11 +127,16 @@ namespace clinica
                 }
             }
         }
-       
 
-        private void lvwConTurno_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnVolver_Click(object sender, EventArgs e)
         {
+            this.Close();
+            formOrigen.Show();
+        }
 
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
