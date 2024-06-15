@@ -83,7 +83,6 @@
             lvwConTurno.Size = new Size(995, 175);
             lvwConTurno.TabIndex = 67;
             lvwConTurno.UseCompatibleStateImageBehavior = false;
-            lvwConTurno.SelectedIndexChanged += lvwConTurno_SelectedIndexChanged;
             // 
             // lvwSinTurno
             // 

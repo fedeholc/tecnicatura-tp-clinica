@@ -199,8 +199,9 @@ namespace clinica
             int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
 
             //guardar historia clínica
-            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - "
-                            + DateTime.Now.ToString() + " - " + cbxLugar.Text + "."; int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - " + DateTime.Now.ToString() + " - " + cbxLugar.Text + ".";
+            int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
+
             if (rtaHistoriaClinica < 1)
             {
                 MessageBox.Show("Error al guardar la historia clínica del paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -208,6 +209,7 @@ namespace clinica
 
             //quitar paciente de la sala
             int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+
             if (rtaQuitarSala > 0)
             {
                 MessageBox.Show("Se registró la atención del paciente y se lo quitó de la lista de espera", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -215,7 +217,7 @@ namespace clinica
             }
             else
             {
-                MessageBox.Show("Error al registrar la atención del paciente paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al registrar la atención del paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private int QuitarDeSala(int idPaciente, int idLugar)
@@ -257,9 +259,8 @@ namespace clinica
             int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
             int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
 
-            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " 
-                + DateTime.Now.ToString()+ " - " + cbxLugar.Text+".";
-            
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " + DateTime.Now.ToString() + " - " + cbxLugar.Text + ".";
+
             int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
             
             if (rtaHistoriaClinica < 1)
@@ -268,6 +269,7 @@ namespace clinica
             }
 
             int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+
             if (rtaQuitarSala > 0)
             {
                 MessageBox.Show("Se registró la atención del paciente y se lo quitó de la lista de espera", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
