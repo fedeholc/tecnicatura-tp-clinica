@@ -214,6 +214,7 @@
             btnImprimirComprobante.TabIndex = 73;
             btnImprimirComprobante.Text = "Imprimir Comprobante";
             btnImprimirComprobante.UseVisualStyleBackColor = true;
+            btnImprimirComprobante.Click += btnImprimirComprobante_Click;
             // 
             // frmAtencion
             // 

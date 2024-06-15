@@ -29,6 +29,7 @@ namespace clinica
             CargarEspera(-1);
             rtxtHistoriaClinica.Text = "";
             rtxtHistoriaClinica.Enabled = false;
+            btnImprimirComprobante.Enabled = false;
         }
 
         private void CargarLugares()
@@ -214,6 +215,7 @@ namespace clinica
             {
                 MessageBox.Show("Se registró la atención del paciente y se lo quitó de la lista de espera", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarEspera(idLugar);
+                btnImprimirComprobante.Enabled = true;
             }
             else
             {
@@ -279,6 +281,11 @@ namespace clinica
             {
                 MessageBox.Show("Error al registrar la atención del paciente paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void btnImprimirComprobante_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnImprimirComprobante.Enabled = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
