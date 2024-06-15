@@ -520,25 +520,6 @@ namespace clinica
             lbxTurnos.Enabled = false;
             btnAcreditar.Enabled = false;
         }
-        private void HabilitarCampos()
-        {
-            cbxPaciente.Enabled = true;
-            cbxEstudios.Enabled = true;
-            cbxLugar.Enabled = true;
-            lbxTurnos.Enabled = true;
-            rbtEfectivo.Enabled = true;
-            rbtTarjeta.Enabled = true;
-            rbtAdeudado.Enabled = true;
-            rbtPagado.Enabled = true;
-            lblCoberturaPaciente.Enabled = true;
-            lblMonto.Enabled = true;
-            lblMedioPago.Enabled = true;
-            lblRegistroPago.Enabled = true;
-            rbtNormal.Enabled = true;
-            rbtUrgencia.Enabled = true;
-            lbxTurnos.Enabled = true;
-            btnAcreditar.Enabled = true;
-        }
 
         private void NuevaAcreditacion_Click(object sender, EventArgs e)
         {
@@ -559,6 +540,26 @@ namespace clinica
             rbtTarjeta.Enabled = false;
             rbtEfectivo.Enabled = false;
             rbtNormal.Checked = true;
+        }
+
+        private void HabilitarCampos()
+        {
+            cbxPaciente.Enabled = true;
+            cbxEstudios.Enabled = true;
+            cbxLugar.Enabled = true;
+            lbxTurnos.Enabled = true;
+            rbtEfectivo.Enabled = true;
+            rbtTarjeta.Enabled = true;
+            rbtAdeudado.Enabled = true;
+            rbtPagado.Enabled = true;
+            lblCoberturaPaciente.Enabled = true;
+            lblMonto.Enabled = true;
+            lblMedioPago.Enabled = true;
+            lblRegistroPago.Enabled = true;
+            rbtNormal.Enabled = true;
+            rbtUrgencia.Enabled = true;
+            lbxTurnos.Enabled = true;
+            btnAcreditar.Enabled = true;
         }
 
         private void btnImprimirComprobante_Click(object sender, EventArgs e)
