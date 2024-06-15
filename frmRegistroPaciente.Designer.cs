@@ -194,7 +194,7 @@
             btnImprimirComprobante.Name = "btnImprimirComprobante";
             btnImprimirComprobante.Size = new Size(149, 28);
             btnImprimirComprobante.TabIndex = 10;
-            btnImprimirComprobante.Text = "Imprimir Comprobante";
+            btnImprimirComprobante.Text = "Comprobante";
             btnImprimirComprobante.UseVisualStyleBackColor = false;
             btnImprimirComprobante.Click += btnImprimirComprobante_Click;
             // 
@@ -220,7 +220,7 @@
             dtpFechaNac.Name = "dtpFechaNac";
             dtpFechaNac.Size = new Size(209, 23);
             dtpFechaNac.TabIndex = 3;
-            dtpFechaNac.Value = new DateTime(2024, 6, 8, 22, 40, 43, 0);
+            dtpFechaNac.Value = DateTime.Today;
             // 
             // pnlTituloR
             // 

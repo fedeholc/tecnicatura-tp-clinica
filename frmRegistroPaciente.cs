@@ -113,7 +113,7 @@ namespace Clinica
                 return;
             }
 
-            if (dtpFechaNac.Value > DateTime.Now)
+            if (dtpFechaNac.Value.Date > DateTime.Today)
             {
                 MessageBox.Show("La fecha de nacimiento no puede ser posterior a la fecha actual", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
