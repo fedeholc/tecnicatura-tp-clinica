@@ -14,7 +14,7 @@ namespace clinica.Entidades
         public int Estudio_id { get; set; }
         public int LugarDeAtencion_id { get; set; }
         public int Prioridad { get; set; }
-        public object Profesional_id { get; internal set; }
-        public object idAgenda { get; internal set; }
+        public object Profesional_id { get; set; }
+        public object idAgenda { get; set; }
     }
 }
