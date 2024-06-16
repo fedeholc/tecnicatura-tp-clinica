@@ -40,8 +40,8 @@ namespace clinica
         public void CargarSalas()
         {
             CargarEsperaListView(lvwConTurno, 2);
-            CargarEsperaListView(lvwSinTurno, 1);
-            CargarEsperaListView(listView1, 3);
+            CargarEsperaListView(lvwSinTurno, 5);
+            CargarEsperaListView(listView1, 1);
         }
 
         private void CargarEsperaListView(ListView lvw, int idAgenda)
@@ -63,7 +63,7 @@ namespace clinica
                 string query = "SELECT sec.FechaHoraAcreditacion, p.Apellido, p.Nombre, pro.Apellido AS Profesional, " +
                     "pro.Especialidad AS Especialidad, sec.Prioridad FROM saladeesperaconsultorios as sec " +
                     "INNER JOIN paciente p ON sec.Paciente_id = p.id INNER JOIN profesional pro ON sec.Profesional_id = pro.Profesional_id " +
-                    $"WHERE sec.idAgenda = {idAgenda} ORDER BY sec.Prioridad, sec.FechaHoraAcreditacion;";
+                    $"WHERE sec.Profesional_id = {idAgenda} ORDER BY sec.Prioridad, sec.FechaHoraAcreditacion;";
 
 
 
