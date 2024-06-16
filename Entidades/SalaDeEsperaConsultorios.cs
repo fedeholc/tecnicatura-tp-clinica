@@ -11,10 +11,9 @@ namespace clinica.Entidades
         public int Id { get; set; }
         public DateTime? FechaHoraAcreditacion { get; set; }
         public int Paciente_id { get; set; }
-        public int Estudio_id { get; set; }
-        public int LugarDeAtencion_id { get; set; }
+        public int Profesional_id { get; set; }
+        public int idAgenda { get; set; }
         public int Prioridad { get; set; }
-        public object Profesional_id { get; set; }
-        public object idAgenda { get; set; }
+        
     }
 }
