@@ -29,18 +29,9 @@ namespace clinica
             CargarEspera(-1);
             rtxtHistoriaClinica.Text = "";
             rtxtHistoriaClinica.Enabled = false;
-        }
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            formOrigen.Show();
+            btnImprimirComprobante.Enabled = false;
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-
-        }
         private void CargarLugares()
         {
             cbxLugar.DataSource = null;
@@ -66,14 +57,13 @@ namespace clinica
                 if (reader.HasRows)
                 {
                     List<KeyValuePair<int, string>> lugares = new();
+
                     while (reader.Read())
                     {
                         int id = reader.GetInt32(0);
                         string descripcion = reader.GetString(1);
-
                         KeyValuePair<int, string> lugar = new(id, descripcion);
                         lugares.Add(lugar);
-
                     }
                     cbxLugar.DataSource = lugares;
                     cbxLugar.DisplayMember = "Value";
@@ -81,9 +71,8 @@ namespace clinica
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos de Lugares");
+                    MessageBox.Show("No hay datos de lugares", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             catch (Exception ex)
             {
@@ -96,8 +85,6 @@ namespace clinica
                     sqlCon.Close();
                 }
             }
-
-
         }
 
         private void cbxLugar_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,7 +146,6 @@ namespace clinica
 
                         KeyValuePair<int, string> espera = new(pacienteId, esperaDescripcion);
                         esperas.Add(espera);
-
                     }
                     lbxEnEspera.DataSource = esperas;
                     lbxEnEspera.DisplayMember = "Value";
@@ -170,10 +156,9 @@ namespace clinica
                 {
                     lbxEnEspera.DataSource = null;
                     lbxEnEspera.Items.Clear();
-                    lbxEnEspera.Items.Add("No hay datos disponibles con los criterios seleccionados.");
+                    lbxEnEspera.Items.Add("No hay datos disponibles con los criterios seleccionados");
                     lbxEnEspera.Enabled = false;
                 }
-
             }
             catch (Exception ex)
             {
@@ -204,7 +189,7 @@ namespace clinica
                 }
                 else
                 {
-                    rtxtHistoriaClinica.Text = "No hay historia clínica para este paciente.";
+                    rtxtHistoriaClinica.Text = "No hay historia clínica para este paciente";
                 }
             }
         }
@@ -215,23 +200,26 @@ namespace clinica
             int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
 
             //guardar historia clínica
-            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - "
-                            + DateTime.Now.ToString() + " - " + cbxLugar.Text + "."; int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - " + DateTime.Now.ToString() + " - " + cbxLugar.Text + ".";
+            int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
+
             if (rtaHistoriaClinica < 1)
             {
-                MessageBox.Show("Error al guardar la historia clínica del paciente. ");
+                MessageBox.Show("Error al guardar la historia clínica del paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //quitar paciente de la sala
             int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+
             if (rtaQuitarSala > 0)
             {
-                MessageBox.Show("Se registró la atención del Paciente y se lo quitó de la lista de espera.");
+                MessageBox.Show("Se registró la atención del paciente y se lo quitó de la lista de espera", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarEspera(idLugar);
+                btnImprimirComprobante.Enabled = true;
             }
             else
             {
-                MessageBox.Show("Error al registrar la atención del paciente paciente");
+                MessageBox.Show("Error al registrar la atención del paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private int QuitarDeSala(int idPaciente, int idLugar)
@@ -273,28 +261,42 @@ namespace clinica
             int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
             int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
 
-            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " 
-                + DateTime.Now.ToString()+ " - " + cbxLugar.Text+".";
-            
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " + DateTime.Now.ToString() + " - " + cbxLugar.Text + ".";
+
             int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
             
             if (rtaHistoriaClinica < 1)
             {
-                MessageBox.Show("Error al guardar la historia clínica del paciente. ");
+                MessageBox.Show("Error al guardar la historia clínica del paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+
             if (rtaQuitarSala > 0)
             {
-                MessageBox.Show("Se registró la atención del Paciente y se lo quitó de la lista de espera.");
+                MessageBox.Show("Se registró la atención del paciente y se lo quitó de la lista de espera", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarEspera(idLugar);
             }
             else
             {
-                MessageBox.Show("Error al registrar la atención del paciente paciente");
+                MessageBox.Show("Error al registrar la atención del paciente paciente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void btnImprimirComprobante_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se envió el documento a la impresora local", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnImprimirComprobante.Enabled = false;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            formOrigen.Show();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
-
-
 }
