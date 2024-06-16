@@ -232,12 +232,13 @@ namespace Clinica
                 e.Handled = true;
             }
 
-            if (txtDNI.Text.Length > 8) //Se restringe el campo a un máximo de 8 cifras
+            if (txtDNI.Text.Length > 7) //Se restringe el campo a un máximo de 8 cifras
             {
-                txtDNI.Text = txtDNI.Text.Substring(0, 8);
-                txtDNI.SelectionStart = 8;
+                txtDNI.Text = txtDNI.Text.Substring(0, 7);
+                txtDNI.SelectionStart = 7;
             }
         }
+
         private void validacionCamposInt(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back) // Si no es un número o la tecla de retroceso, se ignora la pulsación
