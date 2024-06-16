@@ -30,7 +30,7 @@
         {
             btnVolver = new Button();
             btnSalir = new Button();
-            cbxLugar = new ComboBox();
+            cbxProfesionalSE = new ComboBox();
             label1 = new Label();
             lbxEnEspera = new ListBox();
             label2 = new Label();
@@ -43,10 +43,10 @@
             // btnVolver
             // 
             btnVolver.BackColor = SystemColors.ActiveCaption;
-            btnVolver.Location = new Point(582, 526);
-            btnVolver.Margin = new Padding(3, 4, 3, 4);
+            btnVolver.Location = new Point(946, 842);
+            btnVolver.Margin = new Padding(5, 6, 5, 6);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(152, 37);
+            btnVolver.Size = new Size(247, 59);
             btnVolver.TabIndex = 0;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = false;
@@ -55,79 +55,82 @@
             // btnSalir
             // 
             btnSalir.BackColor = SystemColors.ActiveBorder;
-            btnSalir.Location = new Point(582, 571);
-            btnSalir.Margin = new Padding(3, 4, 3, 4);
+            btnSalir.Location = new Point(946, 914);
+            btnSalir.Margin = new Padding(5, 6, 5, 6);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(152, 37);
+            btnSalir.Size = new Size(247, 59);
             btnSalir.TabIndex = 1;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
-            // cbxLugar
+            // cbxProfesionalSE
             // 
-            cbxLugar.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxLugar.FormattingEnabled = true;
-            cbxLugar.Location = new Point(206, 33);
-            cbxLugar.Margin = new Padding(3, 4, 3, 4);
-            cbxLugar.Name = "cbxLugar";
-            cbxLugar.Size = new Size(528, 28);
-            cbxLugar.TabIndex = 2;
-            cbxLugar.SelectedIndexChanged += cbxLugar_SelectedIndexChanged;
+            cbxProfesionalSE.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxProfesionalSE.FormattingEnabled = true;
+            cbxProfesionalSE.Location = new Point(335, 53);
+            cbxProfesionalSE.Margin = new Padding(5, 6, 5, 6);
+            cbxProfesionalSE.Name = "cbxProfesionalSE";
+            cbxProfesionalSE.Size = new Size(856, 40);
+            cbxProfesionalSE.TabIndex = 2;
+            cbxProfesionalSE.SelectedIndexChanged += cbxProfesionalSE_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(14, 33);
+            label1.Location = new Point(23, 53);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(186, 20);
+            label1.Size = new Size(301, 32);
             label1.TabIndex = 3;
             label1.Text = "Seleccione un profesional :";
             // 
             // lbxEnEspera
             // 
             lbxEnEspera.FormattingEnabled = true;
-            lbxEnEspera.Location = new Point(14, 112);
-            lbxEnEspera.Margin = new Padding(3, 4, 3, 4);
+            lbxEnEspera.Location = new Point(23, 179);
+            lbxEnEspera.Margin = new Padding(5, 6, 5, 6);
             lbxEnEspera.Name = "lbxEnEspera";
-            lbxEnEspera.Size = new Size(720, 144);
+            lbxEnEspera.Size = new Size(1168, 228);
             lbxEnEspera.TabIndex = 4;
             lbxEnEspera.SelectedIndexChanged += lbxEnEspera_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(14, 88);
+            label2.Location = new Point(23, 141);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(80, 20);
+            label2.Size = new Size(128, 32);
             label2.TabIndex = 5;
             label2.Text = "En Espera :";
             // 
             // rtxtHistoriaClinica
             // 
-            rtxtHistoriaClinica.Location = new Point(14, 301);
-            rtxtHistoriaClinica.Margin = new Padding(3, 4, 3, 4);
+            rtxtHistoriaClinica.Location = new Point(23, 482);
+            rtxtHistoriaClinica.Margin = new Padding(5, 6, 5, 6);
             rtxtHistoriaClinica.Name = "rtxtHistoriaClinica";
-            rtxtHistoriaClinica.Size = new Size(720, 212);
+            rtxtHistoriaClinica.Size = new Size(1168, 337);
             rtxtHistoriaClinica.TabIndex = 6;
             rtxtHistoriaClinica.Text = "";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(14, 277);
+            label3.Location = new Point(23, 443);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(116, 20);
+            label3.Size = new Size(184, 32);
             label3.TabIndex = 7;
             label3.Text = "Historia Clínica :";
             // 
             // btnRegistrarAtencion
             // 
             btnRegistrarAtencion.BackColor = SystemColors.ActiveCaption;
-            btnRegistrarAtencion.Location = new Point(14, 548);
-            btnRegistrarAtencion.Margin = new Padding(3, 4, 3, 4);
+            btnRegistrarAtencion.Location = new Point(23, 877);
+            btnRegistrarAtencion.Margin = new Padding(5, 6, 5, 6);
             btnRegistrarAtencion.Name = "btnRegistrarAtencion";
-            btnRegistrarAtencion.Size = new Size(220, 37);
+            btnRegistrarAtencion.Size = new Size(358, 59);
             btnRegistrarAtencion.TabIndex = 8;
             btnRegistrarAtencion.Text = "Registrar Atención Paciente";
             btnRegistrarAtencion.UseVisualStyleBackColor = false;
@@ -136,10 +139,10 @@
             // btnPacienteAusente
             // 
             btnPacienteAusente.BackColor = SystemColors.ActiveCaption;
-            btnPacienteAusente.Location = new Point(301, 548);
-            btnPacienteAusente.Margin = new Padding(3, 4, 3, 4);
+            btnPacienteAusente.Location = new Point(489, 877);
+            btnPacienteAusente.Margin = new Padding(5, 6, 5, 6);
             btnPacienteAusente.Name = "btnPacienteAusente";
-            btnPacienteAusente.Size = new Size(220, 37);
+            btnPacienteAusente.Size = new Size(358, 59);
             btnPacienteAusente.TabIndex = 9;
             btnPacienteAusente.Text = "Registrar Paciente Ausente";
             btnPacienteAusente.UseVisualStyleBackColor = false;
@@ -147,9 +150,9 @@
             // 
             // frmAtencionConsultorios
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(746, 621);
+            ClientSize = new Size(1212, 994);
             Controls.Add(btnPacienteAusente);
             Controls.Add(btnRegistrarAtencion);
             Controls.Add(label3);
@@ -157,10 +160,10 @@
             Controls.Add(label2);
             Controls.Add(lbxEnEspera);
             Controls.Add(label1);
-            Controls.Add(cbxLugar);
+            Controls.Add(cbxProfesionalSE);
             Controls.Add(btnSalir);
             Controls.Add(btnVolver);
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(5, 6, 5, 6);
             Name = "frmAtencionConsultorios";
             Text = "Atención en Consultorios";
             Load += frmAtencionConsultorios_Load;
@@ -172,7 +175,7 @@
 
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.ComboBox cbxLugar;
+        private System.Windows.Forms.ComboBox cbxProfesionalSE;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbxEnEspera;
         private System.Windows.Forms.Label label2;

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "clinica": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

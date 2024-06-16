@@ -20,7 +20,7 @@ namespace clinica
 
         private void frmAtencionConsultorios_Load(object sender, EventArgs e)
         {
-            CargarLugares();
+            CargarProfesionalesSalaDeEspera();
             CargarEspera(-1);
             rtxtHistoriaClinica.Text = "";
             rtxtHistoriaClinica.Enabled = false;
@@ -37,71 +37,25 @@ namespace clinica
             Application.Exit();
         }
 
-        private void CargarLugares()
+        private void CargarProfesionalesSalaDeEspera()
         {
-            cbxLugar.DataSource = null;
-            cbxLugar.Items.Clear();
-            cbxLugar.Text = "";
+            cbxProfesionalSE.DataSource = null;
+            cbxProfesionalSE.Items.Clear();
+            cbxProfesionalSE.Text = "";
+            cbxProfesionalSE.DataSource = Clinica.Clinica.ObtenerProfesionales();
+            cbxProfesionalSE.DisplayMember = "Value";
+            cbxProfesionalSE.SelectedIndex = -1;
+        }
 
-            MySqlConnection sqlCon = new MySqlConnection();
-            try
+        private void cbxProfesionalSE_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxProfesionalSE.SelectedIndex != -1)
             {
-                string query;
-                sqlCon = Conexion.getInstancia().CrearConexion();
-                query = "SELECT profesional.Nombre, profesional.Apellido, profesional.Especialidad FROM profesional;";
-                MySqlCommand comando = new(query, sqlCon)
-                {
-                    CommandType = CommandType.Text
-                };
-                sqlCon.Open();
-
-                MySqlDataReader reader;
-                reader = comando.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    List<KeyValuePair<int, string>> lugares = new();
-                    while (reader.Read())
-                    {
-                        string nombre = reader.GetString(0);
-                        string apellido = reader.GetString(1);
-                        string especialidad = reader.GetString(2);
-
-                        string descripcion = $"{nombre} {apellido} - {especialidad}";
-                        KeyValuePair<int, string> lugar = new KeyValuePair<int, string>(0, descripcion); // Aquí ajusta el primer parámetro a tu necesidad
-                        lugares.Add(lugar);
-                    }
-                    cbxLugar.DataSource = lugares;
-                    cbxLugar.DisplayMember = "Value";
-                    cbxLugar.SelectedIndex = -1;
-                }
-                else
-                {
-                    MessageBox.Show("No hay datos de Profesionales");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
+                CargarEspera(((KeyValuePair<int, string>)cbxProfesionalSE.SelectedItem!).Key);
             }
         }
 
-        private void cbxLugar_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxLugar.SelectedIndex != -1)
-            {
-                CargarEspera(((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key);
-            }
-        }
-
-        private void CargarEspera(int idLugar)
+        private void CargarEspera(int idProfesional)
         {
             lbxEnEspera.DataSource = null;
             lbxEnEspera.Items.Clear();
@@ -109,16 +63,14 @@ namespace clinica
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-                string query = "SELECT SalaDeEspera.FechaHoraAcreditacion, SalaDeEspera.Paciente_id, " +
-                    "Paciente.Apellido, Paciente.Nombre, SalaDeEspera.Estudio_id, Estudio.Descripcion, " +
-                    "SalaDeEspera.LugarDeAtencion_id, LugarDeAtencion.Descripcion, SalaDeEspera.Prioridad, " +
-                    "SalaDeEspera.id " +
-                    "FROM SalaDeEspera " +
-                    "INNER JOIN Paciente ON Paciente.id = SalaDeEspera.Paciente_id " +
-                    "INNER JOIN LugarDeAtencion ON LugarDeAtencion.id = SalaDeEspera.LugarDeAtencion_id " +
-                    "INNER JOIN Estudio ON Estudio.id = SalaDeEspera.Estudio_id " +
-                    $"WHERE SalaDeEspera.LugarDeAtencion_id = {idLugar} " +
-                    "ORDER BY SalaDeEspera.Prioridad, SalaDeEspera.FechaHoraAcreditacion;";
+                //Query para buscar en saladeesperaC
+                string query = "SELECT sec.FechaHoraAcreditacion, sec.Paciente_id, sec.Profesional_id, p.Apellido, " +
+                    " p.Nombre, sec.Prioridad " +
+                    "FROM SalaDeEsperaconsultorios as sec " +
+                    "INNER JOIN paciente p ON sec.Paciente_id = p.id " +
+                    "INNER JOIN profesional pro ON sec.Profesional_id = pro.Profesional_id " +
+                    $"WHERE sec.Profesional_id = {idProfesional} " +
+                    "ORDER BY sec.Prioridad, sec.FechaHoraAcreditacion;";
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 MySqlCommand comando = new(query, sqlCon)
@@ -137,14 +89,13 @@ namespace clinica
                     {
                         string fecha = reader.GetDateTime(0).ToString();
                         int pacienteId = reader.GetInt32(1);
-                        string pacienteApellido = reader.GetString(2);
-                        string pacienteNombre = reader.GetString(3);
-                        string estudioDescripcion = reader.GetString(5);
-                        string lugarDescripcion = reader.GetString(7);
-                        int prioridad = reader.GetInt32(8);
-                        int id = reader.GetInt32(9);
+                        string pacienteApellido = reader.GetString(3);
+                        string pacienteNombre = reader.GetString(4);
+                        int prioridad = reader.GetInt32(5);
+                        string profesionalApellido = reader.GetString(2);
 
-                        string esperaDescripcion = $"{pacienteApellido}, {pacienteNombre} - {estudioDescripcion} - {fecha} - {prioridad}";
+
+                        string esperaDescripcion = $"{pacienteApellido}, {pacienteNombre} - {fecha} - {prioridad}";
                         KeyValuePair<int, string> espera = new(pacienteId, esperaDescripcion);
                         esperas.Add(espera);
                     }
@@ -152,6 +103,7 @@ namespace clinica
                     lbxEnEspera.DisplayMember = "Value";
                     lbxEnEspera.SelectedIndex = 0;
                     lbxEnEspera.Enabled = true;
+                    //Hasta acá cambio de lógica en saladeesperaC
                 }
                 else
                 {
@@ -198,20 +150,20 @@ namespace clinica
         private void btnRegistrarAtencion_Click(object sender, EventArgs e)
         {
             int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
-            int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
+            int idProfesional = ((KeyValuePair<int, string>)cbxProfesionalSE.SelectedItem!).Key;
 
-            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - " + DateTime.Now.ToString() + " - " + cbxLugar.Text + ".";
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente atendido - " + DateTime.Now.ToString() + " - " + cbxProfesionalSE.Text + ".";
             int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
             if (rtaHistoriaClinica < 1)
             {
                 MessageBox.Show("Error al guardar la historia clínica del paciente.");
             }
 
-            int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+            int rtaQuitarSala = QuitarDeSalaC(idPaciente, idProfesional);
             if (rtaQuitarSala > 0)
             {
                 MessageBox.Show("Se registró la atención del Paciente y se lo quitó de la lista de espera.");
-                CargarEspera(idLugar);
+                CargarEspera(idProfesional);
             }
             else
             {
@@ -219,7 +171,7 @@ namespace clinica
             }
         }
 
-        private int QuitarDeSala(int idPaciente, int idLugar)
+        private int QuitarDeSalaC(int idPaciente, int idProfesional)
         {
             int salida = 0;
             MySqlConnection sqlCon = new MySqlConnection();
@@ -227,10 +179,10 @@ namespace clinica
             {
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 sqlCon.Open();
-                string query = $"DELETE FROM SalaDeEspera WHERE Paciente_id = {idPaciente} AND LugarDeAtencion_id = {idLugar};";
+                string query = $"DELETE FROM SalaDeEsperaconsultorios WHERE Paciente_id = {idPaciente} AND Profesional_id = {idProfesional};";
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
                 comando.Parameters.AddWithValue("@idPaciente", idPaciente);
-                comando.Parameters.AddWithValue("@idLugar", idLugar);
+                comando.Parameters.AddWithValue("@idProfesional", idProfesional);
                 int rowsAffected = comando.ExecuteNonQuery();
                 salida = rowsAffected;
             }
@@ -252,20 +204,20 @@ namespace clinica
         private void btnPacienteAusente_Click(object sender, EventArgs e)
         {
             int idPaciente = ((KeyValuePair<int, string>)lbxEnEspera.SelectedItem!).Key;
-            int idLugar = ((KeyValuePair<int, string>)cbxLugar.SelectedItem!).Key;
+            int idProfesional = ((KeyValuePair<int, string>)cbxProfesionalSE.SelectedItem!).Key;
 
-            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " + DateTime.Now.ToString() + " - " + cbxLugar.Text + ".";
+            string historiaClinica = rtxtHistoriaClinica.Text + "\n> Paciente ausente - " + DateTime.Now.ToString() + " - " + cbxProfesionalSE.Text + ".";
             int rtaHistoriaClinica = Clinica.Clinica.GuardarHistoriaClinica(idPaciente, historiaClinica);
             if (rtaHistoriaClinica < 1)
             {
                 MessageBox.Show("Error al guardar la historia clínica del paciente.");
             }
 
-            int rtaQuitarSala = QuitarDeSala(idPaciente, idLugar);
+            int rtaQuitarSala = QuitarDeSalaC(idPaciente, idProfesional);
             if (rtaQuitarSala > 0)
             {
                 MessageBox.Show("Se registró la ausencia del Paciente y se lo quitó de la lista de espera.");
-                CargarEspera(idLugar);
+                CargarEspera(idProfesional);
             }
             else
             {
@@ -274,4 +226,5 @@ namespace clinica
         }
     }
 }
+
 

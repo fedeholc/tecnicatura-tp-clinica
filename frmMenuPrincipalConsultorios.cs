@@ -73,7 +73,7 @@ namespace clinica
 
         private void btnSalaDeEspera_Click(object sender, EventArgs e)
         {
-            frmSalaDeEsperaConsultorios acreditacionConsultorios = new frmSalaDeEsperaConsultorios(this);
+            frmSalaDeEsperaConsultorios acreditacionConsultorios = new frmSalaDeEsperaConsultorios();
             acreditacionConsultorios.Show();
             this.Hide();
         }
