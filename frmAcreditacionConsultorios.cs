@@ -12,11 +12,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace clinica
 {
     public partial class frmAcreditacionConsultorios : Form
     {
+        int salaDeEspera;
 
         public frmAcreditacionConsultorios()
         {
@@ -32,132 +34,31 @@ namespace clinica
             cbxPaciente.Items.Clear();
             cbxPaciente.Text = "";
             cbxPaciente.DataSource = Clinica.Clinica.ObtenerPacientes();
-            // Especificar qué propiedad del KeyValuePair se debe mostrar en el ComboBox (en este caso, el nombre y apellido )
             cbxPaciente.DisplayMember = "Value";
             cbxPaciente.SelectedIndex = -1;
         }
 
 
-        private void CargarListaProfesionales()
+        public void CargarProfesionales()
         {
+            cbxProfesionales.DataSource = null;
             cbxProfesionales.Items.Clear();
             cbxProfesionales.Text = "";
-
-
-            try
-            {
-                using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
-                {
-                    string query = "SELECT Profesional_id, Nombre, Apellido FROM Profesional;";
-                    MySqlCommand comando = new MySqlCommand(query, sqlCon);
-
-                    sqlCon.Open();
-                    using (MySqlDataReader reader = comando.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                     
-                            int idProfesional = reader.GetInt32("Profesional_id");
-                            string nombreProfesional = reader.GetString("Nombre");
-                            string apellidoProfesional = reader.GetString("Apellido");
-                            string nombre = $"{nombreProfesional}";
-                            string apellido = $"{apellidoProfesional}";
-                            cbxProfesionales.Items.Add(new KeyValuePair<int, string>(idProfesional, apellido));
-                        }
-                        //cbxProfesionales.DataSource = profesionales;
-                        cbxProfesionales.DisplayMember = "Value";
-                        cbxProfesionales.SelectedIndex = -1;
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+            cbxProfesionales.DataSource = Clinica.Clinica.ObtenerProfesionales();
+            cbxProfesionales.DisplayMember = "Value";
+            cbxProfesionales.SelectedIndex = -1;
         }
-
 
 
         private void CargarTurnos(int idPaciente, int idProfesional)
         {
             lbxTurnos.DataSource = null;
             lbxTurnos.Items.Clear();
-
-            MySqlConnection sqlCon = new MySqlConnection();
-            try
-            {
-                string query = "select at.Id_Agendaturnos, at.Fecha, at.Hora, pro.Nombre, pro.apellido, pro.Especialidad " +
-                    " from agendaturnos as at INNER JOIN PACIENTE AS P INNER JOIN profesional AS PRO on at.Paciente_id = p.id " +
-                    $" and at.Profesional_id = pro.Profesional_id where at.Paciente_id = {idPaciente} and " +
-                    $" pro.Profesional_id = {idProfesional} and at.TurnoStatus = 2;";
-
-                   
-
-                    sqlCon = Conexion.getInstancia().CrearConexion();
-                    MySqlCommand comando = new(query, sqlCon)
-                    {
-                        CommandType = CommandType.Text
-                    };
-                    sqlCon.Open();
-
-                    MySqlDataReader reader = comando.ExecuteReader();
-
-                    if (reader.HasRows)
-                    {
-                        List<KeyValuePair<int, string>> turnos = new();
-
-                        while (reader.Read())
-                        {
-                            int id = reader.GetInt32(0);
-                            DateTime fecha = reader.GetDateTime(1);
-                            TimeSpan hora = reader.GetTimeSpan(2);
-                            string nombreProfesional = reader.GetString(3);
-                            string apellidoProfesional = reader.GetString(4);
-                            string especialidad = reader.GetString(5);
-
-
-                            string descripcionTurno = $"{fecha:dd/MM/yyyy} - {hora} - {nombreProfesional} " +
-                                                      $"-  {apellidoProfesional} - {especialidad}";
-
-                     
-
-                            KeyValuePair<int, string> turno = new(id, descripcionTurno);
-                            turnos.Add(turno);
-                        }
-
-                        lbxTurnos.DataSource = turnos;
-                        lbxTurnos.DisplayMember = "Value";
-                        lbxTurnos.SelectedIndex = 0;
-                        lbxTurnos.Enabled = true;
-                    }
-                    else
-                    {
-                        lbxTurnos.DataSource = null;
-                        lbxTurnos.Items.Clear();
-                        lbxTurnos.Items.Add("No hay turnos disponibles con los criterios seleccionados.");
-                        lbxTurnos.Enabled = false;
-                    }
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if (sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
-            }
+            lbxTurnos.DataSource = Clinica.Clinica.ObtenerTurnosC(idPaciente, idProfesional);
+            lbxTurnos.DisplayMember = "Value";
+            lbxTurnos.SelectedIndex = -1;
+            lbxTurnos.Enabled = true;
         }
-
-
-
-
-      
 
         private void btnRegistrarPaciente_Click(object sender, EventArgs e)
         {
@@ -178,10 +79,40 @@ namespace clinica
                 MessageBox.Show("Debe seleccionar un profesional", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-           
+            // acreditar para sala de espera
+            int rtaSaladeEspera;
+            SalaDeEsperaConsultorios salaDeEspera = new();
+            salaDeEspera.Paciente_id = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
+            salaDeEspera.Profesional_id = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
+            //salaDeEspera.idAgenda = Clinica.Clinica.ObteneridAgenda(((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key);
+            salaDeEspera.FechaHoraAcreditacion = DateTime.Now;
+            salaDeEspera.Prioridad = rbtUrgencia.Checked ? (int)Prioridad.Urgencia : (int)Prioridad.Normal;
+
+            rtaSaladeEspera = Clinica.Clinica.RegistrarSalaDeEsperaC(salaDeEspera);
+            if (rtaSaladeEspera == 0)
+            {
+                MessageBox.Show("Error al acreditar al paciente.", "AVISO DEL SISTEMA",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Acreditación del paciente exitosa.", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            var formsSalas = Application.OpenForms.OfType<frmSalaDeEsperaConsultorios>().ToList();
+
+            // Recorrer las instancias abiertas del form y actualizar datos
+            foreach (var form in formsSalas)
+            {
+                form.CargarSalas();
+            }
         }
 
-       
+
+
+
+
+
 
         private void NuevaAcreditacion_Click(object sender, EventArgs e)
         {
@@ -219,7 +150,7 @@ namespace clinica
         private void frmAcreditacionConsultorios_Load_1(object sender, EventArgs e)
         {
             CargarPacientes();
-            CargarListaProfesionales();
+            CargarProfesionales();
             CargarTurnos(0, 0);
         }
 
@@ -241,6 +172,7 @@ namespace clinica
             {
                 int idPaciente = ((KeyValuePair<int, string>)cbxPaciente.SelectedItem!).Key;
                 int idProfesional = ((KeyValuePair<int, string>)cbxProfesionales.SelectedItem!).Key;
+                //int idAgenda = 
 
                 CargarTurnos(idPaciente, idProfesional);
 

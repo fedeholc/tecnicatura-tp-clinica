@@ -1,20 +1,22 @@
-﻿using Clinica.Datos;
+﻿using clinica.Entidades;
+using Clinica.Datos;
 using Clinica.Entidades;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace clinica
 {
     public partial class frmSalaDeEsperaConsultorios : Form
     {
-        private Form formOrigen;
 
-        public frmSalaDeEsperaConsultorios(Form formOrigen)
+
+        public frmSalaDeEsperaConsultorios()
         {
             InitializeComponent();
-            this.formOrigen = formOrigen;
+
         }
 
         private void frmSalaDeEsperaConsultorios_Load(object sender, EventArgs e)
@@ -25,7 +27,9 @@ namespace clinica
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            formOrigen.Show();
+            frmMenuPrincipalConsultorios frmMenuPrincipalConsultorios = new frmMenuPrincipalConsultorios();
+            frmMenuPrincipalConsultorios.Show();
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -35,48 +39,34 @@ namespace clinica
 
         public void CargarSalas()
         {
-            CargarEsperaListView(lvwConTurno, "Kinesiología");
-            CargarEsperaListView(lvwSinTurno, "Salud Mental");
-            CargarEsperaListView(listView1, "Otros");
+            CargarEsperaListView(lvwConTurno, 2);
+            CargarEsperaListView(lvwSinTurno, 1);
+            CargarEsperaListView(listView1, 3);
         }
 
-        private void CargarEsperaListView(ListView lvw, string categoria)
+        private void CargarEsperaListView(ListView lvw, int idAgenda)
         {
             lvw.Items.Clear();
             lvw.Columns.Clear();
             lvw.View = View.Details;
 
             // Agregar columnas al ListView
-            lvw.Columns.Add("Paciente");
-            lvw.Columns.Add("Lugar de Atención");
-            lvw.Columns.Add("Profesional");
             lvw.Columns.Add("Fecha y Hora Acreditación");
+            lvw.Columns.Add("Paciente");
+            lvw.Columns.Add("Profesional");
+            lvw.Columns.Add("Especialidad");
             lvw.Columns.Add("Prioridad");
 
             MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-                string query = "SELECT se.FechaHoraAcreditacion, p.Apellido, p.Nombre, pro.Nombre AS Profesional, la.Descripcion AS LugarAtencion, se.Prioridad " +
-                               "FROM saladeespera se " +
-                               "INNER JOIN paciente p ON se.Paciente_id = p.id " +
-                               "INNER JOIN lugardeatencion la ON se.LugarDeAtencion_id = la.id " +
-                               "INNER JOIN profesional pro ON se.Paciente_id = pro.id_Matricula " +//Cambiar se.Paciente por se.id_Matricula
-                               "INNER JOIN estudio e ON se.Estudio_id = e.id ";
+                string query = "SELECT sec.FechaHoraAcreditacion, p.Apellido, p.Nombre, pro.Apellido AS Profesional, " +
+                    "pro.Especialidad AS Especialidad, sec.Prioridad FROM saladeesperaconsultorios as sec " +
+                    "INNER JOIN paciente p ON sec.Paciente_id = p.id INNER JOIN profesional pro ON sec.Profesional_id = pro.Profesional_id " +
+                    $"WHERE sec.idAgenda = {idAgenda} ORDER BY sec.Prioridad, sec.FechaHoraAcreditacion;";
 
-                if (categoria == "Kinesiología")
-                {
-                    query += "WHERE pro.Especialidad = 'Kinesiología' ";
-                }
-                else if (categoria == "Salud Mental")
-                {
-                    query += "WHERE pro.Especialidad = 'Salud Mental' ";
-                }
-                else // Otros
-                {
-                    query += "WHERE pro.Especialidad NOT IN ('Kinesiología', 'Salud Mental') ";
-                }
 
-                query += "ORDER BY se.Prioridad, se.FechaHoraAcreditacion";
+
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
 
@@ -96,12 +86,12 @@ namespace clinica
                         string pacienteApellido = reader.GetString(1);
                         string pacienteNombre = reader.GetString(2);
                         string profesional = reader.GetString(3);
-                        string lugarAtencion = reader.GetString(4);
+                        string especialidad = reader.GetString(4);
                         int prioridad = reader.GetInt32(5);
 
                         string nombreyApellido = $"{pacienteApellido}, {pacienteNombre}";
 
-                        string[] row = { nombreyApellido, lugarAtencion, profesional, fecha, prioridad.ToString() };
+                        string[] row = { fecha, nombreyApellido, profesional, especialidad, prioridad.ToString() };
 
                         // Crear un ListViewItem con los valores de la fila actual
                         ListViewItem item = new ListViewItem(row);
