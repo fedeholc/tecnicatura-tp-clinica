@@ -359,9 +359,9 @@ namespace clinica
                             string apellidoProfesional = reader.GetString("Apellido");
                             string nombre = $"{nombreProfesional}";
                             string apellido = $"{apellidoProfesional}";
-                            cbxProfesionales.Items.Add(new KeyValuePair<string, string>(nombre, apellido));
+                            //cbxProfesionales.Items.Add(new KeyValuePair<string, string>(nombre, apellido));
 
-                            //cbxProfesionales.Items.Add(new KeyValuePair<int, string>(idProfesional,nombreProfesional));
+                            cbxProfesionales.Items.Add(new KeyValuePair<int, string>(idProfesional,nombreProfesional));
                         }
                     }
                 }
